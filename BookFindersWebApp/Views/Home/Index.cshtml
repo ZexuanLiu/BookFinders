@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using BookFindersWebApp.Models
+<h1>@ViewData["Title"]</h1>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookFindersWebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BookFindersWebApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <main role="main" style="margin: 0 auto; width:80%;">
+        @model LoginForm
+        <form class="text-center" asp-action="ConfirmationLogin" method="POST">
+            <div asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="Username">Email</label>
+                <input asp-for="Username" class="form-control" placeholder="Email" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+            </div>
+
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </div>
+
+        </form>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Push Notification History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Start Date Time</td>
+                <td>End Date Time</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pushNotification in PushNotificationRepository.GetAllPushNotifications())
+            {
+
+                <tr class="table-success">
+                    <td>@pushNotification.Id</td>
+                    <td>@pushNotification.Title</td>
+                    <td>@pushNotification.Description</td>
+                    <td>@pushNotification.StartDateTime</td>
+                    <td>@pushNotification.EndDateTime</td>
+                </tr>
+               
+            }
+        </tbody>
+    </table>
+
+    @if (PushNotificationRepository.GetAllPushNotifications().Count() == 0)
+    {
+        <p class="p-3 mb-2 bg-warning text-dark">No push notifications that have been sent!</p>
+    }
+
+</div>

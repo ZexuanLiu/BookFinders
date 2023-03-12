@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Create a New Push Notification Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BookFindersWebApp.Models
+<h1>@ViewData["Title"]</h1>
+
+
+@model PushNotificationForm
+<form class="text-center" asp-action="Confirmation" method="POST">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Title" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Description" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDateTime">Start Date Time</label>
+        <input asp-for="StartDateTime" class="form-control" placeholder="Start Date Time" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDateTime">End Date Time</label>
+        <input asp-for="EndDateTime" class="form-control" placeholder="End Date Time" />
+    </div>
+
+    <div class="form-group">
+        <br>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+
+</form>
