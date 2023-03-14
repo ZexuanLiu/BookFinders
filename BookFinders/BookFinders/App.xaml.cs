@@ -10,6 +10,9 @@ namespace BookFinders
         {
             InitializeComponent();
 
+            // Use the dependency service to get a platform-specific implementation and initialize it.
+            DependencyService.Get<INotificationManager>().Initialize();
+
             MainPage = new MainPage();
         }
 

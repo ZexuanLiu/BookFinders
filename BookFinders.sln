@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinders.iOS", "BookFind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFinders", "BookFinders\BookFinders\BookFinders.csproj", "{3EFF24F2-5018-47AF-9B24-14DFE3E9FB94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFindersWebApp", "BookFindersWebApp\BookFindersWebApp.csproj", "{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFindersWebApp", "BookFindersWebApp\BookFindersWebApp.csproj", "{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +23,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{F35D5320-6482-4BC3-9F3D-73F9075ED70F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
