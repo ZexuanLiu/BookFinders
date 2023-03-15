@@ -3,10 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookFinders.bookDetails">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+        <StackLayout Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition  Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="bookImage" Grid.Row ="0" Grid.Column="0" WidthRequest="150" HeightRequest="100"></Image>
+                <Label x:Name="bookName" Text="Hello" Grid.Row="0" Grid.Column="1" 
+               />
+                <Label x:Name="bookAuthor" Text="Hello" Grid.Row="0" Grid.Column="1" Margin="0,30,0,0"
+                />
+               
+            </Grid>
+            <Label Text="Description:"
+               />
+            <Label x:Name="bookDesc" Text="Hello"
+               />
+            <Label Text="Location"></Label>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Available , Short term loan section"></Label>
+                    <Label Text="QA76.73 .J38 M873 2014"></Label>
+                </StackLayout>
+                <Button Text="AR Mode"></Button>
+        </StackLayout>
+           
+            <Label Text="Comment"></Label>
+            <StackLayout Padding="20" Orientation="Horizontal">
+                <Editor x:Name="commentEditor"
+                Placeholder="Enter your comment here..."
+                VerticalOptions="FillAndExpand" />
+                <Button Text="Submit Comment"
+                
+                HorizontalOptions="Center"
+                VerticalOptions="End" />
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

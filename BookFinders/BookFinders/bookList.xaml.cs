@@ -18,16 +18,18 @@ namespace BookFinders
             InitializeComponent();
             List<book> booklist = new List<book>
             {
-                new book(){Name = "My book Cover",Author="Peter", Description="This is a very good book", ImageLink="bookImage.jpg" },
-                new book(){Name = "Intro to Java",Author="Roman", Description="This is a good Java book", ImageLink="bookImage.jpg" }
+                new book(){Id = "0", Name = "My book Cover",Author="Peter", Description="This is a very good book", ImageLink="bookImage.jpg" },
+                new book(){Id = "1", Name = "Intro to Java",Author="Roman", Description="This is a good Java book", ImageLink="bookImage.jpg" }
             };
             bookLists.ItemsSource = booklist;
         }
 
         private void bookLists_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var book = bookLists.SelectedItem as book;
-            Navigation.PushModalAsync(new bookDetails());
+            var bookObj = bookLists.SelectedItem as book;
+          //  var bookDetailsPage = new bookDetails();
+          //  bookDetailsPage.BindingContext = bookObj;
+            Navigation.PushModalAsync(new bookDetails(bookObj));
         }
     }
 }

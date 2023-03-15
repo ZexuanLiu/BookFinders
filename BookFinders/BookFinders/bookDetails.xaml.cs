@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookFinders.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,14 @@ namespace BookFinders
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class bookDetails : ContentPage
     {
-        public bookDetails()
+        public bookDetails(book bookObj)
         {
             InitializeComponent();
-            
+
+            bookName.Text = "Title:"+bookObj.Name;
+            bookAuthor.Text = "Author:" + bookObj.Author;
+            bookDesc.Text =  bookObj.Description;
+            bookImage.Source = "bookImage.jpg";
         }
     }
 }

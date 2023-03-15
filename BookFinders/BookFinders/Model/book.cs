@@ -4,8 +4,9 @@ using System.Text;
 
 namespace BookFinders.Model
 {
-     class book
+     public class book
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
         public string Description { get; set; }
