@@ -86,7 +86,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\bookImage.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookFinders\BookFinders.csproj">
       <Project>{3EFF24F2-5018-47AF-9B24-14DFE3E9FB94}</Project>
