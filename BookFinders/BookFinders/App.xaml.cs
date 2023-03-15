@@ -13,7 +13,8 @@ namespace BookFinders
             // Use the dependency service to get a platform-specific implementation and initialize it.
             DependencyService.Get<INotificationManager>().Initialize();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
+            MainPage = new Login();
         }
 
         protected override void OnStart ()
