@@ -88,8 +88,7 @@ namespace BookFinders.Droid
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
-                .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.abc_ic_go_search_api_material))
-                .SetSmallIcon(Resource.Drawable.abc_ic_go_search_api_material)
+                .SetSmallIcon(Resource.Drawable.pushNotificationLogo)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 
             Notification notification = builder.Build();

@@ -5,7 +5,11 @@
     <ContentPage.Content>
         
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Book Finders" TextColor="Black" HorizontalOptions="Center" FontSize="30" FontAttributes="Bold" ></Label>
+            <Label Text="Book Finders" TextColor="Black" HorizontalOptions="Center" FontSize="30" FontAttributes="Bold" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Title_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
             <Image Source="Logo.jpg" Margin="0,30,0,0"></Image>
             <Entry Placeholder="Username" TextColor="White" PlaceholderColor="Gray"></Entry>
             <Entry Placeholder="Password" TextColor="White" PlaceholderColor="Gray"></Entry>
