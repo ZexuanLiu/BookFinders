@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace BookFinders.iOS
 {
-    internal class iOSNotificationReceiver : UNUserNotificationCenterDelegate
+    public class iOSNotificationReceiver : UNUserNotificationCenterDelegate
     {
         // Called if app is in the foreground.
         public override void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
