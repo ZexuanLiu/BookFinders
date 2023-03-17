@@ -4,7 +4,7 @@
              x:Class="BookFinders.bookDetails">
     <ContentPage.Content>
 
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical" Padding="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -12,20 +12,20 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition  Width="*" />
+                    <ColumnDefinition  Width="2*" />
                 </Grid.ColumnDefinitions>
-                <Image x:Name="bookImage" Grid.Row ="0" Grid.Column="0" WidthRequest="150" HeightRequest="100"></Image>
+                <Image x:Name="bookImage" Grid.Row ="0" Grid.Column="0" Aspect="AspectFit" WidthRequest="180" HeightRequest="120" HorizontalOptions="CenterAndExpand"></Image>
                 <Label x:Name="bookName" Text="Hello" Grid.Row="0" Grid.Column="1" 
                />
                 <Label x:Name="bookAuthor" Text="Hello" Grid.Row="0" Grid.Column="1" Margin="0,30,0,0"
                 />
                
             </Grid>
-            <Label Text="Description:"
+            <Label Text="Description:" FontAttributes="Bold" TextColor="Black"
                />
             <Label x:Name="bookDesc" Text="Hello"
                />
-            <Label Text="Location"></Label>
+            <Label Text="Location" FontAttributes="Bold" TextColor="Black"></Label>
             <StackLayout Orientation="Horizontal">
                 <StackLayout Orientation="Vertical">
                     <Label Text="Available , Short term loan section"></Label>
@@ -33,18 +33,36 @@
                 </StackLayout>
                 <Button Text="AR Mode"></Button>
         </StackLayout>
-           
-            <Label Text="Comment"></Label>
+
+            <Label Text="Comment" FontAttributes="Bold" TextColor="Black"></Label>
             <StackLayout Padding="20" Orientation="Horizontal">
                 <Editor x:Name="commentEditor"
-                Placeholder="Enter your comment here..."
+                Placeholder="Enter your comment..."
                 VerticalOptions="FillAndExpand" />
-                <Button Text="Submit Comment"
-                
+                <Button Text="Submit"
                 HorizontalOptions="Center"
                 VerticalOptions="End" />
             </StackLayout>
-
+            <BoxView Color="Gray" HeightRequest="1" Margin="0,5,0,0" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition  Width="4*" />
+                </Grid.ColumnDefinitions>
+                
+                <Button HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" 
+                        ImageSource="https://picsum.photos/200/300" 
+                        CornerRadius="25" Margin="10" 
+                        Grid.Row="0" Grid.Column="0"></Button>
+                
+                <Label Text="Peter" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Margin="5,0,0,0" />
+            </Grid>
+            <Label Text="I love this book!" TextColor="Black" FontSize="Body" Margin="10,5,10,10" />
+            <Label Text="before 10 hours" TextColor="Gray" FontSize="Small" Margin="10,5,10,10" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
