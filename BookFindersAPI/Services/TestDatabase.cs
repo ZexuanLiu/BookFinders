@@ -7,6 +7,8 @@ namespace BookFindersAPI.Services
     public class TestDatabase : DbContext, IDatabase
     {
         private DbSet<PushNotification> _pushNotifications { get; set; }
+         private DbSet<Comment> _comment { get; set; }
+
 
         public async Task<PushNotification> AddPushNotification(PushNotification pushNotification)
         {
@@ -15,7 +17,17 @@ namespace BookFindersAPI.Services
 
             return pushNotification;
         }
+        public async Task<Comment> AddComment(Comment comment)
+        {
+            _comment.Add(comment);
+            await base.SaveChangesAsync();
 
+            return comment;
+        }
+        public async Task<IEnumerable<Comment>> GetComments()
+        {
+            return _comment;
+        }
         public async Task<IEnumerable<PushNotification>> GetPushNotifications()
         {
             return _pushNotifications;
