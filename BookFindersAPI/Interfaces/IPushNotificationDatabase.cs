@@ -8,6 +8,7 @@ namespace BookFindersAPI.Interfaces
         
         public Task<PushNotification> AddPushNotification(PushNotification pushNotification);
         public Task<IEnumerable<Comment>> GetComments();
+        public Task<IEnumerable<Comment>> GetBookComments(string bookId);
         public Task<Comment> AddComment(Comment comment);
     }
 }

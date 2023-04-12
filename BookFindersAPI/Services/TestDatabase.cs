@@ -28,6 +28,10 @@ namespace BookFindersAPI.Services
         {
             return _comment;
         }
+        public async Task<IEnumerable<Comment>> GetBookComments(string bookId)
+        {
+            return _comment.Where(x=>x.BookId == bookId);
+        }
         public async Task<IEnumerable<PushNotification>> GetPushNotifications()
         {
             return _pushNotifications;

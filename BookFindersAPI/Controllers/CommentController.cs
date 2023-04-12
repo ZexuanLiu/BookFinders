@@ -91,8 +91,39 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
-        [HttpGet("getComments")]
-        public async Task<IActionResult> GetComments()
+        [HttpGet("getComments/{bookId}")]
+        public async Task<IActionResult> GetComments(string bookId)
+        {
+            try
+            {
+                var getCommentsTask = _pushNotificationDatabase.GetBookComments(bookId);
+                await getCommentsTask;
+
+                IEnumerable<Comment> comments = getCommentsTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully fetched push comments",
+                    Data = comments
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
+        [HttpGet("getAllComments")]
+        public async Task<IActionResult> GetAllComments()
         {
             try
             {
