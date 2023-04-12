@@ -18,8 +18,8 @@ namespace BookFinders
             InitializeComponent();
             List<book> booklist = new List<book>
             {
-                new book(){Id = "0", Name = "My book Cover",Author="Peter", Description="This is a very good book", ImageLink="bookImage.jpg" },
-                new book(){Id = "1", Name = "Intro to Java",Author="Roman", Description="This is a good Java book", ImageLink="bookImage.jpg" }
+                new book(){Id = "001", Name = "My book Cover",Author="Peter", Description="This is a very good book", ImageLink="bookImage.jpg" },
+                new book(){Id = "002", Name = "Intro to Java",Author="Roman", Description="This is a good Java book", ImageLink="bookImage.jpg" }
             };
             bookLists.ItemsSource = booklist;
         }

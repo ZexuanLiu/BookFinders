@@ -1,17 +1,8 @@
 ﻿using BookFinders.Model;
-using BookFindersLibrary.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,11 +43,10 @@ namespace BookFinders
                 var comments = JsonConvert.DeserializeObject<CommentResponse>(content);
                 commentsList = comments.data;
                 commentListView.ItemsSource = commentsList;
-                Debug.WriteLine("da"+comments);
             }
             else
             {
-                Debug.WriteLine("it failed");
+                Debug.WriteLine("failed to fetch the comment");
             }
         }
 

@@ -44,32 +44,39 @@
                 VerticalOptions="End" />
             </StackLayout>
             <BoxView Color="Gray" HeightRequest="1" Margin="0,5,0,0" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition  Width="4*" />
-                </Grid.ColumnDefinitions>
-                
-                <Button HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" 
-                        ImageSource="https://picsum.photos/200/300" 
-                        CornerRadius="25" Margin="10" 
-                        Grid.Row="0" Grid.Column="0"></Button>
-                
-                <Label Text="Peter" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Margin="5,0,0,0" />
-            </Grid>
-            <Label Text="I love this book!" TextColor="Black" FontSize="Body" Margin="10,5,10,10" />
-            <Label Text="before 10 hours" TextColor="Gray" FontSize="Small" Margin="10,5,10,10" />
+
             <ListView x:Name="commentListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding UserName}" Detail="{Binding Description}" />
+                        <ViewCell>
+                            <Grid Padding="10,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackLayout Orientation="Horizontal">
+                                    <Button HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" 
+                                    ImageSource="https://picsum.photos/200/300" 
+                                    CornerRadius="25" 
+                                    ></Button>
+                                    <Label Text="{Binding UserName}" FontAttributes="Bold" />
+                                </StackLayout>
+                                <Label Grid.Row="1" Text="{Binding Description}" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Grid.Row="2" Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Gray" />
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.SeparatorVisibility>
+                    <OnPlatform x:TypeArguments="SeparatorVisibility">
+                        <OnPlatform.iOS>Default</OnPlatform.iOS>
+                        <OnPlatform.Android>Default</OnPlatform.Android>
+                    </OnPlatform>
+                </ListView.SeparatorVisibility>
+                <ListView.HasUnevenRows>true</ListView.HasUnevenRows>
             </ListView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
