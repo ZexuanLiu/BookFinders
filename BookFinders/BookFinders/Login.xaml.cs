@@ -35,30 +35,19 @@ namespace BookFinders
         }
         private void login(object sender, EventArgs e)
         {
+
             foreach(User user in userList)
             {
-                if (user.Name == Username.Text) { 
-                    if(user.Password == Password.Text)
-                    {
-                       
-                       Navigation.PushModalAsync(new bookList(user));
-                       break;
-                    }
-                    else
-                    {   
-                        //throw error
-                        DisplayAlert("Login Failed", "Please check you user name and password.", "OK");
-                    }
-                
-                }
-                else
+                if (user.Name == Username.Text && user.Password == Password.Text)
                 {
-                    //throw error
-                    DisplayAlert("Login Failed", "Please check you user name and password.", "OK");
-                }
-            }
 
-           
+                    Navigation.PushModalAsync(new bookList(user));
+                    return;
+                }
+               
+            }
+            DisplayAlert("Login Failed", "Please check you user name and password.", "OK");
+
         }
 
         private void Title_Clicked(object sender, EventArgs e)

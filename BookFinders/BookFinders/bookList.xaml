@@ -12,7 +12,9 @@
            TextTransform="Lowercase"
            HorizontalTextAlignment="Center"
            FontSize="Medium"
-           FontAttributes="Italic" />
+           FontAttributes="Italic"
+           TextChanged="OnSearchBarTextChanged"
+                       />
 
             <ListView x:Name="bookLists" SeparatorColor="Gray" ItemSelected="bookLists_ItemSelected">
                 <ListView.ItemTemplate>

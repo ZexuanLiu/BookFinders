@@ -37,13 +37,13 @@ namespace BookFinders
 
             commentsList = new ObservableCollection<Comment>();
             client = new HttpClient(handler);
-            LoadComments();
+            LoadComments(bookObj.Id);
 
         }
 
-        async void LoadComments()
+        async void LoadComments(string bookId)
         {
-            var response = await client.GetAsync("https://10.0.2.2:7042/api/Comment/getcomments");
+            var response = await client.GetAsync("https://10.0.2.2:7042/api/Comment/getcomments/"+ bookId);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -86,7 +86,7 @@ namespace BookFinders
 
                 };
                 await PostComment("https://10.0.2.2:7042/api/Comment/postcomment", commentObj);
-                LoadComments();
+                LoadComments(bookObject.Id);
 
                 
             }
