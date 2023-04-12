@@ -1,6 +1,7 @@
 ﻿using BookFinders.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
@@ -14,10 +15,11 @@ namespace BookFinders
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class bookDetails : ContentPage
     {
-        private List<Comment> commentsList;
+        private ObservableCollection<Comment> commentsList;
         private HttpClient client;
         private book bookObject;
-        public bookDetails(book bookObj)
+        private User userObj;
+        public bookDetails(book bookObj, User currentUser)
         {
             InitializeComponent();
 
@@ -25,13 +27,15 @@ namespace BookFinders
             bookAuthor.Text = "Author:" + bookObj.Author;
             bookDesc.Text =  bookObj.Description;
             bookImage.Source = "bookImage.jpg";
+
             bookObject = bookObj;
+            userObj = currentUser;
             var handler = new HttpClientHandler();
 
             // Set the ServerCertificateCustomValidationCallback to a delegate that accepts any certificate
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
 
-            commentsList = new List<Comment>();
+            commentsList = new ObservableCollection<Comment>();
             client = new HttpClient(handler);
             LoadComments();
 
@@ -68,30 +72,29 @@ namespace BookFinders
 
             return null;
         }
-        private void PostComment(object sender, System.EventArgs e)
+        private async void PostComment(object sender, System.EventArgs e)
         {
+            
             if (commentEditor.Text != "")
             {
                 var commentObj = new Comment()
                 {
-                    UserId = "001",
+                    UserId = userObj.Id,
                     BookId = bookObject.Id,
-                    UserName = "Roman",
+                    UserName = userObj.Name,
                     Description = commentEditor.Text
 
                 };
-                PostComment("https://10.0.2.2:7042/api/Comment/postcomment", commentObj);
-                RefreshPage(bookObject);
+                await PostComment("https://10.0.2.2:7042/api/Comment/postcomment", commentObj);
+                LoadComments();
+
+                
             }
             else
             {
-                Debug.WriteLine("a");
+                Debug.WriteLine("comment post failed");
             }
         }
-        public async Task RefreshPage(book bookobj)
-        {
-            await Navigation.PopAsync();
-            await Navigation.PushAsync(new bookDetails(bookobj));
-        }
+
     }
 }

@@ -13,7 +13,8 @@ namespace BookFinders
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class bookList : ContentPage
     {
-        public bookList()
+        private User currentUser;
+        public bookList(User user)
         {
             InitializeComponent();
             List<book> booklist = new List<book>
@@ -22,6 +23,7 @@ namespace BookFinders
                 new book(){Id = "002", Name = "Intro to Java",Author="Roman", Description="This is a good Java book", ImageLink="bookImage.jpg" }
             };
             bookLists.ItemsSource = booklist;
+            currentUser = user;
         }
 
         private void bookLists_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -29,7 +31,7 @@ namespace BookFinders
             var bookObj = bookLists.SelectedItem as book;
           //  var bookDetailsPage = new bookDetails();
           //  bookDetailsPage.BindingContext = bookObj;
-            Navigation.PushModalAsync(new bookDetails(bookObj));
+            Navigation.PushModalAsync(new bookDetails(bookObj,currentUser));
         }
     }
 }

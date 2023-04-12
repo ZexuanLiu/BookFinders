@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace BookFinders.Model
@@ -9,7 +10,7 @@ namespace BookFinders.Model
     {
         public int status { get; set; }
         public string message { get; set; }
-        public List<Comment> data { get; set; }
+        public ObservableCollection<Comment> data { get; set; }
         public object errors { get; set; }
     }
 }
