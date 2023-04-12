@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +16,7 @@ namespace BookFinders
     {
         private List<Comment> commentsList;
         private HttpClient client;
+        private book bookObject;
         public bookDetails(book bookObj)
         {
             InitializeComponent();
@@ -22,7 +25,7 @@ namespace BookFinders
             bookAuthor.Text = "Author:" + bookObj.Author;
             bookDesc.Text =  bookObj.Description;
             bookImage.Source = "bookImage.jpg";
-
+            bookObject = bookObj;
             var handler = new HttpClientHandler();
 
             // Set the ServerCertificateCustomValidationCallback to a delegate that accepts any certificate
@@ -50,7 +53,45 @@ namespace BookFinders
             }
         }
 
+        public async Task<string> PostComment(string url, Comment comment)
+        {
+            var json = JsonConvert.SerializeObject(comment);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(url, content);
 
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("success");
+                return responseContent;
+            }
 
+            return null;
+        }
+        private void PostComment(object sender, System.EventArgs e)
+        {
+            if (commentEditor.Text != "")
+            {
+                var commentObj = new Comment()
+                {
+                    UserId = "001",
+                    BookId = bookObject.Id,
+                    UserName = "Roman",
+                    Description = commentEditor.Text
+
+                };
+                PostComment("https://10.0.2.2:7042/api/Comment/postcomment", commentObj);
+                RefreshPage(bookObject);
+            }
+            else
+            {
+                Debug.WriteLine("a");
+            }
+        }
+        public async Task RefreshPage(book bookobj)
+        {
+            await Navigation.PopAsync();
+            await Navigation.PushAsync(new bookDetails(bookobj));
+        }
     }
 }
