@@ -56,7 +56,7 @@ namespace BookFindersAPI.Controllers
             {
                 Comment filteredComment = new Comment()
                 {
-                   UserId = "001",
+                   UserId = comment.UserId,
                    BookId = comment.BookId,
                    ThumbsUp = 0,
                    UserName = comment.UserName,
