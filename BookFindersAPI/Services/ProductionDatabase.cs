@@ -34,6 +34,75 @@ namespace BookFindersAPI.Services
 
             return comment;
         }
+        
+        public async Task<bool> addThumbsUp(int commentId)
+        {
+            var comment = _comment.FirstOrDefault(x=>x.Id==commentId);
+
+            if (comment != null)
+            {
+             // make Thumbs up ++
+            comment.ThumbsUp++;
+
+            // Save the changes to the database
+             await base.SaveChangesAsync();
+             
+            return true;
+            
+            }
+            else{
+                return false;
+            }
+        }
+        public async Task<bool> subThumbsUp(int commentId)
+        {    
+            var comment = _comment.FirstOrDefault(x=>x.Id==commentId);
+
+            if (comment != null)
+            {
+             // make Thumbs up ++
+            comment.ThumbsUp--;
+
+            // Save the changes to the database
+             await base.SaveChangesAsync();
+             
+            return true;
+            
+            }
+            else{
+                return false;
+            }
+        }
+        public async Task<bool> removeComment(int commentId){
+            var comment = _comment.FirstOrDefault(x=>x.Id==commentId);
+             if (comment != null){
+                _comment.Remove(comment);
+                await base.SaveChangesAsync();
+                return true;
+             }
+             else{
+                return false;
+            }
+        }
+        public async Task<bool> EditComment(int commentId, string newComment)
+        {    
+            var comment = _comment.FirstOrDefault(x=>x.Id==commentId);
+
+            if (comment != null)
+            {
+             // make Thumbs up ++
+            comment.Description = newComment;
+
+            // Save the changes to the database
+            await base.SaveChangesAsync();
+             
+            return true;
+            
+            }
+            else{
+                return false;
+            }
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string? host = Environment.GetEnvironmentVariable("bookfindersDBHost");

@@ -153,5 +153,98 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
+        [HttpPut("addthumbsUp/{commentId}")]
+        public async Task<IActionResult> addThumbsUp(int commentId)
+        {
+            try
+            {
+                var addThumbsUpTask = _pushNotificationDatabase.addThumbsUp(commentId);
+                await addThumbsUpTask;
+
+                bool result = addThumbsUpTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully add Thumbs Up",
+                    Data = result
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
+        [HttpDelete("removeComment/{commentId}")]
+        public async Task<IActionResult> removeComment(int commentId)
+        {
+            try
+            {
+                var removeCommentTask = _pushNotificationDatabase.removeComment(commentId);
+                await removeCommentTask;
+
+                bool result = removeCommentTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully remove comment",
+                    Data = result
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
+        [HttpPut("editComment/{commentId}/{newComment}")]
+        public async Task<IActionResult> EditComment(int commentId, string newComment)
+        {
+            try
+            {
+                var EditCommentTask = _pushNotificationDatabase.EditComment(commentId,newComment);
+                await EditCommentTask;
+
+                bool result = EditCommentTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully add Thumbs Up",
+                    Data = result
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
     }
 }
