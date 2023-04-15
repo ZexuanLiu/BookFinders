@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BookFinders.bookDetails">
+             x:Class="BookFinders.bookDetails"
+             Title="Book Details">
+
     <ContentPage.Content>
 
         <StackLayout Orientation="Vertical" Padding="10">
@@ -19,7 +22,7 @@
                />
                 <Label x:Name="bookAuthor" Text="Hello" Grid.Row="0" Grid.Column="1" Margin="0,30,0,0"
                 />
-               
+
             </Grid>
             <Label Text="Description:" FontAttributes="Bold" TextColor="Black"
                />
@@ -32,7 +35,7 @@
                     <Label Text="QA76.73 .J38 M873 2014"></Label>
                 </StackLayout>
                 <Button Text="AR Mode"></Button>
-        </StackLayout>
+            </StackLayout>
 
             <Label Text="Comment" FontAttributes="Bold" TextColor="Black"></Label>
             <StackLayout Padding="20" Orientation="Horizontal">
@@ -43,7 +46,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="End" 
                 Clicked="PostComment"/>
-                
+
             </StackLayout>
             <BoxView Color="Gray" HeightRequest="1" Margin="0,5,0,0" />
 
@@ -53,6 +56,7 @@
                         <ViewCell>
                             <Grid Padding="10,5">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -66,6 +70,14 @@
                                 </StackLayout>
                                 <Label Grid.Row="1" Text="{Binding Description}" FontAttributes="Bold" TextColor="Black"/>
                                 <Label Grid.Row="2" Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Gray" />
+                                <StackLayout Grid.Row="3" Orientation="Horizontal">
+                                    <StackLayout Orientation="Vertical" Padding="10">
+                                        <ImageButton Source="isLike.png" WidthRequest="18" HeightRequest="18" CommandParameter="{Binding Id}" Clicked="likeBtnClicked"/>
+
+                                        <Label Text="{Binding ThumbsUp}" Padding="6,0,0,0" FontSize="Small"></Label>
+                                    </StackLayout>
+                                    <ImageButton Source="edit.png" WidthRequest="25" HeightRequest="25"/>
+                                </StackLayout>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -78,7 +90,7 @@
                 </ListView.SeparatorVisibility>
                 <ListView.HasUnevenRows>true</ListView.HasUnevenRows>
             </ListView>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

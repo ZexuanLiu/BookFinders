@@ -153,7 +153,7 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
-        [HttpPut("addthumbsUp/{commentId}")]
+        [HttpGet("addthumbsUp/{commentId}")]
         public async Task<IActionResult> addThumbsUp(int commentId)
         {
             try

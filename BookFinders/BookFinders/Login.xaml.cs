@@ -41,7 +41,7 @@ namespace BookFinders
                 if (user.Name == Username.Text && user.Password == Password.Text)
                 {
 
-                    Navigation.PushModalAsync(new bookList(user));
+                    Navigation.PushAsync(new bookList(user));
                     return;
                 }
                

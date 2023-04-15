@@ -1,24 +1,30 @@
 ﻿using BookFinders.Model;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Shapes;
 using Xamarin.Forms.Xaml;
 
 
 namespace BookFinders
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class bookDetails : ContentPage
+    public partial class bookDetails : INotifyPropertyChanged
     {
         private ObservableCollection<Comment> commentsList;
         private HttpClient client;
         private book bookObject;
         private User userObj;
+        private bool isLiked = false;
         public bookDetails(book bookObj, User currentUser)
         {
             InitializeComponent();
@@ -37,8 +43,9 @@ namespace BookFinders
 
             commentsList = new ObservableCollection<Comment>();
             client = new HttpClient(handler);
+            
             LoadComments(bookObj.Id);
-
+           
         }
 
         async void LoadComments(string bookId)
@@ -72,6 +79,20 @@ namespace BookFinders
 
             return null;
         }
+        public async Task<bool> addThumpsUp(string commentId)
+        {
+            var response = await client.GetAsync("https://10.0.2.2:7042/api/Comment/addthumbsUp/"+ commentId);
+            if (response.IsSuccessStatusCode)
+            {
+                LoadComments(bookObject.Id);
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("failed to fetch the comment");
+                return false;
+            }
+        }
         private async void PostComment(object sender, System.EventArgs e)
         {
             
@@ -96,5 +117,19 @@ namespace BookFinders
             }
         }
 
+        private async void likeBtnClicked(object sender, EventArgs e)
+        {
+            var ListItem = sender as ImageButton;
+            var currentId = ListItem.CommandParameter.ToString();
+            if (isLiked == false)
+            {
+               await addThumpsUp(currentId);
+                isLiked = true;
+            }
+            else
+            {
+                DisplayAlert("Failed", "You have clicked the like button", "OK");
+            }
+        }
     }
 }

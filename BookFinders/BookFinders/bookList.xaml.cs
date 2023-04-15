@@ -32,7 +32,7 @@ namespace BookFinders
             var bookObj = bookLists.SelectedItem as book;
           //  var bookDetailsPage = new bookDetails();
           //  bookDetailsPage.BindingContext = bookObj;
-            Navigation.PushModalAsync(new bookDetails(bookObj,currentUser));
+            Navigation.PushAsync(new bookDetails(bookObj,currentUser));
         }
 
         private void OnSearchBarTextChanged(object sender, TextChangedEventArgs e)
@@ -50,6 +50,11 @@ namespace BookFinders
             }
 
             bookLists.ItemsSource = filteredBooks;
+        }
+
+        private async void OnBack(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }
