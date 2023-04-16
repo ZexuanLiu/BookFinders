@@ -184,6 +184,37 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
+        [HttpGet("subthumbsUp/{commentId}")]
+        public async Task<IActionResult> subThumbsUp(int commentId)
+        {
+            try
+            {
+                var subThumbsUpTask = _pushNotificationDatabase.subThumbsUp(commentId);
+                await subThumbsUpTask;
+
+                bool result = subThumbsUpTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully sub Thumbs Up",
+                    Data = result
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
         [HttpDelete("removeComment/{commentId}")]
         public async Task<IActionResult> removeComment(int commentId)
         {
