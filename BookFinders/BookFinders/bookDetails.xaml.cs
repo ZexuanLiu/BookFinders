@@ -215,21 +215,12 @@ namespace BookFinders
 
         private void editComment(object sender, EventArgs e)
         {
-            
 
-            foreach (var cell in commentListView.TemplatedItems)
-            {
-                var layout = cell.FindByName<StackLayout>("commentArea");
-                if (layout != null)
-                {
-                        layout.IsVisible = true;
-                    
-                }
-                else
-                {
-                    Debug.WriteLine("layout not found");
-                }
-            }
+            ImageButton button = (ImageButton)sender;
+           
+            StackLayout layout = (StackLayout)button.FindByName("commentArea");
+
+            layout.IsVisible = true;
         }
 
         private async void submitEditComment(object sender, EventArgs e)
@@ -276,19 +267,12 @@ namespace BookFinders
         }
         private void closeBtnClicked(object sender, EventArgs e)
         {
-            foreach (var cell in commentListView.TemplatedItems)
-            {
-                var layout = cell.FindByName<StackLayout>("commentArea");
-                if (layout != null)
-                {
-                    layout.IsVisible = false;
 
-                }
-                else
-                {
-                    Debug.WriteLine("layout not found");
-                }
-            }
+            ImageButton button = (ImageButton)sender;
+
+            StackLayout layout = (StackLayout)button.FindByName("commentArea");
+
+            layout.IsVisible = false;
         }
     }
 }
