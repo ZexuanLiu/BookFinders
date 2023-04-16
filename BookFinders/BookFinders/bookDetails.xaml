@@ -60,6 +60,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <StackLayout Orientation="Horizontal">
                                     <Button HeightRequest="35" WidthRequest="35" BackgroundColor="Transparent" 
@@ -67,16 +68,30 @@
                                     CornerRadius="25" 
                                     ></Button>
                                     <Label Text="{Binding UserName}" FontAttributes="Bold" />
+                                    <ImageButton x:Name="deleteBtn" HorizontalOptions="EndAndExpand" Source="delete.png" WidthRequest="18" HeightRequest="18" IsVisible="false" CommandParameter="{Binding Id}" Clicked="deleteBtnClicked"/>
                                 </StackLayout>
                                 <Label Grid.Row="1" Text="{Binding Description}" FontAttributes="Bold" TextColor="Black"/>
                                 <Label Grid.Row="2" Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Gray" />
                                 <StackLayout Grid.Row="3" Orientation="Horizontal">
                                     <StackLayout Orientation="Vertical" Padding="10">
-                                        <ImageButton Source="isLike.png" WidthRequest="18" HeightRequest="18" CommandParameter="{Binding Id}" Clicked="likeBtnClicked"/>
+                                        <ImageButton Source="unliked.png" WidthRequest="18" HeightRequest="18" CommandParameter="{Binding Id}" Clicked="likeBtnClicked"/>
 
                                         <Label Text="{Binding ThumbsUp}" Padding="6,0,0,0" FontSize="Small"></Label>
                                     </StackLayout>
-                                    <ImageButton Source="edit.png" WidthRequest="25" HeightRequest="25"/>
+                                    <ImageButton x:Name="editBtn" Source="edit.png" CommandParameter="{Binding UserId}" WidthRequest="25" HeightRequest="35" IsVisible="false" Clicked="editComment"/>
+                                    
+
+                                </StackLayout>
+                                <StackLayout x:Name="commentArea" IsVisible="false" Grid.Row="4" Padding="20" Orientation="Horizontal">
+                                    <Editor x:Name="editcommentEditor"
+                                    Placeholder="Enter your comment..."
+                                    VerticalOptions="FillAndExpand" />
+                                    <Button Text="Submit"
+                                      HorizontalOptions="Center"
+                                      VerticalOptions="End"
+                                      CommandParameter="{Binding Id}"
+                                      Clicked="submitEditComment"/>
+                                    <ImageButton x:Name="closeBtn" Source="delete.png" WidthRequest="18" HeightRequest="18" Clicked="closeBtnClicked"/>
                                 </StackLayout>
                             </Grid>
                         </ViewCell>

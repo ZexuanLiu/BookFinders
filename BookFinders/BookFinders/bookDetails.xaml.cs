@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace BookFinders
         private book bookObject;
         private User userObj;
         private bool isLiked = false;
+        
         public bookDetails(book bookObj, User currentUser)
         {
             InitializeComponent();
@@ -43,12 +45,46 @@ namespace BookFinders
 
             commentsList = new ObservableCollection<Comment>();
             client = new HttpClient(handler);
-            
-            LoadComments(bookObj.Id);
-           
-        }
 
-        async void LoadComments(string bookId)
+            LoadComments(bookObj.Id);
+               
+
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
+
+            if (userObj.Authorization != Role.Student)
+            {
+                foreach (var cell in commentListView.TemplatedItems)
+                {
+                    var deleteBtn = cell.FindByName<ImageButton>("deleteBtn");
+                    if (deleteBtn != null)
+                    {
+                        deleteBtn.IsVisible = true;
+                    }
+                    else {
+                        Debug.WriteLine("you are student!");
+                    }
+                }
+            }
+            foreach (var cell in commentListView.TemplatedItems)
+            {
+                var editBtn = cell.FindByName<ImageButton>("editBtn");
+                if (editBtn != null)
+                {
+                    if (userObj.Id == editBtn.CommandParameter.ToString()) { 
+                        editBtn.IsVisible = true;
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("button not found");
+                }
+            }
+        }
+        public async void LoadComments(string bookId)
         {
             var response = await client.GetAsync("https://10.0.2.2:7042/api/Comment/getcomments/"+ bookId);
             if (response.IsSuccessStatusCode)
@@ -57,6 +93,7 @@ namespace BookFinders
                 var comments = JsonConvert.DeserializeObject<CommentResponse>(content);
                 commentsList = comments.data;
                 commentListView.ItemsSource = commentsList;
+                OnAppearing();
             }
             else
             {
@@ -93,6 +130,20 @@ namespace BookFinders
                 return false;
             }
         }
+        public async Task<bool> deleteComment(string commentId)
+        {
+            var response = await client.DeleteAsync("https://10.0.2.2:7042/api/Comment/removeComment/" + commentId);
+            if (response.IsSuccessStatusCode)
+            {
+                LoadComments(bookObject.Id);
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("failed to remove the comment");
+                return false;
+            }
+        }
         private async void PostComment(object sender, System.EventArgs e)
         {
             
@@ -123,12 +174,107 @@ namespace BookFinders
             var currentId = ListItem.CommandParameter.ToString();
             if (isLiked == false)
             {
-               await addThumpsUp(currentId);
+                await addThumpsUp(currentId);
+                ListItem.Source = "isLike.png";
                 isLiked = true;
             }
             else
             {
-                DisplayAlert("Failed", "You have clicked the like button", "OK");
+                ListItem.Source = "unliked.png";
+                isLiked = false;
+            }
+        }
+
+        private async void deleteBtnClicked(object sender, EventArgs e)
+        {
+            var ListItem = sender as ImageButton;
+            var currentId = ListItem.CommandParameter.ToString();
+            if (isLiked == false)
+            {
+                await deleteComment(currentId);
+                isLiked = true;
+            }
+            else
+            {
+                await DisplayAlert("Failed", "delete comment failed", "OK");
+            }
+        }
+
+        private void editComment(object sender, EventArgs e)
+        {
+            
+
+            foreach (var cell in commentListView.TemplatedItems)
+            {
+                var layout = cell.FindByName<StackLayout>("commentArea");
+                if (layout != null)
+                {
+                        layout.IsVisible = true;
+                    
+                }
+                else
+                {
+                    Debug.WriteLine("layout not found");
+                }
+            }
+        }
+
+        private async void submitEditComment(object sender, EventArgs e)
+        {
+            var ListItem = sender as Button;
+            var currentId = ListItem.CommandParameter.ToString();
+            foreach (var cell in commentListView.TemplatedItems)
+            {
+                var textToEdit = cell.FindByName<Editor>("editcommentEditor");
+                if (textToEdit != null)
+                {
+                   if(textToEdit.Text != null)
+                    {
+
+
+                        await editCommentAsync($"https://10.0.2.2:7042/api/Comment/editComment/{currentId}/{textToEdit.Text}");
+                        Debug.WriteLine($"https://10.0.2.2:7042/api/Comment/editComment/{currentId}/{textToEdit.Text}");
+                    }
+
+                }
+                else
+                {
+                    Debug.WriteLine("textToEdit not found");
+                }
+            }
+        }
+        public async Task editCommentAsync(string url)
+        {
+            
+            var content = new StringContent("updateComment", Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(url,content);
+            if (response.IsSuccessStatusCode)
+                {
+                    // Handle successful response
+                    LoadComments(bookObject.Id);
+
+                }
+                else
+                {
+                    // Handle error response
+                    Debug.WriteLine("failed to edit the comment");
+                }
+            
+        }
+        private void closeBtnClicked(object sender, EventArgs e)
+        {
+            foreach (var cell in commentListView.TemplatedItems)
+            {
+                var layout = cell.FindByName<StackLayout>("commentArea");
+                if (layout != null)
+                {
+                    layout.IsVisible = false;
+
+                }
+                else
+                {
+                    Debug.WriteLine("layout not found");
+                }
             }
         }
     }
