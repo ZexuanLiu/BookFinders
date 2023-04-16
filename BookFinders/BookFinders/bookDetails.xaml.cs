@@ -130,6 +130,20 @@ namespace BookFinders
                 return false;
             }
         }
+        public async Task<bool> subThumpsUp(string commentId)
+        {
+            var response = await client.GetAsync("https://10.0.2.2:7042/api/Comment/subthumbsUp/" + commentId);
+            if (response.IsSuccessStatusCode)
+            {
+                LoadComments(bookObject.Id);
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("failed to fetch the comment");
+                return false;
+            }
+        }
         public async Task<bool> deleteComment(string commentId)
         {
             var response = await client.DeleteAsync("https://10.0.2.2:7042/api/Comment/removeComment/" + commentId);
@@ -175,12 +189,12 @@ namespace BookFinders
             if (isLiked == false)
             {
                 await addThumpsUp(currentId);
-                ListItem.Source = "isLike.png";
                 isLiked = true;
             }
             else
             {
-                ListItem.Source = "unliked.png";
+                
+                await subThumpsUp(currentId);
                 isLiked = false;
             }
         }
@@ -189,15 +203,14 @@ namespace BookFinders
         {
             var ListItem = sender as ImageButton;
             var currentId = ListItem.CommandParameter.ToString();
-            if (isLiked == false)
+            bool result = await DisplayAlert("Confirm Delete", "Are you sure you want to remove this comment?", "Yes", "No");
+
+            if (result == true)
             {
                 await deleteComment(currentId);
-                isLiked = true;
+                
             }
-            else
-            {
-                await DisplayAlert("Failed", "delete comment failed", "OK");
-            }
+            
         }
 
         private void editComment(object sender, EventArgs e)
@@ -233,7 +246,7 @@ namespace BookFinders
 
 
                         await editCommentAsync($"https://10.0.2.2:7042/api/Comment/editComment/{currentId}/{textToEdit.Text}");
-                        Debug.WriteLine($"https://10.0.2.2:7042/api/Comment/editComment/{currentId}/{textToEdit.Text}");
+                        //Debug.WriteLine($"https://10.0.2.2:7042/api/Comment/editComment/{currentId}/{textToEdit.Text}");
                     }
 
                 }

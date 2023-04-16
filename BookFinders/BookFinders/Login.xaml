@@ -13,7 +13,7 @@
             </Label>
             <Image Source="Logo.jpg" Margin="0,30,0,0"></Image>
             <Entry x:Name="Username" Placeholder="Username" TextColor="Black" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="Password" Placeholder="Password" TextColor="Black" PlaceholderColor="Gray"></Entry>
+            <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray"></Entry>
 
             <Button
                 
