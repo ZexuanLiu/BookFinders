@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var pushNotification in PushNotificationRepository.GetAllPushNotifications())
+            @foreach (var pushNotification in PushNotificationRepository.GetAllPushNotifications().Result)
             {
 
                 <tr class="table-success">
@@ -32,7 +32,7 @@
         </tbody>
     </table>
 
-    @if (PushNotificationRepository.GetAllPushNotifications().Count() == 0)
+    @if (PushNotificationRepository.GetAllPushNotifications().Result.Count() == 0)
     {
         <p class="p-3 mb-2 bg-warning text-dark">No push notifications that have been sent!</p>
     }

@@ -1,7 +1,11 @@
 ﻿using BookFindersAPI.Interfaces;
 using BookFindersAPI.Services;
 using BookFindersLibrary.Models;
+using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyModel;
 
 namespace BookFindersAPI.Controllers
 {
@@ -21,7 +25,6 @@ namespace BookFindersAPI.Controllers
 
                 if (controllerStartUpTracker.IsInitialRunPushNotificationController())
                 {
-                    controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
                     var loadingDefaultPushNotificationsTask = testDatabase.LoadDefaultPushNotificationHistoryAndReset();
 
                     while (!loadingDefaultPushNotificationsTask.IsCompleted) { Thread.Sleep(500); }
@@ -38,6 +41,15 @@ namespace BookFindersAPI.Controllers
             else
             {
                 _pushNotificationDatabase = productionDatabase;
+            }
+
+            if (controllerStartUpTracker.IsInitialRunPushNotificationController())
+            {
+                // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.GetApplicationDefault()
+                });
             }
 
             if (_pushNotificationDatabase == null)
@@ -98,7 +110,34 @@ namespace BookFindersAPI.Controllers
 
                 PushNotification newlyAddedPushNotification = addPushNotificationTask.Result;
 
-                // TODO: Add logic to actually send the push notification
+                // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+                var message = new Message()
+                {
+                    Topic = "all",
+                    Notification = new Notification()
+                    {
+                        Title = newlyAddedPushNotification.Title,
+                        Body = newlyAddedPushNotification.Description,
+                    }
+                };
+
+                try
+                {
+                    // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+                    Task<string> sendPushNotificationTask = FirebaseMessaging.DefaultInstance.SendAsync(message);
+                    await sendPushNotificationTask;
+                    string resultOfNotification = sendPushNotificationTask.Result;
+                }
+                catch (Exception e)
+                {
+                    ResponseDTO responseDTOError = new ResponseDTO
+                    {
+                        Status = 500,
+                        Message = "An unexpected server error occurred",
+                        Errors = e
+                    };
+                    return BadRequest(responseDTOError);
+                }
 
                 ResponseDTO responseDTOOk = new ResponseDTO()
                 {
