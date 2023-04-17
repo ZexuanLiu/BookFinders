@@ -29,7 +29,7 @@ namespace BookFinders
         }
         private void login(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new bookList());
+            Navigation.PushAsync(new bookList());
         }
 
         private void Title_Clicked(object sender, EventArgs e)

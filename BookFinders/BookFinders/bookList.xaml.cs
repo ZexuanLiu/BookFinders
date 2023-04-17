@@ -29,7 +29,7 @@ namespace BookFinders
             var bookObj = bookLists.SelectedItem as book;
           //  var bookDetailsPage = new bookDetails();
           //  bookDetailsPage.BindingContext = bookObj;
-            Navigation.PushModalAsync(new bookDetails(bookObj));
+            Navigation.PushAsync(new bookDetails(bookObj));
         }
     }
 }
