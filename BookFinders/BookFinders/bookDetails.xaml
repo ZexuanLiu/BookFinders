@@ -31,7 +31,7 @@
                     <Label Text="Available , Short term loan section"></Label>
                     <Label Text="QA76.73 .J38 M873 2014"></Label>
                 </StackLayout>
-                <Button Text="AR Mode"></Button>
+                <Button Text="AR Mode" Clicked="StartAR"></Button>
         </StackLayout>
 
             <Label Text="Comment" FontAttributes="Bold" TextColor="Black"></Label>

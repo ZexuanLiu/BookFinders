@@ -22,5 +22,9 @@ namespace BookFinders
             bookDesc.Text =  bookObj.Description;
             bookImage.Source = "bookImage.jpg";
         }
+        private void StartAR(object sender, EventArgs e)
+        {
+            DependencyService.Get<IARImplmentation>().LaunchAR();
+        }
     }
 }

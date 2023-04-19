@@ -14,7 +14,7 @@ namespace BookFinders
             DependencyService.Get<INotificationManager>().Initialize();
 
             //MainPage = new MainPage();
-            MainPage = new Login();
+            MainPage = new NavigationPage(new Login());
         }
 
         protected override void OnStart ()
