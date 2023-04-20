@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.FirebasePushNotification;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +15,16 @@ namespace BookFinders
             DependencyService.Get<INotificationManager>().Initialize();
 
             //MainPage = new MainPage();
-            MainPage = new Login();
+            MainPage = new NavigationPage(new Login());
+
+            //https://github.com/jfversluis/XFFCMPushNotificationsSample
+            CrossFirebasePushNotification.Current.Subscribe("all");
+            CrossFirebasePushNotification.Current.OnTokenRefresh += Current_OnTokenRefresh;
+        }
+
+        private void Current_OnTokenRefresh(object source, FirebasePushNotificationTokenEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"Token: {e.Token}");
         }
 
         protected override void OnStart ()
