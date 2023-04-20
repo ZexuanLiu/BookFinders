@@ -4,12 +4,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinders.Android", "BookFinders\BookFinders.Android\BookFinders.Android.csproj", "{F35D5320-6482-4BC3-9F3D-73F9075ED70F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A} = {9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFinders.iOS", "BookFinders\BookFinders.iOS\BookFinders.iOS.csproj", "{CF81DCFC-AB7E-4DDE-A3F8-5BB535E97F55}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A} = {9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFinders", "BookFinders\BookFinders\BookFinders.csproj", "{3EFF24F2-5018-47AF-9B24-14DFE3E9FB94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFindersWebApp", "BookFindersWebApp\BookFindersWebApp.csproj", "{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFindersAPI", "BookFindersAPI\BookFindersAPI.csproj", "{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A} = {9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFindersLibrary", "BookFindersLibrary\BookFindersLibrary.csproj", "{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +83,30 @@ Global
 		{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}.Release|iPhone.Build.0 = Release|Any CPU
 		{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|iPhone.Build.0 = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|iPhone.Build.0 = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
