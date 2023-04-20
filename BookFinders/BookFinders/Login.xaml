@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BookFinders.Login">
+             x:Class="BookFinders.Login"
+             Title="Sheridan Library">
     <ContentPage.Content>
-        
+
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
             <Label Text="Book Finders" TextColor="Black" HorizontalOptions="Center" FontSize="30" FontAttributes="Bold" >
                 <Label.GestureRecognizers>
@@ -11,9 +12,9 @@
                 </Label.GestureRecognizers>
             </Label>
             <Image Source="Logo.jpg" Margin="0,30,0,0"></Image>
-            <Entry Placeholder="Username" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry Placeholder="Password" TextColor="White" PlaceholderColor="Gray"></Entry>
-            
+            <Entry x:Name="Username" Placeholder="Username" TextColor="Black" PlaceholderColor="Gray"></Entry>
+            <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray"></Entry>
+
             <Button
                 
                 Margin="0,30,0,0"

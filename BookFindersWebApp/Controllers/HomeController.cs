@@ -1,4 +1,5 @@
 ﻿using BookFindersWebApp.Models;
+using BookFindersLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BookFinders.bookList">
+             x:Class="BookFinders.bookList"
+             Title="BookList">
     <ContentPage.Content>
         <StackLayout>
 
@@ -12,7 +13,9 @@
            TextTransform="Lowercase"
            HorizontalTextAlignment="Center"
            FontSize="Medium"
-           FontAttributes="Italic" />
+           FontAttributes="Italic"
+           TextChanged="OnSearchBarTextChanged"
+                       />
 
             <ListView x:Name="bookLists" SeparatorColor="Gray" ItemSelected="bookLists_ItemSelected">
                 <ListView.ItemTemplate>

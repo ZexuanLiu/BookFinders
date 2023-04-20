@@ -1,4 +1,6 @@
-﻿namespace BookFindersWebApp.Models
+﻿using BookFindersLibrary.Models;
+
+namespace BookFindersWebApp.Models
 {
     public class PushNotificationRepository
     {
