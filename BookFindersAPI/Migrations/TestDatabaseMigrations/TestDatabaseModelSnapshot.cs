@@ -70,6 +70,31 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
 
                     b.ToTable("_pushNotifications");
                 });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserLocations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DestinationId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("XCoordinate")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("YCoordinate")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_locations");
+                });
 #pragma warning restore 612, 618
         }
     }
