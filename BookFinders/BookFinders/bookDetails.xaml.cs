@@ -274,5 +274,9 @@ namespace BookFinders
 
             layout.IsVisible = false;
         }
+        private void StartAR(object sender, EventArgs e)
+        {
+            DependencyService.Get<IARImplmentation>().LaunchAR();
+        }
     }
 }
