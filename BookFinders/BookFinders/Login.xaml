@@ -2,7 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookFinders.Login"
+             BackgroundColor="#E5ECF9"
              Title="Sheridan Library">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Entry Styles -->
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="#E5ECF9" />
+                <Setter Property="TextColor" Value="#333" />
+                <Setter Property="PlaceholderColor" Value="#888" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+
+            <!-- Button Style -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#3498DB" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <!-- Image Style -->
+            <Style TargetType="Image">
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="150" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+            </Style>
+
+            <!-- Page Background Color -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#EDEDED" />
+            </Style>
+
+            <!-- Font Styles -->
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Avenir-Medium" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
 
         <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
@@ -11,21 +49,26 @@
                     <TapGestureRecognizer Tapped="Title_Clicked" />
                 </Label.GestureRecognizers>
             </Label>
-            <Image Source="Logo.jpg" Margin="0,30,0,0"></Image>
-            <Entry x:Name="Username" Placeholder="Username" TextColor="Black" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray"></Entry>
 
-            <Button
-                
-                Margin="0,30,0,0"
-                VerticalOptions="Center"
-                Text="Login"
-                TextColor="Black"
-                BackgroundColor="Transparent"
-                BorderWidth="1.5"
-                BorderColor="Black"
-                CornerRadius="50"
-                Clicked="login"></Button>
+            <Image Source="Logo.jpg" Margin="10,10,10,10"></Image>
+
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="20">
+                <StackLayout Spacing="20">
+                    <!-- Username Entry -->
+                    <Entry x:Name="Username" Placeholder="Username" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0"></Entry>
+
+                    <!-- Password Entry -->
+                    <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0"></Entry>
+                    
+                    <Button
+                        Text="Login" TextColor="White" 
+                        BackgroundColor="#3498DB" 
+                        CornerRadius="10" 
+                        FontSize="18"
+                        Clicked="login">
+                    </Button>
+                </StackLayout>
+            </Frame>
 
         </StackLayout>
     </ContentPage.Content>
