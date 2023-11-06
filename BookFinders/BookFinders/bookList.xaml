@@ -6,7 +6,9 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <SearchBar Placeholder="Search items..."
+            <SearchBar 
+           x:Name="searchBar"
+           Placeholder="Search items..."
            CancelButtonColor="Orange"
            PlaceholderColor="Orange"
            TextColor="Orange"
@@ -14,7 +16,7 @@
            HorizontalTextAlignment="Center"
            FontSize="Medium"
            FontAttributes="Italic"
-           TextChanged="OnSearchBarTextChanged"
+           SearchButtonPressed="SearchBar_SearchButtonPressed"
                        />
 
             <ListView x:Name="bookLists" SeparatorColor="Gray" ItemSelected="bookLists_ItemSelected">

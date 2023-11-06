@@ -50,7 +50,7 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <Image Source="Logo.jpg" Margin="10,10,10,10"></Image>
+            <Image Source="pushNotificationLogo.png" Margin="10,10,10,10"></Image>
 
             <Frame BackgroundColor="White" CornerRadius="20" Padding="20">
                 <StackLayout Spacing="20">
