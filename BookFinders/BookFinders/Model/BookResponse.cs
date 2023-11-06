@@ -15,12 +15,8 @@ namespace BookFinders.Model
     class Pnx
     {
         public PnxSort sort { get; set; }
-        public PnxControl control { get; set; }
         public PnxSearch search { get; set; }
-    }
-    class PnxControl
-    {
-        public List<string> pqid { get; set; }
+        public PnxLinks links { get; set; }
     }
     class PnxSort
     {
@@ -30,6 +26,11 @@ namespace BookFinders.Model
     }
     class PnxSearch
     {
-        public List<string> description { get; set; }   
+        public List<string> description { get; set; }
     }
+    class PnxLinks 
+    {
+        public List<string> thumbnail { get; set; }
+    }
+
 }

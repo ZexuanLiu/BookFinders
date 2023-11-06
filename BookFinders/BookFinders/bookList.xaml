@@ -19,7 +19,7 @@
            SearchButtonPressed="SearchBar_SearchButtonPressed"
                        />
 
-            <ListView x:Name="bookLists" SeparatorColor="Gray" ItemSelected="bookLists_ItemSelected">
+            <ListView x:Name="bookLists" SeparatorColor="Gray" SeparatorVisibility ="Default"  ItemSelected="bookLists_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Text="{Binding Name}" 

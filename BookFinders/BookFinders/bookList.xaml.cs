@@ -49,10 +49,12 @@ namespace BookFinders
         }
         public async void LoadBooks(string searchText)
         {
-            var response = await client.GetAsync("\r\nhttps://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2Cjavascript&lang=eng&offset=0&limit=1&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset=0&limit=8&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+           
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(content);
                 var bookObjLists = JsonConvert.DeserializeObject<BookResponse>(content);
 
                 List<Doc> docs = bookObjLists.docs;
@@ -60,8 +62,8 @@ namespace BookFinders
                 foreach (var doc in docs)
                 {
                     PnxSort sort = doc.pnx.sort;
-                    PnxControl control = doc.pnx.control;
                     PnxSearch search = doc.pnx.search;
+                    PnxLinks links = doc.pnx.links;
 
                     var book = new book
                     {
@@ -69,14 +71,14 @@ namespace BookFinders
                         Name = sort.title[0],
                         Author = sort.author[0],
                         Description = search.description[0],
-                        ImageLink = "N/a"
+                        ImageLink = links.thumbnail[0].Replace("$$T", "")
 
                     };
                     books.Add(book);
                 }
 
                 bookLists.ItemsSource = books;
-                OnAppearing();
+
             }
             else
             {
