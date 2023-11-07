@@ -71,7 +71,7 @@ namespace BookFinders
                         Name = sort.title[0],
                         Author = sort.author[0],
                         Description = search.description[0],
-                        ImageLink = links.thumbnail[0].Replace("$$T", "")
+                        ImageLink = await CheckImageValidity(links.thumbnail[0].Replace("$$T", ""))
 
                     };
                     books.Add(book);
@@ -115,5 +115,38 @@ namespace BookFinders
             await Navigation.PopAsync();
         }
 
+        private async Task<string> CheckImageValidity(string uri)
+        {
+            try
+            {
+                var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var contentType = response.Content.Headers.ContentType;
+                    if (contentType != null && contentType.MediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // It is a Image
+                        return uri;
+                    }
+                    else
+                    {
+                        // not a image
+                        return "defaultBook.png";
+                    }
+                }
+                else
+                {
+                    // request failed invaild url
+                    return "defaultBook.png";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+                return "defaultBook.png";
+                
+            }
+        }
     }
 }

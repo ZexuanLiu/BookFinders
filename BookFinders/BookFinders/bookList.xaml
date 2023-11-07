@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookFinders.bookList"
              Title="BookList">
+    
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Orientation="Vertical">
 
             <SearchBar 
            x:Name="searchBar"
@@ -12,22 +13,24 @@
            CancelButtonColor="Orange"
            PlaceholderColor="Orange"
            TextColor="Orange"
-           TextTransform="Lowercase"
-           HorizontalTextAlignment="Center"
            FontSize="Medium"
            FontAttributes="Italic"
            SearchButtonPressed="SearchBar_SearchButtonPressed"
                        />
 
-            <ListView x:Name="bookLists" SeparatorColor="Gray" SeparatorVisibility ="Default"  ItemSelected="bookLists_ItemSelected">
+            <ListView x:Name="bookLists" SeparatorColor="Black" SeparatorVisibility ="Default"  ItemSelected="bookLists_ItemSelected">
+                <ListView.RowHeight>100</ListView.RowHeight>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell Text="{Binding Name}" 
-                               Detail="{Binding Author}" 
-                              ImageSource="{Binding ImageLink}"
-                               >
-
-                        </ImageCell>
+                        <ViewCell Height="220">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding ImageLink}" WidthRequest="60" HeightRequest="60" Aspect="AspectFit" />
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Name}" TextColor="Black" FontSize="Small" FontAttributes="Bold" />
+                                    <Label Text="{Binding Author}" TextColor="Gray" FontSize="Small" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
