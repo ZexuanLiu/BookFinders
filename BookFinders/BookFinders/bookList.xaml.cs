@@ -42,7 +42,7 @@ namespace BookFinders
             client = new HttpClient(handler);
         }
 
-        private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+        private void searchTextComplete(object sender, EventArgs e)
         {
             string searchText = searchBar.Text;
             LoadBooks(searchText);
@@ -147,6 +147,20 @@ namespace BookFinders
                 return "defaultBook.png";
                 
             }
+        }
+
+        private void searchIcon_Clicked(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = true;
+            searchBarFrame.IsVisible = true;
+            closeButton.IsVisible = true;
+        }
+
+        private void OnCloseButtonTapped(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = false;
+            searchBarFrame.IsVisible = false;
+            closeButton.IsVisible = false;
         }
     }
 }

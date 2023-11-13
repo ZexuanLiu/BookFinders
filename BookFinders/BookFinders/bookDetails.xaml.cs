@@ -34,7 +34,7 @@ namespace BookFinders
             bookName.Text = "Title:"+bookObj.Name;
             bookAuthor.Text = "Author:" + bookObj.Author;
             bookDesc.Text =  bookObj.Description;
-            bookImage.Source = "bookImage.jpg";
+            bookImage.Source = bookObj.ImageLink;
 
             bookObject = bookObj;
             userObj = currentUser;

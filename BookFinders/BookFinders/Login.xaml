@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookFinders.Login"
-             BackgroundColor="#E5ECF9"
-             Title="Sheridan Library">
+             BackgroundColor="#013766"
+             Title="Book Finders">
     <ContentPage.Resources>
         <ResourceDictionary>
             <!-- Entry Styles -->
             <Style TargetType="Entry">
-                <Setter Property="BackgroundColor" Value="#E5ECF9" />
+               
                 <Setter Property="TextColor" Value="#333" />
                 <Setter Property="PlaceholderColor" Value="#888" />
                 <Setter Property="FontSize" Value="16" />
@@ -43,30 +43,40 @@
     </ContentPage.Resources>
     <ContentPage.Content>
 
-        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
-            <Label Text="Book Finders" TextColor="Black" HorizontalOptions="Center" FontSize="30" FontAttributes="Bold" >
-                <Label.GestureRecognizers>
+        <StackLayout Padding="15,0,15,0" HorizontalOptions="FillAndExpand">
+            <Image Source="SheridanLogo.png" HeightRequest="60" WidthRequest="80" HorizontalOptions="FillAndExpand">
+                <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Title_Clicked" />
-                </Label.GestureRecognizers>
-            </Label>
+                </Image.GestureRecognizers>
+            </Image>
 
-            <Image Source="pushNotificationLogo.png" Margin="10,10,10,10"></Image>
+            <Label Text="Login" TextColor="White" FontSize="40" FontAttributes="Bold" VerticalOptions="EndAndExpand" />
 
-            <Frame BackgroundColor="White" CornerRadius="20" Padding="20">
-                <StackLayout Spacing="20">
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="20" VerticalOptions="End">
+                <StackLayout Spacing="10">
+                    <Label x:Name="UserEmailLabel" Text="" IsVisible="false" TextColor="#013766" FontSize="20" TextDecorations="Underline" VerticalOptions="EndAndExpand" />
+                    <Label x:Name="HintLabel" Text="Pick an account" TextColor="#013766" FontSize="32" FontAttributes="Bold" VerticalOptions="EndAndExpand" />
                     <!-- Username Entry -->
-                    <Entry x:Name="Username" Placeholder="Username" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0"></Entry>
+                    <Entry x:Name="UserEmail" Placeholder="myusername@shernet.sheridancollege.ca" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0" IsVisible="true" Completed="UserEmailComplete"></Entry>
 
                     <!-- Password Entry -->
-                    <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0"></Entry>
-                    
+                    <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0" IsVisible="false"></Entry>
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton x:Name="AddIcon" WidthRequest="25" HeightRequest="25" Aspect="AspectFit" Source="plusIcon.png"/>
+                        <Label x:Name="AnotherAccountLabel" TextColor="Black">Use another account</Label>
+                    </StackLayout>
+                    <Label x:Name="ForgotPassword" TextColor="#013766" HorizontalOptions="Center" FontSize="Small" IsVisible="false">Forgot password</Label>
                     <Button
-                        Text="Login" TextColor="White" 
-                        BackgroundColor="#3498DB" 
+                        x:Name="SignIn"
+                        Text="Sign In" TextColor="White" 
+                        BackgroundColor="#013766" 
                         CornerRadius="10" 
                         FontSize="18"
+                        IsVisible="false"
+                        Margin="40,0,40,0"
                         Clicked="login">
                     </Button>
+                    <ImageButton x:Name="CloseIcon" BackgroundColor="White" WidthRequest="50" HeightRequest="40" Aspect="AspectFill" Source="CloseIcon.png" HorizontalOptions="Center" IsVisible="false" Clicked="CloseIcon_Click"/>
                 </StackLayout>
             </Frame>
 

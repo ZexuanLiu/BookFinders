@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BookFinders.bookDetails"
+             BackgroundColor="#E5ECF9"
              Title="Book Details">
 
     <ContentPage.Content>
@@ -18,7 +19,7 @@
                     <ColumnDefinition  Width="2*" />
                 </Grid.ColumnDefinitions>
                 <Image x:Name="bookImage" Grid.Row ="0" Grid.Column="0" Aspect="AspectFit" WidthRequest="180" HeightRequest="120" HorizontalOptions="CenterAndExpand"></Image>
-                <Label x:Name="bookName" Text="Hello" Grid.Row="0" Grid.Column="1" 
+                <Label x:Name="bookName" Text="Hello" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" TextColor="Black"
                />
                 <Label x:Name="bookAuthor" Text="Hello" Grid.Row="0" Grid.Column="1" Margin="0,30,0,0"
                 />
