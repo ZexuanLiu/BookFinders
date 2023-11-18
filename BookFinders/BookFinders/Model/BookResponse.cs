@@ -23,6 +23,13 @@ namespace BookFinders.Model
         public List<string> creationdate { get; set; }
         public List<string> author { get; set; }
         public List<string> title { get; set; }
+        public PnxSort()
+        {
+            // Initialize lists to avoid null reference exceptions
+            creationdate = new List<string>();
+            author = new List<string>();
+            title = new List<string>();
+        }
     }
     class PnxSearch
     {
