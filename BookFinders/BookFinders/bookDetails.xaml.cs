@@ -31,8 +31,8 @@ namespace BookFinders
         {
             InitializeComponent();
 
-            bookName.Text = "Title:"+bookObj.Name;
-            bookAuthor.Text = "Author:" + bookObj.Author;
+            bookName.Text = bookObj.Name;
+            bookAuthor.Text = bookObj.Author;
             bookDesc.Text =  bookObj.Description;
             bookImage.Source = bookObj.ImageLink;
 
@@ -277,6 +277,20 @@ namespace BookFinders
         private void StartAR(object sender, EventArgs e)
         {
             DependencyService.Get<IARImplmentation>().LaunchAR();
+        }
+
+        private void OnCloseButtonTapped(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = false;
+            searchBarFrame.IsVisible = false;
+            closeButton.IsVisible = false;
+        }
+
+        private void searchIcon_Clicked(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = true;
+            searchBarFrame.IsVisible = true;
+            closeButton.IsVisible = true;
         }
     }
 }
