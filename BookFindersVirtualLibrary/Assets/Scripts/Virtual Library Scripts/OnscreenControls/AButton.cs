@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartSideMenu : MonoBehaviour
+public class AButton : MonoBehaviour
 {
-
-    
     // Start is called before the first frame update
     void Start()
     {

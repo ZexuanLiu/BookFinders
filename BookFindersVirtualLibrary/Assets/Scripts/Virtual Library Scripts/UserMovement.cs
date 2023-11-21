@@ -1,40 +1,69 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class UserMovement : MonoBehaviour
+
+interface IMovementControl
 {
-    [SerializeField] float moveSpeed = 6;
-    [SerializeField] float jumpSpeed = 6;
+    public void ApplyMovement(float x, float y);
+
+    public void ApplyJump();
+    public void UsingIMovement(bool isUsingIMovement);
+}
+
+public class UserMovement : MonoBehaviour, IMovementControl
+{
+    [SerializeField] float moveSpeed = 12;
+    [SerializeField] float jumpSpeed = 12;
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
 
-    float horizontalInput;
-    float verticalInput;
+    private float horizontalInput;
+    private float verticalInput;
+
+    [SerializeField] GameObject flashText;
+    private IFlashable iFlashable;
 
     [SerializeField] Transform orientation;
 
-    Vector3 movementDirection;
-    Rigidbody thisBody;
+    private Vector3 movementDirection;
+    private Rigidbody thisBody;
 
     [SerializeField] float groundDrag;
     [SerializeField] float playerHeight;
     [SerializeField] LayerMask ground;
-    bool grounded;
-    bool readyJump = true;
+    private bool grounded;
+    private bool readyJump = true;
+
+    private bool isIMovementUsed = false;
     
     // Start is called before the first frame update
     void Start()
     {
+        //#if UNITY_EDITOR
+        //    QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        //    Application.targetFrameRate = 45;
+        //#endif
+
         thisBody = GetComponent<Rigidbody>();
         thisBody.freezeRotation = true;
+
+        if (flashText.TryGetComponent(out IFlashable flashable))
+        {
+            iFlashable = flashable;
+        }
+        else
+        {
+            throw new Exception("User has no IFlashable");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 2f, ground);
+        grounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 0.5f, ground);
         if (grounded)
         {
             thisBody.drag = groundDrag;
@@ -50,10 +79,15 @@ public class UserMovement : MonoBehaviour
         MovePlayer();
     }
 
+
+
     private void Inputs()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        if (!isIMovementUsed)
+        {
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
+        }
     }
 
     private void ResetJump()
@@ -64,6 +98,7 @@ public class UserMovement : MonoBehaviour
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(thisBody.velocity.x, 0f, thisBody.velocity.z);
+
 
         if (flatVel.magnitude > moveSpeed)
         {
@@ -76,15 +111,21 @@ public class UserMovement : MonoBehaviour
     private void MovePlayer()
     {
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        //iFlashable.Flash($"{movementDirection}");
+        //iFlashable.Flash($"{orientation.forward * verticalInput} + {orientation.right * horizontalInput}");
 
+        Vector3 forceAdded = Vector3.zero;
         if (grounded)
         {
-            thisBody.AddForce(movementDirection.normalized * moveSpeed, ForceMode.Force);
+            forceAdded = movementDirection * moveSpeed * Time.deltaTime * 350;
         }
         else
         {
-            thisBody.AddForce(movementDirection.normalized * moveSpeed * airMultiplier, ForceMode.Force);
+            forceAdded = movementDirection * moveSpeed * airMultiplier * Time.deltaTime * 350;
         }
+        //iFlashable.Flash($"{forceAdded}");
+
+        thisBody.AddForce(forceAdded, ForceMode.Force);
 
         bool jumpPressed = Input.GetButtonDown("Jump");
         if (jumpPressed && readyJump && grounded)
@@ -102,4 +143,26 @@ public class UserMovement : MonoBehaviour
         thisBody.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
     }
 
+    public void ApplyMovement(float x, float y)
+    {
+        isIMovementUsed = true;
+        horizontalInput = x;
+        verticalInput = y;
+    }
+
+    public void ApplyJump()
+    {
+        isIMovementUsed = true;
+        if (readyJump && grounded)
+        {
+            readyJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
+
+    public void UsingIMovement(bool isUsingIMovement)
+    {
+        isIMovementUsed = isUsingIMovement;
+    }
 }

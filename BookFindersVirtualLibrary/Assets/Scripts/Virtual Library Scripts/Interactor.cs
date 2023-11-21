@@ -1,30 +1,64 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 interface IInteractable
 {
     public void Interact();
+
+    public string GetTitle();
+
+    public string GetDescription();
 }
 
-public class Interactor : MonoBehaviour
+public class Interactor : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] Transform InteractorSource;
     [SerializeField] float InteractRange = 20;
+
+    [SerializeField] GameObject flashText;
+    private IFlashable iFlashable;
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        TryInteraction();
+    }
+
+    void Start()
+    {
+        if (flashText.TryGetComponent(out IFlashable flashable))
+        {
+            iFlashable = flashable;
+        }
+        else
+        {
+            throw new Exception("User has no IFlashable");
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
-            if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+            TryInteraction();
+        }
+    }
+
+    private void TryInteraction()
+    {
+        Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
+        if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+        {
+            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
-                if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
-                {
-                    interactObj.Interact();
-                }
+                interactObj.Interact();
+                string title = interactObj.GetTitle();
+                string description = interactObj.GetDescription();
+                iFlashable.Flash(description);
             }
         }
     }
