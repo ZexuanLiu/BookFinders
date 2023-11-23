@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,6 @@ interface IFindingPathTo
     public void CycleTargets();
 }
 
-[RequireComponent(typeof(FlashTrigger))]
 [RequireComponent(typeof(LineRenderer))]
 public class UserPathing : MonoBehaviour, IFindingPathTo
 {
@@ -29,12 +29,14 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     [SerializeField] bool useControllerCycle;
 
     private bool navigationStarted;
-    private FlashTrigger trigger;
     private string currentDestinationText;
 
     private List<Vector3> locations;
     private int currentLocationIndex;
     private int currentIndexSwitchedTo;
+
+    [SerializeField] GameObject flashableText;
+    private IFlashable iFlashable;
 
     private void Start()
     {
@@ -51,8 +53,16 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         myLineRenderer.positionCount = 0;
 
         navigationStarted = false;
-        trigger = GetComponent<FlashTrigger>();
         currentDestinationText = string.Empty;
+
+        if (flashableText.TryGetComponent(out IFlashable flashable))
+        {
+            iFlashable = flashable;
+        }
+        else
+        {
+            throw new Exception("User has no IFlashable");
+        }
 
         locations = new List<Vector3>()
         {
@@ -118,7 +128,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             message = "Set Navigation To " + currentDestinationText;
             currentLocationIndex = 1;
             destination = locations[currentLocationIndex];
-            trigger.FlashText(message);
+            FlashText(message);
         }
         else if (clicked2)
         {
@@ -126,7 +136,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             message = "Set Navigation To " + currentDestinationText;
             currentLocationIndex = 2;
             destination = locations[currentLocationIndex];
-            trigger.FlashText(message);
+            FlashText(message);
         }
         else if (clicked3)
         {
@@ -134,7 +144,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             message = "Set Navigation To " + currentDestinationText;
             currentLocationIndex = 3;
             destination = locations[currentLocationIndex];
-            trigger.FlashText(message);
+            FlashText(message);
         }
         else if (clicked4)
         {
@@ -142,7 +152,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             message = "Set Navigation To " + currentDestinationText;
             currentLocationIndex = 4;
             destination = locations[currentLocationIndex];
-            trigger.FlashText(message);
+            FlashText(message);
         }
         clicked = clicked0 || clicked1 || clicked2 || clicked3 || clicked4;
 
@@ -174,7 +184,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             if (navigationStarted)
             {
                 message = "You have arrived at " + currentDestinationText;
-                trigger.FlashText(message);
+                FlashText(message);
             }
             clickMarker.SetActive(false);
             myLineRenderer.positionCount = 0;
@@ -222,6 +232,11 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             myLineRenderer.SetPosition(i, corner);
         }
 
+    }
+
+    public void FlashText(string text)
+    {
+        iFlashable.Flash(text);
     }
 
     public Vector3 ArrowDestination()

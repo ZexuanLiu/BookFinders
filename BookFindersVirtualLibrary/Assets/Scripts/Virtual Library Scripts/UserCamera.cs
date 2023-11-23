@@ -22,12 +22,12 @@ public class UserCamera : MonoBehaviour, ICameraMovement
     private IFindingPathTo findingPath;
 
     private float mouseXRaw;
-    private  float mouseYRaw;
+    private float mouseYRaw;
 
-    private  float xRotation;
+    private float xRotation;
     private float yRotation;
 
-    private void Start()
+    void Start()
     {
         UpdateCursorMode();
 

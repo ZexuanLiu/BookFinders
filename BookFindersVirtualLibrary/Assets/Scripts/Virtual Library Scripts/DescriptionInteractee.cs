@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+interface IInteractable
+{
+    public void Interact();
+
+    public string GetTitle();
+
+    public string GetDescription();
+}
+
 public class DescriptionInteractee : MonoBehaviour, IInteractable
 {
 
