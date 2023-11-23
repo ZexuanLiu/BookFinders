@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFinders", "BookFinders\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookFindersWebApp", "BookFindersWebApp\BookFindersWebApp.csproj", "{2D49A8E4-BA54-4AAF-A58B-571E3D338B97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "BookFindersVirtualLibrary\Assembly-CSharp.csproj", "{BCD68ACC-3AC7-0B89-B7BA-8F65AAB42C10}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFindersAPI", "BookFindersAPI\BookFindersAPI.csproj", "{36294ADD-EC56-40C7-B87E-ECD4EBEB954C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A} = {9FB74E1A-5B49-4B18-BC64-DFBDAD80DC2A}
