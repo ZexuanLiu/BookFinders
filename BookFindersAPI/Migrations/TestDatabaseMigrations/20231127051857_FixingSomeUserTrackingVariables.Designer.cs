@@ -3,6 +3,7 @@ using System;
 using BookFindersAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookFindersAPI.Migrations.TestDatabaseMigrations
 {
     [DbContext(typeof(TestDatabase))]
-    partial class TestDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20231127051857_FixingSomeUserTrackingVariables")]
+    partial class FixingSomeUserTrackingVariables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -65,7 +68,7 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("_coordinates");
+                    b.ToTable("Coordinate");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.PushNotification", b =>

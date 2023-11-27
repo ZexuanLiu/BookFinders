@@ -3,6 +3,7 @@ using System;
 using BookFindersAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookFindersAPI.Migrations.TestDatabaseMigrations
 {
     [DbContext(typeof(TestDatabase))]
-    partial class TestDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20231127050331_AddingUserTrackingObjects")]
+    partial class AddingUserTrackingObjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -54,18 +57,15 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<float>("X")
+                    b.Property<float>("Key")
                         .HasColumnType("REAL");
 
-                    b.Property<float>("Y")
-                        .HasColumnType("REAL");
-
-                    b.Property<float>("Z")
+                    b.Property<float>("Value")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
-                    b.ToTable("_coordinates");
+                    b.ToTable("Coordinate");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.PushNotification", b =>
@@ -97,10 +97,10 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CoordinateId")
+                    b.Property<int?>("CoordinateId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("PostDateTime")
+                    b.Property<DateTime?>("PostDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("UserTrackingSessionId")
@@ -122,13 +122,12 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Campus")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("TimeEnded")
+                    b.Property<DateTime?>("TimeEnded")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("TimeStarted")
+                    b.Property<DateTime?>("TimeStarted")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -140,9 +139,7 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                 {
                     b.HasOne("BookFindersLibrary.Models.Coordinate", "Coordinate")
                         .WithMany()
-                        .HasForeignKey("CoordinateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CoordinateId");
 
                     b.HasOne("BookFindersLibrary.Models.UserTrackingSession", null)
                         .WithMany("Locations")

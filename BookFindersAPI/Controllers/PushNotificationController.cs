@@ -5,7 +5,6 @@ using FirebaseAdmin;
 using FirebaseAdmin.Messaging;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyModel;
 
 namespace BookFindersAPI.Controllers
 {
@@ -23,7 +22,7 @@ namespace BookFindersAPI.Controllers
             if (isDev)
             {
 
-                if (controllerStartUpTracker.IsInitialRunPushNotificationController())
+                if (controllerStartUpTracker.IsInitialRunOfControllers())
                 {
                     var loadingDefaultPushNotificationsTask = testDatabase.LoadDefaultPushNotificationHistoryAndReset();
 
@@ -43,7 +42,7 @@ namespace BookFindersAPI.Controllers
                 _pushNotificationDatabase = productionDatabase;
             }
 
-            if (controllerStartUpTracker.IsInitialRunPushNotificationController())
+            if (controllerStartUpTracker.IsInitialRunOfControllers())
             {
                 // //https://github.com/jfversluis/XFFCMPushNotificationsSample
                 FirebaseApp.Create(new AppOptions()
@@ -57,7 +56,7 @@ namespace BookFindersAPI.Controllers
                 throw new Exception("Push Notification database was not initialized!");
             }
 
-            controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
+            controllerStartUpTracker.SetIsInitialRunOfControllers(false);
         }
 
         [HttpGet("getPushNotifications")]
