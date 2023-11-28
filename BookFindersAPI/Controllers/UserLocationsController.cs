@@ -10,43 +10,24 @@ namespace BookFindersAPI.Controllers
     [Route("api/[controller]")]
     public class UserLocationsController : ControllerBase
     {
-       private IDatabase _pushNotificationDatabase;
+       private IDatabase _userLocationsDatabase;
 
         public UserLocationsController(ProductionDatabase productionDatabase, TestDatabase testDatabase)
         {
             bool isDev = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-            ControllerStartUpTracker controllerStartUpTracker = ControllerStartUpTracker.GetInstance();
-
             if (isDev)
             {
-
-                if (controllerStartUpTracker.IsInitialRunPushNotificationController())
-                {
-                    controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
-                    var loadingDefaultPushNotificationsTask = testDatabase.LoadDefaultPushNotificationHistoryAndReset();
-
-                    while (!loadingDefaultPushNotificationsTask.IsCompleted) { Thread.Sleep(500); }
-
-                    if (loadingDefaultPushNotificationsTask.Result != true)
-                    {
-                        throw new Exception("Test database could not load default push notifications!");
-                    }
-                    
-                }
-                _pushNotificationDatabase = testDatabase;
-
+                _userLocationsDatabase = testDatabase;
             }
             else
             {
-                _pushNotificationDatabase = productionDatabase;
+                _userLocationsDatabase = productionDatabase;
             }
 
-            if (_pushNotificationDatabase == null)
+            if (_userLocationsDatabase == null)
             {
-                throw new Exception("Push Notification database was not initialized!");
+                throw new Exception("User Locations database was not initialized!");
             }
-
-            controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
         }
 
         [HttpPost("addlocations")]
@@ -63,7 +44,7 @@ namespace BookFindersAPI.Controllers
                    YCoordinate = locations.YCoordinate,
                 };
 
-                var addLocationTask = _pushNotificationDatabase.AddLocation(filteredlocations);
+                var addLocationTask = _userLocationsDatabase.AddLocation(filteredlocations);
                 await addLocationTask;
 
                 UserLocations newlyAddedLocation = addLocationTask.Result;
@@ -95,7 +76,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var getLocationsTask = _pushNotificationDatabase.GetLocations();
+                var getLocationsTask = _userLocationsDatabase.GetLocations();
                 await getLocationsTask;
 
                 IEnumerable<UserLocations> locations = getLocationsTask.Result;

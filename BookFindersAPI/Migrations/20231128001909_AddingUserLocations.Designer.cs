@@ -3,6 +3,7 @@ using System;
 using BookFindersAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookFindersAPI.Migrations
 {
     [DbContext(typeof(ProductionDatabase))]
-    partial class ProductionDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20231128001909_AddingUserLocations")]
+    partial class AddingUserLocations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

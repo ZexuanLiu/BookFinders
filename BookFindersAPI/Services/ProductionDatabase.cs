@@ -10,6 +10,8 @@ namespace BookFindersAPI.Services
         private DbSet<PushNotification> _pushNotifications { get; set; }
         private DbSet<Comment> _comment { get; set; }
 
+        private DbSet<UserLocations> _locations { get; set; }
+
         private DbSet<Coordinate> _coordinates { get; set; }
         private DbSet<UserTrackingInstance> _userTrackingInstances { get; set; }
         private DbSet<UserTrackingSession> _userTrackingSessions { get; set; }
@@ -45,6 +47,20 @@ namespace BookFindersAPI.Services
             });
             await base.SaveChangesAsync();
             return userTrackingSession;
+        }
+        #endregion
+
+        #region Locations
+        public async Task<UserLocations> AddLocation(UserLocations locations)
+        {
+            _locations.Add(locations);
+            await base.SaveChangesAsync();
+
+            return locations;
+        }
+        public async Task<IEnumerable<UserLocations>> GetLocations()
+        {
+            return _locations;
         }
         #endregion
 

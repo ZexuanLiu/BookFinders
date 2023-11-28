@@ -9,6 +9,11 @@ namespace BookFindersAPI.Interfaces
         public Task<UserTrackingSession> SendUserTrackingSession(UserTrackingSession userTrackingSession);
         #endregion
 
+        #region Locations
+        public Task<UserLocations> AddLocation(UserLocations locations);
+        public Task<IEnumerable<UserLocations>> GetLocations();
+        #endregion
+
         #region Push Notifications
         public Task<IEnumerable<PushNotification>> GetPushNotifications();
         public Task<PushNotification> AddPushNotification(PushNotification pushNotification);
