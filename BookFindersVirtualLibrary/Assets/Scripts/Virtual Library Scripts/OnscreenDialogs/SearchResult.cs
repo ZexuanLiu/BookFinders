@@ -29,7 +29,7 @@ public class SearchResult : MonoBehaviour, IPointerClickHandler, ISearchResult
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        BookSearchsTracker.SetClickedBook(id, bookName, bookAuthor, "18B");
+        BookSearchsTracker.SetClickedBook(id);
 
         bookSearchView.SetActive(false);
         bookDetailsView.SetActive(true);

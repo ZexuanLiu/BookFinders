@@ -14,7 +14,7 @@ interface IFindingPathTo
 
     public void CycleTargets();
 
-    public void SetBookDestinationTo(string bookshelfLocationKey);
+    public void SetBookDestinationTo(string bookshelfLocationKey, string bookName);
 
     public void FinishNavigation();
 
@@ -79,7 +79,6 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             Vector3.zero,
             new Vector3(-22f, clickMarker.transform.position.y, 33f),
             new Vector3(-35f, clickMarker.transform.position.y, -35f),
-            new Vector3(30.5f, clickMarker.transform.position.y, 21.5f),
             new Vector3(-3.5f, clickMarker.transform.position.y, -8.45f)
         };
         currentLocationIndex = -1;
@@ -95,7 +94,6 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         bool clicked1 = false;
         bool clicked2 = false;
         bool clicked3 = false;
-        bool clicked4 = false;
         bool clicked = false;
 
         if (useControllerCycle)
@@ -108,7 +106,6 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
                 clicked1 = currentLocationIndex == 1;
                 clicked2 = currentLocationIndex == 2;
                 clicked3 = currentLocationIndex == 3;
-                clicked4 = currentLocationIndex == 4;
 
                 //Debug.Log(currentLocationIndex);
             }
@@ -118,7 +115,6 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             clicked1 = Input.GetKeyDown(KeyCode.Alpha1);
             clicked2 = Input.GetKeyDown(KeyCode.Alpha2);
             clicked3 = Input.GetKeyDown(KeyCode.Alpha3);
-            clicked4 = Input.GetKeyDown(KeyCode.Alpha4);
         }
 
 
@@ -152,21 +148,13 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         }
         else if (clicked3)
         {
-            currentDestinationText = "a Book";
+            currentDestinationText = "Board Game Rental";
             message = "Set Navigation To " + currentDestinationText;
             currentLocationIndex = 3;
             destination = locations[currentLocationIndex];
             FlashText(message);
         }
-        else if (clicked4)
-        {
-            currentDestinationText = "Board Game Rental";
-            message = "Set Navigation To " + currentDestinationText;
-            currentLocationIndex = 4;
-            destination = locations[currentLocationIndex];
-            FlashText(message);
-        }
-        clicked = clicked0 || clicked1 || clicked2 || clicked3 || clicked4;
+        clicked = clicked0 || clicked1 || clicked2 || clicked3;
 
         if (destination != Vector3.zero)
         {
@@ -261,13 +249,17 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         currentIndexSwitchedTo = (currentIndexSwitchedTo + 1) % locations.Count;
     }
 
-    public void SetBookDestinationTo(string bookshelfLocationKey)
+    public void SetBookDestinationTo(string bookshelfLocationKey, string bookName)
     {
-        // TODO check if key exists
-        string message = string.Empty;
+        if (!BookSearchsTracker.BookPathfindingSurfaces.ContainsKey(bookshelfLocationKey))
+        {
+            Debug.Log($"No Key To Navigate To '{bookshelfLocationKey}'");
+        }
+
         navigationStarted = true;
-        currentDestinationText = bookshelfLocationKey;
-        message = "Set Navigation To " + currentDestinationText;
+        currentDestinationText = bookName;
+        string message = $"Set Navigation To: {Environment.NewLine}\"{currentDestinationText}\"";
+        Debug.Log($"Going To {bookshelfLocationKey}");
 
         GameObject bookshelfSurface = BookSearchsTracker.BookPathfindingSurfaces[bookshelfLocationKey];
         Vector3 bookshelfDestination = BookSearchsTracker.BookPathfindLocations[bookshelfLocationKey];
@@ -284,7 +276,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         if (navigationStarted)
         {
             destination = Vector3.zero;
-            string message = "You have cancelled navigation to " + currentDestinationText;
+            string message = $"You have cancelled navigation to: {Environment.NewLine}\"{currentDestinationText}\"";
             FlashText(message);
             clickMarker.SetActive(false);
             myLineRenderer.positionCount = 0;

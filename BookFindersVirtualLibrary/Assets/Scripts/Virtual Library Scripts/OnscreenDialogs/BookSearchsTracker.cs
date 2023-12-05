@@ -11,10 +11,9 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
     public static class BookSearchsTracker
     {
         public static int Id { get; set; }
-        public static string BookName { get; set; }
-        public static string BookAuthor { get; set; }
+        public static book SelectedBook { get; private set; }
 
-        public static string BookLocationCode { get; set; }
+        public static List<book> SearchResultBooks { get; set; }
 
         public static Dictionary<string, Vector3> BookPathfindLocations { get; set; }
         public static Dictionary<string, GameObject> BookPathfindingSurfaces { get; set; }
@@ -23,28 +22,21 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
         {
             BookPathfindLocations = new Dictionary<string, Vector3>();
             BookPathfindingSurfaces = new Dictionary<string, GameObject>();
+
+            SelectedBook = new book();
         }
 
-        public static void SetClickedBook(int id, string bookName, string bookAuthor, string bookLocationCode)
+        public static void SetClickedBook(int id)
         {
-            Id = id;
-            BookName = bookName;
-            BookAuthor = bookAuthor;
-            BookLocationCode = bookLocationCode;
-            BookSelectedUpdated();
-        }
-
-        public static event Action onBookSelectedUpdated;
-        public static void BookSelectedUpdated()
-        {
-            if (onBookSelectedUpdated != null)
+            if (id >= SearchResultBooks.Count)
             {
-                onBookSelectedUpdated();
+                Debug.Log($"{id} is larger than search results");
+                return;
             }
+
+            SelectedBook = SearchResultBooks[id];
+            Id = id;
         }
-
-        
-
 
     }
 }

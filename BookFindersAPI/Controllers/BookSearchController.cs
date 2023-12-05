@@ -25,13 +25,12 @@ namespace BookFindersAPI.Controllers
         public async Task<IActionResult> SearchBooks(string searchText, int offset)
         {   
             var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
-            
+            List<book> books = new List<book>();
+
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var bookObjLists = JsonConvert.DeserializeObject<BookResponse>(content);
-
-                List<book> books = new List<book>();
 
                 foreach (var doc in bookObjLists.docs)
                 {

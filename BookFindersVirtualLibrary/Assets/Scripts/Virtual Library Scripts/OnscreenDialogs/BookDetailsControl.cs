@@ -8,22 +8,23 @@ public class BookDetailsControl : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshName;
     [SerializeField] TextMeshProUGUI textMeshAuthor;
+    [SerializeField] TextMeshProUGUI textMeshLocationCode;
+    [SerializeField] TextMeshProUGUI textMeshDescription;
 
     // Start is called before the first frame update
     void Start()
     {
-        BookSearchsTracker.onBookSelectedUpdated += OnBookSelectedUpdated;
+        textMeshName.text = BookSearchsTracker.SelectedBook.Name;
+        textMeshAuthor.text = BookSearchsTracker.SelectedBook.Author;
+        textMeshLocationCode.text = BookSearchsTracker.SelectedBook.LocationCode;
+        textMeshDescription.text = BookSearchsTracker.SelectedBook.Description;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        
-    }
-
-    private void OnBookSelectedUpdated()
-    {
-        textMeshName.text = BookSearchsTracker.BookName;
-        textMeshAuthor.text = BookSearchsTracker.BookAuthor;
+        textMeshName.text = BookSearchsTracker.SelectedBook.Name;
+        textMeshAuthor.text = BookSearchsTracker.SelectedBook.Author;
+        textMeshLocationCode.text = BookSearchsTracker.SelectedBook.LocationCode;
+        textMeshDescription.text = BookSearchsTracker.SelectedBook.Description;
     }
 }
