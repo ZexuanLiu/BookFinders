@@ -26,14 +26,12 @@ public class JoystickMovement : MonoBehaviour, IDragHandler, IPointerClickHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        userWithMovementInterface.UsingIMovement(true);
         CheckAndUpdateJoystickProperties();
         UpdatePlayerPosition(eventData.position);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        userWithMovementInterface.UsingIMovement(true);
         CheckAndUpdateJoystickProperties();
         UpdatePlayerPosition(eventData.position);
 
@@ -45,13 +43,11 @@ public class JoystickMovement : MonoBehaviour, IDragHandler, IPointerClickHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         UpdatePlayerPosition(new Vector2(joystickStartingX, joystickStartingY));
-        userWithMovementInterface.UsingIMovement(false);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         UpdatePlayerPosition(new Vector2(joystickStartingX, joystickStartingY));
-        userWithMovementInterface.UsingIMovement(false);
     }
 
     private void CheckAndUpdateJoystickProperties()
