@@ -10,7 +10,8 @@ interface IMovementControl
     public void ApplyMovement(float x, float y);
 
     public void ApplyJump();
-    public void UsingIMovement(bool isUsingIMovement);
+
+    public bool IsUsingControllerInput();
 }
 
 public class UserMovement : MonoBehaviour, IMovementControl
@@ -37,7 +38,7 @@ public class UserMovement : MonoBehaviour, IMovementControl
     private bool grounded;
     private bool readyJump = true;
 
-    private bool isIMovementUsed = false;
+    private bool isUsingControllerInput = true;
     
     // Start is called before the first frame update
     void Start()
@@ -73,6 +74,12 @@ public class UserMovement : MonoBehaviour, IMovementControl
             thisBody.drag = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab)){
+            isUsingControllerInput = !isUsingControllerInput;
+            horizontalInput = 0;
+            verticalInput = 0;
+        }
+
         Inputs();
         SpeedControl();
 
@@ -83,7 +90,7 @@ public class UserMovement : MonoBehaviour, IMovementControl
 
     private void Inputs()
     {
-        if (!isIMovementUsed)
+        if (!isUsingControllerInput)
         {
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
@@ -128,11 +135,9 @@ public class UserMovement : MonoBehaviour, IMovementControl
         thisBody.AddForce(forceAdded, ForceMode.Force);
 
         bool jumpPressed = Input.GetButtonDown("Jump");
-        if (jumpPressed && readyJump && grounded)
+        if (jumpPressed && !isUsingControllerInput)
         {
-            readyJump = false;
-            Jump();
-            Invoke(nameof(ResetJump), jumpCooldown);
+            ApplyJump();
         }
 
     }
@@ -145,14 +150,12 @@ public class UserMovement : MonoBehaviour, IMovementControl
 
     public void ApplyMovement(float x, float y)
     {
-        isIMovementUsed = true;
         horizontalInput = x;
         verticalInput = y;
     }
 
     public void ApplyJump()
     {
-        isIMovementUsed = true;
         if (readyJump && grounded)
         {
             readyJump = false;
@@ -161,8 +164,8 @@ public class UserMovement : MonoBehaviour, IMovementControl
         }
     }
 
-    public void UsingIMovement(bool isUsingIMovement)
+    public bool IsUsingControllerInput()
     {
-        isIMovementUsed = isUsingIMovement;
+        return isUsingControllerInput;
     }
 }

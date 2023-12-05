@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ControlUp : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+public class ControlUp : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject userWithMovement;
 
@@ -12,17 +12,10 @@ public class ControlUp : MonoBehaviour, IPointerClickHandler, IPointerDownHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        userWithMovementInterface.ApplyJump();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        userWithMovementInterface.UsingIMovement(true);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        userWithMovementInterface.UsingIMovement(false);
+        if (userWithMovementInterface.IsUsingControllerInput())
+        {
+            userWithMovementInterface.ApplyJump();
+        }
     }
 
     // Start is called before the first frame update

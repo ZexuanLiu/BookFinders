@@ -1,8 +1,10 @@
+using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +13,11 @@ interface IFindingPathTo
     public Vector3 ArrowDestination();
 
     public void CycleTargets();
+
+    public void SetBookDestinationTo(string bookshelfLocationKey);
+
+    public void FinishNavigation();
+
 }
 
 [RequireComponent(typeof(LineRenderer))]
@@ -27,6 +34,9 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     [SerializeField] Transform visualObjectsParent;
 
     [SerializeField] bool useControllerCycle;
+
+    [SerializeField] GameObject bookshelves;
+    private GameObject currentFlashingBookshelf;
 
     private bool navigationStarted;
     private string currentDestinationText;
@@ -74,6 +84,8 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         };
         currentLocationIndex = -1;
         currentIndexSwitchedTo = 0;
+
+        InitiateBookshelfPathfindingDictionaries();
     }
 
     // Update is called once per frame
@@ -247,5 +259,109 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     public void CycleTargets()
     {
         currentIndexSwitchedTo = (currentIndexSwitchedTo + 1) % locations.Count;
+    }
+
+    public void SetBookDestinationTo(string bookshelfLocationKey)
+    {
+        // TODO check if key exists
+        string message = string.Empty;
+        navigationStarted = true;
+        currentDestinationText = bookshelfLocationKey;
+        message = "Set Navigation To " + currentDestinationText;
+
+        GameObject bookshelfSurface = BookSearchsTracker.BookPathfindingSurfaces[bookshelfLocationKey];
+        Vector3 bookshelfDestination = BookSearchsTracker.BookPathfindLocations[bookshelfLocationKey];
+
+        destination = bookshelfDestination;
+        FlashText(message);
+
+        currentFlashingBookshelf = bookshelfSurface;
+        bookshelfSurface.SetActive(true);
+    }
+
+    public void FinishNavigation()
+    {
+        if (navigationStarted)
+        {
+            destination = Vector3.zero;
+            string message = "You have cancelled navigation to " + currentDestinationText;
+            FlashText(message);
+            clickMarker.SetActive(false);
+            myLineRenderer.positionCount = 0;
+            arrow.SetActive(false);
+            currentDestinationText = string.Empty;
+            navigationStarted = false;
+        }
+        if (currentFlashingBookshelf != null)
+        {
+            currentFlashingBookshelf.SetActive(false);
+        }
+    }
+
+    public void InitiateBookshelfPathfindingDictionaries()
+    {
+        Vector3 startingShelvesCoord1 = new Vector3(-8f, 1.25f, 13f);
+        Vector3 startingShelvesCoord2 = new Vector3(40.25f, 1.25f, 39.25f);
+
+        float widthOfShelves = 4.25f;
+        float distanceBetweenShelves = 1.25f;
+        float distanceToNewShelf = widthOfShelves + distanceBetweenShelves;
+
+        foreach (Transform bookshelf in bookshelves.transform)
+        {
+            GameObject bookshelfObject = bookshelf.gameObject;
+            string bookshelfNum = bookshelf.name;
+
+            int bookshelfNumAsInt = 0;
+            if (!int.TryParse(bookshelfNum, out bookshelfNumAsInt)){
+                Debug.Log($"Could not parse bookshelfNum '{bookshelfNum}' to int");
+            }
+
+            if (bookshelfNumAsInt > 20)
+            {
+                Debug.Log($"bookshelfNum '{bookshelfNum}' was too large and was not counted in pathfinding");
+            }
+
+            foreach (Transform bookshelfSide in bookshelf)
+            {
+                GameObject bookshelfSideObject = bookshelfSide.gameObject;
+                string bookshelfSideAlpha = bookshelfSideObject.name;
+
+                string key = $"{bookshelfNum}{bookshelfSideAlpha}";
+                BookSearchsTracker.BookPathfindingSurfaces.Add(key, bookshelfSideObject);
+                //Debug.Log($"Surface = {key} - {bookshelfSideObject}");
+
+                // Setting up search locations for the surface of the bookshelf and the waypoint to it.
+                // Note that these values have been measured previously
+                // Because of the way our bookshelf numbers are mapped, there has to be separate logic for each range
+                float newX = float.MinValue;
+                Vector3 locationPoint = Vector3.zero;
+                if (bookshelfNumAsInt >= 1 && bookshelfNumAsInt <= 9)
+                {
+                    newX = startingShelvesCoord1.x;
+                    newX += (bookshelfNumAsInt - 1) * distanceToNewShelf;
+                    if (bookshelfSideAlpha.Equals("B"))
+                    {
+                        newX += widthOfShelves;
+                    }
+                    locationPoint = new Vector3(newX, startingShelvesCoord1.y, startingShelvesCoord1.z);
+                }
+                else if (bookshelfNumAsInt >= 10 && bookshelfNumAsInt <= 18)
+                {
+                    newX = startingShelvesCoord2.x;
+                    newX -= (bookshelfNumAsInt - 10) * distanceToNewShelf;
+                    if (bookshelfSideAlpha.Equals("A"))
+                    {
+                        newX -= widthOfShelves;
+                    }
+                    locationPoint = new Vector3(newX, startingShelvesCoord2.y, startingShelvesCoord2.z);
+                }
+
+                BookSearchsTracker.BookPathfindLocations.Add(key, locationPoint);
+                //Debug.Log($"Location = {key} - {locationPoint}");
+
+                bookshelfSideObject.SetActive(false);
+            }
+        }
     }
 }
