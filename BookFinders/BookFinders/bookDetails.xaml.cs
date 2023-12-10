@@ -292,5 +292,10 @@ namespace BookFinders
             searchBarFrame.IsVisible = true;
             closeButton.IsVisible = true;
         }
+
+        void CommentIcon_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new bookComments(bookObject, userObj));
+        }
     }
 }
