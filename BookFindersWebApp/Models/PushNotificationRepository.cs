@@ -7,15 +7,30 @@ namespace BookFindersWebApp.Models
 {
     public class PushNotificationRepository
     {
-        private static readonly string URL = "https://localhost:7042/";
+        private static readonly string URL = "https://localhost:7042";
+
+
+        static PushNotificationRepository()
+        {
+            string? possibleAPIURL = Environment.GetEnvironmentVariable("bookfindersAPIURL");
+            if (!string.IsNullOrEmpty(possibleAPIURL))
+            {
+                URL = possibleAPIURL;
+                if (!URL.StartsWith("http"))
+                {
+                    URL = "http://" + URL;
+                }
+            }
+        }
 
         public async static Task<IEnumerable<PushNotification>> GetAllPushNotifications()
         {
-            string subUrl = "api/PushNotification/getPushNotifications";
+            string subUrl = "/api/PushNotification/getPushNotifications";
 
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.GetAsync(URL + subUrl);
+                string requestURL = URL + subUrl;
+                var response = await client.GetAsync(requestURL);
                 var responseString = await response.Content.ReadAsStringAsync();
 
                 List<PushNotification> fetchedPushNotifications = new List<PushNotification>();
@@ -38,11 +53,12 @@ namespace BookFindersWebApp.Models
 
         public async static Task<bool> AddPushNotification(PushNotification pushNotification)
         {
-            string subUrl = "api/PushNotification/sendPushNotification";
+            string subUrl = "/api/PushNotification/sendPushNotification";
 
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.PostAsJsonAsync(URL + subUrl, pushNotification);
+                string requestURL = URL + subUrl;
+                var response = await client.PostAsJsonAsync(requestURL, pushNotification);
 
                 return response.IsSuccessStatusCode;
             }

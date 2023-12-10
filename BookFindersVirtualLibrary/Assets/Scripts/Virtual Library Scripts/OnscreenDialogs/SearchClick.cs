@@ -73,7 +73,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         string textInput = thisInput.text;
         try
         {
-            var response = await client.GetAsync($"https://localhost:7042/api/BookSearch/OnCampus/{textInput}/0");
+            var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{textInput}/0");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

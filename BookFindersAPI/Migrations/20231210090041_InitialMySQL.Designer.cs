@@ -3,6 +3,7 @@ using System;
 using BookFindersAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookFindersAPI.Migrations
 {
     [DbContext(typeof(ProductionDatabase))]
-    partial class ProductionDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20231210090041_InitialMySQL")]
+    partial class InitialMySQL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,11 +82,11 @@ namespace BookFindersAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("EndDateTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("EndDateTime")
+                        .HasColumnType("longtext");
 
-                    b.Property<DateTime>("StartDateTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("StartDateTime")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .HasColumnType("longtext");

@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 interface IFindingPathTo
 {
@@ -254,6 +255,8 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         if (!BookSearchsTracker.BookPathfindingSurfaces.ContainsKey(bookshelfLocationKey))
         {
             Debug.Log($"No Key To Navigate To '{bookshelfLocationKey}'");
+            FlashText($"Navigation to {Environment.NewLine}'{bookName}'{Environment.NewLine} is currently not supported");
+            return;
         }
 
         navigationStarted = true;

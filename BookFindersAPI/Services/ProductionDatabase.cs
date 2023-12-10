@@ -172,7 +172,10 @@ namespace BookFindersAPI.Services
             string? user = Environment.GetEnvironmentVariable("bookfindersDBUser");
             string? pass = Environment.GetEnvironmentVariable("bookfindersDBPassword");
 
-            optionsBuilder.UseNpgsql($"Host={host};Username={user};Password={pass}");
+            string database = "bookfinders";
+
+            string connectionString = $"server={host};database={database};User={user};Password={pass}";
+            optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("5.7.29"));
         }
     }
 }

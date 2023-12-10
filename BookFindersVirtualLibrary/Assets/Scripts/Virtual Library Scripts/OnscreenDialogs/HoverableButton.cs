@@ -36,7 +36,6 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             buttonText.color = initialButtonColor;
         }
         buttonImage.color = activeButtonColor;
-        
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -50,8 +49,20 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             buttonText.color = initialTextColor;
         }
         buttonImage.color = initialButtonColor;
-        
     }
+
+    //private void OnDisable()
+    //{
+    //    if (isButtonDisabled || isButtonActive)
+    //    {
+    //        return;
+    //    }
+    //    if (buttonText != null)
+    //    {
+    //        buttonText.color = initialTextColor;
+    //    }
+    //    buttonImage.color = initialButtonColor;
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +76,7 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
             initialTextColor = buttonText.color;
         }
         initialButtonColor = buttonImage.color;
-        activeButtonColor = Color.cyan;
+        activeButtonColor = Color.white;
         isButtonActive = false;
     }
 
