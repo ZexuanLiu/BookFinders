@@ -15,17 +15,14 @@ interface ActiveBookSearch
 
 public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSearch
 {
-    [SerializeField] GameObject userPathingObject;
     [SerializeField] GameObject libraryGuideView;
     [SerializeField] GameObject controls;
 
     [SerializeField] TextMeshProUGUI buttonText;
-    [SerializeField] GameObject selfHoverableButton;
 
+    [SerializeField] GameObject userPathingObject;
     private IFindingPathTo findingPath;
-    private IHoverableButton hoverableButton;
 
-    private bool bookSearchActive = false;
     private string initialButtonText;
 
     // Start is called before the first frame update
@@ -40,15 +37,6 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSear
             throw new Exception("UserPathing has no IFindingPathTo");
         }
 
-        if (selfHoverableButton.TryGetComponent(out IHoverableButton iHoverableButton))
-        {
-            hoverableButton = iHoverableButton;
-        }
-        else
-        {
-            throw new Exception("LocateClicked has no IHoverableButton");
-        }
-
         initialButtonText = buttonText.text;
     }
 
@@ -56,7 +44,7 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSear
     {
         string localLocationCode = BookSearchsTracker.SelectedBook.LocationBookShelfNum + BookSearchsTracker.SelectedBook.LocationBookShelfSide;
 
-        if (!bookSearchActive)
+        if (!BookSearchsTracker.BookSearchInProgress)
         {
             findingPath.SetBookDestinationTo(localLocationCode, BookSearchsTracker.SelectedBook.Name);
             buttonText.text = "Finish";
@@ -66,11 +54,10 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSear
             findingPath.FinishNavigation();
             buttonText.text = initialButtonText;
         }
-        bookSearchActive = !bookSearchActive;
-        libraryGuideView.SetActive(false);
+        BookSearchsTracker.BookSearchInProgress = !BookSearchsTracker.BookSearchInProgress;
         ButtonObserver.currentButtonMode = ButtonMode.VirtualLibrary;
+        libraryGuideView.SetActive(false);
         controls.SetActive(true);
-        hoverableButton.SetInactive();
     }
 
     public void FinishSearch()

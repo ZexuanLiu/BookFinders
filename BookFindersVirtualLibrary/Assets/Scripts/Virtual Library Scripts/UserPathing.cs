@@ -13,7 +13,7 @@ interface IFindingPathTo
 {
     public Vector3 ArrowDestination();
 
-    public void CycleTargets();
+    public void CycleLocations();
 
     public void SetBookDestinationTo(string bookshelfLocationKey, string bookName);
 
@@ -43,6 +43,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     private string currentDestinationText;
 
     private List<Vector3> locations;
+    private List<string> locationLabels;
     private int currentLocationIndex;
     private int currentIndexSwitchedTo;
 
@@ -75,93 +76,58 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             throw new Exception("User has no IFlashable");
         }
 
+        locationLabels = new List<string>()
+        {
+            string.Empty,
+            "Study Area 1",
+            "Study Area 2",
+            "Study Area 3",
+            "Material ConneXion",
+            "Board Game Rental"
+        };
         locations = new List<Vector3>()
         {
-            Vector3.zero,
-            new Vector3(-22f, clickMarker.transform.position.y, 33f),
-            new Vector3(-35f, clickMarker.transform.position.y, -35f),
-            new Vector3(-3.5f, clickMarker.transform.position.y, -8.45f)
+            Vector3.zero, // Default no search location
+            new Vector3(-4.5f, clickMarker.transform.position.y, -33.5f), // Study Area 1
+            new Vector3(-22f, clickMarker.transform.position.y, 4.25f), // Study Area 2
+            new Vector3(-22f, clickMarker.transform.position.y, 33f), // Study Area 3
+            new Vector3(-35f, clickMarker.transform.position.y, -28f), // Material ConneXion
+            new Vector3(-3.5f, clickMarker.transform.position.y, -8.45f)  // Board Game Rental
         };
         currentLocationIndex = -1;
         currentIndexSwitchedTo = 0;
 
         InitiateBookshelfPathfindingDictionaries();
+
+        if (locationLabels.Count != locations.Count)
+        {
+            throw new Exception("Locations and LocationLabels lists not the same length!");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool clicked0 = false;
-        bool clicked1 = false;
-        bool clicked2 = false;
-        bool clicked3 = false;
-        bool clicked = false;
+        bool wasCycleSwitched = currentIndexSwitchedTo != currentLocationIndex;
 
-        if (useControllerCycle)
+        if (wasCycleSwitched)
         {
-            if (currentIndexSwitchedTo != currentLocationIndex)
+            currentLocationIndex = currentIndexSwitchedTo;
+
+            if (currentLocationIndex != 0)
             {
-                currentLocationIndex = currentIndexSwitchedTo;
-
-                clicked0 = currentLocationIndex == 0;
-                clicked1 = currentLocationIndex == 1;
-                clicked2 = currentLocationIndex == 2;
-                clicked3 = currentLocationIndex == 3;
-
-                //Debug.Log(currentLocationIndex);
+                currentDestinationText = locationLabels[currentLocationIndex];
+                destination = locations[currentLocationIndex];
+                string message = "Set Navigation To " + currentDestinationText;
+                FlashText(message);
             }
         }
-        else
-        {
-            clicked1 = Input.GetKeyDown(KeyCode.Alpha1);
-            clicked2 = Input.GetKeyDown(KeyCode.Alpha2);
-            clicked3 = Input.GetKeyDown(KeyCode.Alpha3);
-        }
-
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    ClickToGetLocation();
-        //}
-
-        string message = string.Empty;
-        if (clicked0)
-        {
-            navigationStarted = false;
-            currentLocationIndex = 0;
-            destination = locations[currentLocationIndex];
-        }
-        if (clicked1)
-        {
-            currentDestinationText = "Study Area 2";
-            message = "Set Navigation To " + currentDestinationText;
-            currentLocationIndex = 1;
-            destination = locations[currentLocationIndex];
-            FlashText(message);
-        }
-        else if (clicked2)
-        {
-            currentDestinationText = "Material Connections";
-            message = "Set Navigation To " + currentDestinationText;
-            currentLocationIndex = 2;
-            destination = locations[currentLocationIndex];
-            FlashText(message);
-        }
-        else if (clicked3)
-        {
-            currentDestinationText = "Board Game Rental";
-            message = "Set Navigation To " + currentDestinationText;
-            currentLocationIndex = 3;
-            destination = locations[currentLocationIndex];
-            FlashText(message);
-        }
-        clicked = clicked0 || clicked1 || clicked2 || clicked3;
 
         if (destination != Vector3.zero)
         {
             navigationStarted = true;
 
-            if (transform.position != lastPosition || clicked)
+            if (transform.position != lastPosition || wasCycleSwitched)
             {
                 SetDestination(destination);
                 arrowDestination = new Vector3(destination.x, arrow.transform.position.y, destination.z);
@@ -178,13 +144,12 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
                     destination = Vector3.zero;
                 }
             }
-
         }
         else
         {
             if (navigationStarted)
             {
-                message = "You have arrived at " + currentDestinationText;
+                string message = "You have arrived at " + currentDestinationText;
                 FlashText(message);
             }
             clickMarker.SetActive(false);
@@ -195,18 +160,6 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             navigationStarted = false;
         }
 
-    }
-
-    private void ClickToGetLocation()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
-        if (hasHit)
-        {
-            Debug.Log(hit.point);
-        }
     }
 
     private void SetDestination(Vector3 target)
@@ -245,9 +198,15 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         return arrowDestination;
     }
 
-    public void CycleTargets()
+    public void CycleLocations()
     {
         currentIndexSwitchedTo = (currentIndexSwitchedTo + 1) % locations.Count;
+
+        BookSearchsTracker.BookSearchInProgress = false;
+        if (currentFlashingBookshelf != null)
+        {
+            currentFlashingBookshelf.SetActive(false);
+        }
     }
 
     public void SetBookDestinationTo(string bookshelfLocationKey, string bookName)

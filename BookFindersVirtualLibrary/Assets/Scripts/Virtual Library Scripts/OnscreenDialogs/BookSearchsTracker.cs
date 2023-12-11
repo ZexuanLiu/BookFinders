@@ -18,6 +18,8 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
         public static Dictionary<string, Vector3> BookPathfindLocations { get; set; }
         public static Dictionary<string, GameObject> BookPathfindingSurfaces { get; set; }
 
+        public static bool BookSearchInProgress { get; set; }
+
         static BookSearchsTracker()
         {
             BookPathfindLocations = new Dictionary<string, Vector3>();

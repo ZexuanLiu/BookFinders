@@ -26,6 +26,6 @@ public class XButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        findingPath.CycleTargets();
+        findingPath.CycleLocations();
     }
 }

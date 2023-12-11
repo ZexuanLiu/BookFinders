@@ -21,8 +21,8 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject scrollView;
     private IScrollBoxControl scrollBoxControl;
 
-    [SerializeField] GameObject searchButton;
-    private IHoverableButton searchButtonInterface;
+    [SerializeField] GameObject userPathingObject;
+    private IFindingPathTo findingPath;
 
     private HttpClient client;
     private volatile bool searchStarted = false;
@@ -38,13 +38,13 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
             throw new Exception("ScrollControl has no IScrollBoxControl");
         }
 
-        if (searchButton.TryGetComponent(out IHoverableButton iHoverableButton))
+        if (userPathingObject.TryGetComponent(out IFindingPathTo findingPathInterface))
         {
-            searchButtonInterface = iHoverableButton;
+            findingPath = findingPathInterface;
         }
         else
         {
-            throw new Exception("SearchButton has no IHoverableButton");
+            throw new Exception("UserPathing has no IFindingPathTo");
         }
 
         var handler = new HttpClientHandler();
@@ -58,8 +58,14 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         {
             return;
         }
+
+        if (BookSearchsTracker.BookSearchInProgress)
+        {
+            BookSearchsTracker.BookSearchInProgress = false;
+            findingPath.FinishNavigation();
+        }
+
         searchStarted = true;
-        searchButtonInterface.SetActive();
         scrollBoxControl.ClearSearchingMessage();
         scrollBoxControl.SetSearchingMessage();
 
@@ -110,14 +116,18 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
 
                 BookSearchsTracker.SearchResultBooks = foundBooks;
             }
+            else
+            {
+                scrollBoxControl.SetNoInternetMessage();
+            }
         }
         catch (Exception e)
         {
+            scrollBoxControl.SetNoInternetMessage();
             Debug.Log($"{e}");
         }
 
         searchStarted = false;
-        searchButtonInterface.SetInactive();
         scrollBoxControl.ClearSearchingMessage();
     }
 

@@ -7,6 +7,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenControls
 {
+    public enum ButtonMode
+    {
+        Default, VirtualLibrary, LibraryGuide, Menu
+    }
+
     public static class ButtonObserver
     {
         public static volatile ButtonMode currentButtonMode = ButtonMode.Default;

@@ -15,6 +15,8 @@ public interface IScrollBoxControl
 
     public void SetSearchingMessage();
 
+    public void SetNoInternetMessage();
+
     public void ClearSearchingMessage();
 }
 
@@ -24,6 +26,7 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
     [SerializeField] GameObject messageNoResultsFound;
     [SerializeField] GameObject messageNoSearchesYet;
     [SerializeField] GameObject messageSearching;
+    [SerializeField] GameObject messageNoInternet;
     [SerializeField] GameObject templates;
 
     private List<GameObject> searchResultChildren = new List<GameObject>();
@@ -34,16 +37,17 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         templateSearchResult.SetActive(false);
         messageNoResultsFound.SetActive(false);
         messageSearching.SetActive(false);
+        messageNoInternet.SetActive(false);
         templateSearchResult.transform.SetParent(templates.transform);
         messageNoResultsFound.transform.SetParent(templates.transform);
         messageSearching.transform.SetParent(templates.transform);
         messageNoSearchesYet.transform.SetParent(templates.transform);
+        messageNoInternet.transform.SetParent(templates.transform);
 
         messageNoSearchesYet.transform.SetParent(transform);
         messageNoSearchesYet.SetActive(true);
 
         templates.SetActive(false);
-        //AddNewSearchResult(1, "Hello", "World");
     }
 
     // Update is called once per frame
@@ -77,9 +81,11 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         messageNoResultsFound.SetActive(false);
         messageSearching.SetActive(false);
         messageNoSearchesYet.SetActive(false);
+        messageNoInternet.SetActive(false);
         messageNoResultsFound.transform.SetParent(templates.transform);
         messageSearching.transform.SetParent(templates.transform);
         messageNoSearchesYet.transform.SetParent(templates.transform);
+        messageNoInternet.transform.SetParent(templates.transform);
 
         searchResultChildren.Clear();
         foreach (Transform child in transform)
@@ -99,7 +105,14 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
     {
         ClearSearchResults();
         messageSearching.SetActive(true);
-        messageSearching.transform.SetParent(gameObject.transform);
+        messageSearching.transform.SetParent(transform);
+    }
+
+    public void SetNoInternetMessage()
+    {
+        ClearSearchResults();
+        messageNoInternet.SetActive(true);
+        messageNoInternet.transform.SetParent(transform);
     }
 
     public void ClearSearchingMessage()
@@ -107,4 +120,6 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         messageSearching.SetActive(false);
         messageSearching.transform.SetParent(templates.transform);
     }
+
+
 }

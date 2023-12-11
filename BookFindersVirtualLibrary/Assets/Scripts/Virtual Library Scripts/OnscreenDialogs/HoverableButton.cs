@@ -5,29 +5,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-interface IHoverableButton
-{
-    public void SetActive();
-
-    public void SetInactive();
-}
-
-public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHoverableButton
+public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField] Image buttonImage;
+    [SerializeField] Sprite buttonImageInvert;
     [SerializeField] TextMeshProUGUI buttonText = null;
     [SerializeField] bool isButtonDisabled;
 
     private Color initialTextColor;
     private Color initialButtonColor;
+    private Sprite buttonImageOriginal;
 
     private Color activeButtonColor;
-    private bool isButtonActive;
+    private bool hasStartScriptRun = false;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isButtonDisabled || isButtonActive)
+        if (isButtonDisabled)
         {
             return;
         }
@@ -35,12 +30,20 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             buttonText.color = initialButtonColor;
         }
-        buttonImage.color = activeButtonColor;
+        
+        if (buttonImageInvert != null)
+        {
+            buttonImage.sprite = buttonImageInvert;
+        }
+        else
+        {
+            buttonImage.color = activeButtonColor;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isButtonDisabled || isButtonActive)
+        if (isButtonDisabled)
         {
             return;
         }
@@ -48,21 +51,25 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             buttonText.color = initialTextColor;
         }
-        buttonImage.color = initialButtonColor;
+
+        if (buttonImageInvert != null)
+        {
+            buttonImage.sprite = buttonImageOriginal;
+        }
+        else
+        {
+            buttonImage.color = initialButtonColor;
+        }
     }
 
-    //private void OnDisable()
-    //{
-    //    if (isButtonDisabled || isButtonActive)
-    //    {
-    //        return;
-    //    }
-    //    if (buttonText != null)
-    //    {
-    //        buttonText.color = initialTextColor;
-    //    }
-    //    buttonImage.color = initialButtonColor;
-    //}
+    void OnDisable()
+    {
+        if (hasStartScriptRun)
+        {
+            OnPointerExit(null);
+        }
+        
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -71,25 +78,19 @@ public class HoverableButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             buttonImage.color = Color.gray;
         }
+        initialButtonColor = buttonImage.color;
         if (buttonText != null)
         {
             initialTextColor = buttonText.color;
+            activeButtonColor = initialTextColor;
         }
-        initialButtonColor = buttonImage.color;
-        activeButtonColor = Color.white;
-        isButtonActive = false;
-    }
+        else
+        {
+            activeButtonColor = Color.white;
+        }
+        buttonImageOriginal = buttonImage.sprite;
+        hasStartScriptRun = true;
 
-    public void SetActive()
-    {
-        OnPointerEnter(null);
-        isButtonActive = true;
-    }
-
-    public void SetInactive()
-    {
-        isButtonActive = false;
-        OnPointerExit(null);
     }
 
 }
