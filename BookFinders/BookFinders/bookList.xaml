@@ -7,7 +7,7 @@
     
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Image Source="libraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
+            <Image Source="LibraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
             <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                 <Frame BackgroundColor="White" 
                            CornerRadius="10" 
@@ -30,7 +30,7 @@
                            WidthRequest="250"
                            Completed="searchTextComplete">
                         </Entry>
-                        <Image Source="delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
+                        <Image Source="Delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
                            IsVisible="false" 
                            x:Name="closeButton">
                         <Image.GestureRecognizers>
@@ -39,11 +39,11 @@
                     </Image>
                     </Grid>
                 </Frame>
-                <ImageButton Source="searchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
-                <ImageButton Source="userIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
+                <ImageButton Source="SearchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
+                <ImageButton Source="UserIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
             </StackLayout>
             
-            <Frame BackgroundColor="White" CornerRadius="20" Margin="0,20,0,0" VerticalOptions="End">
+            <Frame BackgroundColor="White" CornerRadius="20" Margin="0,20,0,0" VerticalOptions="End" HeightRequest="700">
                 <StackLayout Orientation="Vertical">
                     <ListView x:Name="bookLists" SeparatorColor="Black" SeparatorVisibility ="None"  ItemSelected="bookLists_ItemSelected">
                         <ListView.RowHeight>100</ListView.RowHeight>

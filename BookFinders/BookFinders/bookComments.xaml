@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BookFinders.bookComments"
+    BackgroundColor="#013766"
+    Title="Book Comments"
+    >
+    <ContentPage.Content>
+         <StackLayout Orientation="Vertical">
+            <Image Source="LibraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                <Frame BackgroundColor="White" 
+                           CornerRadius="10" 
+                           Margin="10,0,0,0"
+                           Padding="5"
+                           IsVisible="false"
+                           x:Name="searchBarFrame"
+                           >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Entry x:Name="searchBar" Placeholder="Search items..." 
+                           TextColor="Black" 
+                           PlaceholderColor="Gray" 
+                           FontSize="Small"
+                           IsVisible="false"
+                           
+                           WidthRequest="250"
+                           >
+                        </Entry>
+                        <Image Source="Delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
+                           IsVisible="false" 
+                           x:Name="closeButton">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCloseButtonTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <ImageButton Source="SearchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
+                <ImageButton Source="UserIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
+            </StackLayout>
+            <Frame BackgroundColor="White" CornerRadius="20" Margin="0,0,0,0" VerticalOptions="EndAndExpand" HeightRequest="640">
+               <StackLayout Orientation="Vertical">
+
+                    <ListView x:Name="commentListView" SeparatorColor="Black" SeparatorVisibility ="None"  ItemSelected="comments_ItemSelected">
+                        <ListView.RowHeight>100</ListView.RowHeight>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                            <Frame
+                                BackgroundColor="White" 
+                                CornerRadius="10" 
+                                Margin="5,10,5,10"
+                                Padding="5"
+                                >
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                       <Image Source="UserIcon.png" BackgroundColor="Gray" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="StartAndExpand"/>
+                                        <Label Text="{Binding UserName}" TextColor="#013766" FontSize="Medium" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="2" HorizontalOptions="StartAndExpand" Margin="0,0,130,0" />
+                                        <Label Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Black" HorizontalOptions="EndAndExpand"/>                            
+                                </StackLayout>
+                                <Label Text="{Binding Description}" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                            </StackLayout>
+                            </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+
+                   <ImageButton x:Name="AddComments" WidthRequest="50" HeightRequest="50" Aspect="AspectFit" VerticalOptions="EndAndExpand"
+                             HorizontalOptions="CenterAndExpand"
+                             Clicked="AddCommentsBtn_Clicked"
+                             Source="PlusIcon.png"/>
+                </StackLayout>
+                
+               
+            </Frame>
+         </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+

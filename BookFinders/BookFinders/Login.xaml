@@ -62,7 +62,7 @@
                     <!-- Password Entry -->
                     <Entry x:Name="Password" Placeholder="Password" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" Margin="0,0,0,0" IsVisible="false"></Entry>
                     <StackLayout Orientation="Horizontal">
-                        <ImageButton x:Name="AddIcon" WidthRequest="25" HeightRequest="25" Aspect="AspectFit" Source="plusIcon.png"/>
+                        <ImageButton x:Name="AddIcon" WidthRequest="25" HeightRequest="25" Aspect="AspectFit" Source="PlusIcon.png"/>
                         <Label x:Name="AnotherAccountLabel" TextColor="Black">Use another account</Label>
                     </StackLayout>
                     <Label x:Name="ForgotPassword" TextColor="#013766" HorizontalOptions="Center" FontSize="Small" IsVisible="false">Forgot password</Label>
