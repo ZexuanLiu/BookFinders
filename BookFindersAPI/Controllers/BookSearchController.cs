@@ -24,7 +24,9 @@ namespace BookFindersAPI.Controllers
         [HttpGet("{searchText}/{offset}")]
         public async Task<IActionResult> SearchBooks(string searchText, int offset)
         {   
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+            string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
+            
+            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey="+apiKey);
             List<book> books = new List<book>();
 
             if (response.IsSuccessStatusCode)
@@ -67,7 +69,8 @@ namespace BookFindersAPI.Controllers
         [HttpGet("OnCampus/{searchText}/{offset}")]
         public async Task<IActionResult> SearchLibraryBooks(string searchText, int offset)
         {   
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Library_Physical&scope=MyInstitution_Physical&q=any%2Ccontains%2C"+searchText+"&multiFacets=multiFacets%3Dfacet_tlevel%2Cinclude%2Cavailable_p&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=false&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+            string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
+            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Library_Physical&scope=MyInstitution_Physical&q=any%2Ccontains%2C"+searchText+"&multiFacets=multiFacets%3Dfacet_tlevel%2Cinclude%2Cavailable_p&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=false&disableSplitFacets=true&apikey="+apiKey);
             
             if (response.IsSuccessStatusCode)
             {
@@ -181,17 +184,17 @@ namespace BookFindersAPI.Controllers
             else if ((letters == "TR"&&numbers>=681)||(letters=="TT"&&numbers<=205)){
                 return "7B";
             }
-            else if ((letters=="Q")||(letters=="R"&&numbers<=26)){
+            else if ((letters=="Q"&&numbers>=175)||(letters=="R"&&numbers<=26)){
                 return "8A";
             }
             else if ((letters=="R"&&numbers>=726)||(letters=="TK"&&numbers<5105.888)){
                 return "8B";
             }
-            else if ((letters=="HQ"&&numbers>=1080)||(letters=="M"&&numbers<1630)){
-                return "15A";
+            else if ((letters=="PN"&&numbers>=6710)||(letters=="PS"&&numbers<3503)){
+                return "9A";
             }
-            else if ((letters=="M"&&numbers>=1630)||(letters=="N"&&numbers<5300)){
-                return "15B";
+            else if ((letters=="PS"&&numbers>=3501)||(letters=="Q"&&numbers<175)){
+                return "9B";
             }
             else if ((letters=="PN"&&numbers>=1994)&&(letters=="PN"&&numbers<2091)){
                 return "10A";
@@ -199,8 +202,50 @@ namespace BookFindersAPI.Controllers
             else if ((letters=="PN"&&numbers>=2091)&&(letters=="PN"&&numbers<6700)){
                 return "10B";
             }
-            else if ((letters=="PN"&&numbers>=2091)||(letters=="P1"&&numbers<1994)){
+            else if ((letters=="NK"&&numbers>=4335)||(letters=="P"&&numbers<112)){
+                return "11A";
+            }
+            else if ((letters=="P"&&numbers>=116)||(letters=="PN"&&numbers<1994)){
                 return "11B";
+            }
+            else if ((letters=="ND"&&numbers>=461)||(letters=="NE"&&numbers<1300)){
+                return "12A";
+            }
+            else if ((letters=="NE"&&numbers>=1300)||(letters=="NK"&&numbers<4335)){
+                return "12B";
+            }
+            else if ((letters=="NC"&&numbers>=760)||(letters=="NC"&&numbers<1002)){
+                return "13A";
+            }
+            else if ((letters=="NC"&&numbers>=1002)||(letters=="ND"&&numbers<458)){
+                return "13B";
+            }
+            else if ((letters=="N"&&numbers>=5300)&&(letters=="N"&&numbers<7405)){
+                return "14A";
+            }
+            else if ((letters=="N"&&numbers>=7405)||(letters=="NC"&&numbers<758)){
+                return "14B";
+            }
+            else if ((letters=="HQ"&&numbers>=1080)||(letters=="M"&&numbers<1630)){
+                return "15A";
+            }
+            else if ((letters=="M"&&numbers>=1630)||(letters=="N"&&numbers<5300)){
+                return "15B";
+            }
+            else if ((letters=="GT"&&numbers>=540)||(letters=="HE"&&numbers<7775)){
+                return "16A";
+            }
+            else if ((letters=="HE"&&numbers>=7815)||(letters=="HQ"&&numbers<1075)){
+                return "16B";
+            }
+            else if ((letters=="BL"&&numbers>=1200)||(letters=="E"&&numbers<99)){
+                return "17A";
+            }
+            else if ((letters=="E"&&numbers>=99)||(letters=="GT"&&numbers<528)){
+                return "17B";
+            }
+            else if ((letters=="AC"&&numbers>=1)||(letters=="BL"&&numbers<1175)){
+                return "18B";
             }
             else{
                 return letters.ToString();
@@ -215,7 +260,7 @@ namespace BookFindersAPI.Controllers
             return (string.Empty, 0);
         }
 
-        if(input[0].ToString()=="Q"||input[0].ToString()=="R"||input[0].ToString()=="M"){
+        if(input[0].ToString()=="Q"||input[0].ToString()=="R"||input[0].ToString()=="M"||(input[0].ToString()=="P"&&char.IsDigit(input[1]))||(input[0].ToString()=="N"&&char.IsDigit(input[1]))||(input[0].ToString()=="E"&&char.IsDigit(input[1]))){
             string letters = input.Substring(0, 1);
 
        

@@ -31,7 +31,7 @@ namespace BookFinders
         }
         public async void LoadComments(string bookId)
         {
-            var response = await client.GetAsync("http://localhost:5156/api/Comment/getcomments/" + bookId);
+            var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/Comment/getcomments/" + bookId);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

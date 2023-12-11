@@ -59,7 +59,7 @@ namespace BookFinders
                     Description = commentEditor.Text
 
                 };
-                var result = await PostComment("http://localhost:5156/api/Comment/postcomment", commentObj);
+                var result = await PostComment("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/Comment/postcomment", commentObj);
                 if (result != null)
                 {
                     await DisplayAlert("Post Comment Success", "You comment has been posted.", "OK");
