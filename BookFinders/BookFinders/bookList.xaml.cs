@@ -56,7 +56,7 @@ namespace BookFinders
             observableBooks.Clear();
 
             userSearchText = searchText;
-            var response = await client.GetAsync("http://localhost:5156/api/BookSearch/"+searchText+"/0");
+            var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + searchText+"/0");
            
             if (response.IsSuccessStatusCode)
             {
@@ -73,7 +73,7 @@ namespace BookFinders
                         Name = doc.Name ?? "Unknown Title",
                         Author = doc.Author ?? "Unknown Author",
                         Description = doc.Description ?? "Unknown Description",
-                        ImageLink = doc.ImageLink,
+                        ImageLink = CheckImageLink(doc.ImageLink),
                         LocationCode = doc.LocationCode,
                         LibraryCode = doc.LibraryCode,
                         LocationBookShelfNum = doc.LocationBookShelfNum,
@@ -106,38 +106,47 @@ namespace BookFinders
             await Navigation.PopAsync();
         }
 
-        private async Task<string> CheckImageValidity(string uri)
+        private string CheckImageLink(string uri)
         {
-            try
-            {
-                var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
+            //try
+            //{
+            //    var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var contentType = response.Content.Headers.ContentType;
-                    if (contentType != null && contentType.MediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
-                    {
-                        // It is a Image
-                        return uri;
-                    }
-                    else
-                    {
-                        // not a image
-                        return "DefaultBook.png";
-                    }
-                }
-                else
-                {
-                    // request failed invaild url
-                    return "DefaultBook.png";
-                }
-            }
-            catch (Exception ex)
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var contentType = response.Content.Headers.ContentType;
+            //        if (contentType != null && contentType.MediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+            //        {
+            //            // It is a Image
+            //            return uri;
+            //        }
+            //        else
+            //        {
+            //            // not a image
+            //            return "DefaultBook.png";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // request failed invaild url
+            //        return "DefaultBook.png";
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Exception: " + ex.Message);
+            //    return "DefaultBook.png";
+
+            //}
+            if (uri != null && uri.Equals("defaultBook.png", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                // Update to "DefaultBook.png"
                 return "DefaultBook.png";
-                
             }
+
+            // No change needed, return the original value
+            return uri;
+
         }
 
         private void searchIcon_Clicked(object sender, EventArgs e)
@@ -161,7 +170,7 @@ namespace BookFinders
         public async void LoadMoreBooks()
         {
             offset+=10;
-            var response = await client.GetAsync("http://localhost:5156/api/BookSearch/"+userSearchText+"/"+offset);
+            var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + userSearchText+"/"+offset);
 
             if (response.IsSuccessStatusCode)
             {
@@ -179,7 +188,7 @@ namespace BookFinders
                         Name = doc.Name ?? "Unknown Title",
                         Author = doc.Author ?? "Unknown Author",
                         Description = doc.Description ?? "Unknown Description",
-                        ImageLink = doc.ImageLink,
+                        ImageLink = CheckImageLink(doc.ImageLink),
                         LocationCode = doc.LocationCode,
                         LibraryCode = doc.LibraryCode,
                         LocationBookShelfNum = doc.LocationBookShelfNum,
