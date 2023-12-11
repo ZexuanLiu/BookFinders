@@ -47,6 +47,8 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     private int currentLocationIndex;
     private int currentIndexSwitchedTo;
 
+    private bool destinationUpdated;
+
     [SerializeField] GameObject flashableText;
     private IFlashable iFlashable;
 
@@ -127,7 +129,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         {
             navigationStarted = true;
 
-            if (transform.position != lastPosition || wasCycleSwitched)
+            if (transform.position != lastPosition || wasCycleSwitched || destinationUpdated)
             {
                 SetDestination(destination);
                 arrowDestination = new Vector3(destination.x, arrow.transform.position.y, destination.z);
@@ -159,6 +161,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             currentDestinationText = string.Empty;
             navigationStarted = false;
         }
+        destinationUpdated = false;
 
     }
 
@@ -201,6 +204,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
     public void CycleLocations()
     {
         currentIndexSwitchedTo = (currentIndexSwitchedTo + 1) % locations.Count;
+        destinationUpdated = true;
 
         BookSearchsTracker.BookSearchInProgress = false;
         if (currentFlashingBookshelf != null)
@@ -218,6 +222,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             return;
         }
 
+        destinationUpdated = true;
         navigationStarted = true;
         currentDestinationText = bookName;
         string message = $"Set Navigation To: {Environment.NewLine}\"{currentDestinationText}\"";

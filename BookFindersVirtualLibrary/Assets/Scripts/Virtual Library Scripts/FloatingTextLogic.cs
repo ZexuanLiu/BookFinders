@@ -8,6 +8,7 @@ public class FloatingTextLogic : MonoBehaviour
 {
     [SerializeField] GameObject titleText;
     [SerializeField] GameObject interactText;
+    [SerializeField] GameObject bakgroundPlane;
     [SerializeField] float showRange = 25f;
 
     private TextMeshPro titleTextMesh;
@@ -34,12 +35,14 @@ public class FloatingTextLogic : MonoBehaviour
         {
             titleTextMesh.gameObject.SetActive(true);
             interactTextMesh.gameObject.SetActive(true);
+            bakgroundPlane.gameObject.SetActive(true);
             this.transform.LookAt(2 * transform.position - new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y-4, Camera.main.transform.position.z));
         }
         else
         {
             titleTextMesh.gameObject.SetActive(false);
             interactTextMesh.gameObject.SetActive(false);
+            bakgroundPlane.gameObject.SetActive(false);
         }
     }
 }
