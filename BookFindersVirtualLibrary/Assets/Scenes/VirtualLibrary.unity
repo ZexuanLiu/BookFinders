@@ -14738,7 +14738,6 @@ GameObject:
   - component: {fileID: 665726484}
   - component: {fileID: 665726486}
   - component: {fileID: 665726485}
-  - component: {fileID: 665726487}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -14803,20 +14802,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665726483}
   m_CullTransparentMesh: 1
---- !u!114 &665726487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 665726483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c802dd60acbfce40904979f36c043b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bookSearchView: {fileID: 1490822139}
-  bookDetailsView: {fileID: 1962730552}
 --- !u!1 &669342606
 GameObject:
   m_ObjectHideFlags: 0
@@ -50827,7 +50812,6 @@ GameObject:
   - component: {fileID: 2014286807}
   - component: {fileID: 2014286809}
   - component: {fileID: 2014286808}
-  - component: {fileID: 2014286810}
   - component: {fileID: 2014286811}
   m_Layer: 5
   m_Name: Details Button
@@ -50894,20 +50878,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014286806}
   m_CullTransparentMesh: 1
---- !u!114 &2014286810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014286806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c802dd60acbfce40904979f36c043b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bookSearchView: {fileID: 1490822139}
-  bookDetailsView: {fileID: 1962730552}
 --- !u!114 &2014286811
 MonoBehaviour:
   m_ObjectHideFlags: 0

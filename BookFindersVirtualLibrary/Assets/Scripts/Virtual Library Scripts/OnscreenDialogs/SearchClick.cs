@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using BookFindersLibrary.Models;
@@ -77,6 +76,13 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         bookDetailsView.SetActive(false);
 
         string textInput = thisInput.text;
+        if (string.IsNullOrEmpty(textInput) || textInput.Length == 0)
+        {
+            searchStarted = false;
+            scrollBoxControl.SetNoResultsFound();
+            return;
+        }
+
         try
         {
             var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{textInput}/0");
