@@ -45,6 +45,7 @@
             
             <Frame BackgroundColor="White" CornerRadius="20" Margin="0,20,0,0" VerticalOptions="End" HeightRequest="700">
                 <StackLayout Orientation="Vertical">
+                    <Label x:Name="searchBookLabel" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" VerticalOptions="CenterAndExpand" IsVisible="True">Please search for a book</Label>
                     <ListView x:Name="bookLists" SeparatorColor="Black" SeparatorVisibility ="None"  ItemSelected="bookLists_ItemSelected">
                         <ListView.RowHeight>100</ListView.RowHeight>
                             <ListView.ItemTemplate>

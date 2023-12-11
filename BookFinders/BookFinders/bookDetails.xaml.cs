@@ -35,7 +35,7 @@ namespace BookFinders
             bookAuthor.Text = bookObj.Author;
             bookDesc.Text =  bookObj.Description;
             bookImage.Source = bookObj.ImageLink;
-            bookLocation.Text = "Location: " + bookObj.LocationCode;
+            bookLocation.Text = "Location: "; //+ bookObj.LocationCode;
             bookObject = bookObj;
             userObj = currentUser;
             var handler = new HttpClientHandler();
@@ -46,7 +46,7 @@ namespace BookFinders
             commentsList = new ObservableCollection<Comment>();
             client = new HttpClient(handler);
 
-            LoadComments(bookObj.Id);
+            //LoadComments(bookObj.Id);
                
 
         }

@@ -84,9 +84,9 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Text="Publish: Peachpit Press" TextColor="#04345F" FontSize="12" HorizontalOptions="Start" Grid.Column="0"/>
-                    <Label Text="Year Published: 2019" TextColor="#04345F" FontSize="12" HorizontalOptions="Center" Grid.Column="1"/>
-                    <Label x:Name="bookLocation" Text="Location: E99" TextColor="#04345F" FontSize="12" HorizontalOptions="End" Grid.Column="2"/>
+                    <Label Text="Publish: Peachpit Press" TextColor="#04345F" FontSize="10" HorizontalOptions="Start" Grid.Column="0"/>
+                    <Label Text="Year Published: 2019" TextColor="#04345F" FontSize="10" HorizontalOptions="Center" Grid.Column="1"/>
+                    <Label x:Name="bookLocation" Text="Location: E99" TextColor="#04345F" FontSize="10" HorizontalOptions="End" Grid.Column="2"/>
                 </Grid>
 
                         <Label x:Name="bookDesc" Text="Default Desc" HorizontalOptions="Center" TextColor="Black" Margin="0,20,0,0"/>

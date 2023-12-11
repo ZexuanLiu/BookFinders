@@ -48,6 +48,7 @@ namespace BookFinders
         private async void searchTextComplete(object sender, EventArgs e)
         {
             string searchText = searchBar.Text;
+            searchBookLabel.Text = "Searching...";
             await LoadBooks(searchText);
             LoadMoreBtn.IsVisible = true;
         }
@@ -85,12 +86,13 @@ namespace BookFinders
                     
                     observableBooks.Add(book);
                 }
-               
+                searchBookLabel.IsVisible = false;
                 bookLists.ItemsSource = observableBooks;
 
             }
             else
             {
+                searchBookLabel.Text = "No Internet Connection";
                 Debug.WriteLine("failed to fetch the books");
             }
         }

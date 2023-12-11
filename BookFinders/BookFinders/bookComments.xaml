@@ -61,7 +61,7 @@
                             <StackLayout Orientation="Vertical">
                                 <StackLayout Orientation="Horizontal">
                                        <Image Source="UserIcon.png" BackgroundColor="Gray" WidthRequest="20" HeightRequest="20" Aspect="AspectFit" HorizontalOptions="StartAndExpand"/>
-                                        <Label Text="{Binding UserName}" TextColor="#013766" FontSize="Medium" FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="2" HorizontalOptions="StartAndExpand" Margin="0,0,130,0" />
+                                        <Label Text="{Binding UserName}" TextColor="#013766" FontSize="Medium" FontAttributes="Bold"  HorizontalOptions="StartAndExpand" Margin="0,0,100,0" />
                                         <Label Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Black" HorizontalOptions="EndAndExpand"/>                            
                                 </StackLayout>
                                 <Label Text="{Binding Description}" TextColor="Black" HorizontalOptions="StartAndExpand"/>
@@ -75,6 +75,7 @@
 
                    <ImageButton x:Name="AddComments" WidthRequest="50" HeightRequest="50" Aspect="AspectFit" VerticalOptions="EndAndExpand"
                              HorizontalOptions="CenterAndExpand"
+                             BackgroundColor="White"
                              Clicked="AddCommentsBtn_Clicked"
                              Source="PlusIcon.png"/>
                 </StackLayout>
