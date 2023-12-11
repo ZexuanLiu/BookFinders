@@ -34966,14 +34966,14 @@ PrefabInstance:
     - target: {fileID: 2139812741226222741, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2277424000555710910, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
+      objectReference: {fileID: 2100000, guid: 68d8bcec0246a78479facbc64fd2dd0e, type: 2}
     - target: {fileID: 2139812741226222741, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2804266833060853019, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
     - target: {fileID: 2139812741226222741, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
       propertyPath: m_SelectedEditorRenderState
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3584023751878958478, guid: fff3c34ea289ec04ba2202f3ffe1f8ea, type: 3}
       propertyPath: m_Name
