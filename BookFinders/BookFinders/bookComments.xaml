@@ -64,7 +64,21 @@
                                         <Label Text="{Binding UserName}" TextColor="#013766" FontSize="Medium" FontAttributes="Bold"  HorizontalOptions="StartAndExpand" Margin="0,0,100,0" />
                                         <Label Text="{Binding postDateTime, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="Small" TextColor="Black" HorizontalOptions="EndAndExpand"/>                            
                                 </StackLayout>
-                                <Label Text="{Binding Description}" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*" />
+                                         <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Description}" Grid.Column="0" TextColor="Black"/>
+                                    <ImageButton x:Name="DeleteCommentBtn"
+                                                 WidthRequest="20" HeightRequest="20"
+                                                 Aspect="AspectFit" BackgroundColor="White"
+                                                 Source="Delete.png" Grid.Column="1"
+                                                 IsVisible="false"
+                                                 CommandParameter="{Binding Id}"
+                                                 Clicked="DeleteCommentBtn_Clicked"></ImageButton>
+                                </Grid>
                             </StackLayout>
                             </Frame>
                             </ViewCell>
@@ -76,6 +90,7 @@
                    <ImageButton x:Name="AddComments" WidthRequest="50" HeightRequest="50" Aspect="AspectFit" VerticalOptions="EndAndExpand"
                              HorizontalOptions="CenterAndExpand"
                              BackgroundColor="White"
+                             Margin="0,20,0,0"
                              Clicked="AddCommentsBtn_Clicked"
                              Source="PlusIcon.png"/>
                 </StackLayout>

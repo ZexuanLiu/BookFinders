@@ -58,7 +58,8 @@ namespace BookFinders
 
             userSearchText = searchText;
             var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + searchText+"/0");
-           
+            //var response = await client.GetAsync("http://10.0.2.2:5156/api/BookSearch/" + searchText + "/0");
+
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -173,6 +174,7 @@ namespace BookFinders
         {
             offset+=10;
             var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + userSearchText+"/"+offset);
+            //var response = await client.GetAsync("http://10.0.2.2:5156/api/BookSearch/" + userSearchText + "/" + offset);
 
             if (response.IsSuccessStatusCode)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Threading.Tasks;
 using BookFinders.Model;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -29,9 +30,38 @@ namespace BookFinders
             commentsList = new ObservableCollection<Comment>();
             LoadComments(bookObject.Id);
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+            if (userObj.Authorization != Role.Student)
+            {
+                foreach (var cell in commentListView.TemplatedItems)
+                {
+                    var deleteBtn = cell.FindByName<ImageButton>("DeleteCommentBtn");
+                    if (deleteBtn != null)
+                    {
+                        
+                        deleteBtn.IsVisible = true;
+                       
+                    }
+                    else
+                    {
+                        Debug.WriteLine("deleteBtn not exist");
+                    }
+                }
+            }
+            else
+            {
+                Debug.WriteLine("you are student!");
+            }
+
+        }
         public async void LoadComments(string bookId)
         {
             var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/Comment/getcomments/" + bookId);
+            //var response = await client.GetAsync("http://10.0.2.2:5156/api/Comment/getcomments/" + bookId);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -68,6 +98,34 @@ namespace BookFinders
         void comments_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
 
+        }
+
+        async void DeleteCommentBtn_Clicked(System.Object sender, System.EventArgs e)
+        {
+            var ListItem = sender as ImageButton;
+            var currentId = ListItem.CommandParameter.ToString();
+            bool result = await DisplayAlert("Confirm Delete", "Are you sure you want to remove this comment?", "Yes", "No");
+
+            if (result == true)
+            {
+                await deleteComment(currentId);
+
+            }
+        }
+        public async Task<bool> deleteComment(string commentId)
+        {
+            var response = await client.DeleteAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/Comment/removeComment/" + commentId);
+            //var response = await client.DeleteAsync("http://10.0.2.2:5156/api/Comment/removeComment/" + commentId);
+            if (response.IsSuccessStatusCode)
+            {
+                LoadComments(bookObject.Id);
+                return true;
+            }
+            else
+            {
+                Debug.WriteLine("failed to remove the comment");
+                return false;
+            }
         }
     }
 }

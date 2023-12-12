@@ -176,25 +176,25 @@ namespace BookFindersAPI.Controllers
             var letters = result.Letters;
             var numbers = result.Numbers;
             if((letters == "TK"&&numbers>=5105.888)||(letters=="TR"&&numbers<681)){
-                return "7A";
-            }
-            else if ((letters == "TT"&&numbers>=212)||(letters=="ZA")){
-                return "6A";
-            }
-            else if ((letters == "TR"&&numbers>=681)||(letters=="TT"&&numbers<=205)){
                 return "7B";
             }
-            else if ((letters=="Q"&&numbers>=175)||(letters=="R"&&numbers<=26)){
-                return "8A";
+            else if ((letters == "TT"&&numbers>=212)||(letters=="ZA")){
+                return "6B";
             }
-            else if ((letters=="R"&&numbers>=726)||(letters=="TK"&&numbers<5105.888)){
+            else if ((letters == "TR"&&numbers>=681)||(letters=="TT"&&numbers<=205)){
+                return "7A";
+            }
+            else if ((letters=="Q"&&numbers>=175)||(letters=="R"&&numbers<=726)){
                 return "8B";
             }
+            else if ((letters=="R"&&numbers>=726)||(letters=="TK"&&numbers<5105.888)){
+                return "8A";
+            }
             else if ((letters=="PN"&&numbers>=6710)||(letters=="PS"&&numbers<3503)){
-                return "9A";
+                return "9B";
             }
             else if ((letters=="PS"&&numbers>=3501)||(letters=="Q"&&numbers<175)){
-                return "9B";
+                return "9A";
             }
             else if ((letters=="PN"&&numbers>=1994)&&(letters=="PN"&&numbers<2091)){
                 return "10A";
@@ -233,6 +233,7 @@ namespace BookFindersAPI.Controllers
                 return "15B";
             }
             else if ((letters=="GT"&&numbers>=540)||(letters=="HE"&&numbers<7775)){
+                
                 return "16A";
             }
             else if ((letters=="HE"&&numbers>=7815)||(letters=="HQ"&&numbers<1075)){
@@ -254,7 +255,7 @@ namespace BookFindersAPI.Controllers
 
         private async Task<(string Letters, double Numbers)> SeparateLettersAndNumbers(string input)
         {
-        
+           
         if (input.Length < 2)
         {
             return (string.Empty, 0);
@@ -284,6 +285,7 @@ namespace BookFindersAPI.Controllers
        
             if (double.TryParse(numberPart, out double numbers))
             {
+                Console.WriteLine(numbers);
                 return (letters, numbers);
             }
             else

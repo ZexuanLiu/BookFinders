@@ -60,12 +60,12 @@
                             <ImageButton Source="TrackingListIcon.png" BackgroundColor="White" HorizontalOptions="StartAndExpand" WidthRequest="35" HeightRequest="35"></ImageButton>
                             <Button
                                 x:Name="SignIn"
-                                Text="Find Book Using AR" TextColor="White" 
+                                Text="Open Virtual Library" TextColor="White" 
                                 BackgroundColor="#013766" 
                                 CornerRadius="10" 
                                 FontSize="16"
                                 Padding="5"
-                                Margin="30,0,40,0"
+                                Margin="30,0,30,0"
                                 TextTransform="Default"
                                 HorizontalOptions="CenterAndExpand"
                                 >
