@@ -10,14 +10,14 @@ public class BackBooksDetailsClicked : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject bookSearchView;
     [SerializeField] GameObject bookDetailsView;
 
-    [SerializeField] GameObject userPathingObject;
-    private IFindingPathTo findingPath;
+    [SerializeField] GameObject locateButton;
+    private IActiveBookSearch activeBookSearch;
 
     private void Start()
     {
-        if (userPathingObject.TryGetComponent(out IFindingPathTo findingPathInterface))
+        if (locateButton.TryGetComponent(out IActiveBookSearch activeSearchInterface))
         {
-            findingPath = findingPathInterface;
+            activeBookSearch = activeSearchInterface;
         }
         else
         {
@@ -30,7 +30,7 @@ public class BackBooksDetailsClicked : MonoBehaviour, IPointerClickHandler
         if (BookSearchsTracker.BookSearchInProgress)
         {
             BookSearchsTracker.BookSearchInProgress = false;
-            findingPath.FinishNavigation();
+            activeBookSearch.FinishSearch();
         }
         bookSearchView.SetActive(true);
         bookDetailsView.SetActive(false);

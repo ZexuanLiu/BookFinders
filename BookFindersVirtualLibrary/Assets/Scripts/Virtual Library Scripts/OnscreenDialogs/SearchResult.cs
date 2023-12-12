@@ -25,7 +25,6 @@ public class SearchResult : MonoBehaviour, IPointerClickHandler, ISearchResult
     private int id;
     private string bookName;
     private string bookAuthor;
-    
 
     public void OnPointerClick(PointerEventData eventData)
     {

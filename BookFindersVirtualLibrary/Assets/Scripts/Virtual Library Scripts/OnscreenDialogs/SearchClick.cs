@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using BookFindersLibrary.Models;
@@ -21,8 +20,8 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject scrollView;
     private IScrollBoxControl scrollBoxControl;
 
-    [SerializeField] GameObject userPathingObject;
-    private IFindingPathTo findingPath;
+    [SerializeField] GameObject locateButton;
+    private IActiveBookSearch activeBookSearch;
 
     private HttpClient client;
     private volatile bool searchStarted = false;
@@ -38,9 +37,9 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
             throw new Exception("ScrollControl has no IScrollBoxControl");
         }
 
-        if (userPathingObject.TryGetComponent(out IFindingPathTo findingPathInterface))
+        if (locateButton.TryGetComponent(out IActiveBookSearch activeSearchInterface))
         {
-            findingPath = findingPathInterface;
+            activeBookSearch = activeSearchInterface;
         }
         else
         {
@@ -62,7 +61,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         if (BookSearchsTracker.BookSearchInProgress)
         {
             BookSearchsTracker.BookSearchInProgress = false;
-            findingPath.FinishNavigation();
+            activeBookSearch.FinishSearch();
         }
 
         searchStarted = true;
@@ -77,6 +76,13 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         bookDetailsView.SetActive(false);
 
         string textInput = thisInput.text;
+        if (string.IsNullOrEmpty(textInput) || textInput.Length == 0)
+        {
+            searchStarted = false;
+            scrollBoxControl.SetNoResultsFound();
+            return;
+        }
+
         try
         {
             var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{textInput}/0");
@@ -104,6 +110,12 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
                     newBook.LibraryCode = bookJson["libraryCode"].ToString();
                     newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
                     newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+
+                    if (!newBook.LibraryCode.Equals("TRAF"))
+                    {
+                        continue;
+                    }
+
                     foundBooks.Add(newBook);
 
                     string bookName = newBook.Name;
