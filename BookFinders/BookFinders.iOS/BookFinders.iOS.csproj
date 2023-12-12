@@ -143,4 +143,10 @@
       <Name>BookFinders</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\art.scnassest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Collada Include="Resources\art.scnassest\arrow.dae" />
+  </ItemGroup>
 </Project>
