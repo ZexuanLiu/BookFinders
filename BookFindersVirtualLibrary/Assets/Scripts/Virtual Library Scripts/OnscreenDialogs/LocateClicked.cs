@@ -8,12 +8,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 // Implement into back and search
-interface ActiveBookSearch
+interface IActiveBookSearch
 {
     public void FinishSearch();
 }
 
-public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSearch
+public class LocateClicked : MonoBehaviour, IPointerClickHandler, IActiveBookSearch
 {
     [SerializeField] GameObject libraryGuideView;
     [SerializeField] GameObject controls;
@@ -51,8 +51,7 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSear
         }
         else
         {
-            findingPath.FinishNavigation();
-            buttonText.text = initialButtonText;
+            FinishSearch();
         }
         BookSearchsTracker.BookSearchInProgress = !BookSearchsTracker.BookSearchInProgress;
         ButtonObserver.currentButtonMode = ButtonMode.VirtualLibrary;
@@ -63,5 +62,6 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, ActiveBookSear
     public void FinishSearch()
     {
         findingPath.FinishNavigation();
+        buttonText.text = initialButtonText;
     }
 }

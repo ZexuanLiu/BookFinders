@@ -20,8 +20,8 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject scrollView;
     private IScrollBoxControl scrollBoxControl;
 
-    [SerializeField] GameObject userPathingObject;
-    private IFindingPathTo findingPath;
+    [SerializeField] GameObject locateButton;
+    private IActiveBookSearch activeBookSearch;
 
     private HttpClient client;
     private volatile bool searchStarted = false;
@@ -37,9 +37,9 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
             throw new Exception("ScrollControl has no IScrollBoxControl");
         }
 
-        if (userPathingObject.TryGetComponent(out IFindingPathTo findingPathInterface))
+        if (locateButton.TryGetComponent(out IActiveBookSearch activeSearchInterface))
         {
-            findingPath = findingPathInterface;
+            activeBookSearch = activeSearchInterface;
         }
         else
         {
@@ -61,7 +61,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         if (BookSearchsTracker.BookSearchInProgress)
         {
             BookSearchsTracker.BookSearchInProgress = false;
-            findingPath.FinishNavigation();
+            activeBookSearch.FinishSearch();
         }
 
         searchStarted = true;
@@ -110,6 +110,12 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
                     newBook.LibraryCode = bookJson["libraryCode"].ToString();
                     newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
                     newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+
+                    if (!newBook.LibraryCode.Equals("TRAF"))
+                    {
+                        continue;
+                    }
+
                     foundBooks.Add(newBook);
 
                     string bookName = newBook.Name;

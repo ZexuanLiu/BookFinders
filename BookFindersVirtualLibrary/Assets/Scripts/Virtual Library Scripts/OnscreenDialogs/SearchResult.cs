@@ -25,7 +25,6 @@ public class SearchResult : MonoBehaviour, IPointerClickHandler, ISearchResult
     private int id;
     private string bookName;
     private string bookAuthor;
-    private bool foundTextFields = false;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -72,12 +71,10 @@ public class SearchResult : MonoBehaviour, IPointerClickHandler, ISearchResult
             if (child.name.Equals("Name"))
             {
                 textMeshName = child.gameObject.GetComponent<TextMeshProUGUI>();
-                foundTextFields = true;
             }
             else if (child.name.Equals("Author"))
             {
                 textMeshAuthor = child.gameObject.GetComponent<TextMeshProUGUI>();
-                foundTextFields = true;
             }
         }
     }
