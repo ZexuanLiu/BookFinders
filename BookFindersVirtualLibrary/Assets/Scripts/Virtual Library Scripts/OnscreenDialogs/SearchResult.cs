@@ -58,12 +58,6 @@ public class SearchResult : MonoBehaviour, IPointerClickHandler, ISearchResult
         OnStart();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnStart()
     {
         foreach (Transform child in transform)

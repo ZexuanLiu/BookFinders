@@ -50,12 +50,6 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         templates.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddNewSearchResult(int id, string name, string author)
     {
         GameObject duplicate = Instantiate(templateSearchResult);

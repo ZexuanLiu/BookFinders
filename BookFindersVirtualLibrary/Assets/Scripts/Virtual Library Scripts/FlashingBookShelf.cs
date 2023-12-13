@@ -8,7 +8,7 @@ public class FlashingBookShelf : MonoBehaviour
 
     private float flashFadeIn = 1f;
     private float flashStay = 0.1f;
-    private float flastFadeOut = 1f;
+    private float flashFadeOut = 1f;
 
     private float timePassed;
     private float totalTextTime;
@@ -17,7 +17,7 @@ public class FlashingBookShelf : MonoBehaviour
     void Start()
     {
         timePassed = 0;
-        totalTextTime = flashFadeIn + flashStay + flastFadeOut;
+        totalTextTime = flashFadeIn + flashStay + flashFadeOut;
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class FlashingBookShelf : MonoBehaviour
         }
         else if (timePassed < totalTextTime)
         {
-            float newOpacity = 1 - ((timePassed - (flashFadeIn + flashStay)) / flastFadeOut);
+            float newOpacity = 1 - ((timePassed - (flashFadeIn + flashStay)) / flashFadeOut);
             flashObjectMesh.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, newOpacity);
         }
         else
