@@ -23,19 +23,19 @@ namespace BookFinders
     {
         private ObservableCollection<Comment> commentsList;
         private HttpClient client;
-        private book bookObject;
+        private Book bookObject;
         private User userObj;
         private bool isLiked = false;
         
-        public bookDetails(book bookObj, User currentUser)
+        public bookDetails(Book bookObj, User currentUser)
         {
             InitializeComponent();
 
-            bookName.Text = "Title:"+bookObj.Name;
-            bookAuthor.Text = "Author:" + bookObj.Author;
+            bookName.Text = bookObj.Name;
+            bookAuthor.Text = bookObj.Author;
             bookDesc.Text =  bookObj.Description;
-            bookImage.Source = "bookImage.jpg";
-
+            bookImage.Source = bookObj.ImageLink;
+            bookLocation.Text = "Location: " + bookObj.LocationCode;
             bookObject = bookObj;
             userObj = currentUser;
             var handler = new HttpClientHandler();
@@ -277,6 +277,25 @@ namespace BookFinders
         private void StartAR(object sender, EventArgs e)
         {
             DependencyService.Get<IARImplmentation>().LaunchAR();
+        }
+
+        private void OnCloseButtonTapped(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = false;
+            searchBarFrame.IsVisible = false;
+            closeButton.IsVisible = false;
+        }
+
+        private void searchIcon_Clicked(object sender, EventArgs e)
+        {
+            searchBar.IsVisible = true;
+            searchBarFrame.IsVisible = true;
+            closeButton.IsVisible = true;
+        }
+
+        void CommentIcon_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new bookComments(bookObject, userObj));
         }
     }
 }

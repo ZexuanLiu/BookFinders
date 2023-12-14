@@ -48,6 +48,26 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.ToTable("_comment");
                 });
 
+            modelBuilder.Entity("BookFindersLibrary.Models.Coordinate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<float>("X")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Y")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("Z")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_coordinates");
+                });
+
             modelBuilder.Entity("BookFindersLibrary.Models.PushNotification", b =>
                 {
                     b.Property<int>("Id")
@@ -69,6 +89,96 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.HasKey("Id");
 
                     b.ToTable("_pushNotifications");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserLocations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DestinationId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("XCoordinate")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("YCoordinate")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_locations");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CoordinateId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PostDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("UserTrackingSessionId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoordinateId");
+
+                    b.HasIndex("UserTrackingSessionId");
+
+                    b.ToTable("_userTrackingInstances");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Campus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TimeEnded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TimeStarted")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_userTrackingSessions");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
+                {
+                    b.HasOne("BookFindersLibrary.Models.Coordinate", "Coordinate")
+                        .WithMany()
+                        .HasForeignKey("CoordinateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookFindersLibrary.Models.UserTrackingSession", null)
+                        .WithMany("Locations")
+                        .HasForeignKey("UserTrackingSessionId");
+
+                    b.Navigation("Coordinate");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingSession", b =>
+                {
+                    b.Navigation("Locations");
                 });
 #pragma warning restore 612, 618
         }
