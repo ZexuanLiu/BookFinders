@@ -44,7 +44,7 @@ public class AButton : MonoBehaviour, IPointerClickHandler
         Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
         if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
         {
-         
+
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
                 interactObj.Interact();
