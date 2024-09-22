@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.ide.vscode@1.2.5/Editor/Unity.com.unity.vscode.Editor.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

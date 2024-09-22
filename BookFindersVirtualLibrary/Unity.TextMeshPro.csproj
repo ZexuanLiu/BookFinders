@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/Unity.TextMeshPro.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

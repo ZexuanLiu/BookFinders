@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UnityEngine.UI.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

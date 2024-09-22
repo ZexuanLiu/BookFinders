@@ -97,6 +97,7 @@
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.performance.profile-analyzer@1.2.2/Editor/Unity.Performance.Profile-Analyzer.Editor.asmdef" />
     <None Include="Library/PackageCache/com.unity.performance.profile-analyzer@1.2.2/Editor/ProfileAnalyzerShader.shader" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

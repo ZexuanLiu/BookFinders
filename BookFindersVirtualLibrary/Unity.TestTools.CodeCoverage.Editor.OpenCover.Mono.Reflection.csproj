@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/Editor/CoverageFormats/OpenCover/Mono.Reflection/Reflection.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

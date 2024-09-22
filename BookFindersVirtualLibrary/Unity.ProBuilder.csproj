@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.probuilder@5.2.2/Runtime/Unity.ProBuilder.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

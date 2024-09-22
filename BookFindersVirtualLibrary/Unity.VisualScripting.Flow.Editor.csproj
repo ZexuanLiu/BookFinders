@@ -232,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Flow/Unity.VisualScripting.Flow.Editor.asmdef" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

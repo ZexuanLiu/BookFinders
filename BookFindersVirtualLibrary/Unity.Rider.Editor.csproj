@@ -103,6 +103,7 @@
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.ide.rider@3.0.26/Rider/Editor/com.unity.ide.rider.asmdef" />
     <None Include="Library/PackageCache/com.unity.ide.rider@3.0.26/Rider/Editor/JetBrains.Rider.PathLocator.dll" />
+    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
