@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/Toolbar/Unity.CollabProxy.Editor.asmdef" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

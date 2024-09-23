@@ -491,7 +491,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Core/Unity.VisualScripting.Core.asmdef" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

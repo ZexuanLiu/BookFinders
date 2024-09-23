@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.editorcoroutines@1.0.0/Editor/Unity.EditorCoroutines.Editor.asmdef" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -340,7 +340,6 @@
     <None Include="Library/PackageCache/com.unity.timeline@1.7.6/Editor/StyleSheets/res/Timeline_DarkSkin.txt" />
     <None Include="Library/PackageCache/com.unity.timeline@1.7.6/Editor/StyleSheets/Extensions/light.uss" />
     <None Include="Library/PackageCache/com.unity.timeline@1.7.6/Editor/StyleSheets/Extensions/common.uss" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

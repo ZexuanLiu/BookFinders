@@ -176,7 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.test-framework@1.1.33/UnityEngine.TestRunner/UnityEngine.TestRunner.asmdef" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

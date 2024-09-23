@@ -466,7 +466,6 @@
   <ItemGroup>
     <None Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll" />
     <None Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Unity.VisualScripting.Flow.asmdef" />
-    <None Include="Assets\NewFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
