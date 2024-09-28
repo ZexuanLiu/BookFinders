@@ -20,6 +20,11 @@ builder.Services.AddCors(options => {
 builder.Services.AddDbContext<TestDatabase>();
 builder.Services.AddDbContext<ProductionDatabase>();
 
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

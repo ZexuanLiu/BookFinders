@@ -10,43 +10,25 @@ namespace BookFindersAPI.Controllers
     [Route("api/[controller]")]
     public class CommentController : ControllerBase
     {
-         private IDatabase _pushNotificationDatabase;
+         private IDatabase _commentsDatabase;
 
         public CommentController(ProductionDatabase productionDatabase, TestDatabase testDatabase)
         {
             bool isDev = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-            ControllerStartUpTracker controllerStartUpTracker = ControllerStartUpTracker.GetInstance();
 
             if (isDev)
             {
-
-                if (controllerStartUpTracker.IsInitialRunPushNotificationController())
-                {
-                    controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
-                    var loadingDefaultPushNotificationsTask = testDatabase.LoadDefaultPushNotificationHistoryAndReset();
-
-                    while (!loadingDefaultPushNotificationsTask.IsCompleted) { Thread.Sleep(500); }
-
-                    if (loadingDefaultPushNotificationsTask.Result != true)
-                    {
-                        throw new Exception("Test database could not load default push notifications!");
-                    }
-                    
-                }
-                _pushNotificationDatabase = testDatabase;
-
+                _commentsDatabase = testDatabase;
             }
             else
             {
-                _pushNotificationDatabase = productionDatabase;
+                _commentsDatabase = productionDatabase;
             }
 
-            if (_pushNotificationDatabase == null)
+            if (_commentsDatabase == null)
             {
-                throw new Exception("Push Notification database was not initialized!");
+                throw new Exception("Comment database was not initialized!");
             }
-
-            controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
         }
 
         [HttpPost("postcomment")]
@@ -64,7 +46,7 @@ namespace BookFindersAPI.Controllers
                    PostDateTime = DateTime.Now
                 };
 
-                var addCommentTask = _pushNotificationDatabase.AddComment(filteredComment);
+                var addCommentTask = _commentsDatabase.AddComment(filteredComment);
                 await addCommentTask;
 
                 Comment newlyAddedComment = addCommentTask.Result;
@@ -96,7 +78,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var getCommentsTask = _pushNotificationDatabase.GetBookComments(bookId);
+                var getCommentsTask = _commentsDatabase.GetBookComments(bookId);
                 await getCommentsTask;
 
                 IEnumerable<Comment> comments = getCommentsTask.Result;
@@ -127,7 +109,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var getCommentsTask = _pushNotificationDatabase.GetComments();
+                var getCommentsTask = _commentsDatabase.GetComments();
                 await getCommentsTask;
 
                 IEnumerable<Comment> comments = getCommentsTask.Result;
@@ -158,7 +140,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var addThumbsUpTask = _pushNotificationDatabase.addThumbsUp(commentId);
+                var addThumbsUpTask = _commentsDatabase.addThumbsUp(commentId);
                 await addThumbsUpTask;
 
                 bool result = addThumbsUpTask.Result;
@@ -189,7 +171,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var subThumbsUpTask = _pushNotificationDatabase.subThumbsUp(commentId);
+                var subThumbsUpTask = _commentsDatabase.subThumbsUp(commentId);
                 await subThumbsUpTask;
 
                 bool result = subThumbsUpTask.Result;
@@ -220,7 +202,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var removeCommentTask = _pushNotificationDatabase.removeComment(commentId);
+                var removeCommentTask = _commentsDatabase.removeComment(commentId);
                 await removeCommentTask;
 
                 bool result = removeCommentTask.Result;
@@ -251,7 +233,7 @@ namespace BookFindersAPI.Controllers
         {
             try
             {
-                var EditCommentTask = _pushNotificationDatabase.EditComment(commentId,newComment);
+                var EditCommentTask = _commentsDatabase.EditComment(commentId,newComment);
                 await EditCommentTask;
 
                 bool result = EditCommentTask.Result;

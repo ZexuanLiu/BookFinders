@@ -38,7 +38,7 @@ namespace BookFinders
 
             foreach(User user in userList)
             {
-                if (user.Name == Username.Text && user.Password == Password.Text)
+                if (user.Name == UserEmail.Text && user.Password == Password.Text)
                 {
 
                     Navigation.PushAsync(new bookList(user));
@@ -55,6 +55,35 @@ namespace BookFinders
             string title = $"Snow day tomorrow!";
             string message = $"There is likely going to be a snowday tomorrow, stay safe!";
             notificationManager.SendNotification(title, message);
+        }
+
+        private void UserEmailComplete(object sender, EventArgs e)
+        {
+            Password.IsVisible = true;
+            UserEmailLabel.Text = UserEmail.Text;
+            UserEmailLabel.IsVisible = true;
+            HintLabel.Text = "Enter password";
+            UserEmail.IsVisible = false;
+            SignIn.IsVisible = true;
+            AnotherAccountLabel.IsVisible = false;
+            CloseIcon.IsVisible = true;
+            AddIcon.IsVisible = false;
+            ForgotPassword.IsVisible = true;
+        }
+
+        private void CloseIcon_Click(object sender, EventArgs e)
+        {
+            Password.IsVisible = false;
+            UserEmailLabel.Text = "";
+            UserEmailLabel.IsVisible = false;
+            HintLabel.Text = "Pick an account";
+            UserEmail.IsVisible = true;
+            SignIn.IsVisible = false;
+            AnotherAccountLabel.IsVisible = true;
+            CloseIcon.IsVisible = false;
+            AddIcon.IsVisible = true;
+            ForgotPassword.IsVisible = false;
+
         }
     }
 }

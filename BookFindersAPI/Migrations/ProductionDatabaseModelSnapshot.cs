@@ -4,7 +4,6 @@ using BookFindersAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,33 +17,170 @@ namespace BookFindersAPI.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            modelBuilder.Entity("BookFindersLibrary.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("BookId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("PostDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ThumbsUp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_comment");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.Coordinate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<float>("X")
+                        .HasColumnType("float");
+
+                    b.Property<float>("Y")
+                        .HasColumnType("float");
+
+                    b.Property<float>("Z")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_coordinates");
+                });
 
             modelBuilder.Entity("BookFindersLibrary.Models.PushNotification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("EndDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("StartDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.ToTable("_pushNotifications");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserLocations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("DestinationId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<double>("XCoordinate")
+                        .HasColumnType("double");
+
+                    b.Property<double>("YCoordinate")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_locations");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CoordinateId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("UserTrackingSessionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CoordinateId");
+
+                    b.HasIndex("UserTrackingSessionId");
+
+                    b.ToTable("_userTrackingInstances");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Campus")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("TimeEnded")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("TimeStarted")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_userTrackingSessions");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
+                {
+                    b.HasOne("BookFindersLibrary.Models.Coordinate", "Coordinate")
+                        .WithMany()
+                        .HasForeignKey("CoordinateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookFindersLibrary.Models.UserTrackingSession", null)
+                        .WithMany("Locations")
+                        .HasForeignKey("UserTrackingSessionId");
+
+                    b.Navigation("Coordinate");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingSession", b =>
+                {
+                    b.Navigation("Locations");
                 });
 #pragma warning restore 612, 618
         }

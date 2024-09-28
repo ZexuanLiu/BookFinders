@@ -7,6 +7,7 @@ using Android.OS;
 using AndroidX.Core.App;
 using Xamarin.Forms;
 using Android.Content;
+using Plugin.FirebasePushNotification;
 
 namespace BookFinders.Droid
 {
@@ -22,6 +23,9 @@ namespace BookFinders.Droid
             LoadApplication(new App());
 
             CreateNotificationFromIntent(Intent);
+
+            //https://github.com/jfversluis/XFFCMPushNotificationsSample
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

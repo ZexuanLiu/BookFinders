@@ -3,7 +3,7 @@
     public class ControllerStartUpTracker
     {
         private static ControllerStartUpTracker self = null;
-        private volatile bool _isInitialRunPushNotificationController = true;
+        private volatile bool _isInitialRunOfControllers = true;
 
         public static ControllerStartUpTracker GetInstance()
         {
@@ -16,14 +16,14 @@
             // Do nothing
         }
 
-        public bool IsInitialRunPushNotificationController()
+        public bool IsInitialRunOfControllers()
         {
-            return self._isInitialRunPushNotificationController;
+            return self._isInitialRunOfControllers;
         }
 
-        public void SetIsInitialRunPushNotificationController(bool isInitialRunPushNotificationController)
+        public void SetIsInitialRunOfControllers(bool isInitialRunOfControllers)
         {
-            self._isInitialRunPushNotificationController = isInitialRunPushNotificationController;
+            self._isInitialRunOfControllers = isInitialRunOfControllers;
         }
     }
 }

@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
+WORKDIR /BookFindersWebAppBuildDir
+COPY . .
+RUN dotnet restore "BookFindersWebApp/BookFindersWebApp.csproj"
+RUN dotnet publish "BookFindersWebApp/BookFindersWebApp.csproj" -c release -o /BookFindersWebApp/bin/published --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
+WORKDIR /BookFindersWebApp/bin/published
+COPY --from=build /BookFindersWebApp/bin/published ./
+
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "BookFindersWebApp.dll"]

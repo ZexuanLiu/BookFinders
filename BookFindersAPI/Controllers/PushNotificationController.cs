@@ -1,7 +1,11 @@
 ﻿using BookFindersAPI.Interfaces;
 using BookFindersAPI.Services;
 using BookFindersLibrary.Models;
+using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace BookFindersAPI.Controllers
 {
@@ -18,10 +22,8 @@ namespace BookFindersAPI.Controllers
 
             if (isDev)
             {
-
-                if (controllerStartUpTracker.IsInitialRunPushNotificationController())
+                if (controllerStartUpTracker.IsInitialRunOfControllers())
                 {
-                    controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
                     var loadingDefaultPushNotificationsTask = testDatabase.LoadDefaultPushNotificationHistoryAndReset();
 
                     while (!loadingDefaultPushNotificationsTask.IsCompleted) { Thread.Sleep(500); }
@@ -40,12 +42,47 @@ namespace BookFindersAPI.Controllers
                 _pushNotificationDatabase = productionDatabase;
             }
 
+            if (controllerStartUpTracker.IsInitialRunOfControllers())
+            {
+                // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+
+                JObject credentialJson = new JObject();
+                string? bookFindersProjectId = Environment.GetEnvironmentVariable("bookfindersFirebaseProjectId");
+                string? bookFindersPrivateKeyId = Environment.GetEnvironmentVariable("bookfindersFirebasePrivateKeyId");
+                string? bookFindersPrivateKey = Environment.GetEnvironmentVariable("bookfindersFirebasePrivateKey");
+                string? bookFindersClientId = Environment.GetEnvironmentVariable("bookfindersFirebaseClientId");
+                string? bookFindersClientEmail = Environment.GetEnvironmentVariable("bookfindersFirebaseClientEmail");
+                string? bookFindersClientCertURL = Environment.GetEnvironmentVariable("bookfindersFirebaseClientCertURL");
+
+                if (bookFindersPrivateKey != null)
+                {
+                    bookFindersPrivateKey = bookFindersPrivateKey.Replace(@"\\n", $"{Environment.NewLine}");
+                    bookFindersPrivateKey = bookFindersPrivateKey.Replace(@"\n", $"{Environment.NewLine}");
+                }
+
+                credentialJson.Add("type", "service_account");
+                credentialJson.Add("project_id", bookFindersProjectId);
+                credentialJson.Add("private_key_id", bookFindersPrivateKeyId);
+                credentialJson.Add("private_key", bookFindersPrivateKey);
+                credentialJson.Add("client_email", bookFindersClientEmail);
+                credentialJson.Add("client_id", bookFindersClientId);
+                credentialJson.Add("auth_uri", "https://accounts.google.com/o/oauth2/auth");
+                credentialJson.Add("token_uri", "https://oauth2.googleapis.com/token");
+                credentialJson.Add("auth_provider_x509_cert_url", "https://www.googleapis.com/oauth2/v1/certs");
+                credentialJson.Add("client_x509_cert_url", bookFindersClientCertURL);
+
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromJson(credentialJson.ToString())
+                });
+            }
+
             if (_pushNotificationDatabase == null)
             {
                 throw new Exception("Push Notification database was not initialized!");
             }
 
-            controllerStartUpTracker.SetIsInitialRunPushNotificationController(false);
+            controllerStartUpTracker.SetIsInitialRunOfControllers(false);
         }
 
         [HttpGet("getPushNotifications")]
@@ -89,8 +126,8 @@ namespace BookFindersAPI.Controllers
                 {
                     Description = pushNotification.Description,
                     Title = pushNotification.Title,
-                    StartDateTime = pushNotification.StartDateTime.ToUniversalTime(),
-                    EndDateTime = pushNotification.EndDateTime.ToUniversalTime()
+                    StartDateTime = pushNotification.StartDateTime,
+                    EndDateTime = pushNotification.EndDateTime
                 };
 
                 var addPushNotificationTask = _pushNotificationDatabase.AddPushNotification(filteredPushNotification);
@@ -98,7 +135,34 @@ namespace BookFindersAPI.Controllers
 
                 PushNotification newlyAddedPushNotification = addPushNotificationTask.Result;
 
-                // TODO: Add logic to actually send the push notification
+                // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+                var message = new Message()
+                {
+                    Topic = "all",
+                    Notification = new Notification()
+                    {
+                        Title = newlyAddedPushNotification.Title,
+                        Body = newlyAddedPushNotification.Description,
+                    }
+                };
+
+                try
+                {
+                    // //https://github.com/jfversluis/XFFCMPushNotificationsSample
+                    Task<string> sendPushNotificationTask = FirebaseMessaging.DefaultInstance.SendAsync(message);
+                    await sendPushNotificationTask;
+                    string resultOfNotification = sendPushNotificationTask.Result;
+                }
+                catch (Exception e)
+                {
+                    ResponseDTO responseDTOError = new ResponseDTO
+                    {
+                        Status = 500,
+                        Message = "An unexpected server error occurred",
+                        Errors = e
+                    };
+                    return BadRequest(responseDTOError);
+                }
 
                 ResponseDTO responseDTOOk = new ResponseDTO()
                 {
