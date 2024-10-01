@@ -121,6 +121,7 @@
     <Compile Include="Assets/Scripts/Virtual Library Scripts/UserMovement.cs" />
     <Compile Include="Assets/Scripts/Virtual Library Scripts/OnscreenControls/ButtonObserver.cs" />
     <Compile Include="Assets/Scripts/Virtual Library Scripts/OnscreenControls/JoystickLook.cs" />
+    <Compile Include="Assets/Scripts/BookSearchScript/BookSearch.cs" />
     <Compile Include="Assets/Scripts/Models/OnCampusBookResponse.cs" />
     <Compile Include="Assets/Scripts/Models/ResponseDTO.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
