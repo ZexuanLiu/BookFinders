@@ -90,6 +90,7 @@
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ObjectSpin.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets/Scripts/Virtual Library Scripts/OnscreenDialogs/BookDetailsControl.cs" />
+    <Compile Include="Assets/Scripts/SplashScreen/SplashScreen.cs" />
     <Compile Include="Assets/Scripts/Models/BookResponse.cs" />
     <Compile Include="Assets/Scripts/Models/UserTrackingInstance.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexJitter.cs" />
