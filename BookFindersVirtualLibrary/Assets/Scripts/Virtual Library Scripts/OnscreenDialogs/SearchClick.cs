@@ -5,7 +5,7 @@ using System.Net.Http;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using BookFindersLibrary.Models;
+using BookFindersVirtualLibrary.Models;
 using Newtonsoft.Json;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using Newtonsoft.Json.Linq;
@@ -91,7 +91,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
                 var content = await response.Content.ReadAsStringAsync();
                 JArray foundBooksJson = JArray.Parse(content);
 
-                List<book> foundBooks = new List<book>();
+                List<Book> foundBooks = new List<Book>();
                 scrollBoxControl.ClearSearchResults();
                 if (foundBooksJson.Count == 0)
                 {
@@ -101,7 +101,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
                 int index = 0;
                 foreach (JToken bookJson in foundBooksJson)
                 {
-                    book newBook = new book();
+                    Book newBook = new Book();
 
                     newBook.Name = bookJson["name"].ToString();
                     newBook.Author = bookJson["author"].ToString();

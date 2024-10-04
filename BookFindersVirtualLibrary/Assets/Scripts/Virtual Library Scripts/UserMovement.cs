@@ -64,7 +64,7 @@ public class UserMovement : MonoBehaviour, IMovementControl
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 0.5f, ground);
+        grounded = Physics.Raycast(transform.position, Vector3.down, (playerHeight * 0.5f) + 1.5f, ground);
         if (grounded)
         {
             thisBody.drag = groundDrag;
@@ -105,7 +105,6 @@ public class UserMovement : MonoBehaviour, IMovementControl
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(thisBody.velocity.x, 0f, thisBody.velocity.z);
-
 
         if (flatVel.magnitude > moveSpeed)
         {

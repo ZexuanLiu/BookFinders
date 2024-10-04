@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookFindersLibrary.Models;
+using BookFindersVirtualLibrary.Models;
 using UnityEngine;
 
 namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
@@ -11,9 +11,9 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
     public static class BookSearchsTracker
     {
         public static int Id { get; set; }
-        public static book SelectedBook { get; private set; }
+        public static Book SelectedBook { get; private set; }
 
-        public static List<book> SearchResultBooks { get; set; }
+        public static List<Book> SearchResultBooks { get; set; }
 
         public static Dictionary<string, Vector3> BookPathfindLocations { get; set; }
         public static Dictionary<string, GameObject> BookPathfindingSurfaces { get; set; }
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
             BookPathfindLocations = new Dictionary<string, Vector3>();
             BookPathfindingSurfaces = new Dictionary<string, GameObject>();
 
-            SelectedBook = new book();
+            SelectedBook = new Book();
         }
 
         public static void SetClickedBook(int id)
