@@ -9,7 +9,7 @@
     <ContentPage.Content>
 
         <StackLayout Orientation="Vertical">
-            <Image Source="libraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
+            <Image Source="LibraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
             <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                 <Frame BackgroundColor="White" 
                            CornerRadius="10" 
@@ -29,11 +29,11 @@
                            PlaceholderColor="Gray" 
                            FontSize="Small"
                            IsVisible="false"
-                           HeightRequest="80"
+                           
                            WidthRequest="250"
                            >
                         </Entry>
-                        <Image Source="delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
+                        <Image Source="Delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
                            IsVisible="false" 
                            x:Name="closeButton">
                             <Image.GestureRecognizers>
@@ -42,44 +42,52 @@
                         </Image>
                     </Grid>
                 </Frame>
-                <ImageButton Source="searchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
-                <ImageButton Source="userIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
+                <ImageButton Source="SearchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
+                <ImageButton Source="UserIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
             </StackLayout>
             <ScrollView>
             <Grid>
 
 
-                    <Frame BackgroundColor="White" CornerRadius="20" Margin="0,100,0,0" VerticalOptions="EndAndExpand" HeightRequest="600">
+                <Frame BackgroundColor="White" CornerRadius="20" Margin="0,100,0,0" VerticalOptions="EndAndExpand" HeightRequest="600">
 
                 <StackLayout Orientation="Vertical" Margin="0,85,0,0">
 
-                <Label x:Name="bookName" Text="Default title" FontAttributes="Bold" TextColor="#04345F" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0"/>
-                <Label x:Name="bookAuthor" Text="Default author" FontFamily="Cabin" TextColor="Black" HorizontalOptions="CenterAndExpand" />
+                <Label x:Name="bookName" Text="Default title" FontAttributes="Bold" TextColor="#04345F" HorizontalOptions="CenterAndExpand" Margin="10,0,0,0"/>
+                <Label x:Name="bookAuthor" Text="Default author" FontFamily="Cabin" TextColor="Black" HorizontalOptions="CenterAndExpand" Margin="10,0,0,0"/>
                 <!--three buttons -->
                 <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                            <ImageButton Source="trackingListIcon.png" BackgroundColor="White" HorizontalOptions="StartAndExpand" WidthRequest="35" HeightRequest="35"></ImageButton>
+                            <ImageButton Source="TrackingListIcon.png" BackgroundColor="White" HorizontalOptions="StartAndExpand" WidthRequest="35" HeightRequest="35"></ImageButton>
                             <Button
                                 x:Name="SignIn"
                                 Text="Find Book Using AR" TextColor="White" 
                                 BackgroundColor="#013766" 
                                 CornerRadius="10" 
                                 FontSize="16"
-                                Margin="40,0,40,0"
+                                Padding="5"
+                                Margin="30,0,40,0"
                                 TextTransform="Default"
                                 HorizontalOptions="CenterAndExpand"
                                 >
                             </Button>
                             <Frame CornerRadius="20" BackgroundColor="#013766" Padding="5">
-                            <ImageButton Source="commentIcon.png" 
+                            <ImageButton Source="CommentIcon.png" 
                                          BackgroundColor="#013766" WidthRequest="35" HeightRequest="35"
+                                         Clicked="CommentIcon_Clicked"
                                          HorizontalOptions="EndAndExpand"></ImageButton>
                             </Frame>
                         </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
-                            <Label Text="Publish: Peachpit Press" TextColor="#04345F" FontSize="12" HorizontalOptions="StartAndExpand"/>
-                            <Label Text="Year Published: 2019" TextColor="#04345F" FontSize="12" HorizontalOptions="CenterAndExpand"/>
-                            <Label Text="Location: E99" TextColor="#04345F" FontSize="12" HorizontalOptions="EndAndExpand"/>
-                        </StackLayout>
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Publish: Peachpit Press" TextColor="#04345F" FontSize="12" HorizontalOptions="Start" Grid.Column="0"/>
+                    <Label Text="Year Published: 2019" TextColor="#04345F" FontSize="12" HorizontalOptions="Center" Grid.Column="1"/>
+                    <Label x:Name="bookLocation" Text="Location: E99" TextColor="#04345F" FontSize="12" HorizontalOptions="End" Grid.Column="2"/>
+                </Grid>
 
                         <Label x:Name="bookDesc" Text="Default Desc" HorizontalOptions="Center" TextColor="Black" Margin="0,20,0,0"/>
                     
@@ -156,7 +164,7 @@
             </Frame>
                 
                 <Image x:Name="bookImage" HeightRequest="200" WidthRequest="100" 
-                       Aspect="AspectFit"  Margin="0,0,0,550" VerticalOptions="EndAndExpand" />
+                       Aspect="AspectFit"  Margin="10,0,0,550" VerticalOptions="EndAndExpand" />
                 
             </Grid>
             </ScrollView>

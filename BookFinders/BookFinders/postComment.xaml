@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BookFinders.postComment"
+    BackgroundColor="#013766"
+    Title="Post Comment"
+    >
+    <ContentPage.Content>
+         <StackLayout Orientation="Vertical">
+            <Image Source="LibraryLogo.png" Aspect="AspectFill" Margin="35,10,35,0" />
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                <Frame BackgroundColor="White" 
+                           CornerRadius="10" 
+                           Margin="10,0,0,0"
+                           Padding="5"
+                           IsVisible="false"
+                           x:Name="searchBarFrame"
+                           >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Entry x:Name="searchBar" Placeholder="Search items..." 
+                           TextColor="Black" 
+                           PlaceholderColor="Gray" 
+                           FontSize="Small"
+                           IsVisible="false"
+                           
+                           WidthRequest="250"
+                           >
+                        </Entry>
+                        <Image Source="Delete.png" VerticalOptions="CenterAndExpand" Grid.Column="1" WidthRequest="20" HeightRequest="20" 
+                           IsVisible="false" 
+                           x:Name="closeButton">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCloseButtonTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <ImageButton Source="SearchIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" Clicked="searchIcon_Clicked" Margin="0,0,0,0" HorizontalOptions="EndAndExpand"></ImageButton>
+                <ImageButton Source="UserIcon.png" BackgroundColor="#013766" WidthRequest="35" HeightRequest="35" HorizontalOptions="End"></ImageButton>
+            </StackLayout>
+
+            <Frame BackgroundColor="White" CornerRadius="20" Margin="0,0,0,0" VerticalOptions="EndAndExpand" HeightRequest="640">
+            <StackLayout Orientation="Vertical">
+            <Label Text="New Comment" TextColor="#013766"
+                   FontSize="24"
+                   HorizontalOptions="StartAndExpand"/>
+            <Frame
+                BackgroundColor="White" 
+                           CornerRadius="10" 
+                           Margin="0,10,0,0"
+                           Padding="5"
+                           x:Name="commentBoxFrame">
+
+            <Editor x:Name="commentEditor" Placeholder="Please enter your comment!" HeightRequest="200" />
+            </Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Button
+                        x:Name="CancelButton"
+                        Text="Cancel"
+                        FontSize="Medium"
+                        TextColor="#013766"
+                        CornerRadius="10"
+                        BorderWidth="1"
+                        Padding="30,15,30,15"
+                        Margin="30"
+                        BorderColor="#013766"
+                        HorizontalOptions="StartAndExpand"
+                        Clicked="CancelButton_Clicked"
+                        ></Button>
+                    <Button
+                        x:Name="PostButton"
+                        Text="Post"
+                        FontSize="Medium"
+                        CornerRadius="10"
+                        BorderWidth="1"
+                        Padding="35,15,35,15"
+                        Margin="30"
+                        BorderColor="White"
+                        TextColor="White"
+                        BackgroundColor="#013766"
+                        HorizontalOptions="EndAndExpand"
+                        Clicked="PostButton_Clicked"
+                        >
+
+
+                    </Button>
+                </StackLayout>
+            </StackLayout>
+            </Frame>
+
+         </StackLayout>        
+    </ContentPage.Content>
+</ContentPage>
+
