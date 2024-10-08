@@ -57,8 +57,12 @@ public class BookSearch : MonoBehaviour
         {
             GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
             TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
-            texts[0].text = book.Name;  
-            texts[1].text = book.Author;  
+            texts[0].text = book.Name;
+            texts[1].text = book.Author;
+
+            BookItemController controller = newBookItem.GetComponent<BookItemController>();
+            controller.Initialize(book);
+
         }
     }
 }
