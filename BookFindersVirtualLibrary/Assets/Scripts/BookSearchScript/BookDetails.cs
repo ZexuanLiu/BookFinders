@@ -10,17 +10,16 @@ public class BookDetails : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Book currentBook = new Book();
-        currentBook.Author = "123";
+        Book currentBook = BookManager.Instance.currentBook;
         if (currentBook != null)
         {
             authorText = GameObject.Find("BookAuthorLabel").GetComponent<TextMeshProUGUI>();
 
-            authorText.text = "Author: " + currentBook.Author;
+            authorText.text = currentBook.Author;
         }
         else
         {
-            authorText.text = "No book data available.";
+            authorText.text = "No author data available.";
         }
     }
 
