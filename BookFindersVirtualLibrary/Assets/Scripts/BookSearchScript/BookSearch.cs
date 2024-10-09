@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using BookFindersVirtualLibrary.Models;
-using UnityEngine.UI;
+using System.Net.Http;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using BookFindersVirtualLibrary.Models;
+using Newtonsoft.Json;
+using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
+using Newtonsoft.Json.Linq;
+using UnityEngine.UI;
+
 
 public class BookSearch : MonoBehaviour
 {
     public GameObject bookItemPrefab; 
     public Transform contentPanel; 
-    public Image searchIcon; 
-
+    public Image searchIcon;
+    private HttpClient client;
     private List<Book> bookList = new List<Book>();
     // Start is called before the first frame update
     void Start()
@@ -33,6 +40,10 @@ public class BookSearch : MonoBehaviour
         {
             searchButton.onClick.AddListener(OnSearchIconClicked);
         }
+
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+        client = new HttpClient(handler);
     }
 
     // Update is called once per frame
@@ -51,18 +62,68 @@ public class BookSearch : MonoBehaviour
         DisplayBooks();
     }
 
-    void DisplayBooks()
+    async void DisplayBooks()
     {
-        foreach (var book in bookList)
+        try
         {
-            GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
-            TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
-            texts[0].text = book.Name;
-            texts[1].text = book.Author;
+            var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/JavaScript/0");
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                JArray foundBooksJson = JArray.Parse(content);
 
-            BookItemController controller = newBookItem.GetComponent<BookItemController>();
-            controller.Initialize(book);
+                List<Book> foundBooks = new List<Book>();
 
+                int index = 0;
+                foreach (JToken bookJson in foundBooksJson)
+                {
+                    Book newBook = new Book();
+
+                    newBook.Name = bookJson["name"].ToString();
+                    newBook.Author = bookJson["author"].ToString();
+                    newBook.Description = bookJson["description"].ToString();
+                    newBook.LocationCode = bookJson["locationCode"].ToString();
+                    newBook.LibraryCode = bookJson["libraryCode"].ToString();
+                    newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
+                    newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+
+                    //if (!newBook.LibraryCode.Equals("TRAF"))
+                    //{
+                    //    continue;
+                    //}
+
+                    foundBooks.Add(newBook);
+
+                    index++;
+                }
+
+                foreach (var book in foundBooks)
+                {
+                    GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
+                    TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
+                    texts[0].text = book.Name;
+                    texts[1].text = book.Author;
+
+                    BookItemController controller = newBookItem.GetComponent<BookItemController>();
+                    controller.Initialize(book);
+
+                }
+            }
         }
+        catch (Exception e)
+        {
+            Debug.Log($"{e}");
+        }
+        //foreach (var book in bookList)
+        //{
+        //    GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
+        //    TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
+        //    texts[0].text = book.Name;
+        //    texts[1].text = book.Author;
+
+        //    BookItemController controller = newBookItem.GetComponent<BookItemController>();
+        //    controller.Initialize(book);
+
+        //}
     }
 }
