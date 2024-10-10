@@ -41,8 +41,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Folder Include="Assets/Plugins/tvOS/Firebase" />
      <Folder Include="Assets/Plugins" />
+     <Folder Include="Assets/Plugins/tvOS" />
      <Folder Include="Assets/Plugins/Android" />
+     <Folder Include="Assets/Plugins/iOS/Firebase" />
+     <Folder Include="Assets/Plugins/iOS" />
      <None Include="Assets/Plugins/Android/AndroidManifest.xml" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
