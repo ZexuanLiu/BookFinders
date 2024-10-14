@@ -7,15 +7,19 @@ using TMPro;
 public class BookDetails : MonoBehaviour
 {
     public TextMeshProUGUI authorText;
+    public TextMeshProUGUI publisherText;
+    public TextMeshProUGUI publishYearText;
+    public TextMeshProUGUI locationText;
+    public TextMeshProUGUI bookDescText;
     // Start is called before the first frame update
     void Start()
     {
         Book currentBook = BookManager.Instance.currentBook;
         if (currentBook != null)
         {
-            authorText = GameObject.Find("BookAuthorLabel").GetComponent<TextMeshProUGUI>();
-
             authorText.text = currentBook.Author;
+            locationText.text = "Location:"+currentBook.LocationCode;
+            bookDescText.text = currentBook.Description;
         }
         else
         {

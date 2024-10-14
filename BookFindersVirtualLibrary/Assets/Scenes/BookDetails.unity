@@ -2533,7 +2533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765910010b741437c96c19e67b8ed915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  authorText: {fileID: 0}
+  authorText: {fileID: 774789146}
+  publisherText: {fileID: 1162755958}
+  publishYearText: {fileID: 1036741003}
+  locationText: {fileID: 331258278}
+  bookDescText: {fileID: 426453120}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
