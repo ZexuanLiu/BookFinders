@@ -19,6 +19,10 @@ public class BookSearch : MonoBehaviour
     public Image searchIcon;
     private HttpClient client;
     private List<Book> bookList = new List<Book>();
+    public TMP_InputField bookSearchTextArea;
+    public TextMeshProUGUI noBookMessage;
+    public string BookSearchText { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,12 +48,13 @@ public class BookSearch : MonoBehaviour
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
+        noBookMessage.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        BookSearchText = bookSearchTextArea.text;
     }
 
     void OnSearchIconClicked()
@@ -61,12 +66,16 @@ public class BookSearch : MonoBehaviour
 
         DisplayBooks();
     }
-
+    void DisplayNoBookErrorMessage()
+    {
+        noBookMessage.gameObject.SetActive(true);
+        noBookMessage.text = "No Match Result!";
+    }
     async void DisplayBooks()
     {
         try
         {
-            var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/JavaScript/0");
+            var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/0");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -87,16 +96,23 @@ public class BookSearch : MonoBehaviour
                     newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
                     newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
 
-                    //if (!newBook.LibraryCode.Equals("TRAF"))
-                    //{
-                    //    continue;
-                    //}
+                    if (!newBook.LibraryCode.Equals("TRAF"))
+                    {
+                        continue;
+                    }
 
                     foundBooks.Add(newBook);
 
                     index++;
                 }
-
+                if (foundBooks.Count == 0)
+                {
+                    //if no book found enable the error message
+                    DisplayNoBookErrorMessage();
+                    return;
+                }
+                //if books found disable the error message
+                noBookMessage.gameObject.SetActive(false);
                 foreach (var book in foundBooks)
                 {
                     GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
@@ -109,10 +125,15 @@ public class BookSearch : MonoBehaviour
 
                 }
             }
+            else
+            {
+                DisplayNoBookErrorMessage();
+            }
         }
         catch (Exception e)
         {
             Debug.Log($"{e}");
+            DisplayNoBookErrorMessage();
         }
         //foreach (var book in bookList)
         //{
