@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BookFindersVirtualLibrary.Models;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BookDetails : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class BookDetails : MonoBehaviour
         {
             authorText.text = currentBook.Author;
             locationText.text = "Location:"+currentBook.LocationCode;
+            publisherText.text = "Publisher:" + currentBook.Publisher;
+            publishYearText.text = "Year:" + currentBook.PublishYear;
             bookDescText.text = currentBook.Description;
         }
         else
@@ -31,5 +34,9 @@ public class BookDetails : MonoBehaviour
     void Update()
     {
         
+    }
+    public void GoToBrowseBooksScene()
+    {
+        SceneManager.LoadScene("BrowseBooks");
     }
 }

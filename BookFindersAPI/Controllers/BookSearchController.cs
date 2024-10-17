@@ -38,7 +38,7 @@ namespace BookFindersAPI.Controllers
                 {
                     BookFindersLibrary.Models.PnxSort sort = doc.pnx.sort;
                     PnxSearch search = doc.pnx.search;
-                    PnxLinks links = doc.pnx.links;
+                    BookFindersLibrary.Models.PnxLinks links = doc.pnx.links;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
                     
                     var bookObj = new book
@@ -96,6 +96,8 @@ namespace BookFindersAPI.Controllers
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
                         ImageLink = "defaultBook.png",
+                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
                         LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
                         LocationBookShelfNum = locationBookShelfNum,
@@ -113,6 +115,8 @@ namespace BookFindersAPI.Controllers
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
                         ImageLink = "defaultBook.png",
+                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
                         LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
                         LocationBookShelfNum = "Unknown Location Code",

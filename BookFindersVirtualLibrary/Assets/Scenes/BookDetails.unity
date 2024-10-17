@@ -453,8 +453,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.000006, y: -200}
-  m_SizeDelta: {x: 150, y: 20}
+  m_AnchoredPosition: {x: 22, y: -169}
+  m_SizeDelta: {x: 140, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331258278
 MonoBehaviour:
@@ -655,8 +655,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: 5}
-  m_SizeDelta: {x: 360, y: 120}
+  m_AnchoredPosition: {x: -136, y: 6}
+  m_SizeDelta: {x: 360, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &426453120
 MonoBehaviour:
@@ -1020,7 +1020,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 170, y: -17}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774789146
 MonoBehaviour:
@@ -1255,8 +1255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.000006, y: -53}
-  m_SizeDelta: {x: 150, y: 20}
+  m_AnchoredPosition: {x: 20, y: -51}
+  m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036741003
 MonoBehaviour:
@@ -1464,8 +1464,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: 110}
-  m_SizeDelta: {x: 150, y: 20}
+  m_AnchoredPosition: {x: 19, y: 112}
+  m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162755958
 MonoBehaviour:
@@ -2007,7 +2007,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1525712603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2089483377}
+        m_TargetAssemblyTypeName: BookDetails, Assembly-CSharp
+        m_MethodName: GoToBrowseBooksScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1525712605
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2447,7 +2459,7 @@ GameObject:
   - component: {fileID: 2089483375}
   - component: {fileID: 2089483377}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: BookDetailsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

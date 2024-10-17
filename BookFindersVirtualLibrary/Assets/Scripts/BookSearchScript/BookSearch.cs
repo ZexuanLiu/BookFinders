@@ -91,6 +91,8 @@ public class BookSearch : MonoBehaviour
                     newBook.Name = bookJson["name"].ToString();
                     newBook.Author = bookJson["author"].ToString();
                     newBook.Description = bookJson["description"].ToString();
+                    newBook.Publisher = bookJson["publisher"].ToString();
+                    newBook.PublishYear = bookJson["publishYear"].ToString();
                     newBook.LocationCode = bookJson["locationCode"].ToString();
                     newBook.LibraryCode = bookJson["libraryCode"].ToString();
                     newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
@@ -99,7 +101,7 @@ public class BookSearch : MonoBehaviour
                     if (!newBook.LibraryCode.Equals("TRAF"))
                     {
                         continue;
-                    }
+                    }  
 
                     foundBooks.Add(newBook);
 
