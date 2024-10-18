@@ -44,7 +44,9 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         }
         foreach (var flashingSurface in flashingSurfacesPerPOI)
         {
-            flashingSurface.SetActive(false);
+            MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
+
+            flashingSurfaceMeshRenderer.enabled = false;
         }
 
         myLineRenderer = GetComponent<LineRenderer>();
@@ -97,7 +99,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
             DrawPath();
 
             float remainingDistance = Vector3.Distance(lastPosition, destination);
-            if (remainingDistance < 1)
+            if (remainingDistance < 2)
             {
                 destination = Vector3.zero;
                 FinishNavigation();
@@ -109,10 +111,12 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
+        MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
+
         if (clickMarker != null)
         {
             clickMarker.SetActive(false);
-            flashingSurface.SetActive(false);
+            flashingSurfaceMeshRenderer.enabled = false;
         }
 
         destination = clickMarker.transform.position;
@@ -122,7 +126,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
 
         clickMarker.SetActive(true);
         clickMarker.transform.SetParent(visualObjectsParent);
-        flashingSurface.SetActive(true);
+        flashingSurfaceMeshRenderer.enabled = true;
         NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, myNavMeshPath);
     }
 
@@ -150,10 +154,12 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
+        MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
+
         if (clickMarker != null)
         {
             clickMarker.SetActive(false);
-            flashingSurface.SetActive(false);
+            flashingSurfaceMeshRenderer.enabled = false;
         }
 
         currentLocationIndex = (currentLocationIndex + 1) % clickMarks.Count;
@@ -168,7 +174,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
                 }
             case 1:
                 {
-                    iFlashable.Flash("Pathfinding destination set to Board Game Rental");
+                    iFlashable.Flash("Pathfinding destination set to Board Game Rental shelf");
                     arrowAboveUser.SetActive(true);
                     break;
                 }
@@ -192,10 +198,34 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
+        MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
+
         if (clickMarker != null) {
             clickMarker.SetActive(false);
-            flashingSurface.SetActive(false);
+            flashingSurfaceMeshRenderer.enabled = false;
             myLineRenderer.positionCount = 0;
+        }
+
+        switch (currentLocationIndex)
+        {
+            case 1:
+                {
+                    iFlashable.Flash("You have arrived at Board Game Rental shelf");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 2:
+                {
+                    iFlashable.Flash("You have arrived at Material Connections room");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 3:
+                {
+                    iFlashable.Flash("You have arrived at the Art Hallway Back Door");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
         }
 
         currentLocationIndex = 0;

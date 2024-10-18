@@ -117,7 +117,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\Scripts\AR Scripts\GetInteractableObject.cs" />
     <Compile Include="Assets\Scripts\AR Scripts\ToggleARComponents.cs" />
-    <Compile Include="Assets\Scripts\AR Scripts\ToggleDebugStats.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Models\Book.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Assets\Scripts\AR Scripts\CyclePaths.cs" />
     <Compile Include="Assets\Scripts\Virtual Library Scripts\FlashableText.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-    <Compile Include="Assets\Scripts\AR Scripts\GPSLocation.cs" />
     <Compile Include="Assets\Scripts\Models\Coordinate.cs" />
     <Compile Include="Assets\Scripts\Virtual Library Scripts\OnscreenDialogs\BookSearchsTracker.cs" />
     <Compile Include="Assets\Scripts\AR Scripts\FloatingLabel.cs" />
