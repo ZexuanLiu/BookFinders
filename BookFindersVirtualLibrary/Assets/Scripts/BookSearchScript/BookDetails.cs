@@ -4,6 +4,7 @@ using BookFindersVirtualLibrary.Models;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BookDetails : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class BookDetails : MonoBehaviour
     public TextMeshProUGUI publishYearText;
     public TextMeshProUGUI locationText;
     public TextMeshProUGUI bookDescText;
+
+    public GameObject gameObjectBtnLaunchVL;
+    public GameObject gameObjectBtnLaunchAR;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +33,31 @@ public class BookDetails : MonoBehaviour
         {
             authorText.text = "No author data available.";
         }
+
+        Button btnLaunchVL = gameObjectBtnLaunchVL.GetComponent<Button>();
+        if (btnLaunchVL != null)
+        {
+            btnLaunchVL.onClick.AddListener(OnLaunchVLClicked);
+        }
+
+        Button btnLaunchAR = gameObjectBtnLaunchAR.GetComponent<Button>();
+        if (btnLaunchAR != null)
+        {
+            btnLaunchAR.onClick.AddListener(OnLaunchARClicked);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnLaunchVLClicked()
     {
-        
+        SceneManager.LoadScene("Virtual Library");
     }
+
+    void OnLaunchARClicked()
+    {
+        BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
+        SceneManager.LoadScene("AR");
+    }
+
     public void GoToBrowseBooksScene()
     {
         SceneManager.LoadScene("BrowseBooks");

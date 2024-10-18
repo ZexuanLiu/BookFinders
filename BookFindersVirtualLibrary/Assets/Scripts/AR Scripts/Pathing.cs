@@ -1,8 +1,10 @@
+using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 interface IFindingPathToAR
 { 
@@ -27,6 +29,11 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     public List<GameObject> flashingSurfacesPerPOI;
 
     public GameObject flashingText;
+
+    public GameObject flashingBookshelves;
+    private GameObject currentFlashingBookshelf;
+    private bool navigationToBookshelfSet;
+
     private IFlashableAR iFlashable;
 
     private int currentLocationIndex = 0;
@@ -73,6 +80,17 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         }
 
         arrowAboveUser.SetActive(false);
+
+        InitiateBookshelfPathfindingDictionaries();
+
+        if (BookSearchTracking.SelectedBook != null)
+        {
+            string bookLocationKey = $"{BookSearchTracking.SelectedBook.LocationBookShelfNum}{BookSearchTracking.SelectedBook.LocationBookShelfSide}";
+            string bookName = BookSearchTracking.SelectedBook.Name;
+
+            SetBookDestinationTo(bookLocationKey, bookName);
+            navigationToBookshelfSet = true;
+        }
     }
 
     // Update is called once per frame
@@ -85,29 +103,39 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
             lastPosition = transform.position;
         }
 
-        if (clickMarks[currentLocationIndex] == null)
+        if (clickMarks[currentLocationIndex] == null && BookSearchTracking.SelectedBook == null)
         {
             myLineRenderer.positionCount = 0;
             return;
         }
 
-        if (newPosition || lastLocationIndex != currentLocationIndex)
+        if (newPosition || lastLocationIndex != currentLocationIndex || navigationToBookshelfSet)
         {
-            UpdateDestination();
 
+            if (BookSearchTracking.SelectedBook == null)
+            {
+                UpdateHotspotDestination();
+            }
+            else
+            {
+                UpdateBookshelfDestination();
+            }
+
+            Vector3 arrowDestination = new Vector3(destination.x, arrowAboveUser.transform.position.y, destination.z);
+            arrowAboveUser.transform.LookAt(arrowDestination);
+            NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, myNavMeshPath);
             lastLocationIndex = currentLocationIndex;
             DrawPath();
 
             float remainingDistance = Vector3.Distance(lastPosition, destination);
             if (remainingDistance < 2)
             {
-                destination = Vector3.zero;
                 FinishNavigation();
             }
         }
     }
 
-    private void UpdateDestination()
+    private void UpdateHotspotDestination()
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
@@ -121,13 +149,15 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
 
         destination = clickMarker.transform.position;
 
-        Vector3 arrowDestination = new Vector3(destination.x, arrowAboveUser.transform.position.y, destination.z);
-        arrowAboveUser.transform.LookAt(arrowDestination);
-
         clickMarker.SetActive(true);
         clickMarker.transform.SetParent(visualObjectsParent);
         flashingSurfaceMeshRenderer.enabled = true;
-        NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, myNavMeshPath);
+    }
+
+    private void UpdateBookshelfDestination()
+    {
+        arrowAboveUser.SetActive(true);
+        navigationToBookshelfSet = false;
     }
 
     private void DrawPath()
@@ -154,11 +184,11 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
-        MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
-
+        
         if (clickMarker != null)
         {
             clickMarker.SetActive(false);
+            MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
             flashingSurfaceMeshRenderer.enabled = false;
         }
 
@@ -184,24 +214,24 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
                     arrowAboveUser.SetActive(true);
                     break;
                 }
-            case 3:
-                {
-                    iFlashable.Flash("Pathfinding destination set to Art Hallway Back Door");
-                    arrowAboveUser.SetActive(true);
-                    break;
-                }
         }
-        
+
+        if (currentFlashingBookshelf != null)
+        {
+            currentFlashingBookshelf.SetActive(false);
+        }
+
     }
 
     public void FinishNavigation()
     {
         GameObject clickMarker = clickMarks[currentLocationIndex];
         GameObject flashingSurface = flashingSurfacesPerPOI[currentLocationIndex];
-        MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
 
-        if (clickMarker != null) {
+        if (clickMarker != null)
+        {
             clickMarker.SetActive(false);
+            MeshRenderer flashingSurfaceMeshRenderer = flashingSurface.GetComponent<MeshRenderer>();
             flashingSurfaceMeshRenderer.enabled = false;
             myLineRenderer.positionCount = 0;
         }
@@ -211,24 +241,128 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
             case 1:
                 {
                     iFlashable.Flash("You have arrived at Board Game Rental shelf");
-                    arrowAboveUser.SetActive(true);
                     break;
                 }
             case 2:
                 {
                     iFlashable.Flash("You have arrived at Material Connections room");
-                    arrowAboveUser.SetActive(true);
-                    break;
-                }
-            case 3:
-                {
-                    iFlashable.Flash("You have arrived at the Art Hallway Back Door");
-                    arrowAboveUser.SetActive(true);
                     break;
                 }
         }
 
+        if (currentFlashingBookshelf != null)
+        {
+            currentFlashingBookshelf.SetActive(false);
+
+            float remainingDistance = Vector3.Distance(transform.position, new Vector3(destination.x, transform.position.y, destination.z));
+            if (remainingDistance < 2)
+            {
+                iFlashable.Flash($"You have arrived at the book '{BookSearchTracking.SelectedBook.Name}'");
+            }
+            else
+            {
+                iFlashable.Flash($"You have cancelled navigation to {BookSearchTracking.SelectedBook.Name}");
+            }
+        }
+        destination = Vector3.zero;
+
+        BookSearchTracking.SelectedBook = null;
+
         currentLocationIndex = 0;
         arrowAboveUser.SetActive(false);
+    }
+
+    public void InitiateBookshelfPathfindingDictionaries()
+    {
+        BookSearchTracking.BookPathfindingSurfaces.Clear();
+        BookSearchTracking.BookPathfindLocations.Clear();
+
+        float widthOfShelves = 0.653f;
+        float distanceBetweenShelves = 0.835f;
+        float distanceToNewShelf = widthOfShelves + distanceBetweenShelves;
+
+        Vector3 startingShelvesCoord1 = new Vector3(-3.46f - (distanceToNewShelf / 2), 1.076f, 3.06f);
+        Vector3 startingShelvesCoord2 = new Vector3(8.424f + (distanceToNewShelf / 2), 1.076f, 11.26f);
+
+        foreach (Transform bookshelf in flashingBookshelves.transform)
+        {
+            GameObject bookshelfObject = bookshelf.gameObject;
+            string bookshelfNum = bookshelf.name;
+
+            int bookshelfNumAsInt = 0;
+            if (!int.TryParse(bookshelfNum, out bookshelfNumAsInt))
+            {
+                Debug.Log($"Could not parse bookshelfNum '{bookshelfNum}' to int");
+            }
+
+            if (bookshelfNumAsInt > 20)
+            {
+                Debug.Log($"bookshelfNum '{bookshelfNum}' was too large and was not counted in pathfinding");
+            }
+
+            foreach (Transform bookshelfSide in bookshelf)
+            {
+                GameObject bookshelfSideObject = bookshelfSide.gameObject;
+                string bookshelfSideAlpha = bookshelfSideObject.name;
+
+                string key = $"{bookshelfNum}{bookshelfSideAlpha}";
+                BookSearchTracking.BookPathfindingSurfaces.Add(key, bookshelfSideObject);
+                //Debug.Log($"Surface = {key} - {bookshelfSideObject}");
+
+                // Setting up search locations for the surface of the bookshelf and the waypoint to it.
+                // Note that these values have been measured previously
+                // Because of the way our bookshelf numbers are mapped, there has to be separate logic for each range
+                float newX = float.MinValue;
+                Vector3 locationPoint = Vector3.zero;
+                if (bookshelfNumAsInt >= 1 && bookshelfNumAsInt <= 9)
+                {
+                    newX = startingShelvesCoord1.x;
+                    newX += (bookshelfNumAsInt - 1) * distanceToNewShelf;
+                    if (bookshelfSideAlpha.Equals("B"))
+                    {
+                        newX += distanceToNewShelf;
+                    }
+                    locationPoint = new Vector3(newX, startingShelvesCoord1.y, startingShelvesCoord1.z);
+                }
+                else if (bookshelfNumAsInt >= 10 && bookshelfNumAsInt <= 18)
+                {
+                    newX = startingShelvesCoord2.x;
+                    newX -= (bookshelfNumAsInt - 10) * distanceToNewShelf;
+                    if (bookshelfSideAlpha.Equals("A"))
+                    {
+                        newX -= distanceToNewShelf;
+                    }
+                    locationPoint = new Vector3(newX, startingShelvesCoord2.y, startingShelvesCoord2.z);
+                }
+
+                BookSearchTracking.BookPathfindLocations.Add(key, locationPoint);
+                //Debug.Log($"Location = {key} - {locationPoint}");
+
+                bookshelfSideObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SetBookDestinationTo(string bookshelfLocationKey, string bookName)
+    {
+        if (!BookSearchTracking.BookPathfindingSurfaces.ContainsKey(bookshelfLocationKey))
+        {
+            Debug.Log($"No Key To Navigate To '{bookshelfLocationKey}'");
+            iFlashable.Flash($"Navigation to {Environment.NewLine}'{bookName}'{Environment.NewLine} is currently not supported");
+            return;
+        }
+
+        string message = $"Set Navigation To: {Environment.NewLine}\"{bookName}\"";
+
+        GameObject bookshelfSurface = BookSearchTracking.BookPathfindingSurfaces[bookshelfLocationKey];
+        Vector3 bookshelfDestination = BookSearchTracking.BookPathfindLocations[bookshelfLocationKey];
+
+        Debug.Log($"Going To {bookshelfLocationKey} at {bookshelfDestination.ToString()}");
+
+        destination = bookshelfDestination;
+        iFlashable.Flash(message);
+
+        currentFlashingBookshelf = bookshelfSurface;
+        bookshelfSurface.SetActive(true);
     }
 }

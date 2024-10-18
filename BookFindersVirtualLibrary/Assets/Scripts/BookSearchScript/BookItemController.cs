@@ -13,17 +13,6 @@ public class BookItemController : MonoBehaviour
         currentBook = book;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     // Function to load the scene by name
     public void ChangeScene(string sceneName)
     {

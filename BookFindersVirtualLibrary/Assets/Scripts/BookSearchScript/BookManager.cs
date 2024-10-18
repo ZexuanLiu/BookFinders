@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BookManager : MonoBehaviour
 {
-    //use singleton to save the book currect between differen scene
+    //use singleton to save the book currect between different scene
     public static BookManager Instance { get; private set; }
     public Book currentBook;
 
