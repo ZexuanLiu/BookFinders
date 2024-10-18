@@ -21,8 +21,8 @@ namespace BookFinders
     {
         private User currentUser;
         private HttpClient client;
-        List<book> books = new List<book>();
-        ObservableCollection<book> observableBooks = new ObservableCollection<book>();
+        List<Book> books = new List<Book>();
+        ObservableCollection<Book> observableBooks = new ObservableCollection<Book>();
         private string userSearchText;
         private int offset;
         public bookList(User user)
@@ -45,47 +45,47 @@ namespace BookFinders
             client = new HttpClient(handler);
         }
 
-        private void searchTextComplete(object sender, EventArgs e)
+        private async void searchTextComplete(object sender, EventArgs e)
         {
             string searchText = searchBar.Text;
-            LoadBooks(searchText);
+            await LoadBooks(searchText);
             LoadMoreBtn.IsVisible = true;
         }
-        public async void LoadBooks(string searchText)
+        public async Task LoadBooks(string searchText)
         {
-            //books.Clear();
             observableBooks.Clear();
 
             userSearchText = searchText;
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset=0&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+            var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + searchText+"/0");
            
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine(content);
-                var bookObjLists = JsonConvert.DeserializeObject<BookResponse>(content);
+                var bookObjLists = JsonConvert.DeserializeObject<List<Book>>(content);
 
-                List<Doc> docs = bookObjLists.docs;
-                
-                foreach (var doc in docs)
+                foreach (var doc in bookObjLists)
                 {
-                    PnxSort sort = doc.pnx.sort;
-                    PnxSearch search = doc.pnx.search;
-                    PnxLinks links = doc.pnx.links;
 
-                    var book = new book
+                    var book = new Book
                     {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
-                        ImageLink = await CheckImageValidity(links.thumbnail[0].Replace("$$T", ""))
+                        Id = "1"+(doc.Name?.Substring(0, 3) ?? "") + (doc.Author?.Substring(0, 3) ?? ""),
+                        Name = doc.Name ?? "Unknown Title",
+                        Author = doc.Author ?? "Unknown Author",
+                        Description = doc.Description ?? "Unknown Description",
+                        ImageLink = CheckImageLink(doc.ImageLink),
+                        LocationCode = doc.LocationCode,
+                        LibraryCode = doc.LibraryCode,
+                        LocationBookShelfNum = doc.LocationBookShelfNum,
+                        LocationBookShelfSide = doc.LocationBookShelfSide,
+                        LocationBookShelfRow = doc.LocationBookShelfRow,
+                        LocationBookShelfColumn = doc.LocationBookShelfColumn
 
                     };
-                    //books.Add(book);
+                    
                     observableBooks.Add(book);
                 }
-               // observableBooks = new ObservableCollection<book>(books);
+               
                 bookLists.ItemsSource = observableBooks;
 
             }
@@ -96,7 +96,7 @@ namespace BookFinders
         }
         private void bookLists_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var bookObj = bookLists.SelectedItem as book;
+            var bookObj = bookLists.SelectedItem as Book;
           //  var bookDetailsPage = new bookDetails();
           //  bookDetailsPage.BindingContext = bookObj;
             Navigation.PushAsync(new bookDetails(bookObj,currentUser));
@@ -106,38 +106,47 @@ namespace BookFinders
             await Navigation.PopAsync();
         }
 
-        private async Task<string> CheckImageValidity(string uri)
+        private string CheckImageLink(string uri)
         {
-            try
-            {
-                var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
+            //try
+            //{
+            //    var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri));
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var contentType = response.Content.Headers.ContentType;
-                    if (contentType != null && contentType.MediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
-                    {
-                        // It is a Image
-                        return uri;
-                    }
-                    else
-                    {
-                        // not a image
-                        return "defaultBook.png";
-                    }
-                }
-                else
-                {
-                    // request failed invaild url
-                    return "defaultBook.png";
-                }
-            }
-            catch (Exception ex)
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        var contentType = response.Content.Headers.ContentType;
+            //        if (contentType != null && contentType.MediaType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+            //        {
+            //            // It is a Image
+            //            return uri;
+            //        }
+            //        else
+            //        {
+            //            // not a image
+            //            return "DefaultBook.png";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // request failed invaild url
+            //        return "DefaultBook.png";
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Exception: " + ex.Message);
+            //    return "DefaultBook.png";
+
+            //}
+            if (uri != null && uri.Equals("defaultBook.png", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Exception: " + ex.Message);
-                return "defaultBook.png";
-                
+                // Update to "DefaultBook.png"
+                return "DefaultBook.png";
             }
+
+            // No change needed, return the original value
+            return uri;
+
         }
 
         private void searchIcon_Clicked(object sender, EventArgs e)
@@ -161,30 +170,31 @@ namespace BookFinders
         public async void LoadMoreBooks()
         {
             offset+=10;
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C" + userSearchText + "&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey=l8xxbd240191e506439380215edab4ec4d85");
+            var response = await client.GetAsync("http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/" + userSearchText+"/"+offset);
 
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine(content);
-                var bookObjLists = JsonConvert.DeserializeObject<BookResponse>(content);
+                var bookObjLists = JsonConvert.DeserializeObject<List<Book>>(content);
 
-                List<Doc> docs = bookObjLists.docs;
-
-                foreach (var doc in docs)
+               
+                foreach (var doc in bookObjLists)
                 {
-                    PnxSort sort = doc.pnx.sort;
-                    PnxSearch search = doc.pnx.search;
-                    PnxLinks links = doc.pnx.links;
-
-                    var book = new book
+                    
+                    var book = new Book
                     {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
-                        ImageLink = await CheckImageValidity(links.thumbnail[0].Replace("$$T", ""))
-
+                        Id = "1" + (doc.Name?.Substring(0, 3) ?? "") + (doc.Author?.Substring(0, 3) ?? ""),
+                        Name = doc.Name ?? "Unknown Title",
+                        Author = doc.Author ?? "Unknown Author",
+                        Description = doc.Description ?? "Unknown Description",
+                        ImageLink = CheckImageLink(doc.ImageLink),
+                        LocationCode = doc.LocationCode,
+                        LibraryCode = doc.LibraryCode,
+                        LocationBookShelfNum = doc.LocationBookShelfNum,
+                        LocationBookShelfSide = doc.LocationBookShelfSide,
+                        LocationBookShelfRow = doc.LocationBookShelfRow,
+                        LocationBookShelfColumn = doc.LocationBookShelfColumn
                     };
                    // books.Add(book);
                    observableBooks.Add(book);
@@ -200,5 +210,6 @@ namespace BookFinders
 
         }
 
+        
     }
 }

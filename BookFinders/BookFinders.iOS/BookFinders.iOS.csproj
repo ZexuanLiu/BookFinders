@@ -123,81 +123,31 @@
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="ARViewController.xib" />
-    <ImageAsset Include="Assets.xcassets\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\CommentIcon.imageset\commentIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\CommentIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\UserIcon.imageset\userIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\UserIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ArrowIcon.imageset\arrowIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\ArrowIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\PushNotificationLogo.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\PushNotificationLogo.imageset\pushNotificationLogo.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\DefaultBook.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\DefaultBook.imageset\defaultBook.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\CloseIcon.imageset\closeIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\CloseIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\TrackingListIcon.imageset\trackingListIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\TrackingListIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\SheridanLogo.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\SheridanLogo.imageset\SheridanLogo.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\SearchIcon.imageset\searchIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\SearchIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Delete.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\Delete.imageset\delete.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\PlusIcon.imageset\plusIcon.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\PlusIcon.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LibraryLogo.imageset\libraryLogo.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LibraryLogo.imageset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\CommentIcon.imageset\commentIcon.png" />
+    <ImageAsset Include="Assets.xcassets\CommentIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\UserIcon.imageset\userIcon.png" />
+    <ImageAsset Include="Assets.xcassets\UserIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\ArrowIcon.imageset\arrowIcon.png" />
+    <ImageAsset Include="Assets.xcassets\ArrowIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\PushNotificationLogo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\PushNotificationLogo.imageset\pushNotificationLogo.png" />
+    <ImageAsset Include="Assets.xcassets\DefaultBook.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\DefaultBook.imageset\defaultBook.png" />
+    <ImageAsset Include="Assets.xcassets\CloseIcon.imageset\closeIcon.png" />
+    <ImageAsset Include="Assets.xcassets\CloseIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\TrackingListIcon.imageset\trackingListIcon.png" />
+    <ImageAsset Include="Assets.xcassets\TrackingListIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\SheridanLogo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\SheridanLogo.imageset\SheridanLogo.png" />
+    <ImageAsset Include="Assets.xcassets\SearchIcon.imageset\searchIcon.png" />
+    <ImageAsset Include="Assets.xcassets\SearchIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Delete.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Delete.imageset\delete.png" />
+    <ImageAsset Include="Assets.xcassets\PlusIcon.imageset\plusIcon.png" />
+    <ImageAsset Include="Assets.xcassets\PlusIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\LibraryLogo.imageset\libraryLogo.png" />
+    <ImageAsset Include="Assets.xcassets\LibraryLogo.imageset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
