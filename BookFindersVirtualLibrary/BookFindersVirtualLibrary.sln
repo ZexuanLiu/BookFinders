@@ -1,27 +1,18 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{370228e3-3a72-eeae-0c1f-b7755eea00ef}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseMessagingActivityGenerator", "FirebaseMessagingActivityGenerator.csproj", "{dea2b40b-4dce-82f0-f83a-4aa0c9bcbd54}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{f4cf09f0-f952-827f-91a8-1f2acfeb2db8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{50dda13c-6ccc-8d5f-ff45-efa9fe1166cb}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{E3280237-723A-AEEE-0C1F-B7755EEA00EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{370228e3-3a72-eeae-0c1f-b7755eea00ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{370228e3-3a72-eeae-0c1f-b7755eea00ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{dea2b40b-4dce-82f0-f83a-4aa0c9bcbd54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{dea2b40b-4dce-82f0-f83a-4aa0c9bcbd54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{f4cf09f0-f952-827f-91a8-1f2acfeb2db8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{f4cf09f0-f952-827f-91a8-1f2acfeb2db8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50dda13c-6ccc-8d5f-ff45-efa9fe1166cb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50dda13c-6ccc-8d5f-ff45-efa9fe1166cb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3280237-723A-AEEE-0C1F-B7755EEA00EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3280237-723A-AEEE-0C1F-B7755EEA00EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3280237-723A-AEEE-0C1F-B7755EEA00EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3280237-723A-AEEE-0C1F-B7755EEA00EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
