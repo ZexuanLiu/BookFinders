@@ -1296,6 +1296,7 @@ m_ResolvedPackages:
     - 6.0.2
     - 6.0.3
     - 6.1.0-pre.1
+    - 6.1.0-pre.2
     compatible:
     - 5.1.0
     - 5.1.1
@@ -3684,6 +3685,7 @@ m_ResolvedPackages:
     - 6.0.2
     - 6.0.3
     - 6.1.0-pre.1
+    - 6.1.0-pre.2
     compatible:
     - 5.1.0
     - 5.1.1
@@ -4669,6 +4671,7 @@ m_ResolvedPackages:
     - 6.0.2
     - 6.0.3
     - 6.1.0-pre.1
+    - 6.1.0-pre.2
     compatible:
     - 5.1.0
     - 5.1.1
@@ -5135,6 +5138,7 @@ m_ResolvedPackages:
     - 1.10.0
     - 1.11.0
     - 1.11.1
+    - 1.11.2
     compatible:
     - 1.7.0
     - 1.8.0-pre.1
@@ -5146,6 +5150,7 @@ m_ResolvedPackages:
     - 1.10.0
     - 1.11.0
     - 1.11.1
+    - 1.11.2
     recommended: 1.7.0
     deprecated: []
   dependencies:
