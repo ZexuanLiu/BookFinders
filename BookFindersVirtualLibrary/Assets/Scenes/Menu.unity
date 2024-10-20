@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 72757785}
   - component: {fileID: 72757784}
   m_Layer: 5
-  m_Name: Home
+  m_Name: Virtual Library
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 599216794}
   - component: {fileID: 599216793}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: Back to Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1734,7 +1734,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 780362334}
-        m_TargetAssemblyTypeName: StartMenuLogic, Assembly-CSharp
+        m_TargetAssemblyTypeName: StartSideButton, Assembly-CSharp
         m_MethodName: StartVirtualLibrary
         m_Mode: 1
         m_Arguments:
@@ -1792,9 +1792,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 780362329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 393a30f16850eac42a136ea8b2370a1f, type: 3}
+  m_Script: {fileID: 11500000, guid: e32a3000825ebf7469e7738ba2259ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisButton: {fileID: 780362332}
+  thisText: {fileID: 834066043}
+  buttonType: 5
 --- !u!1 &795624216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4841,7 +4844,7 @@ GameObject:
   - component: {fileID: 1473859306}
   - component: {fileID: 1473859305}
   m_Layer: 5
-  m_Name: Quit Text
+  m_Name: Back to Home Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4886,7 +4889,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Back to Home
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6540,7 +6543,7 @@ GameObject:
   - component: {fileID: 1911420611}
   - component: {fileID: 1911420610}
   m_Layer: 5
-  m_Name: Home Text
+  m_Name: Virtual Library Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6585,7 +6588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Home
+  m_text: Virtual Library
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

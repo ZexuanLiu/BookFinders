@@ -54,7 +54,7 @@ public class BookDetails : MonoBehaviour
     {
         BookSearchsTracker.SearchResultBooks = BookManager.Instance.SearchResultBooks;
         BookSearchsTracker.SelectedBook = BookManager.Instance.currentBook;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("VirtualLibrary");
     }
 
     void OnLaunchARClicked()

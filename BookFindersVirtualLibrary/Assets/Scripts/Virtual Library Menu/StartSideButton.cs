@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartSideButton : MonoBehaviour, IPointerClickHandler
@@ -18,6 +19,11 @@ public class StartSideButton : MonoBehaviour, IPointerClickHandler
 
     public void Start()
     {
+        if (buttonType == ButtonType.StartVirtualLibrary)
+        {
+            return;
+        }
+
         ButtonDeselect.AddToButtons(thisButton);
         ButtonDeselect.AddToButtonTexts(thisText);
 
@@ -49,13 +55,22 @@ public class StartSideButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (buttonType == ButtonType.StartVirtualLibrary)
+        {
+            return;
+        }
+
         ButtonDeselect.ResetButtons();
         thisButton.color = Color.white;
         thisText.color = new Color32(1, 55, 103, 255);
 
         if (buttonType == ButtonType.Quit)
         {
-            Application.Quit();
+            ButtonDeselect.ClearButtonTexts();
+            ButtonDeselect.ClearButtons();
+            currentActiveCenter = null;
+            centerTypes = new Dictionary<ButtonType, GameObject>();
+            SceneManager.LoadScene("Home");
             return;
         }
 
@@ -67,13 +82,22 @@ public class StartSideButton : MonoBehaviour, IPointerClickHandler
             currentActiveCenter = newCenter;
         }
     }
+
+    public void StartVirtualLibrary()
+    {
+        ButtonDeselect.ClearButtonTexts();
+        ButtonDeselect.ClearButtons();
+        currentActiveCenter = null;
+        centerTypes = new Dictionary<ButtonType, GameObject>();
+        SceneManager.LoadScene("VirtualLibrary");
+    }
 }
 
 
 
 public enum ButtonType
 {
-    Home, Controls, Help, Settings, Quit
+    Home, Controls, Help, Settings, Quit, StartVirtualLibrary
 }
 
 static class ButtonDeselect
@@ -101,5 +125,15 @@ static class ButtonDeselect
     public static void AddToButtonTexts(TextMeshProUGUI newButtonText)
     {
         buttonTexts.Add(newButtonText);
+    }
+
+    public static void ClearButtons()
+    {
+        buttons.Clear();
+    }
+
+    public static void ClearButtonTexts()
+    {
+        buttonTexts.Clear();
     }
 }

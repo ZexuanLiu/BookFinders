@@ -117,11 +117,14 @@ extern void StartMenuLogic_Quit_mAABF39CE4DBF9DF0A38A7F68C3D488222B18A3FD (void)
 extern void StartMenuLogic__ctor_m7A5991168E75EF72596C459603D4B8315FBF4A5C (void);
 extern void StartSideButton_Start_m84D5E9897A3E7E1120E77DA5DE7C5FD6BCA43B1E (void);
 extern void StartSideButton_OnPointerClick_mAB4541580E5D59B8A71141C21D6DC10DC43E802F (void);
+extern void StartSideButton_StartVirtualLibrary_m8647FAC7DF42A1EB814D63E3847335A00F9E5D02 (void);
 extern void StartSideButton__ctor_mA3476BD205BA5F970B0C450F0FB4E19E19D17A54 (void);
 extern void StartSideButton__cctor_m35EBDBB66E69452432D5ABA86AC24CE50897B148 (void);
 extern void ButtonDeselect_ResetButtons_mC6C1A0D30025592AEC47D4C7CB130679D48E9FD2 (void);
 extern void ButtonDeselect_AddToButtons_m75A9314B631C7E302DFA47ECFC3EF1CDE38C933F (void);
 extern void ButtonDeselect_AddToButtonTexts_m4F0A72EF06DABE2F88D72D62AE38C20DB73B89CC (void);
+extern void ButtonDeselect_ClearButtons_m35C43AE9550C513388CE46040753172F18AD606D (void);
+extern void ButtonDeselect_ClearButtonTexts_m376CE32C6C29099B868FE1BDF0DFCC7C97F5EC00 (void);
 extern void ButtonDeselect__cctor_m9BA7923C4A0190AEABE16197E756182782FB612B (void);
 extern void CameraMovement_Update_m42273F0005E91309F6A375EB990391D92F6727FE (void);
 extern void CameraMovement__ctor_m89EBDC0905F17D37C7604387BED054FDCCADAFD3 (void);
@@ -691,7 +694,7 @@ extern void PnxSort_set_author_m422F317A3F478069FC7682610C90D2C7069ED6B1 (void);
 extern void PnxSort_get_title_m3073463F48951F72569712268CA1A689F65FEF51 (void);
 extern void PnxSort_set_title_m63DB8FB2A6DD875A9E26371D827EC25E260090D0 (void);
 extern void PnxSort__ctor_m6C6D6FE67266BD5303C086FC10E9B7E111CF20EF (void);
-static Il2CppMethodPointer s_methodPointers[708] = 
+static Il2CppMethodPointer s_methodPointers[711] = 
 {
 	EmbeddedAttribute__ctor_m68CAD82666F0FF415043D7DC217986AA2D3133D1,
 	NullableAttribute__ctor_m771BA0E8EFE1DD8AAAE9E2B867CCF4D3AE8834C7,
@@ -804,11 +807,14 @@ static Il2CppMethodPointer s_methodPointers[708] =
 	StartMenuLogic__ctor_m7A5991168E75EF72596C459603D4B8315FBF4A5C,
 	StartSideButton_Start_m84D5E9897A3E7E1120E77DA5DE7C5FD6BCA43B1E,
 	StartSideButton_OnPointerClick_mAB4541580E5D59B8A71141C21D6DC10DC43E802F,
+	StartSideButton_StartVirtualLibrary_m8647FAC7DF42A1EB814D63E3847335A00F9E5D02,
 	StartSideButton__ctor_mA3476BD205BA5F970B0C450F0FB4E19E19D17A54,
 	StartSideButton__cctor_m35EBDBB66E69452432D5ABA86AC24CE50897B148,
 	ButtonDeselect_ResetButtons_mC6C1A0D30025592AEC47D4C7CB130679D48E9FD2,
 	ButtonDeselect_AddToButtons_m75A9314B631C7E302DFA47ECFC3EF1CDE38C933F,
 	ButtonDeselect_AddToButtonTexts_m4F0A72EF06DABE2F88D72D62AE38C20DB73B89CC,
+	ButtonDeselect_ClearButtons_m35C43AE9550C513388CE46040753172F18AD606D,
+	ButtonDeselect_ClearButtonTexts_m376CE32C6C29099B868FE1BDF0DFCC7C97F5EC00,
 	ButtonDeselect__cctor_m9BA7923C4A0190AEABE16197E756182782FB612B,
 	CameraMovement_Update_m42273F0005E91309F6A375EB990391D92F6727FE,
 	CameraMovement__ctor_m89EBDC0905F17D37C7604387BED054FDCCADAFD3,
@@ -1410,10 +1416,10 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[4] =
 {
 	{ 0x06000064, U3CDisplayBooksU3Ed__15_MoveNext_mF3E2E8888518473F9BE229AE00028A717C9C4D85_AdjustorThunk },
 	{ 0x06000065, U3CDisplayBooksU3Ed__15_SetStateMachine_m63FFE5C5EFA658CC5C991BBD7946103BCDAFBA34_AdjustorThunk },
-	{ 0x060000D9, U3COnPointerClickU3Ed__10_MoveNext_m994CDF719AC9A9567FDBC9E9EC0A976124E5E8C4_AdjustorThunk },
-	{ 0x060000DA, U3COnPointerClickU3Ed__10_SetStateMachine_m5AD67140813D08DF04EE3AAB4666351B68A374C5_AdjustorThunk },
+	{ 0x060000DC, U3COnPointerClickU3Ed__10_MoveNext_m994CDF719AC9A9567FDBC9E9EC0A976124E5E8C4_AdjustorThunk },
+	{ 0x060000DD, U3COnPointerClickU3Ed__10_SetStateMachine_m5AD67140813D08DF04EE3AAB4666351B68A374C5_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[708] = 
+static const int32_t s_InvokerIndices[711] = 
 {
 	8709,
 	6786,
@@ -1527,10 +1533,13 @@ static const int32_t s_InvokerIndices[708] =
 	8709,
 	6911,
 	8709,
+	8709,
 	13163,
 	13163,
 	12914,
 	12914,
+	13163,
+	13163,
 	13163,
 	8709,
 	8709,
@@ -2128,7 +2137,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	708,
+	711,
 	s_methodPointers,
 	4,
 	s_adjustorThunks,

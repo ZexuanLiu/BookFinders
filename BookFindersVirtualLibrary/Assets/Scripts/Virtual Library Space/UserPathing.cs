@@ -93,7 +93,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             new Vector3(-22f, clickMarker.transform.position.y, 4.25f), // Study Area 2
             new Vector3(-22f, clickMarker.transform.position.y, 33f), // Study Area 3
             new Vector3(-35f, clickMarker.transform.position.y, 12.1f), // Material ConneXion
-            new Vector3(-3.5f, clickMarker.transform.position.y, -8.45f),  // Board Game Rental
+            new Vector3(-22f, clickMarker.transform.position.y, -28f),  // Board Game Rental
             new Vector3(42.5f, clickMarker.transform.position.y, -0.5f) // Printer
         };
         currentLocationIndex = -1;

@@ -23480,9 +23480,9 @@ IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8763[8] =
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8767[5] = 
 {
 	static_cast<int32_t>(offsetof(StartSideButton_t33CB5025283641372BF99721AD04CA9D2FF07C37, ___thisButton)),static_cast<int32_t>(offsetof(StartSideButton_t33CB5025283641372BF99721AD04CA9D2FF07C37, ___thisText)),static_cast<int32_t>(offsetof(StartSideButton_t33CB5025283641372BF99721AD04CA9D2FF07C37, ___buttonType)),static_cast<int32_t>(offsetof(StartSideButton_t33CB5025283641372BF99721AD04CA9D2FF07C37_StaticFields, ___currentActiveCenter)),static_cast<int32_t>(offsetof(StartSideButton_t33CB5025283641372BF99721AD04CA9D2FF07C37_StaticFields, ___centerTypes)),};
-IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8768[6] = 
+IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8768[7] = 
 {
-	static_cast<int32_t>(sizeof(RuntimeObject)),0,0,0,0,0,};
+	static_cast<int32_t>(sizeof(RuntimeObject)),0,0,0,0,0,0,};
 IL2CPP_EXTERN_C const int32_t g_FieldOffsetTable8769[2] = 
 {
 	static_cast<int32_t>(offsetof(ButtonDeselect_t70E6BE0B3C06778F1929069307C56FDD68FB79ED_StaticFields, ___buttons)),static_cast<int32_t>(offsetof(ButtonDeselect_t70E6BE0B3C06778F1929069307C56FDD68FB79ED_StaticFields, ___buttonTexts)),};
