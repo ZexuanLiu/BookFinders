@@ -2,6 +2,7 @@
 
 using UIKit;
 using ARKit;
+using SceneKit;
 
 namespace BookFinders.iOS
 {
@@ -11,45 +12,55 @@ namespace BookFinders.iOS
 
         public ARViewController () : base ("ARViewController", null)
 		{
-            this.sceneView = new ARSCNView
-            {
-                AutoenablesDefaultLighting = true,
-                DebugOptions = ARSCNDebugOptions.ShowFeaturePoints
-            };
-
-            this.View.AddSubview(this.sceneView);
         }
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 
-            this.sceneView.Frame = this.View.Frame;
+            startAR();
+        }
+
+        public void startAR()
+        {
+            var sceneView = new ARSCNView();
+            sceneView.Frame = View.Frame;
+            View = sceneView;
+
+            CreateARScene(sceneView);
+            PositionScene(sceneView);
+        }
+
+        public void CreateARScene(ARSCNView sceneView)
+        {
+            var scene = SCNScene.FromFile("art.scnassest/arrow");
+            sceneView.Scene = scene;
+
+            sceneView.DebugOptions = ARSCNDebugOptions.ShowWorldOrigin
+                | ARSCNDebugOptions.ShowFeaturePoints;
+        }
+
+        public void PositionScene(ARSCNView sceneView)
+        {
+            var arConfig = new ARWorldTrackingConfiguration
+            {
+                PlaneDetection = ARPlaneDetection.Horizontal,
+                LightEstimationEnabled = true
+            };
+
+            sceneView.Session.Run(arConfig, ARSessionRunOptions.ResetTracking);
+
+            var sceneNode = sceneView.Scene.RootNode.FindChildNode("arrow-001", true);
+            sceneNode.Position = new SCNVector3(0, -25, -40);
+            sceneNode.Scale = new SCNVector3(10, 10, 10);
+
+            sceneView.Scene.RootNode.AddChildNode(sceneNode);
         }
 
 		public override void DidReceiveMemoryWarning ()
 		{
 			base.DidReceiveMemoryWarning ();
 		}
-
-        public override void ViewDidAppear(bool animated)
-        {
-            base.ViewDidAppear(animated);
-
-            this.sceneView.Session.Run(new ARWorldTrackingConfiguration
-            {
-                AutoFocusEnabled = true,
-                LightEstimationEnabled = true,
-                WorldAlignment = ARWorldAlignment.Gravity
-            }, ARSessionRunOptions.ResetTracking | ARSessionRunOptions.RemoveExistingAnchors);
-        }
-
-        public override void ViewDidDisappear(bool animated)
-        {
-            base.ViewDidDisappear(animated);
-
-            this.sceneView.Session.Pause();
-        }
     }
 }
 

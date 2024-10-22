@@ -16,6 +16,8 @@ namespace BookFindersVirtualLibrary.Models
         public string Name { get; set; }
         public string Author { get; set; }
         public string Description { get; set; }
+        public string Publisher { get; set; }
+        public string PublishYear { get; set; }
         public string? ImageLink { get; set; }
         public string? LocationCode {get; set; }
         public string? LibraryCode {get; set; }
