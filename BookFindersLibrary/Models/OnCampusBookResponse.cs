@@ -32,6 +32,7 @@ namespace BookFindersLibrary.Models.OnCampus
     {
         public List<string> description { get; set; }
         public List<string> creationdate { get; set; }
+        public List<string> publisher {get; set;}
     }
     public class PnxSort
     {

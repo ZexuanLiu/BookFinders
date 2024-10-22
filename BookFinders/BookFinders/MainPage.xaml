@@ -19,7 +19,7 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
-        <Button Clicked="Button_Clicked" Text="Test Button!"/>
+        <Button Clicked="OnButtonClicked" Text="Start AR!"/>
     </StackLayout>
 
 </ContentPage>

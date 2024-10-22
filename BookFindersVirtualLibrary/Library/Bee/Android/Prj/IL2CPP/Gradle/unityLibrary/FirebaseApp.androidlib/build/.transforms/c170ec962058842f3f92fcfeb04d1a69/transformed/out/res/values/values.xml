@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">1035912383944</string>
+    <string name="google_api_key" translatable="false">AIzaSyDedcGcJCknIJP2j6nyROH20pjHyG0Dh70</string>
+    <string name="google_app_id" translatable="false">1:1035912383944:android:f3ab7b88183cdd951fc4fd</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDedcGcJCknIJP2j6nyROH20pjHyG0Dh70</string>
+    <string name="google_storage_bucket" translatable="false">book-finders-notificatons.appspot.com</string>
+    <string name="project_id" translatable="false">book-finders-notificatons</string>
+</resources>
