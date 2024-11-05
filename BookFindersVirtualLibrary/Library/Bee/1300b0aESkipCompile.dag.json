@@ -24,10 +24,10 @@
     {
       "Annotation": "BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json",
       "DisplayName": "BuildPlayerDataGenerator TypeDb-All",
-      "Action": "\"D:/Programs/Unity/2022.3.13f1/Editor/Data\\Tools\\netcorerun\\netcorerun.exe\" \"D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\\Firebase.App.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\\Firebase.Messaging.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\\Firebase.Platform.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\\Firebase.TaskExtension.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\\Google.MiniJson.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Resources\\Newtonsoft.Json.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Assembly-CSharp.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.AI.Navigation.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.InputSystem.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.InputSystem.ForUI.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.InputSystem.TestFramework.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.Mathematics.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.ProBuilder.Csg.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.ProBuilder.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.ProBuilder.KdTree.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.ProBuilder.Poly2Tri.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.ProBuilder.Stl.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.TextMeshPro.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.Timeline.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.VisualScripting.Core.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.VisualScripting.Flow.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.VisualScripting.State.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARCore.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARFoundation.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARFoundation.InternalUtils.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARFoundation.VisualScripting.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARKit.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARKit.FaceTracking.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.ARSubsystems.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.CoreUtils.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.InteractionSubsystems.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.Management.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.Features.ConformanceAutomation.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.Features.MetaQuestSupport.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.Features.MockRuntime.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.Features.OculusQuestSupport.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.OpenXR.Features.RuntimeDebugger.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\Unity.XR.Simulation.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\UnityEngine.SpatialTracking.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\UnityEngine.TestRunner.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\UnityEngine.UI.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\UnityEngine.XR.LegacyInputHelpers.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\\UnityEngine.XR.MagicLeap.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\\nunit.framework.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.testtools.codecoverage@1.2.4\\lib\\ReportGenerator\\ReportGeneratorMerged.dll\" -a=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.visualscripting@1.9.1\\Runtime\\VisualScripting.Flow\\Dependencies\\NCalc\\Unity.VisualScripting.Antlr3.Runtime.dll\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Firebase\\Plugins\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Assets\\Resources\" -s=\"D:\\Programs\\Unity\\2022.3.13f1\\Editor\\Data\\Managed\\UnityEngine\" -s=\"D:\\Programs\\Unity\\2022.3.13f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netfx\" -s=\"D:\\Programs\\Unity\\2022.3.13f1\\Editor\\Data\\NetStandard\\compat\\2.1.0\\shims\\netstandard\" -s=\"D:\\Programs\\Unity\\2022.3.13f1\\Editor\\Data\\NetStandard\\Extensions\\2.0.0\" -s=\"D:\\Programs\\Unity\\2022.3.13f1\\Editor\\Data\\NetStandard\\ref\\2.1.0\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\ScriptAssemblies\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.ext.nunit@1.0.6\\net35\\unity-custom\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.testtools.codecoverage@1.2.4\\lib\\ReportGenerator\" -s=\"D:\\Coding\\CSharp\\repos\\BookFinders\\BookFindersVirtualLibrary\\Library\\PackageCache\\com.unity.visualscripting@1.9.1\\Runtime\\VisualScripting.Flow\\Dependencies\\NCalc\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
+      "Action": "\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/netcorerun/netcorerun\" \"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.App.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Messaging.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Platform.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.TaskExtension.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Google.MiniJson.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Resources/Newtonsoft.Json.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Assembly-CSharp.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.AI.Navigation.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.InputSystem.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.InputSystem.ForUI.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.InputSystem.TestFramework.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Mathematics.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Csg.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.KdTree.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Poly2Tri.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Stl.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.TextMeshPro.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Timeline.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.State.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARCore.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARFoundation.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARFoundation.InternalUtils.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARFoundation.VisualScripting.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARKit.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARKit.FaceTracking.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.CoreUtils.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.Management.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.Features.ConformanceAutomation.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.Features.MetaQuestSupport.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.Features.MockRuntime.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.Features.OculusQuestSupport.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.OpenXR.Features.RuntimeDebugger.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.XR.Simulation.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.TestRunner.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.UI.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.XR.MagicLeap.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll\" -a=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netstandard\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/Extensions/2.0.0\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/ref/2.1.0\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Assets/Resources\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator\" -s=\"/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
       "Inputs": [
-        "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/netcorerun/netcorerun.exe",
-        "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe",
+        "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/netcorerun/netcorerun",
+        "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe",
         "Assets/Firebase/Plugins/Firebase.App.dll",
         "Assets/Firebase/Plugins/Firebase.Messaging.dll",
         "Assets/Firebase/Plugins/Firebase.Platform.dll",
@@ -98,112 +98,112 @@
   ],
   "FileSignatures": [
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.BuildTools.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.BuildTools.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Core.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Core.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.CSharpSupport.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.CSharpSupport.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.DotNet.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.DotNet.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.NativeProgramSupport.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.NativeProgramSupport.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Stevedore.Program.exe"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Stevedore.Program.exe"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.TinyProfiler2.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.TinyProfiler2.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Toolchain.GNU.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Toolchain.GNU.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Toolchain.LLVM.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Toolchain.LLVM.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Toolchain.VisualStudio.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Toolchain.VisualStudio.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Toolchain.Xcode.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Toolchain.Xcode.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.Tools.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.Tools.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.TundraBackend.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.TundraBackend.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Bee.VisualStudioSolution.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Bee.VisualStudioSolution.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/BeeBuildProgramCommon.Data.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/BeeBuildProgramCommon.Data.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/BeeBuildProgramCommon.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/BeeBuildProgramCommon.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/BeeLocalCacheTool.exe"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Newtonsoft.Json.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Newtonsoft.Json.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/NiceIO.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/NiceIO.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/PlayerBuildProgramLibrary.Data.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/PlayerBuildProgramLibrary.Data.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/PlayerBuildProgramLibrary.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/PlayerBuildProgramLibrary.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/ScriptCompilationBuildProgram.Data.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/ScriptCompilationBuildProgram.Data.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/ScriptCompilationBuildProgram.exe"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/ScriptCompilationBuildProgram.exe"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/SharpYaml.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/SharpYaml.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Api.Attributes.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Api.Attributes.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Cecil.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Cecil.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Cecil.Mdb.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Cecil.Mdb.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Cecil.Pdb.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Cecil.Pdb.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Cecil.Rocks.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Cecil.Rocks.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.IL2CPP.Api.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.IL2CPP.Api.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.IL2CPP.Bee.BuildLogic.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.IL2CPP.Bee.BuildLogic.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.IL2CPP.Bee.IL2CPPExeCompileCppBuildProgram.Data.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.IL2CPP.Bee.IL2CPPExeCompileCppBuildProgram.Data.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Linker.Api.dll"
     },
     {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Linker.Api.dll"
-    },
-    {
-      "File": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline/Unity.Options.dll"
+      "File": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline/Unity.Options.dll"
     },
     {
       "File": "Library/Bee/1300b0aESkipCompile-inputdata.json"
     }
   ],
   "StatSignatures": [
+    {
+      "File": "/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/getconf"
+    },
     {
       "File": "Assets/csc.rsp"
     },
@@ -357,7 +357,7 @@
   ],
   "GlobSignatures": [
     {
-      "Path": "D:/Programs/Unity/2022.3.13f1/Editor/Data/Tools/BuildPipeline"
+      "Path": "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPipeline"
     }
   ],
   "ContentDigestExtensions": [
@@ -387,6 +387,6 @@
   "SharedResources": [],
   "Scanners": [],
   "Identifier": "Library/Bee/1300b0aESkipCompile.dag.json",
-  "PayloadsFile": "D:/Coding/CSharp/repos/BookFinders/BookFindersVirtualLibrary/Library/Bee/1300b0aESkipCompile.dag.payloads",
+  "PayloadsFile": "/Users/liuzexuan/RiderProjects/BookFinders/BookFindersVirtualLibrary/Library/Bee/1300b0aESkipCompile.dag.payloads",
   "RelativePathToRoot": "../.."
 }
