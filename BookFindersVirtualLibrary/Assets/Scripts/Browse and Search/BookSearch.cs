@@ -75,9 +75,9 @@ public class BookSearch : MonoBehaviour
     {
         try
         {
-            //var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/0");
+            var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/0");
             //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
-            var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
+            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
