@@ -27,18 +27,6 @@ public class BookSearch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Book bookObj = new Book();
-        Book bookObj2 = new Book();
-        bookObj.Name = "testBook";
-        bookObj.Author = "testAuthor";
-        bookObj.Description = "123";
-        bookObj2.Name = "testBook2";
-        bookObj2.Author = "testAuthor2";
-        bookObj2.Description = "1234";
-        bookList.Add(bookObj);
-        bookList.Add(bookObj);
-        bookList.Add(bookObj2);
-        bookList.Add(bookObj2);
 
         Button searchButton = searchIcon.GetComponent<Button>();
         if (searchButton != null)
