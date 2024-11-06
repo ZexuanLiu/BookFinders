@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using Newtonsoft.Json.Linq;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 
 public class BookSearch : MonoBehaviour
@@ -117,12 +118,16 @@ public class BookSearch : MonoBehaviour
                 }
                 //if books found disable the error message
                 noBookMessage.gameObject.SetActive(false);
+                string url = "https://picsum.photos/id/237/200/300";
                 foreach (var book in foundBooks)
                 {
                     GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
                     TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
                     texts[0].text = book.Name;
                     texts[1].text = book.Author;
+
+                    RawImage imageComponent = newBookItem.GetComponentInChildren<RawImage>();
+                    StartCoroutine(DownloadAndSetImage(url, imageComponent));
 
                     BookItemController controller = newBookItem.GetComponent<BookItemController>();
                     controller.Initialize(book);
@@ -152,5 +157,26 @@ public class BookSearch : MonoBehaviour
         //    controller.Initialize(book);
 
         //}
+    }
+
+    IEnumerator DownloadAndSetImage(string url, RawImage imageComponent)
+    {
+        using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error downloading image: " + request.error);
+            }
+            else
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(request);
+                imageComponent.texture = texture;
+                //set the weight and the height of the image
+                RectTransform rectTransform = imageComponent.GetComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(120, 150);
+            }
+        }
     }
 }
