@@ -94,6 +94,7 @@ public class BookSearch : MonoBehaviour
                     newBook.Name = bookJson["name"].ToString();
                     newBook.Author = bookJson["author"].ToString();
                     newBook.Description = bookJson["description"].ToString();
+                    newBook.ImageLink = bookJson["imageLink"].ToString();
                     newBook.Publisher = bookJson["publisher"].ToString();
                     newBook.PublishYear = bookJson["publishYear"].ToString();
                     newBook.LocationCode = bookJson["locationCode"].ToString();
@@ -118,7 +119,7 @@ public class BookSearch : MonoBehaviour
                 }
                 //if books found disable the error message
                 noBookMessage.gameObject.SetActive(false);
-                string url = "https://picsum.photos/id/237/200/300";
+
                 foreach (var book in foundBooks)
                 {
                     GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
@@ -126,8 +127,12 @@ public class BookSearch : MonoBehaviour
                     texts[0].text = book.Name;
                     texts[1].text = book.Author;
 
-                    RawImage imageComponent = newBookItem.GetComponentInChildren<RawImage>();
-                    StartCoroutine(DownloadAndSetImage(url, imageComponent));
+                    //if ImageLink is defaultBook.png means no imageUrl.
+                    if (book.ImageLink != "defaultBook.png")
+                    {
+                        RawImage imageComponent = newBookItem.GetComponentInChildren<RawImage>();
+                        StartCoroutine(DownloadAndSetImage(book.ImageLink, imageComponent));
+                    }
 
                     BookItemController controller = newBookItem.GetComponent<BookItemController>();
                     controller.Initialize(book);
