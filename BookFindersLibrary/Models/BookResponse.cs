@@ -27,6 +27,7 @@ namespace BookFindersLibrary.Models
         public PnxSort sort { get; set; }
         public PnxSearch search { get; set; }
         public PnxLinks links { get; set; }
+        public PnxAdData addata { get; set; }
     }
     public class PnxSort
     {
@@ -49,5 +50,12 @@ namespace BookFindersLibrary.Models
     {
         public List<string> thumbnail { get; set; }
     }
-
+    public class PnxAdData
+    {
+        public List<string> isbn {get; set;}
+        public PnxAdData()
+        {
+            isbn = new List<string>();
+        }
+    }
 }

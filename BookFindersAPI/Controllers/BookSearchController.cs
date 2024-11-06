@@ -40,14 +40,14 @@ namespace BookFindersAPI.Controllers
                     PnxSearch search = doc.pnx.search;
                     BookFindersLibrary.Models.PnxLinks links = doc.pnx.links;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
-                    
+                    BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
                     var bookObj = new book
                     {
                         Id = "1",
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
-                        ImageLink = await CheckImageValidity(links.thumbnail[0].Replace("$$T", "")),
+                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
                         LibraryCode = "None",
                         LocationBookShelfNum = "1",
@@ -83,6 +83,7 @@ namespace BookFindersAPI.Controllers
                 {
                     BookFindersLibrary.Models.OnCampus.PnxSort sort = doc.pnx.sort;
                     PnxDisplay display = doc.pnx.display;
+                    BookFindersLibrary.Models.OnCampus.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.OnCampus.BestLocation bestlocation = doc.delivery.bestlocation;
                     string bookShelfInfo = await CheckBookShelfNum(bestlocation?.callNumber ?? "Unknown Location Code");
                     if (bookShelfInfo != "Unknown Location Code"){
@@ -95,7 +96,7 @@ namespace BookFindersAPI.Controllers
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = "defaultBook.png",
+                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                         Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                         PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
@@ -136,6 +137,11 @@ namespace BookFindersAPI.Controllers
             {
                 return BadRequest("Failed to fetch the books");
             }
+        }
+        private async Task<string> GetImageByISBN (string isbn)
+        {
+            string baseUrl = $"https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn={isbn}/lc.jpg";
+            return await CheckImageValidity(baseUrl);
         }
         private async Task<string> CheckImageValidity(string uri)
         {
