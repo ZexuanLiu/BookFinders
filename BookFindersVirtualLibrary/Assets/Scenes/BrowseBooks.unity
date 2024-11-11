@@ -1788,6 +1788,7 @@ MonoBehaviour:
   bookItemPrefab: {fileID: 4649276692296576314, guid: f4a209d4460bf4c4e933372cea875f8a, type: 3}
   contentPanel: {fileID: 860555254}
   searchIcon: {fileID: 1699338898}
+  scrollRect: {fileID: 1747429656}
   bookSearchTextArea: {fileID: 1726218995}
   noBookMessage: {fileID: 1345244276}
 --- !u!114 &1747429656

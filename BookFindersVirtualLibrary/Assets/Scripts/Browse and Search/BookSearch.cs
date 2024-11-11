@@ -13,17 +13,20 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 
-public class BookSearch : MonoBehaviour
+public class BookSearch : MonoBehaviour, IEndDragHandler
 {
-    public GameObject bookItemPrefab; 
-    public Transform contentPanel; 
+    public GameObject bookItemPrefab;
+    public Transform contentPanel;
     public Image searchIcon;
+    public ScrollRect scrollRect;
+
     private HttpClient client;
-    private List<Book> bookList = new List<Book>();
+    private List<Book> foundBooks = new List<Book>();
+    private List<Book> allLoadedBooks = new List<Book>();
+    private int currentPage = 0;
     public TMP_InputField bookSearchTextArea;
     public TextMeshProUGUI noBookMessage;
     public string BookSearchText { get; set; }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +48,6 @@ public class BookSearch : MonoBehaviour
     {
         BookSearchText = bookSearchTextArea.text;
     }
-
     void OnSearchIconClicked()
     {
         foreach (Transform child in contentPanel)
@@ -54,6 +56,14 @@ public class BookSearch : MonoBehaviour
         }
 
         DisplayBooks();
+    }
+    public void OnEndDrag(PointerEventData data)
+    {
+        currentPage++;
+        if (currentPage <= 10)
+        {
+            SearchBook(currentPage);
+        }
     }
     void DisplayNoBookErrorMessage()
     {
@@ -64,92 +74,14 @@ public class BookSearch : MonoBehaviour
     {
         try
         {
-            var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/0");
-            //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
-            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                JArray foundBooksJson = JArray.Parse(content);
-
-                List<Book> foundBooks = new List<Book>();
-
-                int index = 0;
-                foreach (JToken bookJson in foundBooksJson)
-                {
-                    Book newBook = new Book();
-
-                    newBook.Name = bookJson["name"].ToString();
-                    newBook.Author = bookJson["author"].ToString();
-                    newBook.Description = bookJson["description"].ToString();
-                    newBook.ImageLink = bookJson["imageLink"].ToString();
-                    newBook.Publisher = bookJson["publisher"].ToString();
-                    newBook.PublishYear = bookJson["publishYear"].ToString();
-                    newBook.LocationCode = bookJson["locationCode"].ToString();
-                    newBook.LibraryCode = bookJson["libraryCode"].ToString();
-                    newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
-                    newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
-
-                    if (!newBook.LibraryCode.Equals("TRAF"))
-                    {
-                        continue;
-                    }  
-
-                    foundBooks.Add(newBook);
-
-                    index++;
-                }
-                if (foundBooks.Count == 0)
-                {
-                    //if no book found enable the error message
-                    DisplayNoBookErrorMessage();
-                    return;
-                }
-                //if books found disable the error message
-                noBookMessage.gameObject.SetActive(false);
-
-                foreach (var book in foundBooks)
-                {
-                    GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
-                    TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
-                    texts[0].text = book.Name;
-                    texts[1].text = book.Author;
-
-                    //if ImageLink is defaultBook.png means no imageUrl.
-                    if (book.ImageLink != "defaultBook.png")
-                    {
-                        RawImage imageComponent = newBookItem.GetComponentInChildren<RawImage>();
-                        StartCoroutine(DownloadAndSetImage(book.ImageLink, imageComponent));
-                    }
-
-                    BookItemController controller = newBookItem.GetComponent<BookItemController>();
-                    controller.Initialize(book);
-
-                }
-
-                BookManager.Instance.SearchResultBooks = foundBooks;
-            }
-            else
-            {
-                DisplayNoBookErrorMessage();
-            }
+            currentPage = 0;
+            SearchBook(currentPage);
         }
         catch (Exception e)
         {
             Debug.Log($"{e}");
             DisplayNoBookErrorMessage();
         }
-        //foreach (var book in bookList)
-        //{
-        //    GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
-        //    TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
-        //    texts[0].text = book.Name;
-        //    texts[1].text = book.Author;
-
-        //    BookItemController controller = newBookItem.GetComponent<BookItemController>();
-        //    controller.Initialize(book);
-
-        //}
     }
 
     IEnumerator DownloadAndSetImage(string url, RawImage imageComponent)
@@ -170,6 +102,81 @@ public class BookSearch : MonoBehaviour
                 RectTransform rectTransform = imageComponent.GetComponent<RectTransform>();
                 rectTransform.sizeDelta = new Vector2(120, 150);
             }
+        }
+    }
+
+    private void CreateBookItem(Book book)
+    {
+        GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
+        TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
+        texts[0].text = book.Name;
+        texts[1].text = book.Author;
+
+        if (book.ImageLink != "defaultBook.png")
+        {
+            RawImage imageComponent = newBookItem.GetComponentInChildren<RawImage>();
+            StartCoroutine(DownloadAndSetImage(book.ImageLink, imageComponent));
+        }
+
+        BookItemController controller = newBookItem.GetComponent<BookItemController>();
+        controller.Initialize(book);
+    }
+    private async void SearchBook(int page)
+    {
+        var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
+        //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
+        //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            JArray foundBooksJson = JArray.Parse(content);
+
+            foundBooks = new List<Book>();
+
+            int index = 0;
+            foreach (JToken bookJson in foundBooksJson)
+            {
+                Book newBook = new Book();
+
+                newBook.Name = bookJson["name"].ToString();
+                newBook.Author = bookJson["author"].ToString();
+                newBook.Description = bookJson["description"].ToString();
+                newBook.ImageLink = bookJson["imageLink"].ToString();
+                newBook.Publisher = bookJson["publisher"].ToString();
+                newBook.PublishYear = bookJson["publishYear"].ToString();
+                newBook.LocationCode = bookJson["locationCode"].ToString();
+                newBook.LibraryCode = bookJson["libraryCode"].ToString();
+                newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
+                newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+
+                if (!newBook.LibraryCode.Equals("TRAF"))
+                {
+                    continue;
+                }
+
+                foundBooks.Add(newBook);
+
+                index++;
+            }
+            if (foundBooks.Count == 0)
+            {
+                //if no book found enable the error message
+                DisplayNoBookErrorMessage();
+                return;
+            }
+            //if books found disable the error message
+            noBookMessage.gameObject.SetActive(false);
+
+            foreach (var book in foundBooks)
+            {
+                CreateBookItem(book);
+            }
+            allLoadedBooks.AddRange(foundBooks);
+            BookManager.Instance.SearchResultBooks = foundBooks;
+        }
+        else
+        {
+            DisplayNoBookErrorMessage();
         }
     }
 }
