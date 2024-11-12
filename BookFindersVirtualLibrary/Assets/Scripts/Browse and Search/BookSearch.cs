@@ -110,7 +110,24 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         GameObject newBookItem = Instantiate(bookItemPrefab, contentPanel);
         TextMeshProUGUI[] texts = newBookItem.GetComponentsInChildren<TextMeshProUGUI>();
         texts[0].text = book.Name;
-        texts[1].text = book.Author;
+        if (book.LibraryCode == "TRAF")
+        {
+            texts[1].text = "Campus: Trafalgar";
+        }
+        else if (book.LibraryCode == "DAV")
+        {
+            texts[1].text = "Campus: Davis";
+        }
+        else if (book.LibraryCode == "HMC")
+        {
+            texts[1].text = "Campus: HMC";
+        }
+        else
+        {
+            texts[1].text = "Unknown Campus";
+        }
+
+        texts[2].text = book.Author;
 
         if (book.ImageLink != "defaultBook.png")
         {

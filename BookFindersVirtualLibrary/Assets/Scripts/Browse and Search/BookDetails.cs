@@ -44,12 +44,29 @@ public class BookDetails : MonoBehaviour
         Button btnLaunchVL = gameObjectBtnLaunchVL.GetComponent<Button>();
         if (btnLaunchVL != null)
         {
-            btnLaunchVL.onClick.AddListener(OnLaunchVLClicked);
+            if (currentBook.LibraryCode != "TRAF")
+            {
+                btnLaunchVL.interactable = false;
+            }
+            else
+            {
+                btnLaunchVL.interactable = true;
+                btnLaunchVL.onClick.AddListener(OnLaunchVLClicked);
+            }        
         }
 
         Button btnLaunchAR = gameObjectBtnLaunchAR.GetComponent<Button>();
         if (btnLaunchAR != null)
         {
+            if (currentBook.LibraryCode != "TRAF")
+            {
+                btnLaunchAR.interactable = false;
+            }
+            else
+            {
+                btnLaunchAR.interactable = true;
+                btnLaunchAR.onClick.AddListener(OnLaunchARClicked);
+            }
             btnLaunchAR.onClick.AddListener(OnLaunchARClicked);
         }
 
