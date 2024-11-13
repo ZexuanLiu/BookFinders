@@ -24,7 +24,7 @@
     {
       "Annotation": "BuildPlayerDataGenerator Library/BuildPlayerData/Editor/TypeDb-All.json",
       "DisplayName": "BuildPlayerDataGenerator TypeDb-All",
-      "Action": "\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/netcorerun/netcorerun\" \"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.App.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Messaging.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Platform.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.TaskExtension.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Google.MiniJson.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Resources/Newtonsoft.Json.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Assembly-CSharp.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.AI.Navigation.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Csg.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.KdTree.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Poly2Tri.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Stl.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.TextMeshPro.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Timeline.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.State.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.TestRunner.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.UI.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netstandard\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/Extensions/2.0.0\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/ref/2.1.0\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Resources\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
+      "Action": "\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/netcorerun/netcorerun\" \"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.App.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Messaging.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.Platform.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Firebase.TaskExtension.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins/Google.MiniJson.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Assembly-CSharp.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.AI.Navigation.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Csg.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.KdTree.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Poly2Tri.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.ProBuilder.Stl.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Analytics.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Configuration.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Device.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Environments.Internal.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Internal.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Networking.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Registration.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Scheduler.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Telemetry.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Services.Core.Threading.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.TextMeshPro.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.Timeline.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/Unity.VisualScripting.State.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.TestRunner.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies/UnityEngine.UI.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll\" -a=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netstandard\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/Extensions/2.0.0\" -s=\"/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/ref/2.1.0\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Assets/Firebase/Plugins\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/ScriptAssemblies\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator\" -s=\"/Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc\" -o=\"Library/BuildPlayerData/Editor\" -rn=\"\" -tn=\"TypeDb-All.json\"",
       "Inputs": [
         "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/netcorerun/netcorerun",
         "/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/BuildPlayerDataGenerator/BuildPlayerDataGenerator.exe",
@@ -33,7 +33,6 @@
         "Assets/Firebase/Plugins/Firebase.Platform.dll",
         "Assets/Firebase/Plugins/Firebase.TaskExtension.dll",
         "Assets/Firebase/Plugins/Google.MiniJson.dll",
-        "Assets/Resources/Newtonsoft.Json.dll",
         "Library/ScriptAssemblies/Assembly-CSharp.dll",
         "Library/ScriptAssemblies/Unity.AI.Navigation.dll",
         "Library/ScriptAssemblies/Unity.ProBuilder.Csg.dll",
@@ -41,6 +40,19 @@
         "Library/ScriptAssemblies/Unity.ProBuilder.KdTree.dll",
         "Library/ScriptAssemblies/Unity.ProBuilder.Poly2Tri.dll",
         "Library/ScriptAssemblies/Unity.ProBuilder.Stl.dll",
+        "Library/ScriptAssemblies/Unity.Services.Analytics.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Configuration.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Device.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Environments.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Environments.Internal.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Internal.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Networking.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Registration.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Scheduler.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Telemetry.dll",
+        "Library/ScriptAssemblies/Unity.Services.Core.Threading.dll",
         "Library/ScriptAssemblies/Unity.TextMeshPro.dll",
         "Library/ScriptAssemblies/Unity.Timeline.dll",
         "Library/ScriptAssemblies/Unity.VisualScripting.Core.dll",
@@ -49,6 +61,7 @@
         "Library/ScriptAssemblies/UnityEngine.TestRunner.dll",
         "Library/ScriptAssemblies/UnityEngine.UI.dll",
         "Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll",
+        "Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll",
         "Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll",
         "Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
       ],
@@ -202,13 +215,13 @@
       "File": "Assets/mcs.rsp"
     },
     {
-      "File": "Assets/Resources/Newtonsoft.Json.dll"
-    },
-    {
       "File": "Library/Bee/1300b0aESkipCompile-inputdata.json"
     },
     {
       "File": "Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
+    },
+    {
+      "File": "Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll"
     },
     {
       "File": "Library/PackageCache/com.unity.testtools.codecoverage@1.2.4/lib/ReportGenerator/ReportGeneratorMerged.dll"
@@ -236,6 +249,45 @@
     },
     {
       "File": "Library/ScriptAssemblies/Unity.ProBuilder.Stl.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Analytics.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Configuration.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Device.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Environments.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Environments.Internal.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Internal.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Networking.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Registration.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Scheduler.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Telemetry.dll"
+    },
+    {
+      "File": "Library/ScriptAssemblies/Unity.Services.Core.Threading.dll"
     },
     {
       "File": "Library/ScriptAssemblies/Unity.TextMeshPro.dll"
