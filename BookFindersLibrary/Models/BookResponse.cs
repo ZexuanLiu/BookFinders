@@ -16,6 +16,7 @@ namespace BookFindersLibrary.Models
     public class Delivery
     {
         public BestLocation? bestlocation{ get; set; }
+        public string? almaOpenurl {get; set;}
     }
     public class BestLocation
     {

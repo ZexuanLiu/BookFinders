@@ -6,6 +6,7 @@ using BookFindersLibrary.Models;
 using BookFindersLibrary.Models.OnCampus;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace BookFindersAPI.Controllers
 {
@@ -41,6 +42,7 @@ namespace BookFindersAPI.Controllers
                     BookFindersLibrary.Models.PnxLinks links = doc.pnx.links;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
                     BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
+                    BookFindersLibrary.Models.Delivery delivery = doc.delivery;
                     var bookObj = new book
                     {
                         Id = "1",
@@ -53,7 +55,8 @@ namespace BookFindersAPI.Controllers
                         LocationBookShelfNum = "1",
                         LocationBookShelfSide = "A",
                         LocationBookShelfRow = -1,
-                        LocationBookShelfColumn = -1
+                        LocationBookShelfColumn = -1,
+                        OnlineResourceURL = delivery.almaOpenurl
                     };
 
                     books.Add(bookObj);
@@ -104,7 +107,8 @@ namespace BookFindersAPI.Controllers
                         LocationBookShelfNum = locationBookShelfNum,
                         LocationBookShelfSide = locationBookShelfSide,
                         LocationBookShelfRow = 0,
-                        LocationBookShelfColumn = 0
+                        LocationBookShelfColumn = 0,
+                        OnlineResourceURL = ""
                         };
                          books.Add(bookObj);
                     }

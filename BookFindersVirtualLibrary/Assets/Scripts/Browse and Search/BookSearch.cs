@@ -19,6 +19,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     public Transform contentPanel;
     public Image searchIcon;
     public ScrollRect scrollRect;
+    public TMP_Dropdown searchOptionDropdown;
 
     private HttpClient client;
     private List<Book> foundBooks = new List<Book>();
@@ -62,7 +63,15 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         currentPage++;
         if (currentPage <= 10)
         {
-            SearchBook(currentPage);
+            if (searchOptionDropdown.value == 0)
+            {
+                SearchBook(true, currentPage);
+            }
+            else
+            {
+                //search for online book
+                SearchBook(false, currentPage);
+            }
         }
     }
     void DisplayNoBookErrorMessage()
@@ -75,7 +84,16 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         try
         {
             currentPage = 0;
-            SearchBook(currentPage);
+            //search for physical book
+            if (searchOptionDropdown.value == 0)
+            {
+                SearchBook(true,currentPage);
+            }
+            else
+            {
+                //search for online book
+                SearchBook(false, currentPage);
+            }
         }
         catch (Exception e)
         {
@@ -138,11 +156,22 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         BookItemController controller = newBookItem.GetComponent<BookItemController>();
         controller.Initialize(book);
     }
-    private async void SearchBook(int page)
+    private async void SearchBook(bool isPhysicalBook, int page)
     {
-        var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
-        //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
-        //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
+        HttpResponseMessage response;
+        if (isPhysicalBook)
+        {
+            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
+            //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
+            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
+        }
+        else
+        {
+            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/{BookSearchText}/{page}");
+            //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/{BookSearchText}/0");
+            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/{BookSearchText}/0");
+        }
+
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
@@ -165,11 +194,12 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
                 newBook.LibraryCode = bookJson["libraryCode"].ToString();
                 newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
                 newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+                newBook.OnlineResourceURL = bookJson["onlineResourceURL"].ToString();
 
-                if (!newBook.LibraryCode.Equals("TRAF"))
-                {
-                    continue;
-                }
+                //if (!newBook.LibraryCode.Equals("TRAF"))
+                //{
+                //    continue;
+                //}
 
                 foundBooks.Add(newBook);
 

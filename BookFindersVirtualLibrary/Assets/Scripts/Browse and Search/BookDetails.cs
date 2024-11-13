@@ -18,6 +18,7 @@ public class BookDetails : MonoBehaviour
     public RawImage rawImage;
     public GameObject gameObjectBtnLaunchVL;
     public GameObject gameObjectBtnLaunchAR;
+    public GameObject gameObjectBtnBrowser;
 
     // Start is called before the first frame update
     void Start()
@@ -67,9 +68,21 @@ public class BookDetails : MonoBehaviour
                 btnLaunchAR.interactable = true;
                 btnLaunchAR.onClick.AddListener(OnLaunchARClicked);
             }
-            btnLaunchAR.onClick.AddListener(OnLaunchARClicked);
         }
 
+        Button btnOpenOnlineResource = gameObjectBtnBrowser.GetComponent<Button>();
+        if (btnOpenOnlineResource != null)
+        {
+            if (string.IsNullOrWhiteSpace(currentBook.OnlineResourceURL))
+            {
+                btnOpenOnlineResource.GetComponent<Image>().enabled = false;
+            }
+            else
+            {
+                btnOpenOnlineResource.GetComponent<Image>().enabled = true;
+                btnOpenOnlineResource.onClick.AddListener(OpenOnlineResource);
+            }
+        }
         Screen.orientation = ScreenOrientation.Portrait;
     }
 
@@ -104,6 +117,14 @@ public class BookDetails : MonoBehaviour
                 RectTransform rectTransform = imageComponent.GetComponent<RectTransform>();
                 rectTransform.sizeDelta = new Vector2(100, 200);
             }
+        }
+    }
+    public void OpenOnlineResource()
+    {
+        Book currentBook = BookManager.Instance.currentBook;
+        if (currentBook != null)
+        {
+            Application.OpenURL(currentBook.OnlineResourceURL);
         }
     }
 }

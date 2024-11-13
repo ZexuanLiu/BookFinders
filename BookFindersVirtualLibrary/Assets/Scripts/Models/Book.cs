@@ -25,5 +25,6 @@ namespace BookFindersVirtualLibrary.Models
         public string? LocationBookShelfSide {get; set;}
         public int? LocationBookShelfRow {get; set;}
         public int? LocationBookShelfColumn {get; set;}
+        public string? OnlineResourceURL { get; set; }
     }
 }

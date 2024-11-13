@@ -18,6 +18,7 @@ namespace BookFindersLibrary.Models
         public string Description { get; set; }
         public string Publisher {get; set;}
         public string PublishYear {get; set;}
+        public string? OnlineResourceURL {get; set;}
         public string? ImageLink { get; set; }
         public string? LocationCode {get; set; }
         public string? LibraryCode {get; set; }
