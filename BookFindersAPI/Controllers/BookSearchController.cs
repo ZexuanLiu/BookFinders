@@ -39,10 +39,10 @@ namespace BookFindersAPI.Controllers
                 {
                     BookFindersLibrary.Models.PnxSort sort = doc.pnx.sort;
                     PnxSearch search = doc.pnx.search;
-                    BookFindersLibrary.Models.PnxLinks links = doc.pnx.links;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
                     BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.Delivery delivery = doc.delivery;
+                    BookFindersLibrary.Models.PnxDisplay display = doc.pnx.display;
                     var bookObj = new book
                     {
                         Id = "1",
@@ -50,6 +50,8 @@ namespace BookFindersAPI.Controllers
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
                         ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                        PublishYear = search.creationdate?.Count > 0 ? search.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
                         LibraryCode = "None",
                         LocationBookShelfNum = "1",
@@ -85,7 +87,7 @@ namespace BookFindersAPI.Controllers
                 foreach (var doc in bookObjLists.docs)
                 {
                     BookFindersLibrary.Models.OnCampus.PnxSort sort = doc.pnx.sort;
-                    PnxDisplay display = doc.pnx.display;
+                    BookFindersLibrary.Models.OnCampus.PnxDisplay display = doc.pnx.display;
                     BookFindersLibrary.Models.OnCampus.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.OnCampus.BestLocation bestlocation = doc.delivery.bestlocation;
                     string bookShelfInfo = await CheckBookShelfNum(bestlocation?.callNumber ?? "Unknown Location Code");
