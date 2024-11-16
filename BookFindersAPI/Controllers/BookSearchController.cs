@@ -121,7 +121,7 @@ namespace BookFindersAPI.Controllers
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = "defaultBook.png",
+                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                         Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                         PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
@@ -189,7 +189,7 @@ namespace BookFindersAPI.Controllers
             //use splite to detect blank
             string[] parts = locationCode.Split(' ');
 
-            Match match = Regex.Match(parts[0], @"^([A-Za-z]+)(\d+)(?:\.([A-Za-z0-9]+))?$");
+            Match match = Regex.Match(parts[0], @"^([A-Za-z]+)(\d+(?:\.\d+)?)(?:\.[A-Za-z0-9]+)?$");
             if (!match.Success)
                 return "Unknown Location Code";
 
