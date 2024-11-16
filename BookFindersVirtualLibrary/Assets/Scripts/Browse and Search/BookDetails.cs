@@ -15,6 +15,7 @@ public class BookDetails : MonoBehaviour
     public TextMeshProUGUI publishYearText;
     public TextMeshProUGUI locationText;
     public TextMeshProUGUI bookDescText;
+    public TextMeshProUGUI campusText;
     public RawImage rawImage;
     public GameObject gameObjectBtnLaunchVL;
     public GameObject gameObjectBtnLaunchAR;
@@ -31,6 +32,22 @@ public class BookDetails : MonoBehaviour
             publisherText.text = "Publisher:" + currentBook.Publisher;
             publishYearText.text = "Year:" + currentBook.PublishYear;
             bookDescText.text = currentBook.Description;
+            if (currentBook.LibraryCode == "TRAF")
+            {
+                campusText.text = "Campus: Trafalgar";
+            }
+            else if (currentBook.LibraryCode == "DAV")
+            {
+                campusText.text = "Campus: Davis";
+            }
+            else if (currentBook.LibraryCode == "HMC")
+            {
+                campusText.text = "Campus: HMC";
+            }
+            else
+            {
+                campusText.text = "Unknown Campus";
+            }
             if (currentBook.ImageLink != "defaultBook.png")
             {
                 StartCoroutine(DownloadAndSetImage(currentBook.ImageLink, rawImage));
