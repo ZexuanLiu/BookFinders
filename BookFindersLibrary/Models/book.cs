@@ -24,7 +24,7 @@ namespace BookFindersLibrary.Models
         public string? LibraryCode {get; set; }
         public string? LocationBookShelfNum {get; set;}
         public string? LocationBookShelfSide {get; set;}
-        public int? LocationBookShelfRow {get; set;}
-        public int? LocationBookShelfColumn {get; set;}
+        // public int? LocationBookShelfRow {get; set;}
+        // public int? LocationBookShelfColumn {get; set;}
     }
 }
