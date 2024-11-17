@@ -18,12 +18,13 @@ namespace BookFindersLibrary.Models
         public string Description { get; set; }
         public string Publisher {get; set;}
         public string PublishYear {get; set;}
+        public string? OnlineResourceURL {get; set;}
         public string? ImageLink { get; set; }
         public string? LocationCode {get; set; }
         public string? LibraryCode {get; set; }
         public string? LocationBookShelfNum {get; set;}
         public string? LocationBookShelfSide {get; set;}
-        public int? LocationBookShelfRow {get; set;}
-        public int? LocationBookShelfColumn {get; set;}
+        // public int? LocationBookShelfRow {get; set;}
+        // public int? LocationBookShelfColumn {get; set;}
     }
 }
