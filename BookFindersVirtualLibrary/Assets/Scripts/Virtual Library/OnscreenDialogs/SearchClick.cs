@@ -108,10 +108,15 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
                     newBook.Name = bookJson["name"].ToString();
                     newBook.Author = bookJson["author"].ToString();
                     newBook.Description = bookJson["description"].ToString();
+                    newBook.ImageLink = bookJson["imageLink"].ToString();
+                    newBook.Isbns = string.Join(", ", bookJson["isbns"].ToObject<string[]>());
+                    newBook.Publisher = bookJson["publisher"].ToString();
+                    newBook.PublishYear = bookJson["publishYear"].ToString();
                     newBook.LocationCode = bookJson["locationCode"].ToString();
                     newBook.LibraryCode = bookJson["libraryCode"].ToString();
-                    newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
+                    newBook.LocationBookShelfNum = bookJson["locationBookShelfNum"].ToString();
                     newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
+                    newBook.OnlineResourceURL = bookJson["onlineResourceURL"].ToString();
 
                     if (!newBook.LibraryCode.Equals("TRAF"))
                     {

@@ -49,6 +49,7 @@ namespace BookFindersAPI.Controllers
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
+                        Isbns = addata.isbn,
                         ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                         Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                         PublishYear = search.creationdate?.Count > 0 ? search.creationdate[0] : "Unknown Publish Year",
@@ -97,42 +98,44 @@ namespace BookFindersAPI.Controllers
                         string locationBookShelfSide = bookShelfInfo.Substring(length-1);
                         var bookObj = new Book
                         {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
-                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
-                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
-                        LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
-                        LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
-                        LocationBookShelfNum = locationBookShelfNum,
-                        LocationBookShelfSide = locationBookShelfSide,
-                        // LocationBookShelfRow = 0,
-                        // LocationBookShelfColumn = 0,
-                        OnlineResourceURL = ""
+                            Id = "1",
+                            Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
+                            Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
+                            Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
+                            Isbns = addata.isbn,
+                            ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                            Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                            PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
+                            LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
+                            LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
+                            LocationBookShelfNum = locationBookShelfNum,
+                            LocationBookShelfSide = locationBookShelfSide,
+                            // LocationBookShelfRow = 0,
+                            // LocationBookShelfColumn = 0,
+                            OnlineResourceURL = ""
                         };
-                         books.Add(bookObj);
+                        books.Add(bookObj);
                     }
                     else{
                         var bookObj = new Book
                         {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
-                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
-                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
-                        LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
-                        LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
-                        LocationBookShelfNum = "Unknown Location Code",
-                        LocationBookShelfSide = "Unknown Location Code",
-                        // LocationBookShelfRow = -1,
-                        // LocationBookShelfColumn = -1
-                        OnlineResourceURL = ""
+                            Id = "1",
+                            Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
+                            Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
+                            Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
+                            Isbns = addata.isbn,
+                            ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                            Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                            PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
+                            LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
+                            LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
+                            LocationBookShelfNum = "Unknown Location Code",
+                            LocationBookShelfSide = "Unknown Location Code",
+                            // LocationBookShelfRow = -1,
+                            // LocationBookShelfColumn = -1
+                            OnlineResourceURL = ""
                         };
-                         books.Add(bookObj);
+                        books.Add(bookObj);
                     }
                         
                    

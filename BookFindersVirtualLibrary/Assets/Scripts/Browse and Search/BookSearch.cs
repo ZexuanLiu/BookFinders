@@ -161,15 +161,15 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         HttpResponseMessage response;
         if (isPhysicalBook)
         {
-            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
-            //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
-            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
+            //response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
+            //response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
+            response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
         }
         else
         {
-            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/{BookSearchText}/{page}");
-            //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/{BookSearchText}/0");
-            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/{BookSearchText}/0");
+            //response = await client.GetAsync($"http://localhost:5156/api/BookSearch/{BookSearchText}/{page}");
+            //response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/{BookSearchText}/0");
+            response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/{BookSearchText}/0");
         }
 
         if (response.IsSuccessStatusCode)
@@ -188,11 +188,12 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
                 newBook.Author = bookJson["author"].ToString();
                 newBook.Description = bookJson["description"].ToString();
                 newBook.ImageLink = bookJson["imageLink"].ToString();
+                newBook.Isbns = string.Join(", ", bookJson["isbns"].ToObject<string[]>());
                 newBook.Publisher = bookJson["publisher"].ToString();
                 newBook.PublishYear = bookJson["publishYear"].ToString();
                 newBook.LocationCode = bookJson["locationCode"].ToString();
                 newBook.LibraryCode = bookJson["libraryCode"].ToString();
-                newBook.LocationBookShelfNum = (bookJson["locationBookShelfNum"].ToString());
+                newBook.LocationBookShelfNum = bookJson["locationBookShelfNum"].ToString();
                 newBook.LocationBookShelfSide = bookJson["locationBookShelfSide"].ToString();
                 newBook.OnlineResourceURL = bookJson["onlineResourceURL"].ToString();
 

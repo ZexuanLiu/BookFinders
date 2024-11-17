@@ -10,6 +10,7 @@ public class BookDetailsControl : MonoBehaviour
     [SerializeField] TextMeshProUGUI textMeshAuthor;
     [SerializeField] TextMeshProUGUI textMeshLocationCode;
     [SerializeField] TextMeshProUGUI textMeshDescription;
+    [SerializeField] TextMeshProUGUI textMeshISBNs;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class BookDetailsControl : MonoBehaviour
         textMeshAuthor.text = BookSearchsTracker.SelectedBook.Author;
         textMeshLocationCode.text = BookSearchsTracker.SelectedBook.LocationCode;
         textMeshDescription.text = BookSearchsTracker.SelectedBook.Description;
+        textMeshISBNs.text = string.Join(',',BookSearchsTracker.SelectedBook.Isbns);
     }
 
     void OnEnable()
@@ -34,5 +36,6 @@ public class BookDetailsControl : MonoBehaviour
         textMeshAuthor.text = BookSearchsTracker.SelectedBook.Author;
         textMeshLocationCode.text = BookSearchsTracker.SelectedBook.LocationCode;
         textMeshDescription.text = BookSearchsTracker.SelectedBook.Description;
+        textMeshISBNs.text = string.Join(',', BookSearchsTracker.SelectedBook.Isbns);
     }
 }

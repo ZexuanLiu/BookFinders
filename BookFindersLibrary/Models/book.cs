@@ -15,6 +15,7 @@ namespace BookFindersLibrary.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
+        public List<string> Isbns { get; set; }
         public string Description { get; set; }
         public string Publisher {get; set;}
         public string PublishYear {get; set;}
