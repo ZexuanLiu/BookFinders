@@ -10,7 +10,7 @@ namespace BookFindersLibrary.Models
     //    B,
     //    NotAvailable
     //}
-     public class book
+     public class Book
     {
         public string Id { get; set; }
         public string Name { get; set; }

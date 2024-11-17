@@ -28,7 +28,7 @@ namespace BookFindersAPI.Controllers
             string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
             
             var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey="+apiKey);
-            List<book> books = new List<book>();
+            List<Book> books = new List<Book>();
 
             if (response.IsSuccessStatusCode)
             {
@@ -43,7 +43,7 @@ namespace BookFindersAPI.Controllers
                     BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.Delivery delivery = doc.delivery;
                     BookFindersLibrary.Models.PnxDisplay display = doc.pnx.display;
-                    var bookObj = new book
+                    var bookObj = new Book
                     {
                         Id = "1",
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
@@ -82,7 +82,7 @@ namespace BookFindersAPI.Controllers
                 var content = await response.Content.ReadAsStringAsync();
                 var bookObjLists = JsonConvert.DeserializeObject<OnCampusBookResponse>(content);
 
-                List<book> books = new List<book>();
+                List<Book> books = new List<Book>();
 
                 foreach (var doc in bookObjLists.docs)
                 {
@@ -95,7 +95,7 @@ namespace BookFindersAPI.Controllers
                         int length = bookShelfInfo.Length;
                         string locationBookShelfNum = bookShelfInfo.Substring(0,length-1);
                         string locationBookShelfSide = bookShelfInfo.Substring(length-1);
-                        var bookObj = new book
+                        var bookObj = new Book
                         {
                         Id = "1",
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
@@ -115,7 +115,7 @@ namespace BookFindersAPI.Controllers
                          books.Add(bookObj);
                     }
                     else{
-                        var bookObj = new book
+                        var bookObj = new Book
                         {
                         Id = "1",
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
