@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class Close : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] GameObject libraryGuideView;
+    [SerializeField] GameObject infoPopup;
     [SerializeField] GameObject controls;
 
     public void OnPointerClick(PointerEventData eventData)
