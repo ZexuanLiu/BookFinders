@@ -27,11 +27,13 @@ namespace BookFindersLibrary.Models.OnCampus
     {
         public PnxSort sort { get; set; }
         public PnxDisplay display { get; set; }
+        public PnxAdData addata { get; set; }
     }
     public class PnxDisplay
     {
         public List<string> description { get; set; }
         public List<string> creationdate { get; set; }
+        public List<string> publisher {get; set;}
     }
     public class PnxSort
     {
@@ -43,6 +45,14 @@ namespace BookFindersLibrary.Models.OnCampus
            
             author = new List<string>();
             title = new List<string>();
+        }
+    }
+    public class PnxAdData
+    {
+        public List<string> isbn {get; set;}
+        public PnxAdData()
+        {
+            isbn = new List<string>();
         }
     }
 }
