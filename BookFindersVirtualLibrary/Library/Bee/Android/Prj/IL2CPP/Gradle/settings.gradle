@@ -18,6 +18,13 @@ dependencyResolutionManagement {
         
         google()
         mavenCentral()
+// Android Resolver Repos Start
+        def unityProjectPath = $/file:////Users/andreeapopa/Documents/School/Semester6/SoftwareEngineering/BookFinders/BookFindersVirtualLibrary/$.replace("\\", "/")
+        maven {
+            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22, Assets/Firebase/Editor/AuthDependencies.xml:20, Assets/Firebase/Editor/DatabaseDependencies.xml:22, Assets/Firebase/Editor/MessagingDependencies.xml:24, Assets/Firebase/Editor/RemoteConfigDependencies.xml:20
+        }
+        mavenLocal()
+// Android Resolver Repos End
         flatDir {
             dirs "${project(':unityLibrary').projectDir}/libs"
         }

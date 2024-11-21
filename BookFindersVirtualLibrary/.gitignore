@@ -13,6 +13,7 @@
 # CUSTOM AVOIDING LARGE BUNDLES
 /Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_3_0.bundle
 /Assets/Firebase/Plugins/x86_64/FirebaseCppApp-12_3_0.so
+/Assets/Firebase/Plugins/Firebase.Messaging.dil
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
