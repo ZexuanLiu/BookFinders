@@ -9,6 +9,7 @@ using BookFindersVirtualLibrary.Models;
 using Newtonsoft.Json;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 public class SearchClick : MonoBehaviour, IPointerClickHandler
 {
@@ -49,6 +50,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
     }
 
     public async void OnPointerClick(PointerEventData eventData)
@@ -87,7 +89,8 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         {
             //var response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{textInput}/0");
             //var response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{textInput}/0");
-            var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{textInput}/0");
+            //var response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{textInput}/0");
+            var response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/OnCampus/{textInput}/0");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();

@@ -137,7 +137,13 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.6
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 12d32162b5f66ac4ba03bfc104f4545e, type: 2}
+  - {fileID: 5153196099672964220, guid: c00a3a7ca6f66254d90e9b09eb4d52b1, type: 2}
+  - {fileID: 11400000, guid: e9cae4302bd51ca49b5ad23a34eb194a, type: 2}
+  - {fileID: 2736195744071242034, guid: a19bd39f22dff6c42bb805e4767be489, type: 2}
+  - {fileID: 4800000, guid: c9f956787b1d945e7b36e0516201fc76, type: 3}
+  - {fileID: 4800000, guid: 0945859e5a1034c2cb6dce53cb4fb899, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -158,7 +164,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.BookFindersVirtualLibrary
+    Android: com.SheridanCollegeFAST.SheridanLibraryBookFinders
     iPhone: com.DefaultCompany.Book-Finders-Virtual-Library
   buildNumber:
     Standalone: 0
@@ -248,9 +254,9 @@ PlayerSettings:
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@8.1.1
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 1
+  useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
@@ -964,4 +970,4 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 2
