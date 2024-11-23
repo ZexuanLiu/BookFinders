@@ -6,6 +6,7 @@ using BookFindersLibrary.Models;
 using BookFindersLibrary.Models.OnCampus;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace BookFindersAPI.Controllers
 {
@@ -27,7 +28,7 @@ namespace BookFindersAPI.Controllers
             string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
             
             var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey="+apiKey);
-            List<book> books = new List<book>();
+            List<Book> books = new List<Book>();
 
             if (response.IsSuccessStatusCode)
             {
@@ -38,22 +39,27 @@ namespace BookFindersAPI.Controllers
                 {
                     BookFindersLibrary.Models.PnxSort sort = doc.pnx.sort;
                     PnxSearch search = doc.pnx.search;
-                    BookFindersLibrary.Models.PnxLinks links = doc.pnx.links;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
-                    
-                    var bookObj = new book
+                    BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
+                    BookFindersLibrary.Models.Delivery delivery = doc.delivery;
+                    BookFindersLibrary.Models.PnxDisplay display = doc.pnx.display;
+                    var bookObj = new Book
                     {
                         Id = "1",
                         Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
-                        ImageLink = await CheckImageValidity(links.thumbnail[0].Replace("$$T", "")),
+                        Isbns = addata.isbn,
+                        ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                        PublishYear = search.creationdate?.Count > 0 ? search.creationdate[0] : "Unknown Publish Year",
                         LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
                         LibraryCode = "None",
                         LocationBookShelfNum = "1",
                         LocationBookShelfSide = "A",
-                        LocationBookShelfRow = -1,
-                        LocationBookShelfColumn = -1
+                        // LocationBookShelfRow = -1,
+                        // LocationBookShelfColumn = -1,
+                        OnlineResourceURL = delivery.almaOpenurl
                     };
 
                     books.Add(bookObj);
@@ -77,54 +83,59 @@ namespace BookFindersAPI.Controllers
                 var content = await response.Content.ReadAsStringAsync();
                 var bookObjLists = JsonConvert.DeserializeObject<OnCampusBookResponse>(content);
 
-                List<book> books = new List<book>();
+                List<Book> books = new List<Book>();
 
                 foreach (var doc in bookObjLists.docs)
                 {
                     BookFindersLibrary.Models.OnCampus.PnxSort sort = doc.pnx.sort;
-                    PnxDisplay display = doc.pnx.display;
+                    BookFindersLibrary.Models.OnCampus.PnxDisplay display = doc.pnx.display;
+                    BookFindersLibrary.Models.OnCampus.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.OnCampus.BestLocation bestlocation = doc.delivery.bestlocation;
                     string bookShelfInfo = await CheckBookShelfNum(bestlocation?.callNumber ?? "Unknown Location Code");
                     if (bookShelfInfo != "Unknown Location Code"){
                         int length = bookShelfInfo.Length;
                         string locationBookShelfNum = bookShelfInfo.Substring(0,length-1);
                         string locationBookShelfSide = bookShelfInfo.Substring(length-1);
-                        var bookObj = new book
+                        var bookObj = new Book
                         {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = "defaultBook.png",
-                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
-                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
-                        LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
-                        LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
-                        LocationBookShelfNum = locationBookShelfNum,
-                        LocationBookShelfSide = locationBookShelfSide,
-                        LocationBookShelfRow = 0,
-                        LocationBookShelfColumn = 0
+                            Id = "1",
+                            Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
+                            Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
+                            Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
+                            Isbns = addata.isbn,
+                            ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                            Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                            PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
+                            LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
+                            LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
+                            LocationBookShelfNum = locationBookShelfNum,
+                            LocationBookShelfSide = locationBookShelfSide,
+                            // LocationBookShelfRow = 0,
+                            // LocationBookShelfColumn = 0,
+                            OnlineResourceURL = ""
                         };
-                         books.Add(bookObj);
+                        books.Add(bookObj);
                     }
                     else{
-                        var bookObj = new book
+                        var bookObj = new Book
                         {
-                        Id = "1",
-                        Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
-                        Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
-                        Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
-                        ImageLink = "defaultBook.png",
-                        Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
-                        PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
-                        LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
-                        LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
-                        LocationBookShelfNum = "Unknown Location Code",
-                        LocationBookShelfSide = "Unknown Location Code",
-                        LocationBookShelfRow = -1,
-                        LocationBookShelfColumn = -1
+                            Id = "1",
+                            Name = sort.title?.Count > 0 ? sort.title[0] : "Unknown Title",
+                            Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
+                            Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
+                            Isbns = addata.isbn,
+                            ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
+                            Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
+                            PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
+                            LocationCode = bestlocation?.callNumber ?? "Unknown Location Code",
+                            LibraryCode = bestlocation?.libraryCode ?? "Unknown Library Code",
+                            LocationBookShelfNum = "Unknown Location Code",
+                            LocationBookShelfSide = "Unknown Location Code",
+                            // LocationBookShelfRow = -1,
+                            // LocationBookShelfColumn = -1
+                            OnlineResourceURL = ""
                         };
-                         books.Add(bookObj);
+                        books.Add(bookObj);
                     }
                         
                    
@@ -136,6 +147,11 @@ namespace BookFindersAPI.Controllers
             {
                 return BadRequest("Failed to fetch the books");
             }
+        }
+        private async Task<string> GetImageByISBN (string isbn)
+        {
+            string baseUrl = $"https://proxy-ca.hosted.exlibrisgroup.com/exl_rewrite/syndetics.com/index.php?client=primo&isbn={isbn}/lc.jpg";
+            return await CheckImageValidity(baseUrl);
         }
         private async Task<string> CheckImageValidity(string uri)
         {
@@ -175,135 +191,120 @@ namespace BookFindersAPI.Controllers
         {
             //use splite to detect blank
             string[] parts = locationCode.Split(' ');
-            var result = await SeparateLettersAndNumbers(parts[0]);
-                    // Access the result properties
-            var letters = result.Letters;
-            var numbers = result.Numbers;
-            if((letters == "TK"&&numbers>=5105.888)||(letters=="TR"&&numbers<681)){
+
+            Match match = Regex.Match(parts[0], @"^([A-Za-z]+)(\d+(?:\.\d+)?)(?:\.[A-Za-z0-9]+)?$");
+            if (!match.Success)
+                return "Unknown Location Code";
+
+            string bookPrefix = match.Groups[1].Value.ToUpper();
+            double bookNumber = double.Parse(match.Groups[2].Value); 
+
+            if (match.Groups[3].Success && double.TryParse(match.Groups[3].Value, out double decimalPart))
+            {
+                bookNumber += decimalPart / Math.Pow(10, match.Groups[3].Value.Length);
+            }
+
+            if(IsInBookShelfRange(bookPrefix,bookNumber,"U",20,"Z",2448)){
+                return "6B";
+            }
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"TS",23,"TX",991)){
                 return "7A";
             }
-            else if ((letters == "TT"&&numbers>=212)||(letters=="ZA")){
-                return "6A";
-            }
-            else if ((letters == "TR"&&numbers>=681)||(letters=="TT"&&numbers<=205)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"TR",263,"TR",1010)){
                 return "7B";
             }
-            else if ((letters=="Q"&&numbers>=175)||(letters=="R"&&numbers<=26)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"SB",453,"TR",263)){
                 return "8A";
             }
-            else if ((letters=="R"&&numbers>=726)||(letters=="TK"&&numbers<5105.888)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"QH",46,"SB",451)){
                 return "8B";
             }
-            else if ((letters=="PN"&&numbers>=6710)||(letters=="PS"&&numbers<3503)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"PS",8523,"QH",45)){
                 return "9A";
             }
-            else if ((letters=="PS"&&numbers>=3501)||(letters=="Q"&&numbers<175)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"PR",3325,"PS",8545)){
                 return "9B";
             }
-            else if ((letters=="PN"&&numbers>=1994)&&(letters=="PN"&&numbers<2091)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"PN",1998,"PN",2598)){
                 return "10A";
             }
-            else if ((letters=="PN"&&numbers>=2091)&&(letters=="PN"&&numbers<6700)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"PN",2599,"PR",3316)){
                 return "10B";
             }
-            else if ((letters=="NK"&&numbers>=4335)||(letters=="P"&&numbers<112)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"NK",5440,"PL",8013)){
                 return "11A";
             }
-            else if ((letters=="P"&&numbers>=116)||(letters=="PN"&&numbers<1994)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"PL",8014,"PN",1997)){
                 return "11B";
             }
-            else if ((letters=="ND"&&numbers>=461)||(letters=="NE"&&numbers<1300)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"ND",624,"NK",1397)){
                 return "12A";
             }
-            else if ((letters=="NE"&&numbers>=1300)||(letters=="NK"&&numbers<4335)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"NK",1403,"NK",5343)){
                 return "12B";
             }
-            else if ((letters=="NC"&&numbers>=760)||(letters=="NC"&&numbers<1002)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"NC",976,"NC",1765)){
                 return "13A";
             }
-            else if ((letters=="NC"&&numbers>=1002)||(letters=="ND"&&numbers<458)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"NC",1766,"ND",623)){
                 return "13B";
             }
-            else if ((letters=="N"&&numbers>=5300)&&(letters=="N"&&numbers<7405)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"N",5301,"N",7405)){
                 return "14A";
             }
-            else if ((letters=="N"&&numbers>=7405)||(letters=="NC"&&numbers<758)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"N",7407,"NC",975)){
                 return "14B";
             }
-            else if ((letters=="HQ"&&numbers>=1080)||(letters=="M"&&numbers<1630)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"HQ",1122,"M",1630)){
                 return "15A";
             }
-            else if ((letters=="M"&&numbers>=1630)||(letters=="N"&&numbers<5300)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"M",1631,"N",5300)){
                 return "15B";
             }
-            else if ((letters=="GT"&&numbers>=540)||(letters=="HE"&&numbers<7775)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"GT",540,"HE",7775)){
                 return "16A";
             }
-            else if ((letters=="HE"&&numbers>=7815)||(letters=="HQ"&&numbers<1075)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"HE",7815,"HQ",1075)){
                 return "16B";
             }
-            else if ((letters=="BL"&&numbers>=1200)||(letters=="E"&&numbers<99)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"BL",1202,"E",99)){
                 return "17A";
             }
-            else if ((letters=="E"&&numbers>=99)||(letters=="GT"&&numbers<528)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"E",100,"GT",525)){
                 return "17B";
             }
-            else if ((letters=="AC"&&numbers>=1)||(letters=="BL"&&numbers<1175)){
+            else if (IsInBookShelfRange(bookPrefix,bookNumber,"AC",1,"BL",1112)){
                 return "18B";
             }
             else{
-                return letters.ToString();
+                return "Unknown Location Code";
             }
         }
 
-        private async Task<(string Letters, double Numbers)> SeparateLettersAndNumbers(string input)
+        static bool IsInBookShelfRange(string bookPrefix, double bookNumber, string startPrefix, double startNumber, string endPrefix, double endNumber)
         {
-        
-        if (input.Length < 2)
-        {
-            return (string.Empty, 0);
-        }
+            string shelfStartPrefix = startPrefix;
+            double shelfStartNumber = startNumber;
+            string shelfEndPrefix = endPrefix;
+            double shelfEndNumber = endNumber;
 
-        if(input[0].ToString()=="Q"||input[0].ToString()=="R"||input[0].ToString()=="M"||(input[0].ToString()=="P"&&char.IsDigit(input[1]))||(input[0].ToString()=="N"&&char.IsDigit(input[1]))||(input[0].ToString()=="E"&&char.IsDigit(input[1]))){
-            string letters = input.Substring(0, 1);
+            double prefixStartComparison = String.Compare(bookPrefix, shelfStartPrefix);
+            double prefixEndComparison = String.Compare(bookPrefix, shelfEndPrefix);
 
-       
-            string numberPart = input.Substring(1);
-
-       
-             if (double.TryParse(numberPart, out double numbers))
+            if (prefixStartComparison > 0 && prefixEndComparison < 0)
             {
-                return (letters, numbers);
+                return true;
             }
-            else
+            else if (prefixStartComparison == 0)
             {
-            
-                return (letters, 0);
+                return bookNumber >= shelfStartNumber;
             }
-        }
-        else{
-            string letters = input.Substring(0, 2);
+            else if (prefixEndComparison == 0)
+            {
+                return bookNumber <= shelfEndNumber;
+            }
 
-            string numberPart = ExtractNumbers(input.Substring(2));
-       
-            if (double.TryParse(numberPart, out double numbers))
-            {
-                return (letters, numbers);
-            }
-            else
-            {
-            
-                return (letters, 0);
-            }
-        }
-        
-        }
-        static string ExtractNumbers(string input)
-        {
-        
-            string numbersOnly = new string(input.Where(c => char.IsDigit(c) || c == '.').ToArray());
-
-            return numbersOnly;
+            return false;
         }
     }
 }

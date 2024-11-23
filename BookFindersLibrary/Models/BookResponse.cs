@@ -16,6 +16,7 @@ namespace BookFindersLibrary.Models
     public class Delivery
     {
         public BestLocation? bestlocation{ get; set; }
+        public string? almaOpenurl {get; set;}
     }
     public class BestLocation
     {
@@ -26,7 +27,8 @@ namespace BookFindersLibrary.Models
     {
         public PnxSort sort { get; set; }
         public PnxSearch search { get; set; }
-        public PnxLinks links { get; set; }
+        public PnxAdData addata { get; set; }
+        public PnxDisplay display { get; set; }
     }
     public class PnxSort
     {
@@ -44,10 +46,19 @@ namespace BookFindersLibrary.Models
     public class PnxSearch
     {
         public List<string> description { get; set; }
+        public List<string> creationdate { get; set; }
     }
-    public class PnxLinks 
+    public class PnxDisplay
     {
-        public List<string> thumbnail { get; set; }
+        public List<string> publisher {get; set;}
     }
-
+    public class PnxAdData
+    {
+        public List<string> isbn {get; set;}
+        public PnxAdData()
+        {
+            isbn = new List<string>();
+        }
+    }
+    
 }

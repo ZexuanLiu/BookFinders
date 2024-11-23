@@ -1,30 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.XR.CoreUtils;
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.XR.ARFoundation;
 
 public class PositionReset : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject arSession;
+    public GameObject arSessionObject;
+    public GameObject xrOrigin;
 
     public Camera mainCamera;
+    public GameObject cameraOffset;
 
-    private Vector3 initialCameraPosition;
-    private Quaternion initialCameraRotation;
+    public GameObject xrOriginParent;
+
+    public ARSession arSession;
+
+    private Vector3 xrOriginPosition;
+    private Quaternion xrOriginRotation;
 
     // Start is called before the first frame update
     void Start()
     {
-        initialCameraPosition = mainCamera.transform.position;
-        initialCameraRotation = mainCamera.transform.rotation;
+        xrOriginPosition = xrOrigin.transform.position;
+        xrOriginRotation = xrOrigin.transform.rotation;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        arSession.transform.position = initialCameraPosition;
+        xrOriginParent.transform.position = xrOriginPosition;
 
-        mainCamera.transform.position = initialCameraPosition;
-        mainCamera.transform.rotation = initialCameraRotation;
+        arSessionObject.transform.position = xrOriginPosition;
+
+        mainCamera.transform.position = xrOriginPosition;
+        cameraOffset.transform.position = xrOriginPosition;
+
+        xrOrigin.transform.position = xrOriginPosition;
+        xrOrigin.transform.rotation = xrOriginRotation;
+
+        arSession.Reset();
     }
 }
