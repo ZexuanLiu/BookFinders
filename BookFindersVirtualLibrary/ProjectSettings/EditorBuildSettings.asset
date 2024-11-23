@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VirtualLibrary.unity
     guid: 99efe1a323773ed42a56bbbf4fe376bf
+  - enabled: 1
+    path: Assets/Scenes/Notifications.unity
+    guid: af2b836878390477e998f764700ad109
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: ee899ae5e21e51c43ab16cfbdb8d1732, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 728e6f894d0246340b55cf52cb14ff35, type: 2}
