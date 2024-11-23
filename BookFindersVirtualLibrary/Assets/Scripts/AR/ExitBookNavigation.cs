@@ -12,7 +12,7 @@ public class ExitBookNavigation : MonoBehaviour, IPointerClickHandler
     public TextMeshProUGUI selfButtonText;
 
     public GameObject btnLibraryHotspots;
-
+     
     public GameObject pathingSource;
     private IFindingPathToAR iFindingPathToAR;
 
@@ -63,7 +63,7 @@ public class ExitBookNavigation : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("BrowseBooks");
         }
     }
 }

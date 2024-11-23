@@ -25,7 +25,6 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
     private Vector3 destination;
     private Vector3 lastPosition;
 
-    public Transform visualObjectsParent;
     public List<GameObject> clickMarks;
     public List<GameObject> flashingSurfacesPerPOI;
 
@@ -153,7 +152,6 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         destination = clickMarker.transform.position;
 
         clickMarker.SetActive(true);
-        clickMarker.transform.SetParent(visualObjectsParent);
         flashingSurfaceMeshRenderer.enabled = true;
     }
 

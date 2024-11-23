@@ -62,138 +62,126 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Browse and Search\BookSearch.cs" />
     <Compile Include="Assets\Scripts\Models\Comment.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\OnClickOpacity.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\UserCamera.cs" />
     <Compile Include="Assets\Scripts\Browse and Search\BookDetails.cs" />
+    <Compile Include="Assets\Scripts\AR\BookDetailsAR.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\BookDetailsControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\AR\InfoAboutAR.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Models\PushNotification.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\ButtonObserver.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\SearchResult.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\AR\PositionReset.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-    <Compile Include="Assets\Scripts\Browse and Search\HomeButton.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\XButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\FloatingTextLogic.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\SyncSearch.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\LocateClicked.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\HomeClicked.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\SearchClick.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\ControlUp.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\AR\ToggleARComponents.cs" />
     <Compile Include="Assets\Scripts\Browse and Search\BookItemController.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\SearchClick.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\JoystickMovement.cs" />
     <Compile Include="Assets\Scripts\AR\ExitBookNavigation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\YButton.cs" />
     <Compile Include="Assets\Scripts\Models\BookResponse.cs" />
     <Compile Include="Assets\Scripts\Models\UserTrackingInstance.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\AR\FlashingText.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\ControlUp.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\UserPathing.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\FloatingTextLogic.cs" />
     <Compile Include="Assets\Scripts\AR\CyclePaths.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\SearchResult.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\FlashingBookShelf.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\HomeClicked.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\UserMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\Scripts\AR\InteractableObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\Browse and Search\NavigationMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\DescriptionInteractee.cs" />
     <Compile Include="Assets\Scripts\AR\Pathing.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\ScrollControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\BackBooksDetailsClicked.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\BookDetailsControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\XButton.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\YButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\ControlLeftRight.cs" />
     <Compile Include="Assets\Scripts\Models\UserLocations.cs" />
+    <Compile Include="Assets\Scripts\AR\BookDetailsOk.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\Close.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Models\UserTrackingSession.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\ButtonObserver.cs" />
     <Compile Include="Assets\Scripts\Splash Screen\SplashScreen.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\UserMovement.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\CameraMovement.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\UserPathing.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\JoystickMovement.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\JoystickLook.cs" />
     <Compile Include="Assets\Scripts\Browse and Search\BookManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\FlashableText.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\ControlDown.cs" />
     <Compile Include="Assets\Scripts\AR\FlashingSurface.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\BookSearchsTracker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Models\Book.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\AR\GetInteractableObject.cs" />
     <Compile Include="Assets\Scripts\AR\InfoOk.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\SyncSearch.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\UserCamera.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\DescriptionInteractee.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\BookSearchsTracker.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\BackBooksDetailsClicked.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\InfoClicked.cs" />
     <Compile Include="Assets\Scripts\Models\OnCampusBookResponse.cs" />
     <Compile Include="Assets\Scripts\Models\ResponseDTO.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\Close.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\ScrollControl.cs" />
     <Compile Include="Assets\Scripts\AR\HideMeasurements.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\LocateClicked.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\JoystickLook.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Menu\StartMenuLogic.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\FlashableText.cs" />
     <Compile Include="Assets\Scripts\AR\FloatingLabel.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenDialogs\HoverableButton.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\AButton.cs" />
     <Compile Include="Assets\Scripts\AR\InfoCyclePics.cs" />
     <Compile Include="Assets\Scripts\AR\BookSearchTracking.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Space\OnscreenControls\OnClickOpacity.cs" />
-    <Compile Include="Assets\Scripts\Virtual Library Menu\StartSideButton.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\HoverableButton.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\FlashingBookShelf.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\AButton.cs" />
     <Compile Include="Assets\Scripts\Models\Coordinate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Firebase\Plugins\iOS\Firebase.Messaging.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\Firebase\Plugins\Firebase.Messaging.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
-    <None Include="Assets\Firebase\Plugins\Firebase.App.dll" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
-    <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppApp-12_3_0.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppMessaging.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Firebase\Plugins\Firebase.TaskExtension.dll" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-messaging-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-config-unity\maven-metadata.xml" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-analytics-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\Firebase\Plugins\Firebase.Platform.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-database-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\Firebase\Plugins\Google.MiniJson.dll" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Resources\Newtonsoft.Json.dll" />
-    <None Include="Assets\Firebase\Plugins\iOS\Firebase.App.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
   </ItemGroup>
@@ -518,32 +506,12 @@
       <HintPath>D:\Programs\Unity\2022.3.13f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Firebase.Messaging">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Messaging.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ReportGeneratorMerged">
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@1.2.4\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.MiniJson">
-      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -1246,12 +1214,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
@@ -1336,10 +1304,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="FirebaseMessagingActivityGenerator.csproj">
-      <Project>{0BB4A2DE-CE4D-F082-F83A-4AA0C9BCBD54}</Project>
-      <Name>FirebaseMessagingActivityGenerator</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
