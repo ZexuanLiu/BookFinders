@@ -84,7 +84,8 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             "Study Area 3",
             "Material ConneXion",
             "Board Game Rental",
-            "Printer"
+            "Printer",
+            "Oversized Books"
         };
         locations = new List<Vector3>()
         {
@@ -94,7 +95,8 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             new Vector3(-22f, clickMarker.transform.position.y, 33f), // Study Area 3
             new Vector3(-35f, clickMarker.transform.position.y, 12.1f), // Material ConneXion
             new Vector3(-22f, clickMarker.transform.position.y, -28f),  // Board Game Rental
-            new Vector3(42.5f, clickMarker.transform.position.y, -0.5f) // Printer
+            new Vector3(42.5f, clickMarker.transform.position.y, -0.5f), // Printer
+            new Vector3(28.5f, clickMarker.transform.position.y, 55f) // Oversized Books
         };
         currentLocationIndex = -1;
         currentIndexSwitchedTo = 0;
@@ -133,6 +135,15 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
                 destination = locations[currentLocationIndex];
                 string message = "Set Navigation To " + currentDestinationText;
                 FlashText(message);
+            }
+            else
+            {
+                clickMarker.SetActive(false);
+                myLineRenderer.positionCount = 0;
+                destination = Vector3.zero;
+                arrow.SetActive(false);
+                currentDestinationText = string.Empty;
+                navigationStarted = false;
             }
         }
 
@@ -261,6 +272,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             arrow.SetActive(false);
             currentDestinationText = string.Empty;
             navigationStarted = false;
+            currentIndexSwitchedTo = 0;
         }
         if (currentFlashingBookshelf != null)
         {

@@ -20,7 +20,9 @@ public class Notifications : MonoBehaviour
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (receiver, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
-        
+
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+
         ShowNotifications();
     }
 
@@ -28,7 +30,7 @@ public class Notifications : MonoBehaviour
     {
         try
         {
-            var response = await client.GetAsync($"http://localhost:5156/api/PushNotification/getPushNotifications");
+            var response = await client.GetAsync($"http://137.184.5.147:4004/api/PushNotification/getPushNotifications");
 
             if (response.IsSuccessStatusCode)
             {
@@ -48,7 +50,7 @@ public class Notifications : MonoBehaviour
                     
                         notifications.Add(pushNotification);
                     }
-
+                   
                     foreach (var notification in notifications)
                     {
                         GameObject notificationArea = Instantiate(notificationPrefab, content);
@@ -56,9 +58,6 @@ public class Notifications : MonoBehaviour
 
                         textArr[0].text = notification.Title;
                         textArr[1].text = notification.Description;
-                        
-                        NotificationController controller = notificationArea.GetComponent<NotificationController>();
-                        controller.InitializeNotification(notification);
                     }
                 }
             }

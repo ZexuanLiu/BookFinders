@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
-  <string name="gcm_defaultSenderId" translatable="false">1035912383944</string>
-  <string name="google_storage_bucket" translatable="false">book-finders-notificatons.appspot.com</string>
-  <string name="project_id" translatable="false">book-finders-notificatons</string>
-  <string name="google_api_key" translatable="false">AIzaSyDedcGcJCknIJP2j6nyROH20pjHyG0Dh70</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDedcGcJCknIJP2j6nyROH20pjHyG0Dh70</string>
-  <string name="google_app_id" translatable="false">1:1035912383944:android:f3ab7b88183cdd951fc4fd</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">290548267862</string>
+  <string name="google_storage_bucket" translatable="false">bookfinders-a2ed6.appspot.com</string>
+  <string name="project_id" translatable="false">bookfinders-a2ed6</string>
+  <string name="google_api_key" translatable="false">AIzaSyCJlZ3Igo0oNLy1xjjRfkAzZ_2nGTt9R5c</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCJlZ3Igo0oNLy1xjjRfkAzZ_2nGTt9R5c</string>
+  <string name="google_app_id" translatable="false">1:290548267862:android:22d19a9a11d5efbc7634f7</string>
+  <string name="default_web_client_id" translatable="false">290548267862-9ucai0q0h2ni89tlinetq7ugeu87vpud.apps.googleusercontent.com</string>
 </resources>

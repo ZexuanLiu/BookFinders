@@ -8,7 +8,7 @@ namespace BookFindersWebApp.Models
     public class PushNotificationRepository
     {
         private static readonly string URL = "https://localhost:7042";
-
+        
 
         static PushNotificationRepository()
         {
@@ -27,8 +27,12 @@ namespace BookFindersWebApp.Models
         {
             string subUrl = "/api/PushNotification/getPushNotifications";
 
-            using (HttpClient client = new HttpClient())
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            using (HttpClient client = new HttpClient(handler))
             {
+                client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+
                 string requestURL = URL + subUrl;
                 var response = await client.GetAsync(requestURL);
                 var responseString = await response.Content.ReadAsStringAsync();
@@ -55,8 +59,12 @@ namespace BookFindersWebApp.Models
         {
             string subUrl = "/api/PushNotification/sendPushNotification";
 
-            using (HttpClient client = new HttpClient())
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            using (HttpClient client = new HttpClient(handler))
             {
+                client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+
                 string requestURL = URL + subUrl;
                 var response = await client.PostAsJsonAsync(requestURL, pushNotification);
 

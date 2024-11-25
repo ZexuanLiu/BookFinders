@@ -2211,8 +2211,8 @@ RectTransform:
   - {fileID: 774789145}
   - {fileID: 1614329577}
   - {fileID: 1279406687}
-  - {fileID: 416748723}
   - {fileID: 1332226234}
+  - {fileID: 416748723}
   m_Father: {fileID: 847867954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2280,6 +2280,7 @@ MonoBehaviour:
   gameObjectBtnLaunchVL: {fileID: 241003704}
   gameObjectBtnLaunchAR: {fileID: 1455434346}
   gameObjectBtnBrowser: {fileID: 1332226233}
+  errorText: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

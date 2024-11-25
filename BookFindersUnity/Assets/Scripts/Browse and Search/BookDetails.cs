@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using UnityEngine.Networking;
+using UnityEngine.Android;
 
 public class BookDetails : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class BookDetails : MonoBehaviour
     public GameObject gameObjectBtnLaunchVL;
     public GameObject gameObjectBtnLaunchAR;
     public GameObject gameObjectBtnBrowser;
+
+    public TextMeshProUGUI errorText;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +116,14 @@ public class BookDetails : MonoBehaviour
     void OnLaunchARClicked()
     {
         BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
+
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+            errorText.text = "Please enable camera permissions to use Augmented Reality";
+            Permission.RequestUserPermission(Permission.Camera);
+            return;
+        }
+
         SceneManager.LoadScene("AR");
     }
 

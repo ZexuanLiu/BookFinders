@@ -205,13 +205,43 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
                 }
             case 1:
                 {
-                    iFlashable.Flash("Pathfinding destination set to Board Game Rental shelf");
+                    iFlashable.Flash("Pathfinding destination set to Study Area 1");
                     arrowAboveUser.SetActive(true);
                     break;
                 }
             case 2:
                 {
+                    iFlashable.Flash("Pathfinding destination set to Study Area 2");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 3:
+                {
+                    iFlashable.Flash("Pathfinding destination set to Study Area 3");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 4:
+                {
                     iFlashable.Flash("Pathfinding destination set to door to Material Connections");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 5:
+                {
+                    iFlashable.Flash("Pathfinding destination set Board Game Rental shelf");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 6:
+                {
+                    iFlashable.Flash("Pathfinding destination set to the Printer");
+                    arrowAboveUser.SetActive(true);
+                    break;
+                }
+            case 7:
+                {
+                    iFlashable.Flash("Pathfinding destination set to Oversized Books shelf");
                     arrowAboveUser.SetActive(true);
                     break;
                 }
@@ -241,12 +271,37 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         {
             case 1:
                 {
-                    iFlashable.Flash("You have arrived at Board Game Rental shelf");
+                    iFlashable.Flash("You have arrived at Study Area 1");
                     break;
                 }
             case 2:
                 {
+                    iFlashable.Flash("You have arrived at Study Area 2");
+                    break;
+                }
+            case 3:
+                {
+                    iFlashable.Flash("You have arrived at Study Area 3");
+                    break;
+                }
+            case 4:
+                {
                     iFlashable.Flash("You have arrived at Material Connections room");
+                    break;
+                }
+            case 5:
+                {
+                    iFlashable.Flash("You have arrived at Board Game Rental shelf");
+                    break;
+                }
+            case 6:
+                {
+                    iFlashable.Flash("You have arrived at the Printer");
+                    break;
+                }
+            case 7:
+                {
+                    iFlashable.Flash("You have arrived at the Oversized Books shelf");
                     break;
                 }
         }
