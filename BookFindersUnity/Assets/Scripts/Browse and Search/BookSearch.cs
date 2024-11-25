@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using Unity.VisualScripting.Antlr3.Runtime;
 using System.Net.Http.Headers;
+using System.Web;
 
 public class BookSearch : MonoBehaviour, IEndDragHandler
 {
@@ -49,7 +50,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     // Update is called once per frame
     void Update()
     {
-        BookSearchText = bookSearchTextArea.text;
+        BookSearchText = HttpUtility.UrlEncode(bookSearchTextArea.text);
     }
     void OnSearchIconClicked()
     {
@@ -163,16 +164,10 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         HttpResponseMessage response;
         if (isPhysicalBook)
         {
-            //response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
-            //response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/OnCampus/{BookSearchText}/0");
-            //response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/OnCampus/{BookSearchText}/0");
             response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/OnCampus/{BookSearchText}/{page}");
         }
         else
         {
-            //response = await client.GetAsync($"http://localhost:5156/api/BookSearch/{BookSearchText}/{page}");
-            //response = await client.GetAsync($"https://frp-ask.top:11049/api/BookSearch/{BookSearchText}/0");
-            //response = await client.GetAsync($"http://api.krutikov.openstack.fast.sheridanc.on.ca/api/BookSearch/{BookSearchText}/0");
             response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/{BookSearchText}/{page}");
         }
 

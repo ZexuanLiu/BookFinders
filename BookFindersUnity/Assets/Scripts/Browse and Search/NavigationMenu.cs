@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class NavigationMenu : MonoBehaviour
 {
     public GameObject panel;
+    public GameObject closeBg;
+
     void Start()
     {
         panel.SetActive(false);
+        closeBg.SetActive(false);
     }
     public void OnNavigationButtonClick(string sceneName)
     {
@@ -18,5 +21,6 @@ public class NavigationMenu : MonoBehaviour
     public void TogglePanelVisibility()
     {
         panel.SetActive(!panel.activeSelf);
+        closeBg.SetActive(!closeBg.activeSelf);
     }
 }
