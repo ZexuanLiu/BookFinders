@@ -68,10 +68,4 @@ public class Notifications : MonoBehaviour
             Debug.Log($"{e}");
         }
     }
-    
-    /* Update is called once per frame
-    void Update()
-    {
-        
-    } */
 }

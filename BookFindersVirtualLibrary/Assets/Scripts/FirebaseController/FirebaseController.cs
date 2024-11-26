@@ -21,10 +21,4 @@ public class FirebaseController : MonoBehaviour
             }
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
