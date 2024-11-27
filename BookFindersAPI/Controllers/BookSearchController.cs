@@ -7,6 +7,7 @@ using BookFindersLibrary.Models.OnCampus;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace BookFindersAPI.Controllers
 {
@@ -26,8 +27,9 @@ namespace BookFindersAPI.Controllers
         public async Task<IActionResult> SearchBooks(string searchText, int offset)
         {   
             string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
-            
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+searchText+"&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey="+apiKey);
+
+            string urlEncodedSearchText = HttpUtility.UrlEncode(searchText);
+            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Everything&scope=MyInst_and_CI&q=q%3Dany%2Ccontains%2C"+ urlEncodedSearchText + "&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=true&disableSplitFacets=true&apikey="+apiKey);
             List<Book> books = new List<Book>();
 
             if (response.IsSuccessStatusCode)
@@ -76,7 +78,9 @@ namespace BookFindersAPI.Controllers
         public async Task<IActionResult> SearchLibraryBooks(string searchText, int offset)
         {   
             string? apiKey = Environment.GetEnvironmentVariable("bookfindersLibraryAPIKey");
-            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Library_Physical&scope=MyInstitution_Physical&q=any%2Ccontains%2C"+searchText+"&multiFacets=multiFacets%3Dfacet_tlevel%2Cinclude%2Cavailable_p&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=false&disableSplitFacets=true&apikey="+apiKey);
+
+            string urlEncodedSearchText = HttpUtility.UrlEncode(searchText);
+            var response = await client.GetAsync("https://api-ca.hosted.exlibrisgroup.com/primo/v1/search?vid=01OCLS_SHER%3ASHER&tab=Library_Physical&scope=MyInstitution_Physical&q=any%2Ccontains%2C"+urlEncodedSearchText+ "&multiFacets=multiFacets%3Dfacet_tlevel%2Cinclude%2Cavailable_p&lang=eng&offset="+offset+"&limit=10&sort=rank&pcAvailability=true&getMore=0&conVoc=true&inst=01OCLS_SHER&skipDelivery=false&disableSplitFacets=true&apikey="+apiKey);
             
             if (response.IsSuccessStatusCode)
             {
