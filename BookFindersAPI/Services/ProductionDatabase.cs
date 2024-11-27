@@ -16,6 +16,8 @@ namespace BookFindersAPI.Services
         private DbSet<UserTrackingInstance> _userTrackingInstances { get; set; }
         private DbSet<UserTrackingSession> _userTrackingSessions { get; set; }
 
+        private DbSet<User> _users { get; set; }
+
         #region User Tracking
         public async Task<UserTrackingSession> SendUserTrackingSession(UserTrackingSession userTrackingSession)
         {
@@ -165,17 +167,53 @@ namespace BookFindersAPI.Services
         }
         #endregion
 
+        #region Login
+
+        public async Task<User> SignUpUser(User newUser)
+        {
+            _users.Add(newUser);
+            await base.SaveChangesAsync();
+            return newUser;
+        }
+
+        public async Task<User?> GetUserFromUserLogin(UserLogin userLogin)
+        {
+            User? userLoggingIn = null;
+            try
+            {
+                userLoggingIn = await _users.Include(x => x.UserLogin)
+                    .Where(user => user.UserLogin.Username.Equals(userLogin.Username) && user.UserLogin.Password.Equals(userLogin.Password))
+                    .FirstAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                userLoggingIn = null;
+            }
+
+            return userLoggingIn;
+        }
+
+        public async Task<IEnumerable<string>> GetUsernames()
+        {
+            List<string> usernames = new List<string>();
+            foreach (var user in _users)
+            {
+                usernames.Add(user.UserLogin.Username);
+            }
+
+            return usernames;
+        }
+
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string? host = Environment.GetEnvironmentVariable("bookfindersDBHost");
             string? user = Environment.GetEnvironmentVariable("bookfindersDBUser");
             string? pass = Environment.GetEnvironmentVariable("bookfindersDBPassword");
-
-            string database = "bookfinders";
-
-            string connectionString = $"server={host};database={database};User={user};Password={pass}";
-            optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("5.7.29"));
+            
+            optionsBuilder.UseNpgsql($"Host={host};Database=BookFindersDB;Username={user};Password={pass};SSL Mode=Require;Trust Server Certificate=true");
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
     }
 }

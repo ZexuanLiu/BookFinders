@@ -1,5 +1,8 @@
 using BookFindersAPI.Interfaces;
+using BookFindersAPI.Middleware;
 using BookFindersAPI.Services;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,9 +39,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AcceptAllPolicy");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseMiddleware<AuthenticationMiddleware>();
 
 app.MapControllers();
 

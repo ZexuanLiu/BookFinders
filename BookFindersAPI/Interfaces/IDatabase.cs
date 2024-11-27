@@ -28,5 +28,13 @@ namespace BookFindersAPI.Interfaces
         public Task<bool> removeComment(int commentId);
         public Task<bool> EditComment(int commentId, string newComment);
         #endregion
+
+        #region Login
+        public Task<User> SignUpUser(User newUser);
+
+        public Task<User?> GetUserFromUserLogin(UserLogin userLogin);
+
+        public Task<IEnumerable<string>> GetUsernames();
+        #endregion
     }
 }
