@@ -8,7 +8,6 @@ namespace BookFindersWebApp.Models
     public class PushNotificationRepository
     {
         private static readonly string URL = "https://localhost:7042";
-        
 
         static PushNotificationRepository()
         {

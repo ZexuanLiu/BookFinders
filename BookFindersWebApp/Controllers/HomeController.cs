@@ -38,14 +38,19 @@ namespace BookFindersWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (form.Username.Equals("Librarian") && form.Password.Equals("password"))
+                UserLogin userLogin = new UserLogin()
                 {
+                    Username = form.Username,
+                    Password = form.Password
+                };
+                User loggedInUser = LoginRepository.Login(userLogin).Result;
+
+                if (loggedInUser != null)
+                {
+                    ViewBag.UserFullname = loggedInUser.Fullname;
+                    ViewBag.UserUsername = loggedInUser.UserLogin.Username;
+                    ViewBag.UserRole = loggedInUser.Role;
                     return View("Home");
-                }
-                else if(form.Username.Equals("Faculty") && form.Password.Equals("password"))
-                {
-                    ModelState.AddModelError("Unauthorized Login", "This tool is for Librarians only.");
-                    return View("Index");
                 }
                 else
                 {
