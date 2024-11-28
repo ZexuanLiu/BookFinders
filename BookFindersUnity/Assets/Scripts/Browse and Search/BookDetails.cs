@@ -11,6 +11,7 @@ using UnityEngine.Android;
 
 public class BookDetails : MonoBehaviour
 {
+    public TextMeshProUGUI titleText;
     public TextMeshProUGUI authorText;
     public TextMeshProUGUI publisherText;
     public TextMeshProUGUI publishYearText;
@@ -18,18 +19,24 @@ public class BookDetails : MonoBehaviour
     public TextMeshProUGUI bookDescText;
     public TextMeshProUGUI campusText;
     public RawImage rawImage;
+    
     public GameObject gameObjectBtnLaunchVL;
     public GameObject gameObjectBtnLaunchAR;
+
     public GameObject gameObjectBtnBrowser;
+    public GameObject gameObjectLblBrowser;
 
     public TextMeshProUGUI errorText;
 
     // Start is called before the first frame update
     void Start()
     {
-        Book currentBook = BookManager.Instance.currentBook;
+        Book currentBook = BookManager.currentBook;
+        errorText.text = "";
+
         if (currentBook != null)
         {
+            titleText.text = currentBook.Name;
             authorText.text = currentBook.Author;
             locationText.text = "Location:"+currentBook.LocationCode;
             publisherText.text = "Publisher:" + currentBook.Publisher;
@@ -37,11 +44,11 @@ public class BookDetails : MonoBehaviour
             bookDescText.text = currentBook.Description;
             if (currentBook.LibraryCode == "TRAF")
             {
-                campusText.text = "Campus: Trafalgar";
+                campusText.text = "Campus: TRAF";
             }
             else if (currentBook.LibraryCode == "DAV")
             {
-                campusText.text = "Campus: Davis";
+                campusText.text = "Campus: DAV";
             }
             else if (currentBook.LibraryCode == "HMC")
             {
@@ -59,7 +66,14 @@ public class BookDetails : MonoBehaviour
         }
         else
         {
+            titleText.text = "No title data available.";
             authorText.text = "No author data available.";
+            locationText.text = "Location: (Unknown)";
+            publisherText.text = "Publisher: (Unknown)";
+            publishYearText.text = "Year: (Unknown)";
+            bookDescText.text = "No Description";
+            campusText.text = "Campus: (Unknown)";
+            
         }
 
         Button btnLaunchVL = gameObjectBtnLaunchVL.GetComponent<Button>();
@@ -96,10 +110,12 @@ public class BookDetails : MonoBehaviour
             if (string.IsNullOrWhiteSpace(currentBook.OnlineResourceURL))
             {
                 btnOpenOnlineResource.GetComponent<Image>().enabled = false;
+                gameObjectLblBrowser.SetActive(false);
             }
             else
             {
                 btnOpenOnlineResource.GetComponent<Image>().enabled = true;
+                gameObjectLblBrowser.SetActive(true);
                 btnOpenOnlineResource.onClick.AddListener(OpenOnlineResource);
             }
         }
@@ -108,23 +124,24 @@ public class BookDetails : MonoBehaviour
 
     void OnLaunchVLClicked()
     {
-        BookSearchsTracker.SearchResultBooks = BookManager.Instance.SearchResultBooks;
-        BookSearchsTracker.SelectedBook = BookManager.Instance.currentBook;
+        BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks;
+        BookSearchsTracker.SelectedBook = BookManager.currentBook;
         SceneManager.LoadScene("VirtualLibrary");
     }
 
     void OnLaunchARClicked()
     {
-        BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
+        BookSearchTracking.SelectedBook = BookManager.currentBook;
 
         if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
         {
             errorText.text = "Please enable camera permissions to use Augmented Reality";
             Permission.RequestUserPermission(Permission.Camera);
-            return;
         }
-
-        SceneManager.LoadScene("AR");
+        else
+        {
+            SceneManager.LoadScene("AR");
+        }
     }
 
     IEnumerator DownloadAndSetImage(string url, RawImage imageComponent)
@@ -143,13 +160,16 @@ public class BookDetails : MonoBehaviour
                 imageComponent.texture = texture;
                 //set the weight and the height of the image
                 RectTransform rectTransform = imageComponent.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(100, 200);
+
+                float imageScaleFactor = 300.0f / texture.height;
+                rectTransform.sizeDelta = new Vector2((float)texture.width * imageScaleFactor, (float)texture.height * imageScaleFactor);
+                var test = rectTransform.sizeDelta;
             }
         }
     }
     public void OpenOnlineResource()
     {
-        Book currentBook = BookManager.Instance.currentBook;
+        Book currentBook = BookManager.currentBook;
         if (currentBook != null)
         {
             Application.OpenURL(currentBook.OnlineResourceURL);

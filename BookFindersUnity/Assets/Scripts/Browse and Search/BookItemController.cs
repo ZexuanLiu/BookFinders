@@ -16,7 +16,7 @@ public class BookItemController : MonoBehaviour
     // Function to load the scene by name
     public void ChangeScene(string sceneName)
     {
-        BookManager.Instance.SetBook(currentBook);
+        BookManager.currentBook = currentBook;
         SceneManager.LoadScene(sceneName);
     }
 }
