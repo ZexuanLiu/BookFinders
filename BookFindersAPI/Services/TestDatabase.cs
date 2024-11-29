@@ -16,6 +16,7 @@ namespace BookFindersAPI.Services
         private DbSet<UserTrackingSession> _userTrackingSessions { get; set; }
 
         private DbSet<User> _users { get; set; }
+        private DbSet<BookSearchHistory> _bookSearchHistory { get; set; }
 
         #region User Tracking
         public async Task<UserTrackingSession> SendUserTrackingSession(UserTrackingSession userTrackingSession)
@@ -239,7 +240,20 @@ namespace BookFindersAPI.Services
 
             return usernames;
         }
+        #endregion
+        
+        #region bookSearchHistory
+        public async Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory)
+        {
+            _bookSearchHistory.Add(bookSearchHistory);
+            await base.SaveChangesAsync();
 
+            return bookSearchHistory;
+        }
+        public async Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory()
+        {
+            return _bookSearchHistory;
+        }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

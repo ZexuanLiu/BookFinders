@@ -36,5 +36,10 @@ namespace BookFindersAPI.Interfaces
 
         public Task<IEnumerable<string>> GetUsernames();
         #endregion
+
+        #region bookSearchHistory
+        public Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory);
+        public Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory();     
+        #endregion
     }
 }
