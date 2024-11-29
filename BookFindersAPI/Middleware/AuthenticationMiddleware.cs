@@ -7,7 +7,7 @@ namespace BookFindersAPI.Middleware
     public class AuthenticationMiddleware
     {
         private readonly RequestDelegate _nextRequest;
-        private readonly string _staticBearerToken = Environment.GetEnvironmentVariable("bookfindersAPIBearerToken"); 
+        private readonly string _staticBearerToken = "123";//Environment.GetEnvironmentVariable("bookfindersAPIBearerToken"); 
 
         public AuthenticationMiddleware(RequestDelegate nextRequest)
         {

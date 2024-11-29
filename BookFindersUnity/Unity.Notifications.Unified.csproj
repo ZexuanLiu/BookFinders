@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4A950FDA-A691-8835-AA31-6D0AF31FAD96}</ProjectGuid>
+    <ProjectGuid>{D0FAA20F-A9AD-8F4C-7A7D-C8DFFDF4554A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.XR.InteractionSubsystems</AssemblyName>
+    <AssemblyName>Unity.Notifications.Unified</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -27,7 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -60,17 +60,13 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/Gestures/ActivateGestureEvent.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/XRGestureSubsystem.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/GestureId.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/AssemblyInfo.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/GestureState.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/XRGestureSubsystemDescriptor.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/NativeCopyUtility.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/SubsystemLifecycleManager.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Unified/Notification.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Unified/NotificationScheduling.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Unified/NotificationsPermissionRequest.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Unified/NotificationCenter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/Unity.XR.InteractionSubsystems.asmdef" />
+    <None Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Unified/Unity.Notifications.Unified.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1007,6 +1003,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Notifications.Android.csproj">
+      <Project>{6CF27C66-2C39-09ED-D884-25AF912A6239}</Project>
+      <Name>Unity.Notifications.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Notifications.iOS.csproj">
+      <Project>{5557801B-45F0-DBB0-EA9F-C407ED60702F}</Project>
+      <Name>Unity.Notifications.iOS</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{6ADC7816-9C4E-2E3D-DE64-9C6F392FC92F}</Project>
       <Name>UnityEditor.UI</Name>

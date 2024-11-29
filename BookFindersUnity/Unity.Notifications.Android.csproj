@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4A950FDA-A691-8835-AA31-6D0AF31FAD96}</ProjectGuid>
+    <ProjectGuid>{6CF27C66-2C39-09ED-D884-25AF912A6239}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.XR.InteractionSubsystems</AssemblyName>
+    <AssemblyName>Unity.Notifications.Android</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -27,7 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -60,17 +60,18 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/Gestures/ActivateGestureEvent.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/XRGestureSubsystem.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/GestureId.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/AssemblyInfo.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/GestureState.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/GestureSubsystem/XRGestureSubsystemDescriptor.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/NativeCopyUtility.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/SubsystemLifecycleManager.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotificationChannel.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotificationIntentData.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotificationCallback.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/NotificationPermission.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotification.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidReceivedNotificationMainThreadDispatcher.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AssemblyInfo.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotificationCenter.cs" />
+    <Compile Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/AndroidNotificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library/PackageCache/com.unity.xr.interactionsubsystems@2.0.0/Runtime/Unity.XR.InteractionSubsystems.asmdef" />
+    <None Include="Library/PackageCache/com.unity.mobile.notifications@2.3.2/Runtime/Android/Unity.Notifications.Android.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

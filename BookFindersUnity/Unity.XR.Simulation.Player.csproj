@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5C0B1197-2DE3-BBE2-0D0C-E5C2D483D229}</ProjectGuid>
+    <ProjectGuid>{E0AC9132-99C9-D2A2-B90C-FC3D7FC94156}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.XR.Simulation</AssemblyName>
@@ -917,31 +917,31 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.XR.ARSubsystems.Player.csproj">
-      <Project>{1BCAAFBA-EA7A-97A2-953E-417DC9504827}</Project>
+      <Project>{90EA08F7-6D24-22C2-FEC1-F1E72E0EC017}</Project>
       <Name>Unity.XR.ARSubsystems.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.XR.Management.Player.csproj">
-      <Project>{597A7CDF-DE08-013F-04B6-BC580FF95804}</Project>
+      <Project>{3F3C8DA9-7649-5B0C-8836-E0E17B19AC2C}</Project>
       <Name>Unity.XR.Management.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.XR.CoreUtils.Player.csproj">
-      <Project>{31BC8A8F-237D-920D-CFBD-20BEFFB54F20}</Project>
+      <Project>{2F2A7B7F-4C43-D258-D835-9D3ABC795A5C}</Project>
       <Name>Unity.XR.CoreUtils.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
-      <Project>{385A4692-52B4-F37D-81AE-560A0C84CD6B}</Project>
+      <Project>{AEF27A83-00E3-510B-D6E3-ECC905840005}</Project>
       <Name>Unity.InputSystem.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.Player.csproj">
-      <Project>{19C92D4C-BEB8-EBF0-A0B7-5F46F4F453BF}</Project>
+      <Project>{EE1BEF8F-A8C7-9066-E25C-389E64D20EAC}</Project>
       <Name>Unity.Mathematics.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.XR.ARFoundation.InternalUtils.Player.csproj">
-      <Project>{D45055B4-1034-39FF-08F4-CEF82198E9B6}</Project>
+      <Project>{315FB6B1-6E33-4F0B-4478-D349747EF03F}</Project>
       <Name>Unity.XR.ARFoundation.InternalUtils.Player</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.Player.csproj">
-      <Project>{66CABA4F-03D3-49F6-911A-2BE54B09D3CD}</Project>
+      <Project>{35A00AE2-2EB3-3BBA-FB2B-C44413287232}</Project>
       <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
   </ItemGroup>

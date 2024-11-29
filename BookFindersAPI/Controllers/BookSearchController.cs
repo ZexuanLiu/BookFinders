@@ -40,7 +40,7 @@ namespace BookFindersAPI.Controllers
                 foreach (var doc in bookObjLists.docs)
                 {
                     BookFindersLibrary.Models.PnxSort sort = doc.pnx.sort;
-                    PnxSearch search = doc.pnx.search;
+                    BookFindersLibrary.Models.PnxSearch search = doc.pnx.search;
                     BookFindersLibrary.Models.BestLocation bestlocation = doc.delivery.bestlocation;
                     BookFindersLibrary.Models.PnxAdData addata = doc.pnx.addata;
                     BookFindersLibrary.Models.Delivery delivery = doc.delivery;
@@ -52,6 +52,7 @@ namespace BookFindersAPI.Controllers
                         Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                         Description = search.description?.Count > 0 ? search.description[0] : "Unknown Description",
                         Isbns = addata.isbn,
+                        Subject = search.subject?.Count > 0 ? search.subject[0] : "Unknown Subject",
                         ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                         Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                         PublishYear = search.creationdate?.Count > 0 ? search.creationdate[0] : "Unknown Publish Year",
@@ -107,6 +108,7 @@ namespace BookFindersAPI.Controllers
                             Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                             Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
                             Isbns = addata.isbn,
+                            Subject = display.subject?.Count > 0 ? display.subject[0] : "Unknown Subject",
                             ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                             Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                             PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",
@@ -128,6 +130,7 @@ namespace BookFindersAPI.Controllers
                             Author = sort.author?.Count > 0 ? sort.author[0] : "Unknown Author",
                             Description = display.description?.Count > 0 ? display.description[0] : "Unknown Description",
                             Isbns = addata.isbn,
+                            Subject = display.subject?.Count > 0 ? display.subject[0] : "Unknown Subject",
                             ImageLink = await GetImageByISBN(addata.isbn?.Count > 0 ? addata.isbn[0] : "defaultBook.png"),
                             Publisher = display.publisher?.Count > 0 ? display.publisher[0] : "Unknown Publisher",
                             PublishYear = display.creationdate?.Count > 0 ? display.creationdate[0] : "Unknown Publish Year",

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using BookFindersVirtualLibrary.Models;
 using UnityEngine;
 using TMPro;
@@ -8,6 +7,11 @@ using UnityEngine.UI;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using UnityEngine.Networking;
 using UnityEngine.Android;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
+using System.Text;
+using Newtonsoft.Json;
 
 public class BookDetails : MonoBehaviour
 {
@@ -23,7 +27,7 @@ public class BookDetails : MonoBehaviour
     public GameObject gameObjectBtnBrowser;
 
     public TextMeshProUGUI errorText;
-
+    private HttpClient client;
     // Start is called before the first frame update
     void Start()
     {
@@ -104,27 +108,55 @@ public class BookDetails : MonoBehaviour
             }
         }
         Screen.orientation = ScreenOrientation.Portrait;
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+        client = new HttpClient(handler);
+        //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer 123");
     }
 
-    void OnLaunchVLClicked()
+    async void OnLaunchVLClicked()
     {
-        BookSearchsTracker.SearchResultBooks = BookManager.Instance.SearchResultBooks;
-        BookSearchsTracker.SelectedBook = BookManager.Instance.currentBook;
-        SceneManager.LoadScene("VirtualLibrary");
-    }
-
-    void OnLaunchARClicked()
-    {
-        BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
-
-        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        try
         {
-            errorText.text = "Please enable camera permissions to use Augmented Reality";
-            Permission.RequestUserPermission(Permission.Camera);
-            return;
+            await SaveBookSearchHistory();
         }
+        catch (Exception e)
+        {
+            Debug.Log($"{e}");
+        }
+        finally
+        {
+            BookSearchsTracker.SearchResultBooks = BookManager.Instance.SearchResultBooks;
+            BookSearchsTracker.SelectedBook = BookManager.Instance.currentBook;
+            SceneManager.LoadScene("VirtualLibrary");
+        }
+    }
 
-        SceneManager.LoadScene("AR");
+    async void OnLaunchARClicked()
+    {
+
+
+            BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
+
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            {
+                errorText.text = "Please enable camera permissions to use Augmented Reality";
+                Permission.RequestUserPermission(Permission.Camera);
+                return;
+            }
+            try
+            {
+                await SaveBookSearchHistory();
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"{e}");
+            }
+            finally
+            {
+                SceneManager.LoadScene("AR");
+            }
     }
 
     IEnumerator DownloadAndSetImage(string url, RawImage imageComponent)
@@ -153,6 +185,42 @@ public class BookDetails : MonoBehaviour
         if (currentBook != null)
         {
             Application.OpenURL(currentBook.OnlineResourceURL);
+        }
+    }
+    async Task SaveBookSearchHistory()
+    {
+        HttpResponseMessage response;
+        Book currentBook = BookManager.Instance.currentBook;
+        if (currentBook != null)
+        {
+            BookSearchHistory bookSearchHistoryObj = new BookSearchHistory();
+            bookSearchHistoryObj.Subject = currentBook.Subject;
+            string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
+            //string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
+            switch (currentBook.LibraryCode)
+            {
+                case "TRAF":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Trafalgar;
+                    break;
+                case "DAV":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Davis;
+                    break;
+                case "HMC":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.HMC;
+                    break;
+                default:
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Unknown;
+                    break;
+            }
+
+            var json = JsonConvert.SerializeObject(bookSearchHistoryObj);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+           
+            response = await client.PostAsync(url, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.Log($"Something wrong during the save book search history");
+            }
         }
     }
 }
