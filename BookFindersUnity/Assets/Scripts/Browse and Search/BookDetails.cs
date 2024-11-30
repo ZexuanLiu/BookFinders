@@ -139,7 +139,7 @@ public class BookDetails : MonoBehaviour
     {
         try
         {
-            await SaveBookSearchHistory();
+            await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.VirtualLibrary);
         }
         catch (Exception e)
         {
@@ -169,7 +169,7 @@ public class BookDetails : MonoBehaviour
             }
             try
             {
-                await SaveBookSearchHistory();
+                await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.AugmentedReality);
             }
             catch (Exception e)
             {
@@ -204,12 +204,23 @@ public class BookDetails : MonoBehaviour
             }
         }
     }
-    public void OpenOnlineResource()
+    public async void OpenOnlineResource()
     {
         Book currentBook = BookManager.currentBook;
         if (currentBook != null)
         {
-            Application.OpenURL(currentBook.OnlineResourceURL);
+            try
+            {
+                await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.OnlineResources);
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"{e}");
+            }
+            finally
+            {
+                Application.OpenURL(currentBook.OnlineResourceURL);
+            }
         }
     }
     async Task SaveBookSearchHistory()
@@ -249,6 +260,22 @@ public class BookDetails : MonoBehaviour
                 JObject responseAsJson = JObject.Parse(responseContent);
                 
                 bookSearchRecordId = responseAsJson["data"]["id"].ToString();
+            }
+        }
+    }
+    //update the Navigation method property based on user click vl button or ar button
+    async Task UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu navigationMethodEnmu)
+    {
+        HttpResponseMessage response;
+
+        if (bookSearchRecordId != "")
+        {
+            string url = $"http://localhost:5156/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
+
+            response = await client.PutAsync(url, null);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.LogError("Something wrong while update the book search record ");
             }
         }
     }

@@ -24,6 +24,7 @@ namespace BookFindersVirtualLibrary.Models
     {
         VirtualLibrary,
         AugmentedReality,
+        OnlineResources,
         Unknown
     }
 }

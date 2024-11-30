@@ -1,6 +1,7 @@
 ﻿using BookFindersAPI.Interfaces;
 using BookFindersLibrary.Models;
 using Microsoft.EntityFrameworkCore;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Services
 {
@@ -263,6 +264,24 @@ namespace BookFindersAPI.Services
                 _bookSearchHistory.Remove(bookSearchHistory);
                 await base.SaveChangesAsync();
                 return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+
+            if (bookSearchHistory != null)
+            {
+                bookSearchHistory.NavigationMethod = newMethod;
+
+                await base.SaveChangesAsync();
+
+                return true;
+
             }
             else
             {

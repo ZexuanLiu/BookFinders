@@ -2,6 +2,7 @@ using BookFindersAPI.Interfaces;
 using BookFindersAPI.Services;
 using BookFindersLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Controllers
 {
@@ -144,6 +145,37 @@ namespace BookFindersAPI.Controllers
                 {
                     Status = 200,
                     Message = "Successfully remove bookSearchHistory",
+                    Data = result
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
+        [HttpPut("editBookSearchHistory/{historyId}/{newMethod}")]
+        public async Task<IActionResult> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod)
+        {
+            try
+            {
+                var EditBookSearchHistoryTask = _bookSearchHistoryDatabase.EditBookSearchHistoryNavigationMethod(historyId,newMethod);
+                await EditBookSearchHistoryTask;
+
+                bool result = EditBookSearchHistoryTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully UpdateB BookSearchHistory",
                     Data = result
                 };
 

@@ -1,4 +1,5 @@
 ﻿using BookFindersLibrary.Models;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Interfaces
 {
@@ -40,7 +41,8 @@ namespace BookFindersAPI.Interfaces
         #region bookSearchHistory
         public Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory);
         public Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory();
-        public Task<bool> RemoveBookSearchHistory(int historyId);     
+        public Task<bool> RemoveBookSearchHistory(int historyId);   
+        public Task<bool> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod);  
         #endregion
     }
 }

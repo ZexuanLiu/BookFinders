@@ -4,6 +4,7 @@ namespace BookFindersLibrary.Enums
     {
         VirtualLibrary,
         AugmentedReality,
+        OnlineResources,
         Unknown
     }
 }
