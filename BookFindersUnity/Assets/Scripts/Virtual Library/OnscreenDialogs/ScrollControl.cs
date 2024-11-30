@@ -40,6 +40,8 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
     [SerializeField] GameObject bookSearchView;
     [SerializeField] GameObject bookDetailsView;
 
+    [SerializeField] GameObject loadingImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
 
         messageNoSearchesYet.transform.SetParent(transform);
         messageNoSearchesYet.SetActive(true);
+        loadingImage.SetActive(false);
 
         templates.SetActive(false);
 
@@ -67,7 +70,14 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
                 AddNewSearchResult(i, book.Name, book.Author);
             }
 
-            bookDetailsBtnLocateText.text = "Finish";
+            if (BookSearchsTracker.BookSearchInProgress)
+            {
+                bookDetailsBtnLocateText.text = "Finish";
+            }
+            else
+            {
+                bookDetailsBtnLocateText.text = "Locate";
+            }
 
             bookSearchView.SetActive(false);
             bookDetailsView.SetActive(true);
@@ -118,6 +128,7 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         ClearSearchResults();
         messageNoResultsFound.transform.SetParent(transform);
         messageNoResultsFound.SetActive(true);
+        loadingImage.SetActive(false);
     }
 
     public void SetSearchingMessage()
@@ -125,6 +136,7 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         ClearSearchResults();
         messageSearching.SetActive(true);
         messageSearching.transform.SetParent(transform);
+        loadingImage.SetActive(true);
     }
 
     public void SetNoInternetMessage()
@@ -132,12 +144,14 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
         ClearSearchResults();
         messageNoInternet.SetActive(true);
         messageNoInternet.transform.SetParent(transform);
+        loadingImage.SetActive(false);
     }
 
     public void ClearSearchingMessage()
     {
         messageSearching.SetActive(false);
         messageSearching.transform.SetParent(templates.transform);
+        loadingImage.SetActive(false);
     }
 
 
