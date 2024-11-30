@@ -2,3 +2,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>Hello world</h1>
+@if (DataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
+{
+    <p class="p-3 mb-2 bg-warning text-dark">No push notifications that have been sent!</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Campus</td>
+                <td>Subject</td>
+                <td>SearchDate</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bookSearchHistory in DataAnalystModel.GetBookSearchHistory().Result)
+                {
+
+                    <tr class="table-success">
+                        <td>@bookSearchHistory.Id</td>
+                        <td>@bookSearchHistory.Campus</td>
+                        <td>@bookSearchHistory.Subject</td>
+                        <td>@bookSearchHistory.SearchDate</td>
+                    </tr>
+
+                }
+        </tbody>
+    </table>
+}
