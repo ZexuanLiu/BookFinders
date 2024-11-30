@@ -33,6 +33,9 @@ namespace BookFindersAPI.Migrations
                     b.Property<int>("Campus")
                         .HasColumnType("integer");
 
+                    b.Property<int>("NavigationMethod")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("SearchDate")
                         .HasColumnType("timestamp without time zone");
 

@@ -218,6 +218,20 @@ namespace BookFindersAPI.Services
         {
             return _bookSearchHistory;
         }
+        public async Task<bool> RemoveBookSearchHistory(int historyId)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+            if (bookSearchHistory != null)
+            {
+                _bookSearchHistory.Remove(bookSearchHistory);
+                await base.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

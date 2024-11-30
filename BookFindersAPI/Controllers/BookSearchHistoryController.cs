@@ -38,6 +38,7 @@ namespace BookFindersAPI.Controllers
                 {
                    Campus = bookSearchHistory.Campus,
                    Subject = bookSearchHistory.Subject,
+                   NavigationMethod = bookSearchHistory.NavigationMethod,
                    SearchDate = DateTime.UtcNow
                 };
 
@@ -113,6 +114,37 @@ namespace BookFindersAPI.Controllers
                     Status = 200,
                     Message = "Successfully fetched all book search history by year with month",
                     Data = bookSearchHistoryList
+                };
+
+                return Ok(responseDTOOk);
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
+        [HttpDelete("removeBookSearchHistory/{historyId}")]
+        public async Task<IActionResult> RemoveBookSearchHistory(int historyId)
+        {
+            try
+            {
+                var removeHistoryTask = _bookSearchHistoryDatabase.RemoveBookSearchHistory(historyId);
+                await removeHistoryTask;
+
+                bool result = removeHistoryTask.Result;
+
+                ResponseDTO responseDTOOk = new ResponseDTO()
+                {
+                    Status = 200,
+                    Message = "Successfully remove bookSearchHistory",
+                    Data = result
                 };
 
                 return Ok(responseDTOOk);

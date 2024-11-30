@@ -39,7 +39,8 @@ namespace BookFindersAPI.Interfaces
 
         #region bookSearchHistory
         public Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory);
-        public Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory();     
+        public Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory();
+        public Task<bool> RemoveBookSearchHistory(int historyId);     
         #endregion
     }
 }

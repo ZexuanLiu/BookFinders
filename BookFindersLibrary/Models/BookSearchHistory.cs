@@ -10,6 +10,7 @@ namespace BookFindersLibrary.Models
     {
         public int Id { get; set; }
         public SheridanCampusEnum Campus { get; set; }
+        public NavigationMethodEnmu NavigationMethod {get; set;}
         public string Subject { get; set; }
         public DateTime SearchDate {  get; set; }
     }

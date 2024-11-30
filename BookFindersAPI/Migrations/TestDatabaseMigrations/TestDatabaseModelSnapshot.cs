@@ -26,6 +26,9 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.Property<int>("Campus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("NavigationMethod")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("SearchDate")
                         .HasColumnType("TEXT");
 
