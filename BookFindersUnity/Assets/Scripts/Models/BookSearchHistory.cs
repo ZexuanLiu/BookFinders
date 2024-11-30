@@ -8,6 +8,7 @@ namespace BookFindersVirtualLibrary.Models
     {
         public int Id { get; set; }
         public SheridanCampusEnum Campus { get; set; }
+        public NavigationMethodEnmu NavigationMethod { get; set; }
         public string Subject { get; set; }
         public DateTime SearchDate { get; set; }
     }
@@ -17,6 +18,12 @@ namespace BookFindersVirtualLibrary.Models
         Trafalgar,
         Davis,
         HMC,
+        Unknown
+    }
+    public enum NavigationMethodEnmu
+    {
+        VirtualLibrary,
+        AugmentedReality,
         Unknown
     }
 }

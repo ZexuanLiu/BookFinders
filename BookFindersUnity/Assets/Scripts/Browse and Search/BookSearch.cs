@@ -48,7 +48,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
         //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer 123");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
         noBookMessage.gameObject.SetActive(false);
 
         LoadingBook.gameObject.SetActive(false);

@@ -12,6 +12,7 @@ using System;
 using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class BookDetails : MonoBehaviour
 {
@@ -32,8 +33,10 @@ public class BookDetails : MonoBehaviour
 
     public TextMeshProUGUI errorText;
     private HttpClient client;
+
+    private string bookSearchRecordId = "";
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         Book currentBook = BookManager.currentBook;
         errorText.text = "";
@@ -67,6 +70,12 @@ public class BookDetails : MonoBehaviour
                 StartCoroutine(DownloadAndSetImage(currentBook.ImageLink, rawImage));
             }
 
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            client = new HttpClient(handler);
+            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
+            await SaveBookSearchHistory();
         }
         else
         {
@@ -124,11 +133,6 @@ public class BookDetails : MonoBehaviour
             }
         }
         Screen.orientation = ScreenOrientation.Portrait;
-        var handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-        client = new HttpClient(handler);
-        //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer 123");
     }
 
     async void OnLaunchVLClicked()
@@ -216,8 +220,9 @@ public class BookDetails : MonoBehaviour
         {
             BookSearchHistory bookSearchHistoryObj = new BookSearchHistory();
             bookSearchHistoryObj.Subject = currentBook.Subject;
+            bookSearchHistoryObj.NavigationMethod = NavigationMethodEnmu.Unknown;
             string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
-            //string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
+
             switch (currentBook.LibraryCode)
             {
                 case "TRAF":
@@ -238,9 +243,12 @@ public class BookDetails : MonoBehaviour
             var content = new StringContent(json, Encoding.UTF8, "application/json");
            
             response = await client.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                Debug.Log($"Something wrong during the save book search history");
+                var responseContent = await response.Content.ReadAsStringAsync();
+                JObject responseAsJson = JObject.Parse(responseContent);
+                
+                bookSearchRecordId = responseAsJson["data"]["id"].ToString();
             }
         }
     }
