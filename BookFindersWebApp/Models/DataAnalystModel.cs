@@ -10,8 +10,8 @@ namespace BookFindersWebApp.Models
 {
 	public class DataAnalystModel
 	{
-        private static readonly string URL = "https://localhost:7042";
-        static DataAnalystModel()
+        private string URL = "https://localhost:7042";
+        public DataAnalystModel()
 		{
             string? possibleAPIURL = "http://localhost:5156";//Environment.GetEnvironmentVariable("bookfindersAPIURL");
             if (!string.IsNullOrEmpty(possibleAPIURL))
@@ -23,7 +23,7 @@ namespace BookFindersWebApp.Models
                 }
             }
         }
-        public async static Task<IEnumerable<BookSearchHistory>> GetBookSearchHistory()
+        public async Task<IEnumerable<BookSearchHistory>> GetBookSearchHistory()
         {
             string subUrl = "/api/BookSearchHistory/getAllBookSearchHistory";
 
@@ -36,7 +36,6 @@ namespace BookFindersWebApp.Models
                 string requestURL = URL + subUrl;
                 var response = await client.GetAsync(requestURL);
                 var responseString = await response.Content.ReadAsStringAsync();
-
                 List<BookSearchHistory> fetchedBookSearchHistory = new List<BookSearchHistory>();
                 JObject responseAsJson = JObject.Parse(responseString);
                 if (!responseAsJson.ContainsKey("data"))

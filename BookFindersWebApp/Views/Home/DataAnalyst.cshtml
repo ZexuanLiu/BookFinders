@@ -1,8 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var dataAnalystModel = new DataAnalystModel();
 }
 <h1>Hello world</h1>
-@if (DataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
+@if (dataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
 {
     <p class="p-3 mb-2 bg-warning text-dark">No push notifications that have been sent!</p>
 }
@@ -18,7 +19,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var bookSearchHistory in DataAnalystModel.GetBookSearchHistory().Result)
+            @foreach (var bookSearchHistory in dataAnalystModel.GetBookSearchHistory().Result)
                 {
 
                     <tr class="table-success">
