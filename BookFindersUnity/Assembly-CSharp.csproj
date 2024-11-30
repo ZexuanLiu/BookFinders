@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Virtual Library\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\XButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\BButton.cs" />
     <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\SyncSearch.cs" />
     <Compile Include="Assets\Scripts\Virtual Library\OnscreenDialogs\LocateClicked.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
