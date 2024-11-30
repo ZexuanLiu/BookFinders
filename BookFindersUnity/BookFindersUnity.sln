@@ -113,6 +113,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VSCode.Editor", "Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection", "Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.csproj", "{650950EB-3555-F36E-33DB-A769F990C585}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.2D.Sprite.Editor", "Unity.2D.Sprite.Editor.csproj", "{4715D286-56DA-3CEC-9E2B-82C43F036ED0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.AI.Navigation.Updater", "Unity.AI.Navigation.Updater.csproj", "{5C9EE496-4840-716E-B116-669C9BBAAFF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Notifications.iOS", "Unity.Notifications.iOS.csproj", "{5557801B-45F0-DBB0-EA9F-C407ED60702F}"
@@ -473,6 +475,10 @@ Global
 		{650950EB-3555-F36E-33DB-A769F990C585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{650950EB-3555-F36E-33DB-A769F990C585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{650950EB-3555-F36E-33DB-A769F990C585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4715D286-56DA-3CEC-9E2B-82C43F036ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4715D286-56DA-3CEC-9E2B-82C43F036ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4715D286-56DA-3CEC-9E2B-82C43F036ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4715D286-56DA-3CEC-9E2B-82C43F036ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C9EE496-4840-716E-B116-669C9BBAAFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C9EE496-4840-716E-B116-669C9BBAAFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C9EE496-4840-716E-B116-669C9BBAAFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU

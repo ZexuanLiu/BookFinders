@@ -132,9 +132,9 @@
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/ARKitMeshSubsystemExtensions.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Frameworks/Foundation/NSData.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Participant/ARKitParticipantSubsystem.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Frameworks/Foundation/NSStringEncoding.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/ARWorldMapRequestStatus.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Frameworks/ARKit/ARCollaborationData.cs" />
+    <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Frameworks/Foundation/NSStringEncoding.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Camera/ARKitCameraSubsystem.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arkit@5.1.0/Runtime/Frameworks/Foundation/NSErrorDomain.cs" />
   </ItemGroup>

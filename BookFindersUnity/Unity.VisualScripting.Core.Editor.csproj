@@ -525,8 +525,8 @@
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Assignment/Assigner.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Plugin/Changelogs/LegacyLudiqCore/Changelog_1_4_11.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Inspection/Special/ListInspector.cs" />
-    <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Plugin/Changelogs/LegacyLudiqCore/Changelog_1_4_3.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Interface/Fuzzy/FuzzyWindow.cs" />
+    <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Plugin/Changelogs/LegacyLudiqCore/Changelog_1_4_3.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Serialization/TypeSerializer.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Analytics/OnPreprocessBuildAnalytics.cs" />
     <Compile Include="Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Interface/ListOption.cs" />

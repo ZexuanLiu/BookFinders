@@ -192,20 +192,6 @@ namespace BookFindersAPI.Services
             }
 
             return userLoggingIn;
-<<<<<<< HEAD
-        }
-
-        public async Task<IEnumerable<string>> GetUsernames()
-        {
-            List<string> usernames = new List<string>();
-            foreach (var user in _users)
-            {
-                usernames.Add(user.UserLogin.Username);
-            }
-
-            return usernames;
-        }
-=======
         }
 
         public async Task<IEnumerable<string>> GetUsernames()
@@ -220,33 +206,7 @@ namespace BookFindersAPI.Services
             return usernames;
         }
 
->>>>>>> DEV
         #endregion
-
-        #region bookSearchHistory
-        public async Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory)
-        {
-            _bookSearchHistory.Add(bookSearchHistory);
-            await base.SaveChangesAsync();
-
-            return bookSearchHistory;
-        }
-        public async Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory()
-        {
-            List<string> usernames = new List<string>();
-            List<User> users = await _users.Include(x => x.UserLogin).ToListAsync();
-            foreach (var user in users)
-            {
-            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
-            if (bookSearchHistory != null)
-            {
-                _bookSearchHistory.Remove(bookSearchHistory);
-                await base.SaveChangesAsync();
-                return true;
-            }
-
-            return usernames;
-        }
 
         #region bookSearchHistory
         public async Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory)

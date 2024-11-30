@@ -178,8 +178,8 @@
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/UI/Progress/ProgressControlsForViews.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/UnityConfigurationChecker.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/UI/DrawSplitter.cs" />
-    <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/Configuration/ChannelCertificateUiImpl.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/Views/PendingChanges/PendingChangesTreeView.cs" />
+    <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/Configuration/ChannelCertificateUiImpl.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/Configuration/ToolConfig.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/WebApi/SubscriptionDetailsResponse.cs" />
     <Compile Include="Library/PackageCache/com.unity.collab-proxy@2.2.0/Editor/PlasticSCM/PlasticWindow.cs" />

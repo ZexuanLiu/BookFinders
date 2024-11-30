@@ -155,7 +155,7 @@ public class BookDetails : MonoBehaviour
     {
 
 
-            BookSearchTracking.SelectedBook = BookManager.Instance.currentBook;
+            BookSearchTracking.SelectedBook = BookManager.currentBook;
             BookSearchTracking.BookSearchInProgress = true;
             if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
             {
@@ -211,7 +211,7 @@ public class BookDetails : MonoBehaviour
     async Task SaveBookSearchHistory()
     {
         HttpResponseMessage response;
-        Book currentBook = BookManager.Instance.currentBook;
+        Book currentBook = BookManager.currentBook;
         if (currentBook != null)
         {
             BookSearchHistory bookSearchHistoryObj = new BookSearchHistory();

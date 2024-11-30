@@ -123,8 +123,8 @@
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/ObjectTrackingSubsystem/XRReferenceObjectLibrary.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/SessionSubsystem/SessionAvailability.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/Configuration/Feature.cs" />
-    <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/CameraSubsystem/XRCameraParams.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/AssemblyInfo.cs" />
+    <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/CameraSubsystem/XRCameraParams.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/XRCpuImage/Transformation.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/ParticipantSubsystem/XRParticipantSubsystemDescriptor.cs" />
     <Compile Include="Library/PackageCache/com.unity.xr.arfoundation@5.1.5/Runtime/ARSubsystems/ParticipantSubsystem/XRParticipantSubsystem.cs" />

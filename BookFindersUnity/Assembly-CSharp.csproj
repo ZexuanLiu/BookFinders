@@ -64,6 +64,7 @@
     <Compile Include="Assets/Scripts/Models/Comment.cs" />
     <Compile Include="Assets/Scripts/Virtual Library/OnscreenControls/OnClickOpacity.cs" />
     <Compile Include="Assets/Scripts/Virtual Library/UserCamera.cs" />
+    <Compile Include="Assets/Scripts/Browse and Search/BackToBookSearch.cs" />
     <Compile Include="Assets/Scripts/Browse and Search/BookDetails.cs" />
     <Compile Include="Assets/Scripts/AR/BookDetailsAR.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets/Scripts/Virtual Library/CameraMovement.cs" />
     <Compile Include="Assets/Scripts/Virtual Library/OnscreenControls/XButton.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/EnvMapAnimator.cs" />
+    <Compile Include="Assets/Scripts/Virtual Library/OnscreenControls/BButton.cs" />
     <Compile Include="Assets/Scripts/Virtual Library/OnscreenDialogs/SyncSearch.cs" />
     <Compile Include="Assets/Scripts/Virtual Library/OnscreenDialogs/LocateClicked.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
@@ -1107,13 +1109,13 @@
       <Project>{49F2C7BF-1655-1402-94B4-1797BB21D5C1}</Project>
       <Name>Unity.XR.ARSubsystems.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{4715D286-56DA-3CEC-9E2B-82C43F036ED0}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.XR.OpenXR.Features.OculusQuestSupport.Editor.csproj">
       <Project>{3CDB1B71-5815-5FEF-E9C9-F641FB7238F3}</Project>
       <Name>Unity.XR.OpenXR.Features.OculusQuestSupport.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.XR.ARCore.csproj">
-      <Project>{01867E35-1DB2-735C-07EF-9A0B89452F4D}</Project>
-      <Name>Unity.XR.ARCore</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{B328857D-6CAE-EC53-E3FD-C678603B359A}</Project>
@@ -1170,6 +1172,10 @@
     <ProjectReference Include="Unity.XR.Management.Editor.csproj">
       <Project>{690113F8-1D3A-F8A2-1104-87E14F92CC69}</Project>
       <Name>Unity.XR.Management.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.XR.ARCore.csproj">
+      <Project>{01867E35-1DB2-735C-07EF-9A0B89452F4D}</Project>
+      <Name>Unity.XR.ARCore</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.XR.ARCore.Editor.csproj">
       <Project>{4B1D94BB-F401-1235-6C70-973BCDCB345C}</Project>
