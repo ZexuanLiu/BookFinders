@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using Unity.VisualScripting.Antlr3.Runtime;
 using System.Net.Http.Headers;
 using System.Web;
+using UnityEngine.SceneManagement;
 
 public class BookSearch : MonoBehaviour, IEndDragHandler
 {
@@ -28,7 +29,8 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     private int currentPage = 0;
     public TMP_InputField bookSearchTextArea;
     public TextMeshProUGUI noBookMessage;
-    public string BookSearchText { get; set; }
+
+    private string BookSearchText { get; set; }
 
     public Image LoadingBook;
 
@@ -45,7 +47,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer BookFinders $B34R4RT0K3N$");
         noBookMessage.gameObject.SetActive(false);
 
         LoadingBook.gameObject.SetActive(false);

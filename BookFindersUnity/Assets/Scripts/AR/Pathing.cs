@@ -83,7 +83,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
 
         InitiateBookshelfPathfindingDictionaries();
 
-        if (BookSearchTracking.SelectedBook != null)
+        if (BookSearchTracking.BookSearchInProgress)
         {
             string bookLocationKey = $"{BookSearchTracking.SelectedBook.LocationBookShelfNum}{BookSearchTracking.SelectedBook.LocationBookShelfSide}";
             string bookName = BookSearchTracking.SelectedBook.Name;
@@ -105,7 +105,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
             lastPosition = transform.position;
         }
 
-        if (clickMarks[currentLocationIndex] == null && BookSearchTracking.SelectedBook == null)
+        if (clickMarks[currentLocationIndex] == null && !BookSearchTracking.BookSearchInProgress)
         {
             myLineRenderer.positionCount = 0;
             return;
@@ -114,7 +114,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         if (newPosition || lastLocationIndex != currentLocationIndex || navigationToBookshelfSet)
         {
 
-            if (BookSearchTracking.SelectedBook == null)
+            if (!BookSearchTracking.BookSearchInProgress)
             {
                 UpdateHotspotDestination();
             }
@@ -306,7 +306,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
                 }
         }
 
-        if (currentFlashingBookshelf != null)
+        if (BookSearchTracking.BookSearchInProgress)
         {
             currentFlashingBookshelf.SetActive(false);
 
@@ -322,7 +322,7 @@ public class Pathing : MonoBehaviour, IFindingPathToAR
         }
         destination = Vector3.zero;
 
-        BookSearchTracking.SelectedBook = null;
+        BookSearchTracking.BookSearchInProgress = false;
 
         currentLocationIndex = 0;
         arrowAboveUser.SetActive(false);

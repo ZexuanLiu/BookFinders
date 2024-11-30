@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Models\Comment.cs" />
     <Compile Include="Assets\Scripts\Virtual Library\OnscreenControls\OnClickOpacity.cs" />
     <Compile Include="Assets\Scripts\Virtual Library\UserCamera.cs" />
+    <Compile Include="Assets\Scripts\Browse and Search\BackToBookSearch.cs" />
     <Compile Include="Assets\Scripts\Browse and Search\BookDetails.cs" />
     <Compile Include="Assets\Scripts\AR\BookDetailsAR.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />

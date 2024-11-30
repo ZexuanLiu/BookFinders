@@ -71866,7 +71866,7 @@ MonoBehaviour:
   textObject: {fileID: 1035991956}
   backgroundOfTextObject: {fileID: 1865675291}
   flashFadeIn: 1
-  flashStay: 1
+  flashStay: 3
   flastFadeOut: 1
 --- !u!1 &1562158264
 GameObject:
@@ -87850,6 +87850,7 @@ MonoBehaviour:
   libraryGuideView: {fileID: 954355673}
   bookSearchView: {fileID: 1490822139}
   bookDetailedView: {fileID: 1962730552}
+  bookDetailsBtnLocateText: {fileID: 1905406258}
   controls: {fileID: 2024489540}
 --- !u!1 &1831301350
 GameObject:
@@ -89796,7 +89797,7 @@ GameObject:
   - component: {fileID: 1905406259}
   - component: {fileID: 1905406258}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtLocate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

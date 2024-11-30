@@ -70,7 +70,14 @@ public class ScrollControl : MonoBehaviour, IScrollBoxControl
                 AddNewSearchResult(i, book.Name, book.Author);
             }
 
-            bookDetailsBtnLocateText.text = "Finish";
+            if (BookSearchsTracker.BookSearchInProgress)
+            {
+                bookDetailsBtnLocateText.text = "Finish";
+            }
+            else
+            {
+                bookDetailsBtnLocateText.text = "Locate";
+            }
 
             bookSearchView.SetActive(false);
             bookDetailsView.SetActive(true);

@@ -126,12 +126,15 @@ public class BookDetails : MonoBehaviour
     {
         BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks;
         BookSearchsTracker.SelectedBook = BookManager.currentBook;
+        BookSearchsTracker.BookSearchInProgress = true;
+
         SceneManager.LoadScene("VirtualLibrary");
     }
 
     void OnLaunchARClicked()
     {
         BookSearchTracking.SelectedBook = BookManager.currentBook;
+        BookSearchTracking.BookSearchInProgress = true;
 
         if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
         {

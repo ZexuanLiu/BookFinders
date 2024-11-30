@@ -7,6 +7,8 @@ public static class BookSearchTracking
 {
     public static Book SelectedBook { get; set; }
 
+    public static bool BookSearchInProgress { get; set; }
+
     public static Dictionary<string, Vector3> BookPathfindLocations { get; set; }
     public static Dictionary<string, GameObject> BookPathfindingSurfaces { get; set; }
 

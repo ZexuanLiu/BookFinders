@@ -98,7 +98,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
             new Vector3(42.5f, clickMarker.transform.position.y, -0.5f), // Printer
             new Vector3(28.5f, clickMarker.transform.position.y, 55f) // Oversized Books
         };
-        currentLocationIndex = -1;
+        currentLocationIndex = 0;
         currentIndexSwitchedTo = 0;
 
         InitiateBookshelfPathfindingDictionaries();
