@@ -19,7 +19,7 @@ public class ExitBookNavigation : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        if (BookSearchTracking.SelectedBook != null)
+        if (BookSearchTracking.BookSearchInProgress)
         {
             btnLibraryHotspots.SetActive(false);
             selfButtonText.text = "End Book Navigation";
@@ -43,7 +43,7 @@ public class ExitBookNavigation : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        if (BookSearchTracking.SelectedBook != null)
+        if (BookSearchTracking.BookSearchInProgress)
         {
             btnLibraryHotspots.SetActive(false);
             selfButtonText.text = "End Book Navigation";
@@ -57,7 +57,7 @@ public class ExitBookNavigation : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (BookSearchTracking.SelectedBook != null)
+        if (BookSearchTracking.BookSearchInProgress)
         {
             iFindingPathToAR.FinishNavigation();
         }

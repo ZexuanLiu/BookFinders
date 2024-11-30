@@ -62,8 +62,8 @@ public class BookDetailsAR : MonoBehaviour, IPointerClickHandler
                 //set the weight and the height of the image
                 RectTransform rectTransform = imageComponent.GetComponent<RectTransform>();
 
-                float imageScaleFactor = 900 / texture.height;
-                rectTransform.sizeDelta = new Vector2(texture.width * imageScaleFactor, texture.height * imageScaleFactor);
+                float imageScaleFactor = 900.0f / texture.height;
+                rectTransform.sizeDelta = new Vector2((float)texture.width * imageScaleFactor, (float)texture.height * imageScaleFactor);
             }
         }
     }

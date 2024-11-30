@@ -14,30 +14,27 @@ public class FlashingText : MonoBehaviour, IFlashableAR
     [SerializeField] GameObject textObject;
     [SerializeField] Image backgroundOfTextObject;
     [SerializeField] float flashFadeIn = 1f;
-    [SerializeField] float flashStay = 1f;
+    [SerializeField] float flashStay = 3f;
     [SerializeField] float flastFadeOut = 1f;
 
-    private static volatile Queue<string> flashingTextStack = new Queue<string>();
-    private static readonly string defaultText = "Default Text";
-
     private TextMeshProUGUI textMesh;
-    float originalBackgroundOpacity;
+    private float originalBackgroundOpacity;
 
     private float timePassed;
     private float totalTextTime;
     private bool timeToRun;
 
-    public void Flash(string text)
-    {
-        flashingTextStack.Enqueue(text);
-        textMesh.text = text;
-        new WaitUntil(() => object.ReferenceEquals(flashingTextStack.TryPeek(out string nextFlashText), text));
-        timeToRun = true;
-    }
+    private bool startRun = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (startRun)
+        {
+            return;
+        }
+
+        Debug.Log("Started FlashableText");
         textMesh = textObject.GetComponent<TextMeshProUGUI>();
         textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 0);
 
@@ -45,9 +42,23 @@ public class FlashingText : MonoBehaviour, IFlashableAR
         backgroundOfTextObject.color = new Color(backgroundOfTextObject.color.r, backgroundOfTextObject.color.g, backgroundOfTextObject.color.b, 0);
 
         totalTextTime = flashFadeIn + flashStay + flastFadeOut;
-        textMesh.text = defaultText;
         timePassed = 0;
         timeToRun = false;
+
+        startRun = true;
+    }
+
+    public void Flash(string text)
+    {
+        if (!startRun)
+        {
+            Start();
+        }
+
+        Debug.Log($"Flashing Text '{text}'");
+        textMesh.text = text;
+        timePassed = 0;
+        timeToRun = true;
     }
 
     void Update()
@@ -78,7 +89,6 @@ public class FlashingText : MonoBehaviour, IFlashableAR
             timePassed = 0;
             textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 0);
             backgroundOfTextObject.color = new Color(backgroundOfTextObject.color.r, backgroundOfTextObject.color.g, backgroundOfTextObject.color.b, 0);
-            flashingTextStack.Dequeue();
             timeToRun = false;
         }
     }
