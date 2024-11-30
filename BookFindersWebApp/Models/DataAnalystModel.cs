@@ -32,7 +32,7 @@ namespace BookFindersWebApp.Models
             using (HttpClient client = new HttpClient(handler))
             {
                 //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
-                client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer 123");
+                client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
                 string requestURL = URL + subUrl;
                 var response = await client.GetAsync(requestURL);
                 var responseString = await response.Content.ReadAsStringAsync();

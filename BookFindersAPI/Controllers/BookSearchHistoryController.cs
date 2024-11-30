@@ -131,6 +131,59 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
+        [HttpGet("getTop5BookSearchHistory")]
+        public async Task<IActionResult> GetTop5BookSearchHistory()
+        {
+            try
+            {
+                var getBookSearchHistoryTask = _bookSearchHistoryDatabase.GetAllBookSearchHistory();
+                await getBookSearchHistoryTask;
+
+                IEnumerable<BookSearchHistory> bookSearchHistoryList = getBookSearchHistoryTask.Result;
+
+                var subjectFrequency = bookSearchHistoryList
+                    .GroupBy(obj => obj.Subject) 
+                    .Select(group => new
+                    {
+                        Subject = group.Key,
+                        Count = group.Count()
+                    })
+                    .OrderByDescending(x => x.Count) 
+                    .Take(5) 
+                    .ToList();
+                if(subjectFrequency.Count != 0)
+                {
+                    var response = new BookSearchHistoryResponse
+                    {
+                        TopSubjects = subjectFrequency.Select(x => x.Subject).ToList(),
+                        SubjectCounts = subjectFrequency.Select(x => x.Count).ToList()
+                    };
+                    ResponseDTO responseDTOOk = new ResponseDTO()
+                    {
+                        Status = 200,
+                        Message = "Successfully fetched all book search history",
+                        Data = response
+                    };
+
+                    return Ok(responseDTOOk);
+                }
+                else
+                {
+                    throw new Exception("subjectFrequency list is empty");
+                }
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
         [HttpDelete("removeBookSearchHistory/{historyId}")]
         public async Task<IActionResult> RemoveBookSearchHistory(int historyId)
         {
