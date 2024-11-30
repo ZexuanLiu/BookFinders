@@ -17,6 +17,8 @@ interface IFindingPathTo
 
     public void FinishNavigation();
 
+    public bool IsNavigatingToLocation();
+
 }
 
 [RequireComponent(typeof(LineRenderer))]
@@ -278,6 +280,7 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
         {
             currentFlashingBookshelf.SetActive(false);
         }
+        BookSearchsTracker.BookSearchInProgress = false;
     }
 
     public void InitiateBookshelfPathfindingDictionaries()
@@ -349,5 +352,10 @@ public class UserPathing : MonoBehaviour, IFindingPathTo
                 bookshelfSideObject.SetActive(false);
             }
         }
+    }
+
+    public bool IsNavigatingToLocation()
+    {
+        return currentLocationIndex != 0 || BookSearchsTracker.BookSearchInProgress;
     }
 }
