@@ -5,8 +5,8 @@ namespace BookFindersWebApp.Models
 {
 	public class DataAnalystViewModel
 	{
-        public DataAnalystCondition? Condition { get; set; }
-        public DataAnalystModel? DataModel { get; set; }
+        public DataAnalystCondition Condition { get; set; } = new DataAnalystCondition();
+        public DataAnalystModel DataModel { get; set; } = new DataAnalystModel();
     }
 }
 

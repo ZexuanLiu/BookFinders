@@ -194,11 +194,12 @@ namespace BookFindersAPI.Controllers
 
                 IEnumerable<BookSearchHistory> bookSearchHistoryList = getBookSearchHistoryTask.Result;
 
+                //if !dataAnalystCondition.Campus.HasValue is true will ignore check the Campus field.
                 var filteredList = bookSearchHistoryList.Where(history =>
                     (!dataAnalystCondition.Campus.HasValue || dataAnalystCondition.Campus == SheridanCampusEnum.All || history.Campus == dataAnalystCondition.Campus) &&
                     (!dataAnalystCondition.NavigationMethod.HasValue || dataAnalystCondition.NavigationMethod == NavigationMethodEnmu.All || history.NavigationMethod == dataAnalystCondition.NavigationMethod) &&
                     (!dataAnalystCondition.StartDate.HasValue || history.SearchDate >= dataAnalystCondition.StartDate) && 
-                    (dataAnalystCondition.StartDate.HasValue || !dataAnalystCondition.EndDate.HasValue || history.SearchDate <= dataAnalystCondition.EndDate)
+                    (dataAnalystCondition.StartDate.HasValue || !dataAnalystCondition.EndDate.HasValue || (history.SearchDate >= dataAnalystCondition.StartDate && history.SearchDate <= dataAnalystCondition.EndDate))
                 ).ToList();
                 var subjectFrequency = filteredList
                     .GroupBy(obj => obj.Subject) 
@@ -210,8 +211,7 @@ namespace BookFindersAPI.Controllers
                     .OrderByDescending(x => x.Count) 
                     .Take(5) 
                     .ToList();
-                // if(subjectFrequency.Count != 0)
-                // {
+
                     var response = new BookSearchHistoryResponse
                     {
                         TopSubjects = subjectFrequency.Select(x => x.Subject).ToList(),
@@ -225,11 +225,6 @@ namespace BookFindersAPI.Controllers
                     };
 
                     return Ok(responseDTOOk);
- //               }
-                // else
-                // {
-                //     throw new Exception("subjectFrequency list is empty");
-                // }
             }
             catch (Exception e)
             {
