@@ -1,42 +1,73 @@
 ﻿@using Newtonsoft.Json
+@using BookFindersLibrary.Models
+@using BookFindersLibrary.Enums
+@model DataAnalystViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var dataAnalystModel = new DataAnalystModel();
-    await dataAnalystModel.GetTop5BookSearchHistory();
-}
-<h1>Hello world</h1>
-@if (dataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
-{
-    <p class="p-3 mb-2 bg-warning text-dark">No Book Search Record exist</p>
-}
-else
-{
-    <canvas id="pieChart" width="200" height="200"></canvas>
-    @*<table class="table table-bordered">
-            <thead>
-                <tr>
-                    <td>Id</td>
-                    <td>Campus</td>
-                    <td>Subject</td>
-                    <td>NavigationMethod</td>
-                    <td>SearchDate</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var bookSearchHistory in dataAnalystModel.GetBookSearchHistory().Result)
-                    {
+    DataAnalystModel dataAnalystModel;
+    if (Model == null)
+    {
+        dataAnalystModel = new DataAnalystModel();
+        await dataAnalystModel.GetTop5BookSearchHistory();
+    }
+    else
+    {
+        dataAnalystModel = Model.DataModel;
+    }
+    var dataAnalystCondition = new DataAnalystCondition();
 
-                        <tr class="table-success">
-                            <td>@bookSearchHistory.Id</td>
-                            <td>@bookSearchHistory.Campus</td>
-                            <td>@bookSearchHistory.Subject</td>
-                            <td>@bookSearchHistory.NavigationMethod</td>
-                            <td>@bookSearchHistory.SearchDate</td>
-                        </tr>
+    var campusList = Enum.GetValues(typeof(SheridanCampusEnum))
+       .Cast<SheridanCampusEnum>()
+       .Where(c => c != SheridanCampusEnum.Unknown)
+       .Select(c => new SelectListItem
+       {
+           Value = ((int)c).ToString(),
+           Text = c.ToString()
+       }).ToList();
+    var navigationMethodList = Enum.GetValues(typeof(NavigationMethodEnmu))
+       .Cast<NavigationMethodEnmu>()
+       .Where(c => c != NavigationMethodEnmu.Unknown)
+       .Select(c => new SelectListItem
+       {
+           Value = ((int)c).ToString(),
+           Text = c.ToString()
+       }).ToList();
+}
 
-                    }
-            </tbody>
-        </table>*@
+<h1>Top 5 Most Popular Book Subjects</h1>
+
+<form class="text-left" asp-action="FilterDataAnaylst" method="POST">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="Condition.Campus">Campus</label>
+        <select asp-for="Condition.Campus" asp-items="@campusList" class="form-control">
+            <option value="">-- Select Campus --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Condition.NavigationMethod">Navigation Tools</label>
+        <select asp-for="Condition.NavigationMethod" asp-items="@navigationMethodList" class="form-control">
+            <option value="">-- Select... --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Condition.StartDate">Start Date Time</label>
+        <input asp-for="Condition.StartDate" class="form-control" placeholder="Start Date" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Condition.EndDate">End Date Time</label>
+        <input asp-for="Condition.EndDate" class="form-control" placeholder="End Date" />
+    </div>
+    <div class="form-group">
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
+    <canvas id="pieChart" width="600" height="600"></canvas>
+
     <script>
         var topSubjects = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.TopSubjects));
         var subjectCounts = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.SubjectCounts));
@@ -66,7 +97,7 @@ else
                 }]
             },
             options: {
-                responsive: true,
+                responsive: false,
                 plugins: {
                     datalabels: {
                         formatter: (value, context) => {
@@ -76,7 +107,7 @@ else
                         color: 'black',
                         font: {
                             weight: 'bold',
-                            size: 18  
+                            size: 18
                         },
                         anchor: 'center',
                         align: 'center'
@@ -85,4 +116,3 @@ else
             }
         });
     </script>
-}

@@ -5,6 +5,7 @@ namespace BookFindersLibrary.Enums
         Trafalgar,
         Davis,
         HMC,
-        Unknown
+        Unknown,
+        All
     }
 }

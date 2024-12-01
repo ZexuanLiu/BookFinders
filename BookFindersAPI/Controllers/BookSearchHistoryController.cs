@@ -184,6 +184,65 @@ namespace BookFindersAPI.Controllers
                 return BadRequest(responseDTOError);
             }
         }
+        [HttpPost("getTop5BookSearchHistoryWithCondition")]
+        public async Task<IActionResult> GetTop5BookSearchHistory(DataAnalystCondition dataAnalystCondition)
+        {
+            try
+            {
+                var getBookSearchHistoryTask = _bookSearchHistoryDatabase.GetAllBookSearchHistory();
+                await getBookSearchHistoryTask;
+
+                IEnumerable<BookSearchHistory> bookSearchHistoryList = getBookSearchHistoryTask.Result;
+
+                var filteredList = bookSearchHistoryList.Where(history =>
+                    (!dataAnalystCondition.Campus.HasValue || dataAnalystCondition.Campus == SheridanCampusEnum.All || history.Campus == dataAnalystCondition.Campus) &&
+                    (!dataAnalystCondition.NavigationMethod.HasValue || dataAnalystCondition.NavigationMethod == NavigationMethodEnmu.All || history.NavigationMethod == dataAnalystCondition.NavigationMethod) &&
+                    (!dataAnalystCondition.StartDate.HasValue || history.SearchDate >= dataAnalystCondition.StartDate) && 
+                    (dataAnalystCondition.StartDate.HasValue || !dataAnalystCondition.EndDate.HasValue || history.SearchDate <= dataAnalystCondition.EndDate)
+                ).ToList();
+                var subjectFrequency = filteredList
+                    .GroupBy(obj => obj.Subject) 
+                    .Select(group => new
+                    {
+                        Subject = group.Key,
+                        Count = group.Count()
+                    })
+                    .OrderByDescending(x => x.Count) 
+                    .Take(5) 
+                    .ToList();
+                // if(subjectFrequency.Count != 0)
+                // {
+                    var response = new BookSearchHistoryResponse
+                    {
+                        TopSubjects = subjectFrequency.Select(x => x.Subject).ToList(),
+                        SubjectCounts = subjectFrequency.Select(x => x.Count).ToList()
+                    };
+                    ResponseDTO responseDTOOk = new ResponseDTO()
+                    {
+                        Status = 200,
+                        Message = "Successfully fetched all book search history",
+                        Data = response
+                    };
+
+                    return Ok(responseDTOOk);
+ //               }
+                // else
+                // {
+                //     throw new Exception("subjectFrequency list is empty");
+                // }
+            }
+            catch (Exception e)
+            {
+                ResponseDTO responseDTOError = new ResponseDTO
+                {
+                    Status = 400,
+                    Message = "An unexpected server error occurred",
+                    Errors = e
+                };
+                
+                return BadRequest(responseDTOError);
+            }
+        }
         [HttpDelete("removeBookSearchHistory/{historyId}")]
         public async Task<IActionResult> RemoveBookSearchHistory(int historyId)
         {

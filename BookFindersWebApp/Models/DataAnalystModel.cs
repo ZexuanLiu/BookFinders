@@ -67,6 +67,21 @@ namespace BookFindersWebApp.Models
             
 
         }
+
+        public async Task FilterByDataAnalystCondition(DataAnalystCondition dataAnalystCondition)
+        {
+            string subUrl = "/api/BookSearchHistory/getTop5BookSearchHistoryWithCondition";
+
+            string requestURL = URL + subUrl;
+            var response = await client.PostAsJsonAsync(requestURL, dataAnalystCondition);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            JObject jsonResponse = JObject.Parse(responseString);
+
+            TopSubjects = jsonResponse["data"]?["topSubjects"]?.ToObject<List<string>>() ?? new List<string>();
+            SubjectCounts = jsonResponse["data"]?["subjectCounts"]?.ToObject<List<int>>() ?? new List<int>();
+
+        }
     }
 }
 

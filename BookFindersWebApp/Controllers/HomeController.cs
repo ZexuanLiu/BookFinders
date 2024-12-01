@@ -66,7 +66,29 @@ namespace BookFindersWebApp.Controllers
             //}
             return View("Home");
         }
+        [HttpPost]
+        public async Task<IActionResult> FilterDataAnaylst(DataAnalystCondition condition)
+        {
 
+            if (ModelState.IsValid)
+            {
+                DataAnalystCondition tempDataAnalystCondition = new DataAnalystCondition()
+                {
+                    Campus = condition.Campus,
+                    NavigationMethod = condition.NavigationMethod,
+                    StartDate = condition.StartDate,
+                    EndDate = condition.EndDate
+                };
+
+                DataAnalystModel dataAnalystModel = new DataAnalystModel();
+                await dataAnalystModel.FilterByDataAnalystCondition(tempDataAnalystCondition);
+                DataAnalystViewModel dataAnalystViewModel = new DataAnalystViewModel();
+                dataAnalystViewModel.DataModel = dataAnalystModel;
+                return View("DataAnalyst", dataAnalystViewModel);
+            }
+            return View("DataAnalyst");
+
+        }
         [HttpPost]
         public IActionResult Confirmation(PushNotificationForm form)
         {
