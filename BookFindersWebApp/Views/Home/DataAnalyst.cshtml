@@ -4,10 +4,9 @@
 @model DataAnalystViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    DataAnalystModel dataAnalystModel;
+    DataAnalystModel dataAnalystModel = new DataAnalystModel();
     if (Model == null)
     {
-        dataAnalystModel = new DataAnalystModel();
         await dataAnalystModel.GetTop5BookSearchHistory();
     }
     else
@@ -66,9 +65,18 @@
     </div>
 
 </form>
+@if (dataAnalystModel.TopSubjects.Count == 0)
+{
+    <br />
+    <p class="p-3 mb-2 bg-warning text-dark">No Matched Record Exist!</p>
+}
+else
+{
     <canvas id="pieChart" width="600" height="600"></canvas>
+}
 
-    <script>
+
+<script>
         var topSubjects = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.TopSubjects));
         var subjectCounts = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.SubjectCounts));
 
@@ -115,4 +123,4 @@
                 }
             }
         });
-    </script>
+</script>
