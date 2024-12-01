@@ -18,14 +18,16 @@ namespace BookFindersVirtualLibrary.Models
         Trafalgar,
         Davis,
         HMC,
-        Unknown
+        Unknown,
+        All
     }
     public enum NavigationMethodEnmu
     {
         VirtualLibrary,
         AugmentedReality,
         OnlineResources,
-        Unknown
+        Unknown,
+        All
     }
 }
 

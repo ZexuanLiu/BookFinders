@@ -41,30 +41,30 @@ namespace BookFindersWebApp.Controllers
 
         public IActionResult ConfirmationLogin(LoginForm form)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    UserLogin userLogin = new UserLogin()
-            //    {
-            //        Username = form.Username,
-            //        Password = form.Password
-            //    };
-            //    User loggedInUser = LoginRepository.Login(userLogin).Result;
+            if (ModelState.IsValid)
+            {
+                UserLogin userLogin = new UserLogin()
+                {
+                    Username = form.Username,
+                    Password = form.Password
+                };
+                User loggedInUser = LoginRepository.Login(userLogin).Result;
 
-            //    if (loggedInUser != null)
-            //    {
-            //        ViewBag.UserFullname = loggedInUser.Fullname;
-            //        ViewBag.UserUsername = loggedInUser.UserLogin.Username;
-            //        ViewBag.UserRole = loggedInUser.Role;
-            //        return View("Home");
-            //    }
-            //    else
-            //    {
-            //        ModelState.AddModelError("Unknown Login", "Unknown Username or Password, please try again...");
-            //        return View("Index");
-            //    }
-                
-            //}
-            return View("Home");
+                if (loggedInUser != null)
+                {
+                    ViewBag.UserFullname = loggedInUser.Fullname;
+                    ViewBag.UserUsername = loggedInUser.UserLogin.Username;
+                    ViewBag.UserRole = loggedInUser.Role;
+                    return View("Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("Unknown Login", "Unknown Username or Password, please try again...");
+                    return View("Index");
+                }
+
+            }
+            return View("Index");
         }
         [HttpPost]
         public async Task<IActionResult> FilterDataAnaylst(DataAnalystCondition condition)

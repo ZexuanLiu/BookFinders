@@ -17,7 +17,8 @@ namespace BookFindersWebApp.Models
         HttpClient client;
         public DataAnalystModel()
 		{
-            string? possibleAPIURL = "http://localhost:5156";//Environment.GetEnvironmentVariable("bookfindersAPIURL");
+            string? possibleAPIURL = "http://localhost:5156";
+            // string? possibleAPIURL = Environment.GetEnvironmentVariable("bookfindersAPIURL");
             if (!string.IsNullOrEmpty(possibleAPIURL))
             {
                 URL = possibleAPIURL;
@@ -29,8 +30,8 @@ namespace BookFindersWebApp.Models
             handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
-            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
         }
         public async Task GetTop5BookSearchHistory()
         {
@@ -43,6 +44,7 @@ namespace BookFindersWebApp.Models
             TopSubjects = jsonResponse["data"]?["topSubjects"]?.ToObject<List<string>>() ?? new List<string>();
             SubjectCounts = jsonResponse["data"]?["subjectCounts"]?.ToObject<List<int>>() ?? new List<int>();
         }
+        //This method is for testing not used in any cshtml page
         public async Task<IEnumerable<BookSearchHistory>> GetBookSearchHistory()
         {
             string subUrl = "/api/BookSearchHistory/getAllBookSearchHistory";

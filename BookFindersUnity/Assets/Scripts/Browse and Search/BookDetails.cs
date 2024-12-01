@@ -73,8 +73,8 @@ public class BookDetails : MonoBehaviour
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             client = new HttpClient(handler);
-            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
-            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
             await SaveBookSearchHistory();
         }
         else
@@ -233,7 +233,7 @@ public class BookDetails : MonoBehaviour
             bookSearchHistoryObj.Subject = currentBook.Subject;
             bookSearchHistoryObj.NavigationMethod = NavigationMethodEnmu.Unknown;
             string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
-
+            //string url = $"http://137.184.5.147:4004/api/BookSearchHistory/InsertBookSearchHistory";
             switch (currentBook.LibraryCode)
             {
                 case "TRAF":
@@ -271,7 +271,7 @@ public class BookDetails : MonoBehaviour
         if (bookSearchRecordId != "")
         {
             string url = $"http://localhost:5156/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
-
+            //string url = $"http://137.184.5.147:4004/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
             response = await client.PutAsync(url, null);
             if (!response.IsSuccessStatusCode)
             {
