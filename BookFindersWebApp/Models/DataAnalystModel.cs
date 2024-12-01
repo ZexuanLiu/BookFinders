@@ -11,6 +11,10 @@ namespace BookFindersWebApp.Models
 	public class DataAnalystModel
 	{
         private string URL = "https://localhost:7042";
+        public List<string> TopSubjects { get; set; } = new();
+        public List<int> SubjectCounts { get; set; } = new();
+        private HttpClientHandler handler;
+        HttpClient client;
         public DataAnalystModel()
 		{
             string? possibleAPIURL = "http://localhost:5156";//Environment.GetEnvironmentVariable("bookfindersAPIURL");
@@ -22,35 +26,45 @@ namespace BookFindersWebApp.Models
                     URL = "http://" + URL;
                 }
             }
+            handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            client = new HttpClient(handler);
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
+            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+        }
+        public async Task GetTop5BookSearchHistory()
+        {
+            string subUrl = "/api/BookSearchHistory/getTop5BookSearchHistory";
+            string requestURL = URL + subUrl;
+            var response = await client.GetAsync(requestURL);
+            var responseString = await response.Content.ReadAsStringAsync();
+            JObject jsonResponse = JObject.Parse(responseString);
+
+            TopSubjects = jsonResponse["data"]?["topSubjects"]?.ToObject<List<string>>() ?? new List<string>();
+            SubjectCounts = jsonResponse["data"]?["subjectCounts"]?.ToObject<List<int>>() ?? new List<int>();
         }
         public async Task<IEnumerable<BookSearchHistory>> GetBookSearchHistory()
         {
             string subUrl = "/api/BookSearchHistory/getAllBookSearchHistory";
-
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
-            using (HttpClient client = new HttpClient(handler))
+           
+            string requestURL = URL + subUrl;
+            var response = await client.GetAsync(requestURL);
+            var responseString = await response.Content.ReadAsStringAsync();
+            List<BookSearchHistory> fetchedBookSearchHistory = new List<BookSearchHistory>();
+            JObject responseAsJson = JObject.Parse(responseString);
+            if (!responseAsJson.ContainsKey("data"))
             {
-                //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
-                client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
-                string requestURL = URL + subUrl;
-                var response = await client.GetAsync(requestURL);
-                var responseString = await response.Content.ReadAsStringAsync();
-                List<BookSearchHistory> fetchedBookSearchHistory = new List<BookSearchHistory>();
-                JObject responseAsJson = JObject.Parse(responseString);
-                if (!responseAsJson.ContainsKey("data"))
-                {
-                    return fetchedBookSearchHistory;
-                }
-
-                JArray bookSearchHistoryJson = (JArray)responseAsJson["data"];
-                foreach (JObject bookSearchHistoryJsonObj in bookSearchHistoryJson)
-                {
-                    BookSearchHistory bookSearchHistory = JsonConvert.DeserializeObject<BookSearchHistory>(bookSearchHistoryJsonObj.ToString());
-                    fetchedBookSearchHistory.Add(bookSearchHistory);
-                }
                 return fetchedBookSearchHistory;
             }
+
+            JArray bookSearchHistoryJson = (JArray)responseAsJson["data"];
+            foreach (JObject bookSearchHistoryJsonObj in bookSearchHistoryJson)
+            {
+                BookSearchHistory bookSearchHistory = JsonConvert.DeserializeObject<BookSearchHistory>(bookSearchHistoryJsonObj.ToString());
+                fetchedBookSearchHistory.Add(bookSearchHistory);
+            }
+            return fetchedBookSearchHistory;
+            
 
         }
     }

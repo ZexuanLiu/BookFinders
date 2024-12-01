@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Newtonsoft.Json
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var dataAnalystModel = new DataAnalystModel();
+    await dataAnalystModel.GetTop5BookSearchHistory();
 }
 <h1>Hello world</h1>
 @if (dataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
@@ -9,29 +11,71 @@
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Campus</td>
-                <td>Subject</td>
-                <td>NavigationMethod</td>
-                <td>SearchDate</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var bookSearchHistory in dataAnalystModel.GetBookSearchHistory().Result)
-                {
+    <canvas id="pieChart" width="400" height="400"></canvas>
+    @*<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Campus</td>
+                    <td>Subject</td>
+                    <td>NavigationMethod</td>
+                    <td>SearchDate</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bookSearchHistory in dataAnalystModel.GetBookSearchHistory().Result)
+                    {
 
-                    <tr class="table-success">
-                        <td>@bookSearchHistory.Id</td>
-                        <td>@bookSearchHistory.Campus</td>
-                        <td>@bookSearchHistory.Subject</td>
-                        <td>@bookSearchHistory.NavigationMethod</td>
-                        <td>@bookSearchHistory.SearchDate</td>
-                    </tr>
+                        <tr class="table-success">
+                            <td>@bookSearchHistory.Id</td>
+                            <td>@bookSearchHistory.Campus</td>
+                            <td>@bookSearchHistory.Subject</td>
+                            <td>@bookSearchHistory.NavigationMethod</td>
+                            <td>@bookSearchHistory.SearchDate</td>
+                        </tr>
 
+                    }
+            </tbody>
+        </table>*@
+    <script>
+        var topSubjects = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.TopSubjects));
+        var subjectCounts = @Html.Raw(JsonConvert.SerializeObject(dataAnalystModel.SubjectCounts));
+
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: topSubjects,
+                datasets: [{
+                    data: subjectCounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
                 }
-        </tbody>
-    </table>
+            }
+        });
+    </script>
 }
