@@ -7,11 +7,11 @@
 <h1>Hello world</h1>
 @if (dataAnalystModel.GetBookSearchHistory().Result.Count() == 0)
 {
-    <p class="p-3 mb-2 bg-warning text-dark">No push notifications that have been sent!</p>
+    <p class="p-3 mb-2 bg-warning text-dark">No Book Search Record exist</p>
 }
 else
 {
-    <canvas id="pieChart" width="400" height="400"></canvas>
+    <canvas id="pieChart" width="200" height="200"></canvas>
     @*<table class="table table-bordered">
             <thead>
                 <tr>
@@ -68,11 +68,18 @@ else
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'top'
-                    },
-                    tooltip: {
-                        enabled: true
+                    datalabels: {
+                        formatter: (value, context) => {
+                            let percentage = (value / context.dataset._meta[0].total * 100).toFixed(2) + '%';
+                            return percentage;
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: 18  
+                        },
+                        anchor: 'center',
+                        align: 'center'
                     }
                 }
             }
