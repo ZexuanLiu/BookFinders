@@ -51,6 +51,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
+
         client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
     }
 

@@ -1046,7 +1046,7 @@ MonoBehaviour:
   textObject: {fileID: 1215393782}
   backgroundOfTextObject: {fileID: 1882068164}
   flashFadeIn: 1
-  flashStay: 1
+  flashStay: 3
   flastFadeOut: 1
 --- !u!1 &132287508
 GameObject:

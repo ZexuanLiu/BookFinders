@@ -7,13 +7,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using BookFindersVirtualLibrary.Models;
 using Newtonsoft.Json;
-using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using Newtonsoft.Json.Linq;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using Unity.VisualScripting.Antlr3.Runtime;
 using System.Net.Http.Headers;
 using System.Web;
+using UnityEngine.SceneManagement;
 
 public class BookSearch : MonoBehaviour, IEndDragHandler
 {
@@ -29,22 +29,37 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     private int currentPage = 0;
     public TMP_InputField bookSearchTextArea;
     public TextMeshProUGUI noBookMessage;
-    public string BookSearchText { get; set; }
+
+    private string BookSearchText { get; set; }
+
+    public Image LoadingBook;
+
     // Start is called before the first frame update
     void Start()
     {
-
         Button searchButton = searchIcon.GetComponent<Button>();
         if (searchButton != null)
         {
             searchButton.onClick.AddListener(OnSearchIconClicked);
         }
+        Screen.orientation = ScreenOrientation.Portrait;
 
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
         client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
         noBookMessage.gameObject.SetActive(false);
+
+        LoadingBook.gameObject.SetActive(false);
+
+        if (!string.IsNullOrEmpty(BookManager.rawSearchTerm))
+        {
+            bookSearchTextArea.text = BookManager.rawSearchTerm;
+            searchOptionDropdown.value = BookManager.searchDropdownValue;
+            BookSearchText = HttpUtility.UrlEncode(BookManager.rawSearchTerm);
+            OnSearchIconClicked();
+        }
+        
     }
 
     // Update is called once per frame
@@ -52,15 +67,21 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     {
         BookSearchText = HttpUtility.UrlEncode(bookSearchTextArea.text);
     }
+
     void OnSearchIconClicked()
     {
+        BookManager.searchDropdownValue = searchOptionDropdown.value;
+        BookManager.rawSearchTerm = bookSearchTextArea.text;
+
         foreach (Transform child in contentPanel)
         {
             Destroy(child.gameObject);
         }
+        BookManager.SearchResultBooks = new List<Book>();
 
         DisplayBooks();
     }
+
     public void OnEndDrag(PointerEventData data)
     {
         currentPage++;
@@ -77,15 +98,18 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
             }
         }
     }
+
     void DisplayNoBookErrorMessage()
     {
         noBookMessage.gameObject.SetActive(true);
         noBookMessage.text = "No Match Result!";
     }
+
     async void DisplayBooks()
     {
         try
         {
+            noBookMessage.text = "";
             currentPage = 0;
             //search for physical book
             if (searchOptionDropdown.value == 0)
@@ -97,6 +121,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
                 //search for online book
                 SearchBook(false, currentPage);
             }
+            LoadingBook.gameObject.SetActive(true);
         }
         catch (Exception e)
         {
@@ -133,11 +158,11 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         texts[0].text = book.Name;
         if (book.LibraryCode == "TRAF")
         {
-            texts[1].text = "Campus: Trafalgar";
+            texts[1].text = "Campus: TRAF";
         }
         else if (book.LibraryCode == "DAV")
         {
-            texts[1].text = "Campus: Davis";
+            texts[1].text = "Campus: DAV";
         }
         else if (book.LibraryCode == "HMC")
         {
@@ -159,6 +184,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         BookItemController controller = newBookItem.GetComponent<BookItemController>();
         controller.Initialize(book);
     }
+
     private async void SearchBook(bool isPhysicalBook, int page)
     {
         HttpResponseMessage response;
@@ -209,6 +235,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
             {
                 //if no book found enable the error message
                 DisplayNoBookErrorMessage();
+                LoadingBook.gameObject.SetActive(false);
                 return;
             }
             //if books found disable the error message
@@ -219,11 +246,13 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
                 CreateBookItem(book);
             }
             allLoadedBooks.AddRange(foundBooks);
-            BookManager.Instance.SearchResultBooks = foundBooks;
+            BookManager.SearchResultBooks = allLoadedBooks;
+            LoadingBook.gameObject.SetActive(false);
         }
         else
         {
             DisplayNoBookErrorMessage();
+            LoadingBook.gameObject.SetActive(false);
         }
     }
 }

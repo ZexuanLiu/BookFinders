@@ -16,11 +16,8 @@ public class FlashableText : MonoBehaviour, IFlashable
     [SerializeField] GameObject textObject;
     [SerializeField] Image backgroundOfTextObject;
     [SerializeField] float flashFadeIn = 1f;
-    [SerializeField] float flashStay = 1f;
+    [SerializeField] float flashStay = 3f;
     [SerializeField] float flastFadeOut = 1f;
-
-    private static volatile Queue<string> flashingTextStack = new Queue<string>();
-    private static readonly string defaultText = "Default Text";
 
     private TextMeshProUGUI textMesh;
     private float originalBackgroundOpacity;
@@ -47,7 +44,6 @@ public class FlashableText : MonoBehaviour, IFlashable
         backgroundOfTextObject.color = new Color(backgroundOfTextObject.color.r, backgroundOfTextObject.color.g, backgroundOfTextObject.color.b, 0);
 
         totalTextTime = flashFadeIn + flashStay + flastFadeOut;
-        textMesh.text = defaultText;
         timePassed = 0;
         timeToRun = false;
 
@@ -62,9 +58,8 @@ public class FlashableText : MonoBehaviour, IFlashable
         }
 
         Debug.Log($"Flashing Text '{text}'");
-        flashingTextStack.Enqueue(text);
         textMesh.text = text;
-        new WaitUntil(() => object.ReferenceEquals(flashingTextStack.TryPeek(out string nextFlashText), text));
+        timePassed = 0;
         timeToRun = true;
     }
 
@@ -96,7 +91,6 @@ public class FlashableText : MonoBehaviour, IFlashable
             timePassed = 0;
             textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, 0);
             backgroundOfTextObject.color = new Color(backgroundOfTextObject.color.r, backgroundOfTextObject.color.g, backgroundOfTextObject.color.b, 0);
-            flashingTextStack.Dequeue();
             timeToRun = false;
         }
     }

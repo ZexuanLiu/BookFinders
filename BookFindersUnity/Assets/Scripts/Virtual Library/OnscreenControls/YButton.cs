@@ -3,6 +3,7 @@ using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,7 @@ public class YButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject libraryGuideView;
     [SerializeField] GameObject bookSearchView;
     [SerializeField] GameObject bookDetailedView;
+    [SerializeField] TextMeshProUGUI bookDetailsBtnLocateText;
     [SerializeField] GameObject controls;
 
     // Start is called before the first frame update
@@ -25,6 +27,15 @@ public class YButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (BookSearchsTracker.BookSearchInProgress)
+        {
+            bookDetailsBtnLocateText.text = "Finish";
+        }
+        else
+        {
+            bookDetailsBtnLocateText.text = "Locate";
+        }
+
         if (ButtonObserver.currentButtonMode == ButtonMode.VirtualLibrary || ButtonObserver.currentButtonMode == ButtonMode.Menu)
         {
             ButtonObserver.currentButtonMode = ButtonMode.LibraryGuide;

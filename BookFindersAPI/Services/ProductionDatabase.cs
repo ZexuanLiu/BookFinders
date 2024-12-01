@@ -196,7 +196,8 @@ namespace BookFindersAPI.Services
         public async Task<IEnumerable<string>> GetUsernames()
         {
             List<string> usernames = new List<string>();
-            foreach (var user in _users)
+            List<User> users = await _users.Include(x => x.UserLogin).ToListAsync();
+            foreach (var user in users)
             {
                 usernames.Add(user.UserLogin.Username);
             }

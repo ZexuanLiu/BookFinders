@@ -23,8 +23,6 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, IActiveBookSea
     [SerializeField] GameObject userPathingObject;
     private IFindingPathTo findingPath;
 
-    private string initialButtonText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,33 +34,35 @@ public class LocateClicked : MonoBehaviour, IPointerClickHandler, IActiveBookSea
         {
             throw new Exception("UserPathing has no IFindingPathTo");
         }
-
-        initialButtonText = buttonText.text;
     }
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        string localLocationCode = BookSearchsTracker.SelectedBook.LocationBookShelfNum + BookSearchsTracker.SelectedBook.LocationBookShelfSide;
-
+    { 
         if (!BookSearchsTracker.BookSearchInProgress)
         {
-            findingPath.SetBookDestinationTo(localLocationCode, BookSearchsTracker.SelectedBook.Name);
-            buttonText.text = "Finish";
+            StartSearch();
         }
         else
         {
             FinishSearch();
         }
-        BookSearchsTracker.BookSearchInProgress = !BookSearchsTracker.BookSearchInProgress;
         ButtonObserver.currentButtonMode = ButtonMode.VirtualLibrary;
         libraryGuideView.SetActive(false);
         controls.SetActive(true);
     }
 
+    public void StartSearch()
+    {
+        string localLocationCode = BookSearchsTracker.SelectedBook.LocationBookShelfNum + BookSearchsTracker.SelectedBook.LocationBookShelfSide;
+        buttonText.text = "Finish";
+        findingPath.SetBookDestinationTo(localLocationCode, BookSearchsTracker.SelectedBook.Name);
+        BookSearchsTracker.BookSearchInProgress = true;
+    }
+
     public void FinishSearch()
     {
+        buttonText.text = "Locate";
         findingPath.FinishNavigation();
-        buttonText.text = initialButtonText;
         BookSearchsTracker.BookSearchInProgress = false;
     }
 }
