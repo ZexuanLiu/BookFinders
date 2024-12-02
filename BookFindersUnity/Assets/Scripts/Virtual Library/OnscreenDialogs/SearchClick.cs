@@ -52,7 +52,7 @@ public class SearchClick : MonoBehaviour, IPointerClickHandler
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
 
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
     }
 
     public async void OnPointerClick(PointerEventData eventData)
