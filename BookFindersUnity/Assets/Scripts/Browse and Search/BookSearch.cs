@@ -47,7 +47,8 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
+        //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
         noBookMessage.gameObject.SetActive(false);
 
         LoadingBook.gameObject.SetActive(false);
@@ -191,6 +192,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         if (isPhysicalBook)
         {
             response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/OnCampus/{BookSearchText}/{page}");
+        
         }
         else
         {
@@ -214,6 +216,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
                 newBook.Description = bookJson["description"].ToString();
                 newBook.ImageLink = bookJson["imageLink"].ToString();
                 newBook.Isbns = string.Join(", ", bookJson["isbns"].ToObject<string[]>());
+                newBook.Subject = bookJson["subject"].ToString();
                 newBook.Publisher = bookJson["publisher"].ToString();
                 newBook.PublishYear = bookJson["publishYear"].ToString();
                 newBook.LocationCode = bookJson["locationCode"].ToString();

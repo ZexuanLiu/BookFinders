@@ -12,6 +12,7 @@ namespace Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs
     {
         public static int Id { get; set; }
         public static Book SelectedBook { get; set; }
+        public static string BookSearchRecordId { get; set; }
 
         public static List<Book> SearchResultBooks { get; set; }
 

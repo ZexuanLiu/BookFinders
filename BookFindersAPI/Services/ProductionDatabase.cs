@@ -2,6 +2,7 @@
 using BookFindersLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Services
 {
@@ -17,6 +18,7 @@ namespace BookFindersAPI.Services
         private DbSet<UserTrackingSession> _userTrackingSessions { get; set; }
 
         private DbSet<User> _users { get; set; }
+        private DbSet<BookSearchHistory> _bookSearchHistory { get; set; }
 
         #region User Tracking
         public async Task<UserTrackingSession> SendUserTrackingSession(UserTrackingSession userTrackingSession)
@@ -205,6 +207,52 @@ namespace BookFindersAPI.Services
             return usernames;
         }
 
+        #endregion
+
+        #region bookSearchHistory
+        public async Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory)
+        {
+            _bookSearchHistory.Add(bookSearchHistory);
+            await base.SaveChangesAsync();
+
+            return bookSearchHistory;
+        }
+        public async Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory()
+        {
+            return _bookSearchHistory;
+        }
+        public async Task<bool> RemoveBookSearchHistory(int historyId)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+            if (bookSearchHistory != null)
+            {
+                _bookSearchHistory.Remove(bookSearchHistory);
+                await base.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+
+            if (bookSearchHistory != null)
+            {
+                bookSearchHistory.NavigationMethod = newMethod;
+
+                await base.SaveChangesAsync();
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

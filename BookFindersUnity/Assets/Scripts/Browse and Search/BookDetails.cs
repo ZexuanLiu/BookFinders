@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using BookFindersVirtualLibrary.Models;
 using UnityEngine;
 using TMPro;
@@ -8,6 +7,13 @@ using UnityEngine.UI;
 using Assets.Scripts.Virtual_Library_Scripts.OnscreenDialogs;
 using UnityEngine.Networking;
 using UnityEngine.Android;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 public class BookDetails : MonoBehaviour
 {
@@ -27,9 +33,11 @@ public class BookDetails : MonoBehaviour
     public GameObject gameObjectLblBrowser;
 
     public TextMeshProUGUI errorText;
+    private HttpClient client;
 
+    private string bookSearchRecordId = "";
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         Book currentBook = BookManager.currentBook;
         errorText.text = "";
@@ -38,9 +46,9 @@ public class BookDetails : MonoBehaviour
         {
             titleText.text = currentBook.Name;
             authorText.text = currentBook.Author;
-            locationText.text = "Location:"+currentBook.LocationCode;
-            publisherText.text = "Publisher:" + currentBook.Publisher;
-            publishYearText.text = "Year:" + currentBook.PublishYear;
+            locationText.text = "Location: "+currentBook.LocationCode;
+            publisherText.text = "Publisher: " + currentBook.Publisher;
+            publishYearText.text = "Year: " + currentBook.PublishYear;
             bookDescText.text = currentBook.Description;
             if (currentBook.LibraryCode == "TRAF")
             {
@@ -63,6 +71,12 @@ public class BookDetails : MonoBehaviour
                 StartCoroutine(DownloadAndSetImage(currentBook.ImageLink, rawImage));
             }
 
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            client = new HttpClient(handler);
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
+            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
+            await SaveBookSearchHistory();
         }
         else
         {
@@ -122,29 +136,48 @@ public class BookDetails : MonoBehaviour
         Screen.orientation = ScreenOrientation.Portrait;
     }
 
-    void OnLaunchVLClicked()
+    async void OnLaunchVLClicked()
     {
-        BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks;
-        BookSearchsTracker.SelectedBook = BookManager.currentBook;
-        BookSearchsTracker.BookSearchInProgress = true;
+        try
+        {
+            await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.VirtualLibrary);
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"{e}");
+        }
+        finally
+        {
+            BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks.Where(book => book.LibraryCode == "TRAF").ToList();
+            BookSearchsTracker.SelectedBook = BookManager.currentBook;
+            BookSearchsTracker.BookSearchInProgress = true;
 
-        SceneManager.LoadScene("VirtualLibrary");
+            SceneManager.LoadScene("VirtualLibrary");
+        }
     }
 
-    void OnLaunchARClicked()
+    async void OnLaunchARClicked()
     {
-        BookSearchTracking.SelectedBook = BookManager.currentBook;
-        BookSearchTracking.BookSearchInProgress = true;
-
-        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
-        {
-            errorText.text = "Please enable camera permissions to use Augmented Reality";
-            Permission.RequestUserPermission(Permission.Camera);
-        }
-        else
-        {
-            SceneManager.LoadScene("AR");
-        }
+            BookSearchTracking.SelectedBook = BookManager.currentBook;
+            BookSearchTracking.BookSearchInProgress = true;
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            {
+                errorText.text = "Please enable camera permissions to use Augmented Reality";
+                Permission.RequestUserPermission(Permission.Camera);
+                return;
+            }
+            try
+            {
+                await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.AugmentedReality);
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"{e}");
+            }
+            finally
+            {
+                SceneManager.LoadScene("AR");
+            }
     }
 
     IEnumerator DownloadAndSetImage(string url, RawImage imageComponent)
@@ -170,12 +203,77 @@ public class BookDetails : MonoBehaviour
             }
         }
     }
-    public void OpenOnlineResource()
+    public async void OpenOnlineResource()
     {
         Book currentBook = BookManager.currentBook;
         if (currentBook != null)
         {
-            Application.OpenURL(currentBook.OnlineResourceURL);
+            try
+            {
+                await UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu.OnlineResources);
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"{e}");
+            }
+            finally
+            {
+                Application.OpenURL(currentBook.OnlineResourceURL);
+            }
+        }
+    }
+    async Task SaveBookSearchHistory()
+    {
+        HttpResponseMessage response;
+        Book currentBook = BookManager.currentBook;
+        if (currentBook != null)
+        {
+            BookSearchHistory bookSearchHistoryObj = new BookSearchHistory();
+            bookSearchHistoryObj.Subject = currentBook.Subject == null ? "Unknown" : currentBook.Subject;
+            bookSearchHistoryObj.NavigationMethod = NavigationMethodEnmu.Unknown;
+            string url = $"http://137.184.5.147:4004/api/BookSearchHistory/InsertBookSearchHistory";
+            switch (currentBook.LibraryCode)
+            {
+                case "TRAF":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Trafalgar;
+                    break;
+                case "DAV":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Davis;
+                    break;
+                case "HMC":
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.HMC;
+                    break;
+                default:
+                    bookSearchHistoryObj.Campus = SheridanCampusEnum.Unknown;
+                    break;
+            }
+
+            var json = JsonConvert.SerializeObject(bookSearchHistoryObj);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+           
+            response = await client.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                JObject responseAsJson = JObject.Parse(responseContent);
+                
+                bookSearchRecordId = responseAsJson["data"]["id"].ToString();
+            }
+        }
+    }
+    //update the Navigation method property based on user click vl button or ar button
+    async Task UpdateBookSearchHistoryNavigationMethod(NavigationMethodEnmu navigationMethodEnmu)
+    {
+        HttpResponseMessage response;
+
+        if (bookSearchRecordId != "")
+        {
+            string url = $"http://137.184.5.147:4004/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
+            response = await client.PutAsync(url, null);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.LogError("Something wrong while update the book search record ");
+            }
         }
     }
 }

@@ -34,6 +34,22 @@ namespace BookFindersWebApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DataAnalytics()
+        {
+            DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
+            DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+            DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+            await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+            dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+            return View("DataAnalytics", dataAnalyticsModel);
+        }
+
         public IActionResult ConfirmationLogin(LoginForm form)
         {
             if (ModelState.IsValid)
@@ -57,11 +73,33 @@ namespace BookFindersWebApp.Controllers
                     ModelState.AddModelError("Unknown Login", "Unknown Username or Password, please try again...");
                     return View("Index");
                 }
-                
+
             }
             return View("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> FilterDataAnalytics(DataAnalyticsCondition condition)
+        {
 
+            if (ModelState.IsValid)
+            {
+                DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
+                {
+                    Campus = condition.Campus,
+                    NavigationMethod = condition.NavigationMethod,
+                    StartDate = condition.StartDate,
+                    EndDate = condition.EndDate
+                };
+
+                DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+                await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+                DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+                dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+                return View("DataAnalytics", dataAnalyticsModel);
+            }
+            return View("DataAnalytics");
+
+        }
         [HttpPost]
         public IActionResult Confirmation(PushNotificationForm form)
         {
