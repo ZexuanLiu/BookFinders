@@ -34,9 +34,20 @@ namespace BookFindersWebApp.Controllers
             return View();
         }
 
-        public IActionResult DataAnalyst()
+        public async Task<IActionResult> DataAnalytics()
         {
-            return View();
+            DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
+            DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+            DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+            await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+            dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+            return View("DataAnalytics", dataAnalyticsModel);
         }
 
         public IActionResult ConfirmationLogin(LoginForm form)
@@ -67,12 +78,12 @@ namespace BookFindersWebApp.Controllers
             return View("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> FilterDataAnaylst(DataAnalystCondition condition)
+        public async Task<IActionResult> FilterDataAnalytics(DataAnalyticsCondition condition)
         {
 
             if (ModelState.IsValid)
             {
-                DataAnalystCondition tempDataAnalystCondition = new DataAnalystCondition()
+                DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
                 {
                     Campus = condition.Campus,
                     NavigationMethod = condition.NavigationMethod,
@@ -80,13 +91,13 @@ namespace BookFindersWebApp.Controllers
                     EndDate = condition.EndDate
                 };
 
-                DataAnalystModel dataAnalystModel = new DataAnalystModel();
-                await dataAnalystModel.FilterByDataAnalystCondition(tempDataAnalystCondition);
-                DataAnalystViewModel dataAnalystViewModel = new DataAnalystViewModel();
-                dataAnalystViewModel.DataModel = dataAnalystModel;
-                return View("DataAnalyst", dataAnalystViewModel);
+                DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+                await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+                DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+                dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+                return View("DataAnalytics", dataAnalyticsModel);
             }
-            return View("DataAnalyst");
+            return View("DataAnalytics");
 
         }
         [HttpPost]

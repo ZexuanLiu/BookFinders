@@ -169,7 +169,19 @@ namespace BookFindersAPI.Controllers
                 }
                 else
                 {
-                    throw new Exception("subjectFrequency list is empty");
+                    var response = new BookSearchHistoryResponse
+                    {
+                        TopSubjects = new List<string>(),
+                        SubjectCounts = new List<int>()
+                    };
+                    ResponseDTO responseDTOOk = new ResponseDTO()
+                    {
+                        Status = 200,
+                        Message = "Successfully fetched all book search history",
+                        Data = response
+                    };
+
+                    return Ok(responseDTOOk);
                 }
             }
             catch (Exception e)
@@ -185,7 +197,7 @@ namespace BookFindersAPI.Controllers
             }
         }
         [HttpPost("getTop5BookSearchHistoryWithCondition")]
-        public async Task<IActionResult> GetTop5BookSearchHistory(DataAnalystCondition dataAnalystCondition)
+        public async Task<IActionResult> GetTop5BookSearchHistory(DataAnalyticsCondition dataAnalyticsCondition)
         {
             try
             {
@@ -196,10 +208,10 @@ namespace BookFindersAPI.Controllers
 
                 //if !dataAnalystCondition.Campus.HasValue is true will ignore check the Campus field.
                 var filteredList = bookSearchHistoryList.Where(history =>
-                    (!dataAnalystCondition.Campus.HasValue || dataAnalystCondition.Campus == SheridanCampusEnum.All || history.Campus == dataAnalystCondition.Campus) &&
-                    (!dataAnalystCondition.NavigationMethod.HasValue || dataAnalystCondition.NavigationMethod == NavigationMethodEnmu.All || history.NavigationMethod == dataAnalystCondition.NavigationMethod) &&
-                    (!dataAnalystCondition.StartDate.HasValue || history.SearchDate >= dataAnalystCondition.StartDate) && 
-                    (dataAnalystCondition.StartDate.HasValue || !dataAnalystCondition.EndDate.HasValue || (history.SearchDate >= dataAnalystCondition.StartDate && history.SearchDate <= dataAnalystCondition.EndDate))
+                    (!dataAnalyticsCondition.Campus.HasValue || dataAnalyticsCondition.Campus == SheridanCampusEnum.All || history.Campus == dataAnalyticsCondition.Campus) &&
+                    (!dataAnalyticsCondition.NavigationMethod.HasValue || dataAnalyticsCondition.NavigationMethod == NavigationMethodEnmu.All || history.NavigationMethod == dataAnalyticsCondition.NavigationMethod) &&
+                    (!dataAnalyticsCondition.StartDate.HasValue || history.SearchDate >= dataAnalyticsCondition.StartDate) && 
+                    (dataAnalyticsCondition.StartDate.HasValue || !dataAnalyticsCondition.EndDate.HasValue || (history.SearchDate >= dataAnalyticsCondition.StartDate && history.SearchDate <= dataAnalyticsCondition.EndDate))
                 ).ToList();
                 var subjectFrequency = filteredList
                     .GroupBy(obj => obj.Subject) 

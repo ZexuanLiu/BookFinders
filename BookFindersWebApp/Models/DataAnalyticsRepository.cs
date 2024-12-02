@@ -8,17 +8,20 @@ using BookFindersLibrary.Models;
 
 namespace BookFindersWebApp.Models
 {
-	public class DataAnalystModel
+	public class DataAnalyticsRepository
 	{
         private string URL = "https://localhost:7042";
         public List<string> TopSubjects { get; set; } = new();
         public List<int> SubjectCounts { get; set; } = new();
+
+        public DataAnalyticsCondition AppliedConditions { get; set; } = new();
+
         private HttpClientHandler handler;
         HttpClient client;
-        public DataAnalystModel()
+
+        public DataAnalyticsRepository()
 		{
-            string? possibleAPIURL = "http://localhost:5156";
-            // string? possibleAPIURL = Environment.GetEnvironmentVariable("bookfindersAPIURL");
+            string? possibleAPIURL = Environment.GetEnvironmentVariable("bookfindersAPIURL");
             if (!string.IsNullOrEmpty(possibleAPIURL))
             {
                 URL = possibleAPIURL;
@@ -32,6 +35,14 @@ namespace BookFindersWebApp.Models
             client = new HttpClient(handler);
             //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer  -BookFinders-");
             client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+
+            AppliedConditions = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
         }
         public async Task GetTop5BookSearchHistory()
         {
@@ -43,6 +54,14 @@ namespace BookFindersWebApp.Models
 
             TopSubjects = jsonResponse["data"]?["topSubjects"]?.ToObject<List<string>>() ?? new List<string>();
             SubjectCounts = jsonResponse["data"]?["subjectCounts"]?.ToObject<List<int>>() ?? new List<int>();
+
+            AppliedConditions = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
         }
         //This method is for testing not used in any cshtml page
         public async Task<IEnumerable<BookSearchHistory>> GetBookSearchHistory()
@@ -65,17 +84,24 @@ namespace BookFindersWebApp.Models
                 BookSearchHistory bookSearchHistory = JsonConvert.DeserializeObject<BookSearchHistory>(bookSearchHistoryJsonObj.ToString());
                 fetchedBookSearchHistory.Add(bookSearchHistory);
             }
-            return fetchedBookSearchHistory;
-            
 
+            AppliedConditions = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
+
+            return fetchedBookSearchHistory;
         }
 
-        public async Task FilterByDataAnalystCondition(DataAnalystCondition dataAnalystCondition)
+        public async Task FilterByDataAnalyticsCondition(DataAnalyticsCondition dataAnalyticsCondition)
         {
             string subUrl = "/api/BookSearchHistory/getTop5BookSearchHistoryWithCondition";
 
             string requestURL = URL + subUrl;
-            var response = await client.PostAsJsonAsync(requestURL, dataAnalystCondition);
+            var response = await client.PostAsJsonAsync(requestURL, dataAnalyticsCondition);
 
             var responseString = await response.Content.ReadAsStringAsync();
             JObject jsonResponse = JObject.Parse(responseString);
@@ -83,6 +109,12 @@ namespace BookFindersWebApp.Models
             TopSubjects = jsonResponse["data"]?["topSubjects"]?.ToObject<List<string>>() ?? new List<string>();
             SubjectCounts = jsonResponse["data"]?["subjectCounts"]?.ToObject<List<int>>() ?? new List<int>();
 
+            AppliedConditions = new DataAnalyticsCondition{
+                Campus = dataAnalyticsCondition.Campus,
+                NavigationMethod = dataAnalyticsCondition.NavigationMethod,
+                StartDate = dataAnalyticsCondition.StartDate == null ? DateTime.MinValue : dataAnalyticsCondition.StartDate.Value,
+                EndDate = dataAnalyticsCondition.EndDate == null ? DateTime.Now : dataAnalyticsCondition.EndDate.Value,
+            };
         }
     }
 }

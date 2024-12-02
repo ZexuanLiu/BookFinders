@@ -99,7 +99,7 @@ namespace BookFindersAPI.Controllers
                 {
                     Status = 200,
                     Message = "Successfully fetched push notifications",
-                    Data = pushNotifications
+                    Data = pushNotifications.Reverse()
                 };
 
                 return Ok(responseDTOOk);

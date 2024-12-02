@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 public class BookDetails : MonoBehaviour
 {
@@ -45,9 +46,9 @@ public class BookDetails : MonoBehaviour
         {
             titleText.text = currentBook.Name;
             authorText.text = currentBook.Author;
-            locationText.text = "Location:"+currentBook.LocationCode;
-            publisherText.text = "Publisher:" + currentBook.Publisher;
-            publishYearText.text = "Year:" + currentBook.PublishYear;
+            locationText.text = "Location: "+currentBook.LocationCode;
+            publisherText.text = "Publisher: " + currentBook.Publisher;
+            publishYearText.text = "Year: " + currentBook.PublishYear;
             bookDescText.text = currentBook.Description;
             if (currentBook.LibraryCode == "TRAF")
             {
@@ -73,7 +74,7 @@ public class BookDetails : MonoBehaviour
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
             //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
             await SaveBookSearchHistory();
         }
@@ -147,7 +148,7 @@ public class BookDetails : MonoBehaviour
         }
         finally
         {
-            BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks;
+            BookSearchsTracker.SearchResultBooks = BookManager.SearchResultBooks.Where(book => book.LibraryCode == "TRAF").ToList();
             BookSearchsTracker.SelectedBook = BookManager.currentBook;
             BookSearchsTracker.BookSearchInProgress = true;
 
@@ -157,8 +158,6 @@ public class BookDetails : MonoBehaviour
 
     async void OnLaunchARClicked()
     {
-
-
             BookSearchTracking.SelectedBook = BookManager.currentBook;
             BookSearchTracking.BookSearchInProgress = true;
             if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
@@ -230,10 +229,9 @@ public class BookDetails : MonoBehaviour
         if (currentBook != null)
         {
             BookSearchHistory bookSearchHistoryObj = new BookSearchHistory();
-            bookSearchHistoryObj.Subject = currentBook.Subject;
+            bookSearchHistoryObj.Subject = currentBook.Subject == null ? "Unknown" : currentBook.Subject;
             bookSearchHistoryObj.NavigationMethod = NavigationMethodEnmu.Unknown;
-            string url = $"http://localhost:5156/api/BookSearchHistory/InsertBookSearchHistory";
-            //string url = $"http://137.184.5.147:4004/api/BookSearchHistory/InsertBookSearchHistory";
+            string url = $"http://137.184.5.147:4004/api/BookSearchHistory/InsertBookSearchHistory";
             switch (currentBook.LibraryCode)
             {
                 case "TRAF":
@@ -270,8 +268,7 @@ public class BookDetails : MonoBehaviour
 
         if (bookSearchRecordId != "")
         {
-            string url = $"http://localhost:5156/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
-            //string url = $"http://137.184.5.147:4004/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
+            string url = $"http://137.184.5.147:4004/api/BookSearchHistory/editBookSearchHistory/{bookSearchRecordId}/{navigationMethodEnmu}";
             response = await client.PutAsync(url, null);
             if (!response.IsSuccessStatusCode)
             {

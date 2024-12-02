@@ -47,7 +47,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         var handler = new HttpClientHandler();
         handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         client = new HttpClient(handler);
-        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
+        client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
         //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
         noBookMessage.gameObject.SetActive(false);
 
@@ -191,14 +191,12 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
         HttpResponseMessage response;
         if (isPhysicalBook)
         {
-            //response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/OnCampus/{BookSearchText}/{page}");
-            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/OnCampus/{BookSearchText}/{page}");
+            response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/OnCampus/{BookSearchText}/{page}");
         
         }
         else
         {
-           //response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/{BookSearchText}/{page}");
-            response = await client.GetAsync($"http://localhost:5156/api/BookSearch/{BookSearchText}/{page}");
+            response = await client.GetAsync($"http://137.184.5.147:4004/api/BookSearch/{BookSearchText}/{page}");
         }
 
         if (response.IsSuccessStatusCode)

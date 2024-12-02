@@ -6,7 +6,7 @@ using BookFindersLibrary.Enums;
 
 namespace BookFindersLibrary.Models
 {
-    public class DataAnalystCondition
+    public class DataAnalyticsCondition
     {
         public SheridanCampusEnum? Campus { get; set; }
 
