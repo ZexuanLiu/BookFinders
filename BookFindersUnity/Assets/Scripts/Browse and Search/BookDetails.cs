@@ -74,8 +74,7 @@ public class BookDetails : MonoBehaviour
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer $B34R4RT0K3N$_for_-BookFinders-");
-            //client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer -BookFinders-");
+            client.DefaultRequestHeaders.Add("X-Authorization", $"Bearer {Environment.GetEnvironmentVariable("bookfindersAPIBearerToken")}");
             await SaveBookSearchHistory();
         }
         else
