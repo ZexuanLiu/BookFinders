@@ -6,11 +6,11 @@ namespace Notifications_Manager
 {
     public class NotificationController : MonoBehaviour
     {
-        private PushNotification _notification;
+        private PushNotification notification;
 
         public void InitializeNotification(PushNotification notification)
         {
-            _notification = notification;
+            notification = notification;
         }
     }
 }

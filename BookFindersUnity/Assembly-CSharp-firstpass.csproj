@@ -2,6 +2,8 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
+    <_TargetFrameworkDirectories>non_empty_path_generated_by_unity.rider.package</_TargetFrameworkDirectories>
+    <_FullFrameworkReferenceAssemblyPaths>non_empty_path_generated_by_unity.rider.package</_FullFrameworkReferenceAssemblyPaths>
     <DisableHandlePackageFileConflicts>true</DisableHandlePackageFileConflicts>
   </PropertyGroup>
   <PropertyGroup>
@@ -10,7 +12,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{f4cf09f0-f952-827f-91a8-1f2acfeb2db8}</ProjectGuid>
+    <ProjectGuid>{90f77789-4aa3-cdca-e99e-2285cf2436ef}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -23,6 +25,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <OutputPath>Temp\Bin\Debug\Unity.Rider.Editor\</OutputPath>
     <DefineConstants>UNITY_EDITOR</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,13 +41,239 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Folder Include="Assets/Plugins/tvOS/Firebase" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-port" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fr-rCA/values-fr-rCA.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mn/values-mn.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-cs" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lo" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-vi" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-iw" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-large-v4" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-es/values-es.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v25" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rXC" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hy" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fr" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-h720dp-v13" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-si/values-si.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ms" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ro" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kk" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ja/values-ja.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-large-v4/values-large-v4.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rHK" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nb/values-nb.xml" />
      <Folder Include="Assets/Plugins" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-as" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v30" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nl/values-nl.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ka/values-ka.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-az" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v21/values-watch-v21.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hr" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rCA" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-tr/values-tr.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-b+sr+Latn" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sq/values-sq.xml" />
      <Folder Include="Assets/Plugins/tvOS" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-eu" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hr/values-hr.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sr" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lt" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v21" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v17" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-te/values-te.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sv" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sl" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-as/values-as.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-gu" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-th" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ja" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v31/values-v31.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-gl" />
      <Folder Include="Assets/Plugins/Android" />
-     <Folder Include="Assets/Plugins/iOS/Firebase" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mr/values-mr.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-it/values-it.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-uz" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ru" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-in" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-iw/values-iw.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-te" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ta/values-ta.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-tr" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-uk/values-uk.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-gu/values-gu.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v21" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-es-rUS/values-es-rUS.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sr/values-sr.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rIN/values-en-rIN.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ms/values-ms.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-es" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v16" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bs/values-bs.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-si" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ldltr-v21" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hi/values-hi.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sq" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-b+sr+Latn/values-b+sr+Latn.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-eu/values-eu.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-in/values-in.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mk/values-mk.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kn/values-kn.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lv" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kn" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-el" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bn" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fi/values-fi.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ml/values-ml.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-km" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-port/values-port.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-kk/values-kk.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-is" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt-rBR" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pa" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-is/values-is.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v18/values-v18.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fr-rCA" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nb" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v30/values-v30.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sw/values-sw.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-cs/values-cs.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fa/values-fa.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rGB/values-en-rGB.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-az/values-az.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v23" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v25/values-v25.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml" />
+     <Folder Include="Assets/Plugins/Android/build" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ca/values-ca.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rIN" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-el/values-el.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ne" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ur/values-ur.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v26/values-v26.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lt/values-lt.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v18" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-es-rUS" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-de" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v22/values-v22.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sl/values-sl.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ar/values-ar.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rAU" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20/values-watch-v20.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bg" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-am/values-am.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rCN" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fa" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rHK/values-zh-rHK.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nl" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rTW" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ca" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt-rPT/values-pt-rPT.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-de/values-de.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v21/values-v21.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-th/values-th.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bn/values-bn.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-da/values-da.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-et" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sk" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ne/values-ne.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ro/values-ro.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pl/values-pl.xml" />
      <Folder Include="Assets/Plugins/iOS" />
+     <Folder Include="Assets/Plugins/tvOS/Firebase" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hu" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v26" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-my/values-my.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v23/values-v23.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bs" />
      <None Include="Assets/Plugins/Android/AndroidManifest.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v22" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-watch-v20" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt-rPT" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-land" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mk" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-da" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mr" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hu/values-hu.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sk/values-sk.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ur" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pl" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-my" />
+     <None Include="Assets/Plugins/Android/google-services.json" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v31" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v24/values-v24.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sv/values-sv.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rAU/values-en-rAU.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-et/values-et.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zu/values-zu.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ka" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-be" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rXC/values-en-rXC.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-vi/values-vi.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rCA/values-en-rCA.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-tl" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hi" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-af/values-af.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-or" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v28/values-v28.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v17/values-v17.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lv/values-lv.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rGB" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-gl/values-gl.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-or/values-or.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-it" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hy/values-hy.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v24" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-lo/values-lo.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-km/values-km.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-tl/values-tl.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ta" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zu" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/release-mergeJavaRes/zip-cache" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-af" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sw600dp-v13" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rCN/values-zh-rCN.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ky/values-ky.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ky" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt-rBR/values-pt-rBR.xml" />
+     <Folder Include="Assets/Plugins/iOS/Firebase" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh-rTW/values-zh-rTW.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ru/values-ru.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ko" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-mn" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fr/values-fr.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-land/values-land.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-be/values-be.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-bg/values-bg.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-xlarge-v4" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pt/values-pt.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/release-mergeJavaRes" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-am" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-pa/values-pa.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ko/values-ko.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-fi" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-sw" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-uk" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-ar" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-uz/values-uz.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml" />
+     <None Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v16/values-v16.xml" />
+     <Folder Include="Assets/Plugins/Android/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-v28" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
