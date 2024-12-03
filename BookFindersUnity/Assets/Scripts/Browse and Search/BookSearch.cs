@@ -102,7 +102,7 @@ public class BookSearch : MonoBehaviour, IEndDragHandler
     void DisplayNoBookErrorMessage()
     {
         noBookMessage.gameObject.SetActive(true);
-        noBookMessage.text = "No Match Result!";
+        noBookMessage.text = "No Results Found!";
     }
 
     async void DisplayBooks()
