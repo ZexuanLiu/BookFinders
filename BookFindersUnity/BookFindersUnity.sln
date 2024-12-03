@@ -1,27 +1,24 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{3ef94ed6-be11-90b3-19c6-4d142702c13c}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{D64EF93E-11BE-B390-19C6-4D142702C13C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseMessagingActivityGenerator", "FirebaseMessagingActivityGenerator.csproj", "{a1eb4538-cb29-4fdf-7f60-3a000deb13fc}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{90f77789-4aa3-cdca-e99e-2285cf2436ef}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{bdec0588-4206-8742-014e-8d2dc8c69429}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseMessagingActivityGenerator", "FirebaseMessagingActivityGenerator.csproj", "{3845EBA1-29CB-DF4F-7F60-3A000DEB13FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3ef94ed6-be11-90b3-19c6-4d142702c13c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3ef94ed6-be11-90b3-19c6-4d142702c13c}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{a1eb4538-cb29-4fdf-7f60-3a000deb13fc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{a1eb4538-cb29-4fdf-7f60-3a000deb13fc}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90f77789-4aa3-cdca-e99e-2285cf2436ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90f77789-4aa3-cdca-e99e-2285cf2436ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{bdec0588-4206-8742-014e-8d2dc8c69429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{bdec0588-4206-8742-014e-8d2dc8c69429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64EF93E-11BE-B390-19C6-4D142702C13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64EF93E-11BE-B390-19C6-4D142702C13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64EF93E-11BE-B390-19C6-4D142702C13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64EF93E-11BE-B390-19C6-4D142702C13C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3845EBA1-29CB-DF4F-7F60-3A000DEB13FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3845EBA1-29CB-DF4F-7F60-3A000DEB13FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3845EBA1-29CB-DF4F-7F60-3A000DEB13FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3845EBA1-29CB-DF4F-7F60-3A000DEB13FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
