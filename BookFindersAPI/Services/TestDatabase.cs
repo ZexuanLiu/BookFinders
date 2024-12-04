@@ -1,6 +1,7 @@
 ﻿using BookFindersAPI.Interfaces;
 using BookFindersLibrary.Models;
 using Microsoft.EntityFrameworkCore;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Services
 {
@@ -14,6 +15,9 @@ namespace BookFindersAPI.Services
         private DbSet<Coordinate> _coordinates { get; set; }
         private DbSet<UserTrackingInstance> _userTrackingInstances { get; set; }
         private DbSet<UserTrackingSession> _userTrackingSessions { get; set; }
+
+        private DbSet<User> _users { get; set; }
+        private DbSet<BookSearchHistory> _bookSearchHistory { get; set; }
 
         #region User Tracking
         public async Task<UserTrackingSession> SendUserTrackingSession(UserTrackingSession userTrackingSession)
@@ -201,6 +205,90 @@ namespace BookFindersAPI.Services
         }
         #endregion
 
+        #region Login
+
+        public async Task<User> SignUpUser(User newUser)
+        {
+            _users.Add(newUser);
+            await base.SaveChangesAsync();
+            return newUser;
+        }
+
+        public async Task<User?> GetUserFromUserLogin(UserLogin userLogin)
+        {
+            User? userLoggingIn = null;
+            try
+            {
+                userLoggingIn = await _users.Include(x => x.UserLogin)
+                    .Where(user => user.UserLogin.Username.Equals(userLogin.Username) && user.UserLogin.Password.Equals(userLogin.Password))
+                    .FirstAsync();
+            }
+            catch (InvalidOperationException)
+            {
+                userLoggingIn = null;
+            }
+
+            return userLoggingIn;
+        }
+
+        public async Task<IEnumerable<string>> GetUsernames()
+        {
+            List<string> usernames = new List<string>();
+            List<User> users = await _users.Include(x => x.UserLogin).ToListAsync();
+            foreach (var user in users)
+            {
+                usernames.Add(user.UserLogin.Username);
+            }
+
+            return usernames;
+        }
+        #endregion
+        
+        #region bookSearchHistory
+        public async Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory)
+        {
+            _bookSearchHistory.Add(bookSearchHistory);
+            await base.SaveChangesAsync();
+
+            return bookSearchHistory;
+        }
+        public async Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory()
+        {
+            return _bookSearchHistory;
+        }
+        public async Task<bool> RemoveBookSearchHistory(int historyId)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+            if (bookSearchHistory != null)
+            {
+                _bookSearchHistory.Remove(bookSearchHistory);
+                await base.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public async Task<bool> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod)
+        {
+            var bookSearchHistory = _bookSearchHistory.FirstOrDefault(x => x.Id == historyId);
+
+            if (bookSearchHistory != null)
+            {
+                bookSearchHistory.NavigationMethod = newMethod;
+
+                await base.SaveChangesAsync();
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

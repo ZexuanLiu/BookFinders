@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Welcome Librarian!";
+    ViewData["Title"] = $"Welcome {ViewBag.UserFullname}!";
     Layout = "../Shared/_Layout";
 }
 
@@ -18,5 +18,16 @@
     <a href="/Home/PushNotificationForm">    
         <button class="btn btn-primary">Create Notification</button>
     </a>
+
+    <br />
+    <br />
+
+    <a href="/Home/DataAnalytics">
+        <button class="btn btn-primary">Data Analytics</button>
+    </a>
+
+    <br />
+    <br />
+
 
 </div>

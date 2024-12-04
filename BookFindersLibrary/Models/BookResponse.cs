@@ -47,6 +47,14 @@ namespace BookFindersLibrary.Models
     {
         public List<string> description { get; set; }
         public List<string> creationdate { get; set; }
+        public List<string> subject {get; set;}
+        public PnxSearch()
+        {
+            // Initialize lists to avoid null reference exceptions
+            description = new List<string>();
+            creationdate = new List<string>();
+            subject = new List<string>();
+        }
     }
     public class PnxDisplay
     {
