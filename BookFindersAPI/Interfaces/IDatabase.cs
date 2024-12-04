@@ -1,4 +1,5 @@
 ﻿using BookFindersLibrary.Models;
+using BookFindersLibrary.Enums;
 
 namespace BookFindersAPI.Interfaces
 {
@@ -27,6 +28,21 @@ namespace BookFindersAPI.Interfaces
         public Task<bool> subThumbsUp(int commentId);
         public Task<bool> removeComment(int commentId);
         public Task<bool> EditComment(int commentId, string newComment);
+        #endregion
+
+        #region Login
+        public Task<User> SignUpUser(User newUser);
+
+        public Task<User?> GetUserFromUserLogin(UserLogin userLogin);
+
+        public Task<IEnumerable<string>> GetUsernames();
+        #endregion
+
+        #region bookSearchHistory
+        public Task<BookSearchHistory> AddBookSearchHistory(BookSearchHistory bookSearchHistory);
+        public Task<IEnumerable<BookSearchHistory>> GetAllBookSearchHistory();
+        public Task<bool> RemoveBookSearchHistory(int historyId);   
+        public Task<bool> EditBookSearchHistoryNavigationMethod(int historyId, NavigationMethodEnmu newMethod);  
         #endregion
     }
 }

@@ -22,6 +22,32 @@ namespace BookFindersAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("BookFindersLibrary.Models.BookSearchHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Campus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NavigationMethod")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("SearchDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_bookSearchHistory");
+                });
+
             modelBuilder.Entity("BookFindersLibrary.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -38,7 +64,7 @@ namespace BookFindersAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("PostDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("ThumbsUp")
                         .HasColumnType("integer");
@@ -89,10 +115,10 @@ namespace BookFindersAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EndDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("StartDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -100,6 +126,32 @@ namespace BookFindersAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("_pushNotifications");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserLoginId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserLoginId");
+
+                    b.ToTable("_users");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.UserLocations", b =>
@@ -129,6 +181,27 @@ namespace BookFindersAPI.Migrations
                     b.ToTable("_locations");
                 });
 
+            modelBuilder.Entity("BookFindersLibrary.Models.UserLogin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserLogin");
+                });
+
             modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
                 {
                     b.Property<int>("Id")
@@ -141,7 +214,7 @@ namespace BookFindersAPI.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("PostDateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("UserTrackingSessionId")
                         .HasColumnType("integer");
@@ -168,14 +241,25 @@ namespace BookFindersAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("TimeEnded")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("TimeStarted")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.ToTable("_userTrackingSessions");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.User", b =>
+                {
+                    b.HasOne("BookFindersLibrary.Models.UserLogin", "UserLogin")
+                        .WithMany()
+                        .HasForeignKey("UserLoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserLogin");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>

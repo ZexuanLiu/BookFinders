@@ -1,0 +1,138 @@
+﻿@using Newtonsoft.Json
+@using BookFindersLibrary.Models
+@using BookFindersLibrary.Enums
+@model DataAnalyticsModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+    if (Model == null)
+    {
+        await dataAnalyticsRepository.GetTop5BookSearchHistory();
+    }
+    else
+    {
+        dataAnalyticsRepository = Model.DataModel;
+    }
+    var dataAnalystCondition = new DataAnalyticsCondition();
+
+    var campusList = Enum.GetValues(typeof(SheridanCampusEnum))
+       .Cast<SheridanCampusEnum>()
+       .Where(c => c != SheridanCampusEnum.Unknown && c != SheridanCampusEnum.All)
+       .Select(c => new SelectListItem
+       {
+           Value = ((int)c).ToString(),
+           Text = c.ToString()
+       }).ToList();
+    var navigationMethodList = Enum.GetValues(typeof(NavigationMethodEnmu))
+       .Cast<NavigationMethodEnmu>()
+       .Where(c => c != NavigationMethodEnmu.Unknown && c != NavigationMethodEnmu.All)
+       .Select(c => new SelectListItem
+       {
+           Value = ((int)c).ToString(),
+           Text = c.ToString()
+       }).ToList();
+}
+
+<h1>Top 5 Most Popular Book Subjects</h1>
+
+<form class="text-left" asp-action="FilterDataAnalytics" method="POST">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="Condition.Campus">Campus</label>
+        <select asp-for="Condition.Campus" asp-items="@campusList" class="form-control">
+            <option value="All">All</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Condition.NavigationMethod">Navigation Tool</label>
+        <select asp-for="Condition.NavigationMethod" asp-items="@navigationMethodList" class="form-control">
+            <option value="All">All</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Condition.StartDate">Start Date Time</label>
+        <input asp-for="Condition.StartDate" class="form-control" placeholder="Start Date" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Condition.EndDate">End Date Time</label>
+        <input asp-for="Condition.EndDate" class="form-control" placeholder="End Date" />
+    </div>
+    <div class="form-group">
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
+
+
+
+@if (dataAnalyticsRepository.TopSubjects.Count == 0)
+{
+    <br />
+    <p class="p-3 mb-2 bg-warning text-dark">No Matched Record Exist!</p>
+}
+else
+{
+    <div style="float: right">
+        <h3>Current Conditions</h3>
+
+        <p>Campus: @Model?.DataModel.AppliedConditions.Campus</p>
+        <p>Navigation Tool: @Model?.DataModel.AppliedConditions.NavigationMethod</p>
+        <p>Start Date: @Model?.DataModel.AppliedConditions.StartDate</p>
+        <p>End Date: @Model?.DataModel.AppliedConditions.EndDate</p>
+    </div>
+
+    <canvas id="pieChart" width="600" height="600"></canvas>
+}
+
+
+<script>
+    var topSubjects = @Html.Raw(JsonConvert.SerializeObject(dataAnalyticsRepository.TopSubjects));
+    var subjectCounts = @Html.Raw(JsonConvert.SerializeObject(dataAnalyticsRepository.SubjectCounts));
+
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: topSubjects,
+                datasets: [{
+                    data: subjectCounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    datalabels: {
+                        formatter: (value, context) => {
+                            let percentage = (value / context.dataset._meta[0].total * 100).toFixed(2) + '%';
+                            return percentage;
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: 18
+                        },
+                        anchor: 'center',
+                        align: 'center'
+                    }
+                }
+            }
+        });
+</script>

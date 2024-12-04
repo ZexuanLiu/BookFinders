@@ -34,29 +34,72 @@ namespace BookFindersWebApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DataAnalytics()
+        {
+            DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
+            {
+                Campus = BookFindersLibrary.Enums.SheridanCampusEnum.All,
+                NavigationMethod = BookFindersLibrary.Enums.NavigationMethodEnmu.All,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.Now
+            };
+            DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+            DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+            await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+            dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+            return View("DataAnalytics", dataAnalyticsModel);
+        }
+
         public IActionResult ConfirmationLogin(LoginForm form)
         {
             if (ModelState.IsValid)
             {
-                if (form.Username.Equals("Librarian") && form.Password.Equals("password"))
+                UserLogin userLogin = new UserLogin()
                 {
+                    Username = form.Username,
+                    Password = form.Password
+                };
+                User loggedInUser = LoginRepository.Login(userLogin).Result;
+
+                if (loggedInUser != null)
+                {
+                    ViewBag.UserFullname = loggedInUser.Fullname;
+                    ViewBag.UserUsername = loggedInUser.UserLogin.Username;
+                    ViewBag.UserRole = loggedInUser.Role;
                     return View("Home");
-                }
-                else if(form.Username.Equals("Faculty") && form.Password.Equals("password"))
-                {
-                    ModelState.AddModelError("Unauthorized Login", "This tool is for Librarians only.");
-                    return View("Index");
                 }
                 else
                 {
                     ModelState.AddModelError("Unknown Login", "Unknown Username or Password, please try again...");
                     return View("Index");
                 }
-                
+
             }
             return View("Index");
         }
+        [HttpPost]
+        public async Task<IActionResult> FilterDataAnalytics(DataAnalyticsCondition condition)
+        {
 
+            if (ModelState.IsValid)
+            {
+                DataAnalyticsCondition tempDataAnalyticsCondition = new DataAnalyticsCondition()
+                {
+                    Campus = condition.Campus,
+                    NavigationMethod = condition.NavigationMethod,
+                    StartDate = condition.StartDate,
+                    EndDate = condition.EndDate
+                };
+
+                DataAnalyticsRepository dataAnalyticsRepository = new DataAnalyticsRepository();
+                await dataAnalyticsRepository.FilterByDataAnalyticsCondition(tempDataAnalyticsCondition);
+                DataAnalyticsModel dataAnalyticsModel = new DataAnalyticsModel();
+                dataAnalyticsModel.DataModel = dataAnalyticsRepository;
+                return View("DataAnalytics", dataAnalyticsModel);
+            }
+            return View("DataAnalytics");
+
+        }
         [HttpPost]
         public IActionResult Confirmation(PushNotificationForm form)
         {

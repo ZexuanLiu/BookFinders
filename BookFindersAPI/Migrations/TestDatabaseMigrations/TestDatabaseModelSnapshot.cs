@@ -17,6 +17,30 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
+            modelBuilder.Entity("BookFindersLibrary.Models.BookSearchHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Campus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NavigationMethod")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("SearchDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("_bookSearchHistory");
+                });
+
             modelBuilder.Entity("BookFindersLibrary.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +115,30 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.ToTable("_pushNotifications");
                 });
 
+            modelBuilder.Entity("BookFindersLibrary.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserLoginId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserLoginId");
+
+                    b.ToTable("_users");
+                });
+
             modelBuilder.Entity("BookFindersLibrary.Models.UserLocations", b =>
                 {
                     b.Property<int>("Id")
@@ -114,6 +162,25 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.HasKey("Id");
 
                     b.ToTable("_locations");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.UserLogin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserLogin");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
@@ -159,6 +226,17 @@ namespace BookFindersAPI.Migrations.TestDatabaseMigrations
                     b.HasKey("Id");
 
                     b.ToTable("_userTrackingSessions");
+                });
+
+            modelBuilder.Entity("BookFindersLibrary.Models.User", b =>
+                {
+                    b.HasOne("BookFindersLibrary.Models.UserLogin", "UserLogin")
+                        .WithMany()
+                        .HasForeignKey("UserLoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserLogin");
                 });
 
             modelBuilder.Entity("BookFindersLibrary.Models.UserTrackingInstance", b =>
