@@ -261,7 +261,7 @@ namespace BookFindersAPI.Services
             string? user = Environment.GetEnvironmentVariable("bookfindersDBUser");
             string? pass = Environment.GetEnvironmentVariable("bookfindersDBPassword");
             
-            optionsBuilder.UseNpgsql($"Host={host};Database=BookFindersDB;Username={user};Password={pass};SSL Mode=Require;Trust Server Certificate=true");
+            optionsBuilder.UseNpgsql($"Host={host};Database=BookFindersDB;Username={user};Password={pass};");
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
     }
